@@ -326,6 +326,7 @@ def simulate_execution(
     starting_equity: float = STARTING_EQUITY,
     total_cost_bps: float = TOTAL_COST_BPS,
     max_abs_weight: float | None = None,
+    min_confidence: float = 0.0,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Simulate mark-to-market returns, target changes, and cost drag.
 
@@ -410,13 +411,23 @@ def simulate_execution(
             symbol = str(row["symbol"])
             previous_weight = float(current_weights.get(symbol, 0.0))
             raw_target_weight = float(row["target_weight"])
+            confidence = float(row["confidence"])
+            abs_confidence = abs(confidence)
+
+            confidence_pass = abs_confidence >= float(min_confidence)
+
+            if confidence_pass:
+                confidence_filtered_weight = raw_target_weight
+            else:
+                confidence_filtered_weight = 0.0
+
             if max_abs_weight is not None:
                 target_weight = max(
                     -float(max_abs_weight),
-                    min(float(max_abs_weight), raw_target_weight),
+                    min(float(max_abs_weight), confidence_filtered_weight),
                 )
             else:
-                target_weight = raw_target_weight
+                target_weight = confidence_filtered_weight
 
             weight_change = target_weight - previous_weight
             abs_weight_change = abs(weight_change)
@@ -434,11 +445,15 @@ def simulate_execution(
                         "close": symbol_closes.get(symbol),
                         "signal": row["signal"],
                         "action": float(row["action"]),
-                        "confidence": float(row["confidence"]),
+                        "confidence": confidence,
+                        "abs_confidence": abs_confidence,
+                        "confidence_pass": confidence_pass,
                         "previous_weight": previous_weight,
                         "target_weight": target_weight,
                         "raw_target_weight": raw_target_weight,
+                        "confidence_filtered_weight": confidence_filtered_weight,
                         "max_abs_weight": max_abs_weight,
+                        "min_confidence": min_confidence,
                         "weight_change": weight_change,
                         "abs_weight_change": abs_weight_change,
                         "symbol_return": float(symbol_returns.get(symbol, 0.0)),
@@ -612,6 +627,15 @@ def parse_args() -> argparse.Namespace:
             "Example: 0.15 caps weights to +/-15%%. If omitted, payload weights are used."
         ),
     )
+    parser.add_argument(
+        "--min-confidence",
+        type=float,
+        default=0.0,
+        help=(
+            "Minimum absolute signal confidence required to keep a target weight. "
+            "Example: 0.20 forces signals with abs(confidence) < 0.20 to flat."
+        ),
+    )
 
     return parser.parse_args()
 
@@ -648,6 +672,7 @@ def main() -> None:
         starting_equity=args.starting_equity,
         total_cost_bps=args.cost_bps,
         max_abs_weight=args.max_abs_weight,
+        min_confidence=args.min_confidence,
     )
 
     summary = summarize_results(
@@ -667,6 +692,7 @@ def main() -> None:
         print(f"Max abs weight override: {args.max_abs_weight:.4f}")
     else:
         print("Max abs weight override: None; using payload target weights")
+        print(f"Minimum confidence threshold: {args.min_confidence:.4f}")
 
     print_header("SUMMARY")
     print(summary.to_string(index=False))
