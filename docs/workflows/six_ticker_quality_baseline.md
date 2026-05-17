@@ -563,9 +563,80 @@ Interpretation: reducing the maximum absolute position size lowers net return, t
 
 The 15% and 10% caps are not proposed replacements for the primary baseline at this stage. They are sensitivity checks showing how the same signal payload behaves when position sizing is reduced.
 
-## Known Limitations
+---
+
+## Confidence-Threshold Sensitivity Check
+
+A confidence-threshold sensitivity test was run against the six-ticker quality-filtered dynamic signal payload to evaluate whether filtering lower-confidence signals improves the local mark-to-market result.
+
+The simulator now supports a confidence override:
+
+```bash
+--min-confidence
+```
+
+The rule is applied at the simulator level:
+
+```text
+If abs(confidence) < min_confidence:
+    target_weight = 0.0
+else:
+    use the payload target weight
+```
+
+This allows the same exported signal payload to be tested under stricter confidence requirements without regenerating the signal file.
+
+Example commands:
+
+```bash
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --min-confidence 0.00
+
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --min-confidence 0.10
+
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --min-confidence 0.20
+
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --min-confidence 0.30
+
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5
+```
+
+The final command restores the standard baseline output file after the sensitivity runs.
+
+| Confidence threshold | Final equity | Net return | Sharpe estimate | Max drawdown | Transaction costs | Total turnover | Trade events |
+| -------------------- | -----------: | ---------: | --------------: | -----------: | ----------------: | -------------: | -----------: |
+| `conf >= 0.00`       |   112,982.27 |     12.98% |          3.8048 |        8.96% |          2,000.96 |        36.8929 |          198 |
+| `conf >= 0.10`       |   112,982.27 |     12.98% |          3.8048 |        8.96% |          2,000.96 |        36.8929 |          198 |
+| `conf >= 0.20`       |   112,698.56 |     12.70% |          3.7273 |        9.05% |          1,897.33 |        35.0915 |          157 |
+| `conf >= 0.30`       |   112,073.16 |     12.07% |          3.5764 |        8.85% |          1,800.22 |        33.5000 |          133 |
+
+Interpretation: confidence filtering reduces turnover, transaction costs, and trade count, but it does not improve the baseline risk-adjusted result in this sample. The 0.20 and 0.30 thresholds remove weaker signals and lower activity, but they also reduce net return and Sharpe estimate relative to the unfiltered baseline.
+
+The 0.10 threshold is effectively equivalent to the baseline in this test window because the filtered-out signals do not change the final simulated path. The 0.20 and 0.30 thresholds are useful stress checks, but they are not proposed replacements for the primary six-ticker baseline at this stage.
+
+The confidence-threshold logic is therefore retained as a simulator-level robustness tool rather than promoted to the default baseline configuration.
 
 ---
+
+## Known Limitations
 
 The six-ticker baseline is based on local mark-to-market simulation, not a full broker-accurate fill simulator.
 
