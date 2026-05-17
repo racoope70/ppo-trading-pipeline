@@ -170,28 +170,11 @@ tests/test_validate_payload_manifest.py
 
 After this addition, the local pytest suite increased from 23 tests to 26 tests.
 
-Then commit:
-
-```bash
-git status --short
-git add docs/runs/2026-05-13_reproducibility_cli_improvements.md
-git commit -m "Document payload manifest validation"
-git pull --rebase origin main
-git push
-git status --short
-```
-
 Then final test:
 
 ```bash
 python -m pytest tests -q
 git log --oneline -6
-```
-
-Expected:
-
-```text
-26 passed
 ```
 
 This is documentation-only and will not change the baseline metrics.
@@ -316,8 +299,28 @@ Future ticker additions should pass the quality selector before inclusion.
 
 ## Next Recommended Work
 
-1. Add a single command preset for the documented six-ticker baseline.
-2. Add manifest validation that compares the saved SHA256 hash against the current payload file.
-3. Add lightweight tests for manifest generation and validation-chain command construction.
-4. Revisit stricter quality rules after more local validation runs.
-5. Use QuantConnect only for execution-path validation until data availability is resolved.
+1. Add lightweight tests for validation-chain command construction.
+2. Revisit stricter quality rules after additional local validation runs.
+3. Run a true out-of-sample validation using a newly trained run or later market period.
+4. Use QuantConnect primarily for execution-path validation until the data-availability issue is resolved.
+5. Keep the six-ticker payload as the controlled research baseline unless a future validation run clearly improves both return and robustness.
+
+## Robustness Sensitivity Addendum
+
+After the reproducibility and payload-validation layer was completed, additional local mark-to-market robustness checks were added around the six-ticker quality baseline.
+
+The simulator now supports:
+- `--cost-bps`
+- `--max-abs-weight`
+- `--min-confidence`
+- `--window-offset`
+
+These controls allow the same selected dynamic signal payload to be evaluated under alternative cost, exposure, confidence-filtering, and return-window assumptions without regenerating the signal file.
+
+Summary:
+- Transaction-cost sensitivity showed the strategy remained positive at 10 bps and 15 bps.
+- Weight-cap sensitivity showed lower exposure reduced return and drawdown while preserving Sharpe near the baseline level.
+- Confidence-threshold sensitivity reduced turnover and trade count but did not improve Sharpe versus the unfiltered baseline.
+- Return-window sensitivity remained positive across the sampled windows but showed material variation by market window.
+
+Conclusion: the six-ticker baseline passed basic local robustness checks, but the return-window test showed meaningful regime sensitivity. The current result should be treated as a controlled research baseline rather than a final deployment-ready model.
