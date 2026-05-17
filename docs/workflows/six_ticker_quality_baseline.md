@@ -636,6 +636,69 @@ The confidence-threshold logic is therefore retained as a simulator-level robust
 
 ---
 
+## Return-Window Sensitivity Check
+
+A return-window sensitivity test was run against the six-ticker quality-filtered dynamic signal payload to evaluate whether the selected signal path remains positive across different local return windows.
+
+The simulator now supports a return-window offset:
+
+```bash
+--window-offset
+```
+
+The offset controls which 250-row return window is aligned against the exported signal payload:
+
+```text
+--window-offset 0    uses the latest available 250-row return window
+--window-offset 250  uses the prior 250-row return window
+--window-offset 500  uses the 250-row window before that
+```
+
+This test is a local robustness check. It does not retrain the PPO models and does not regenerate the signal payload. Instead, it reuses the same selected signal path and evaluates how the mark-to-market result changes when aligned to earlier realized return windows.
+
+Example commands:
+
+```bash
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --window-offset 0
+
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --window-offset 250
+
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --window-offset 500
+
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_8ticker_combined \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_6ticker_quality_250marketbars.json \
+  --cost-bps 5 \
+  --window-offset 0
+```
+
+The final command restores the standard latest-window baseline output file after the sensitivity runs.
+
+| Return window                 | Final equity | Net return | Sharpe estimate | Max drawdown | Transaction costs | Total turnover | Trade events |
+| ----------------------------- | -----------: | ---------: | --------------: | -----------: | ----------------: | -------------: | -----------: |
+| Latest window / offset 0      |   112,982.27 |     12.98% |          3.8048 |        8.96% |          2,000.96 |        36.8929 |          198 |
+| Prior window / offset 250     |   101,981.37 |      1.98% |          0.6958 |       10.84% |          1,853.30 |        36.8929 |          198 |
+| Two windows back / offset 500 |   117,016.03 |     17.02% |          4.3890 |        2.01% |          1,967.60 |        36.8929 |          198 |
+
+Interpretation: the selected signal payload remained positive across all three tested return windows, but performance varied materially by market slice. The latest window and the two-windows-back test produced strong risk-adjusted results, while the prior 250-row window was only modestly positive and had the weakest Sharpe estimate and largest drawdown.
+
+This result does not invalidate the six-ticker baseline, but it does show that the strategy is sensitive to the return window being tested. The correct conclusion is that the payload passes a basic profitability robustness check across these sampled windows, while also showing meaningful time-window sensitivity.
+
+The `--window-offset` feature is retained as a simulator-level robustness tool. It should not be interpreted as a replacement for full walk-forward retraining or out-of-sample validation.
+
+---
 ## Known Limitations
 
 The six-ticker baseline is based on local mark-to-market simulation, not a full broker-accurate fill simulator.
