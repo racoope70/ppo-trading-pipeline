@@ -699,6 +699,129 @@ This result does not invalidate the six-ticker baseline, but it does show that t
 The `--window-offset` feature is retained as a simulator-level robustness tool. It should not be interpreted as a replacement for full walk-forward retraining or out-of-sample validation.
 
 ---
+
+## Partial Independent Validation Check
+
+A partial independent validation check was run to test whether the six-ticker quality baseline remained positive when evaluated using separate historical PPO run folders.
+
+The available independent run folders did not contain all six baseline tickers in one unified run. Instead, the available runs were split by ticker group:
+
+| Run folder | Available tickers | Quality-selected tickers |
+|---|---|---|
+| `reports/backtests/ppo_walkforward_results_20260512_203706` | AMD, META, MRK, ORCL | AMD, MRK |
+| `reports/backtests/ppo_walkforward_results_20260509_172626` | AAPL, PFE, UNH, XOM | AAPL, PFE, UNH, XOM |
+
+Because of this split, the test should be interpreted as **partial independent validation**, not a full unified six-ticker independent run.
+
+### AMD/MRK independent validation group
+
+The first independent group used:
+
+```text
+Run directory: reports/backtests/ppo_walkforward_results_20260512_203706
+Symbols: AMD, MRK
+Payload: quantconnect/test_payloads/selected_dynamic_signals_independent_amd_mrk_250marketbars.json
+Manifest: quantconnect/test_payloads/selected_dynamic_signals_independent_amd_mrk_250marketbars.manifest.json
+```
+
+Export command:
+
+```bash
+python -m src.export_selected_dynamic_lean_signals \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_203706 \
+  --symbols AMD,MRK \
+  --scenario moderate \
+  --output quantconnect/test_payloads/selected_dynamic_signals_independent_amd_mrk_250marketbars.json
+```
+
+Manifest validation command:
+
+```bash
+python -m src.validate_payload_manifest \
+  --manifest quantconnect/test_payloads/selected_dynamic_signals_independent_amd_mrk_250marketbars.manifest.json
+```
+
+Simulation command:
+
+```bash
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260512_203706 \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_independent_amd_mrk_250marketbars.json \
+  --cost-bps 5
+```
+
+Result:
+
+| Validation group | Final equity | Net return | Sharpe estimate | Max drawdown | Transaction costs | Total turnover | Trade events |
+| ---------------- | -----------: | ---------: | --------------: | -----------: | ----------------: | -------------: | -----------: |
+| AMD/MRK | 103,754.64 | 3.75% | 1.9191 | 4.65% | 176.89 | 3.50 | 14 |
+
+The AMD/MRK independent group passed manifest validation and produced a positive local mark-to-market result.
+
+### AAPL/PFE/UNH/XOM independent validation group
+
+The second independent group used:
+
+```text
+Run directory: reports/backtests/ppo_walkforward_results_20260509_172626
+Symbols: AAPL, PFE, UNH, XOM
+Payload: quantconnect/test_payloads/selected_dynamic_signals_independent_aapl_pfe_unh_xom_250marketbars.json
+Manifest: quantconnect/test_payloads/selected_dynamic_signals_independent_aapl_pfe_unh_xom_250marketbars.manifest.json
+```
+
+Export command:
+
+```bash
+python -m src.export_selected_dynamic_lean_signals \
+  --run-dir reports/backtests/ppo_walkforward_results_20260509_172626 \
+  --symbols AAPL,PFE,UNH,XOM \
+  --scenario moderate \
+  --output quantconnect/test_payloads/selected_dynamic_signals_independent_aapl_pfe_unh_xom_250marketbars.json
+```
+
+Manifest validation command:
+
+```bash
+python -m src.validate_payload_manifest \
+  --manifest quantconnect/test_payloads/selected_dynamic_signals_independent_aapl_pfe_unh_xom_250marketbars.manifest.json
+```
+
+Simulation command:
+
+```bash
+python -m src.simulate_dynamic_signal_execution \
+  --run-dir reports/backtests/ppo_walkforward_results_20260509_172626 \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_independent_aapl_pfe_unh_xom_250marketbars.json \
+  --cost-bps 5
+```
+
+Result:
+
+| Validation group | Final equity | Net return | Sharpe estimate | Max drawdown | Transaction costs | Total turnover | Trade events |
+| ---------------- | -----------: | ---------: | --------------: | -----------: | ----------------: | -------------: | -----------: |
+| AAPL/PFE/UNH/XOM | 108,909.18 | 8.91% | 3.4037 | 6.49% | 1,806.12 | 33.3929 | 184 |
+
+The AAPL/PFE/UNH/XOM independent group passed manifest validation and produced a positive local mark-to-market result.
+
+### Combined interpretation
+
+The six-ticker baseline could not be independently validated as one unified six-ticker run because the available historical run folders were split by ticker group. However, the two available independent validation groups collectively covered all six baseline names:
+
+```text
+AMD, MRK
+AAPL, PFE, UNH, XOM
+```
+
+Both partial groups produced positive local mark-to-market results:
+
+| Independent group | Net return | Sharpe estimate | Max drawdown |
+| ----------------- | ---------: | --------------: | -----------: |
+| AMD/MRK | 3.75% | 1.9191 | 4.65% |
+| AAPL/PFE/UNH/XOM | 8.91% | 3.4037 | 6.49% |
+
+This is a positive validation result, but it should be treated as **partial independent support**, not full out-of-sample confirmation. The next stronger test should be a newly generated unified six-ticker independent run using the same reproducibility and validation chain.
+
+---
 ## Known Limitations
 
 The six-ticker baseline is based on local mark-to-market simulation, not a full broker-accurate fill simulator.
