@@ -167,6 +167,7 @@ def load_symbol_returns(
     run_dir: Path,
     signals: pd.DataFrame,
     selected_models: dict[str, str],
+    window_offset: int = 0,
 ) -> pd.DataFrame:
     """Load Close returns from prediction compatibility CSVs.
 
@@ -234,16 +235,29 @@ def load_symbol_returns(
         prices["close"] = pd.to_numeric(prices["Close"], errors="coerce")
         prices = prices.dropna(subset=["source_datetime", "close"])
 
-        if len(prices) < len(signal_rows):
+        if window_offset < 0:
+            raise ValueError("--window-offset must be non-negative.")
+
+        rows_needed = len(signal_rows) + int(window_offset)
+
+        if len(prices) < rows_needed:
             raise ValueError(
                 f"Not enough price rows for {symbol}: "
-                f"need {len(signal_rows)}, found {len(prices)}"
+                f"need {rows_needed} rows for signal_count={len(signal_rows)} "
+                f"and window_offset={window_offset}, found {len(prices)}"
             )
 
-        aligned_prices = prices.tail(len(signal_rows)).reset_index(drop=True)
+        if int(window_offset) == 0:
+            aligned_prices = prices.tail(len(signal_rows)).reset_index(drop=True)
+        else:
+            aligned_prices = (
+                prices.iloc[-rows_needed : -int(window_offset)]
+                .reset_index(drop=True)
+            )
 
         aligned_prices["symbol"] = symbol
         aligned_prices["bar_index"] = signal_rows["bar_index"].to_numpy()
+        aligned_prices["window_offset"] = int(window_offset)
         aligned_prices["payload_timestamp"] = signal_rows["timestamp"].to_numpy()
         aligned_prices["symbol_return"] = (
             aligned_prices["close"].pct_change().fillna(0.0)
@@ -253,6 +267,7 @@ def load_symbol_returns(
             aligned_prices[
                 [
                     "bar_index",
+                    "window_offset",
                     "symbol",
                     "payload_timestamp",
                     "source_datetime",
@@ -636,6 +651,15 @@ def parse_args() -> argparse.Namespace:
             "Example: 0.20 forces signals with abs(confidence) < 0.20 to flat."
         ),
     )
+    parser.add_argument(
+        "--window-offset",
+        type=int,
+        default=0,
+        help=(
+            "Number of prediction rows to skip from the end before aligning returns. "
+            "Default 0 uses the latest window. Example: 250 uses the prior 250-row window."
+        ),
+    )
 
     return parser.parse_args()
 
@@ -650,6 +674,7 @@ def main() -> None:
         run_dir=run_dir,
         signals=signals,
         selected_models=selected_models,
+        window_offset=args.window_offset,
     )
 
     validate_signal_return_coverage(signals=signals, returns=returns)
@@ -688,6 +713,7 @@ def main() -> None:
     print(f"Return rows: {len(returns)}")
     print(f"Starting equity: {args.starting_equity:,.2f}")
     print(f"Cost bps: {args.cost_bps:.2f}")
+    print(f"Window offset: {args.window_offset}")
     if args.max_abs_weight is not None:
         print(f"Max abs weight override: {args.max_abs_weight:.4f}")
     else:
