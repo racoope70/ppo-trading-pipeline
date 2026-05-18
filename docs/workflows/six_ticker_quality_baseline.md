@@ -819,9 +819,184 @@ Both partial groups produced positive local mark-to-market results:
 | AMD/MRK | 3.75% | 1.9191 | 4.65% |
 | AAPL/PFE/UNH/XOM | 8.91% | 3.4037 | 6.49% |
 
-This is a positive validation result, but it should be treated as **partial independent support**, not full out-of-sample confirmation. The next stronger test should be a newly generated unified six-ticker independent run using the same reproducibility and validation chain.
+This is a positive validation result, but it should be treated as **partial independent support**, not full out-of-sample confirmation.
 
 ---
+
+## Unified Independent Six-Ticker Validation Check
+
+A unified independent six-ticker validation run was completed to verify whether the full baseline universe could be retrained and validated together in a fresh run directory.
+
+This check is stronger than the earlier partial independent validation because it uses one unified six-ticker run instead of split ticker-group runs.
+
+### Run provenance
+
+The independent run directory was:
+
+```text
+reports/backtests/ppo_walkforward_results_20260517_200251
+```
+
+Execution-realism analysis was generated successfully:
+
+```text
+reports/backtests/ppo_walkforward_results_20260517_200251/execution_realism_analysis.csv
+```
+
+The run used the six baseline symbols:
+
+```text
+AAPL, AMD, MRK, PFE, UNH, XOM
+```
+
+The fresh training run was enabled by the `--force-retrain` option:
+
+```bash
+python -m src.train \
+  --tickers AAPL AMD MRK PFE UNH XOM \
+  --force-retrain
+```
+
+This option forces PPO windows to retrain even when matching model artifacts already exist in `FINAL_MODEL_DIR`. That behavior is required for a clean independent run because the default resume logic correctly skips previously completed artifacts.
+
+### Validation chain
+
+The downstream validation chain completed successfully:
+
+```text
+selector → export → manifest validation → simulation → summary
+```
+
+The chain was run against the unified independent run folder:
+
+```bash
+python -m src.run_validation_chain \
+  --tickers AAPL AMD MRK PFE UNH XOM \
+  --run-dir reports/backtests/ppo_walkforward_results_20260517_200251 \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_unified_independent_250marketbars.json \
+  --output-dir reports/validation_summary_unified_independent \
+  --skip-data \
+  --skip-train \
+  --skip-execution-realism
+```
+
+The quality selector retained all six baseline tickers:
+
+```text
+AAPL, AMD, MRK, PFE, UNH, XOM
+```
+
+Selected models:
+
+```text
+AAPL    ppo_AAPL_window1
+AMD     ppo_AMD_window3
+MRK     ppo_MRK_window1
+PFE     ppo_PFE_window1
+UNH     ppo_UNH_window1
+XOM     ppo_XOM_window1
+```
+
+### Manifest validation
+
+The exported unified independent payload passed all manifest integrity checks:
+
+| Check | Status |
+| ----- | ------ |
+| `payload_exists` | PASS |
+| `sha256_match` | PASS |
+| `symbols_match` | PASS |
+| `selected_models_match` | PASS |
+| `rows_per_symbol_match` | PASS |
+| `signal_rows_match` | PASS |
+| `first_timestamp_match` | PASS |
+| `last_timestamp_match` | PASS |
+
+This confirms that the exported signal payload matched the manifest record and that the validation was run against the intended ticker universe, selected models, row counts, and timestamp range.
+
+### Unified independent local MTM result
+
+The final unified independent local mark-to-market result was:
+
+| Metric | Value |
+| ------ | ----: |
+| Final equity | 113,439.87 |
+| Net PnL | 13,439.87 |
+| Net return | 13.44% |
+| Gross PnL before costs | 15,304.99 |
+| Transaction costs | 1,865.13 |
+| Sharpe estimate | 4.0243 |
+| Max drawdown | 6.45% |
+| Total turnover | 34.3483 |
+| Trade events | 164 |
+| Simulation rows | 250 |
+
+### Comparison versus prior six-ticker baseline
+
+The unified independent result was modestly stronger than the prior six-ticker quality baseline:
+
+| Validation run | Final equity | Net return | Sharpe estimate | Max drawdown | Total turnover | Trade events |
+| -------------- | -----------: | ---------: | --------------: | -----------: | -------------: | -----------: |
+| Prior six-ticker quality baseline | 112,982.27 | 12.98% | 3.8048 | 8.96% | 36.8929 | 198 |
+| Unified independent six-ticker run | 113,439.87 | 13.44% | 4.0243 | 6.45% | 34.3483 | 164 |
+
+### Interpretation
+
+The unified independent six-ticker run does not invalidate the existing baseline. It supports it.
+
+Relative to the prior six-ticker baseline, the independent retrained run produced:
+
+```text
+higher final equity
+higher net return
+higher Sharpe estimate
+lower maximum drawdown
+lower turnover
+fewer trade events
+```
+
+This is the strongest validation check completed so far because it moves beyond same-payload sensitivity analysis and beyond the earlier split-run partial validation. The full six-ticker universe was retrained together, selected together, exported together, manifest-validated together, and simulated through the same local mark-to-market execution path.
+
+The result should be treated as independent support for the six-ticker research baseline. It is not a deployment claim. Additional validation should still be run across later market periods, broker-style simulation paths, and live-paper execution before treating the strategy as production-ready.
+
+### Related code state
+
+The `--force-retrain` PPO training improvement was committed separately:
+
+```text
+e43ee3f Add force retrain option to PPO training
+```
+
+That commit is appropriate because the training improvement is source-code functionality and should remain separate from generated research payloads.
+
+### Generated payload cleanup
+
+The unified independent payload files are currently generated artifacts:
+
+```text
+quantconnect/test_payloads/selected_dynamic_signals_unified_independent_250marketbars.json
+quantconnect/test_payloads/selected_dynamic_signals_unified_independent_250marketbars.manifest.json
+```
+
+Do not commit these files unless they are intentionally being promoted to reusable fixtures.
+
+Recommended cleanup:
+
+```bash
+rm quantconnect/test_payloads/selected_dynamic_signals_unified_independent_250marketbars.json
+rm quantconnect/test_payloads/selected_dynamic_signals_unified_independent_250marketbars.manifest.json
+
+git status --short
+python -m pytest tests -q
+git log --oneline -8
+```
+
+### Documentation status
+
+This section should be treated as the primary independent support note for the six-ticker quality baseline until superseded by a broader walk-forward validation, later-period out-of-sample test, or live-paper execution result.
+
+---
+
 ## Known Limitations
 
 The six-ticker baseline is based on local mark-to-market simulation, not a full broker-accurate fill simulator.
