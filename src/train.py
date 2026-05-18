@@ -82,8 +82,16 @@ def parse_args() -> argparse.Namespace:
         ),
     )
 
-    return parser.parse_args()
+    parser.add_argument(
+        "--force-retrain",
+        action="store_true",
+        help=(
+            "Retrain all requested ticker windows even when existing model artifacts "
+            "are already present in FINAL_MODEL_DIR."
+        ),
+    )
 
+    return parser.parse_args()
 
 def resolve_symbols(raw_tickers: list[str] | None) -> list[str]:
     """Return CLI tickers when supplied, otherwise configured default symbols."""
@@ -372,6 +380,7 @@ def walkforward_ppo(
     timesteps: int = TIMESTEPS,
     learning_rate: float = 1e-4,
     ppo_overrides: dict | None = None,
+    force_retrain: bool = False,
 ) -> list[dict]:
     """Train PPO over rolling walk-forward windows for one ticker."""
     if ppo_overrides is None:
@@ -405,7 +414,7 @@ def walkforward_ppo(
         for idx in range(len(windows))
     )
 
-    if all_done:
+    if all_done and not force_retrain:
         logging.info(
             "Ticker %s fully skipped: all %s windows already complete.",
             ticker,
@@ -426,11 +435,18 @@ def walkforward_ppo(
 
         prefix = f"ppo_{ticker}_window{window_idx + 1}"
 
-        if required_artifacts_exist(prefix, FINAL_MODEL_DIR):
+        if required_artifacts_exist(prefix, FINAL_MODEL_DIR) and not force_retrain:
             logging.info("Skipping %s | Window %s already trained.", ticker, window_idx + 1)
             skipped_windows.append(f"{ticker}_window{window_idx + 1}")
             continue
 
+        if required_artifacts_exist(prefix, FINAL_MODEL_DIR) and force_retrain:
+            logging.info(
+                "Force retrain enabled for %s | Window %s despite existing artifacts.",
+                ticker,
+                window_idx + 1,
+            )
+            
         missing = missing_artifacts(prefix, FINAL_MODEL_DIR)
         logging.info(
             "Will train %s | Window %s because missing: %s",
@@ -602,6 +618,7 @@ def process_ticker(
     df: pd.DataFrame,
     results_dir: Path,
     skip_log_path: Path,
+    force_retrain: bool = False,
 ) -> list[dict]:
     """Train all eligible walk-forward windows for one ticker."""
     try:
@@ -623,6 +640,7 @@ def process_ticker(
             timesteps=TIMESTEPS,
             learning_rate=hyperparams["lr"],
             ppo_overrides=hyperparams,
+            force_retrain=force_retrain,
         )
 
     except Exception as exc:
@@ -654,6 +672,7 @@ def run_parallel_tickers(
     results_dir: Path,
     skip_log_path: Path,
     max_workers: int = MAX_WORKERS,
+    force_retrain: bool = False,
 ) -> list[dict]:
     """Train multiple tickers in parallel and incrementally save summary results."""
     results: list[dict] = []
@@ -675,6 +694,7 @@ def run_parallel_tickers(
                 df,
                 results_dir,
                 skip_log_path,
+                force_retrain,
             ): ticker
             for ticker in tickers
         }
@@ -734,6 +754,10 @@ def main() -> None:
     else:
         output_path = summary_path
         logging.info("Running full training on %s symbols: %s", len(valid_symbols), valid_symbols)
+    if args.force_retrain:
+        logging.warning(
+            "Force retrain enabled: existing model artifacts will not cause windows to be skipped."
+        )
 
     summary_results = run_parallel_tickers(
         df=df,
@@ -742,6 +766,7 @@ def main() -> None:
         results_dir=results_dir,
         skip_log_path=skip_log_path,
         max_workers=MAX_WORKERS,
+        force_retrain=args.force_retrain,
     )
 
     if not summary_results:
