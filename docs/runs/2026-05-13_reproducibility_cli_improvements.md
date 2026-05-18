@@ -170,13 +170,6 @@ tests/test_validate_payload_manifest.py
 
 After this addition, the local pytest suite increased from 23 tests to 26 tests.
 
-Then final test:
-
-```bash
-python -m pytest tests -q
-git log --oneline -6
-```
-
 This is documentation-only and will not change the baseline metrics.
 
 ### Lightweight Tests and CI
@@ -297,14 +290,6 @@ AAPL, AMD, MRK, PFE, UNH, XOM
 
 Future ticker additions should pass the quality selector before inclusion.
 
-## Next Recommended Work
-
-1. Add lightweight tests for validation-chain command construction.
-2. Revisit stricter quality rules after additional local validation runs.
-3. Run a true out-of-sample validation using a newly trained run or later market period.
-4. Use QuantConnect primarily for execution-path validation until the data-availability issue is resolved.
-5. Keep the six-ticker payload as the controlled research baseline unless a future validation run clearly improves both return and robustness.
-
 ## Robustness Sensitivity Addendum
 
 After the reproducibility and payload-validation layer was completed, additional local mark-to-market robustness checks were added around the six-ticker quality baseline.
@@ -324,3 +309,120 @@ Summary:
 - Return-window sensitivity remained positive across the sampled windows but showed material variation by market window.
 
 Conclusion: the six-ticker baseline passed basic local robustness checks, but the return-window test showed meaningful regime sensitivity. The current result should be treated as a controlled research baseline rather than a final deployment-ready model.
+
+## Unified Independent Six-Ticker Validation Addendum
+
+After the same-payload robustness checks and partial independent validation were completed, a unified six-ticker independent run was created to test whether the complete baseline universe could be retrained and validated together in one fresh run folder.
+
+A training override was added to support this workflow:
+
+```bash
+--force-retrain
+```
+
+This option forces `src.train` to retrain requested ticker windows even when matching model artifacts already exist in `FINAL_MODEL_DIR`. This was necessary because the normal training behavior correctly skips previously completed windows, which is useful for resume behavior but prevents creation of a fresh independent run.
+
+The unified independent run used the same six baseline tickers:
+
+```text
+AAPL, AMD, MRK, PFE, UNH, XOM
+```
+
+Training command:
+
+```bash
+python -m src.train \
+  --tickers AAPL AMD MRK PFE UNH XOM \
+  --force-retrain
+```
+
+Run directory:
+
+```text
+reports/backtests/ppo_walkforward_results_20260517_200251
+```
+
+The run generated all expected compatibility prediction files:
+
+```text
+3 windows × 6 tickers = 18 *_predictions_compat.csv files
+```
+
+Execution-realism analysis was generated for the run, and the downstream validation chain was executed using the existing reproducibility workflow.
+
+Validation chain command:
+
+```bash
+python -m src.run_validation_chain \
+  --tickers AAPL AMD MRK PFE UNH XOM \
+  --run-dir reports/backtests/ppo_walkforward_results_20260517_200251 \
+  --payload quantconnect/test_payloads/selected_dynamic_signals_unified_independent_250marketbars.json \
+  --output-dir reports/validation_summary_unified_independent \
+  --skip-data \
+  --skip-train \
+  --skip-execution-realism
+```
+
+The quality selector retained all six tickers:
+
+```text
+AAPL, AMD, MRK, PFE, UNH, XOM
+```
+
+Selected models:
+
+```text
+AAPL    ppo_AAPL_window1
+AMD     ppo_AMD_window3
+MRK     ppo_MRK_window1
+PFE     ppo_PFE_window1
+UNH     ppo_UNH_window1
+XOM     ppo_XOM_window1
+```
+
+The exported unified independent payload passed manifest validation:
+
+```text
+payload_exists: PASS
+sha256_match: PASS
+symbols_match: PASS
+selected_models_match: PASS
+rows_per_symbol_match: PASS
+signal_rows_match: PASS
+first_timestamp_match: PASS
+last_timestamp_match: PASS
+```
+
+Local mark-to-market result:
+
+| Metric                 |      Value |
+| ---------------------- | ---------: |
+| Final equity           | 113,439.87 |
+| Net PnL                |  13,439.87 |
+| Net return             |     13.44% |
+| Gross PnL before costs |  15,304.99 |
+| Transaction costs      |   1,865.13 |
+| Sharpe estimate        |     4.0243 |
+| Max drawdown           |      6.45% |
+| Total turnover         |    34.3483 |
+| Trade events           |        164 |
+| Simulation rows        |        250 |
+
+Comparison against the prior six-ticker baseline:
+
+| Validation run                     | Final equity | Net return | Sharpe estimate | Max drawdown | Total turnover | Trade events |
+| ---------------------------------- | -----------: | ---------: | --------------: | -----------: | -------------: | -----------: |
+| Prior six-ticker quality baseline  |   112,982.27 |     12.98% |          3.8048 |        8.96% |        36.8929 |          198 |
+| Unified independent six-ticker run |   113,439.87 |     13.44% |          4.0243 |        6.45% |        34.3483 |          164 |
+
+Conclusion: the unified independent run supports the six-ticker research baseline. The retrained run selected all six tickers, passed manifest validation, and produced a positive execution-adjusted local mark-to-market result with higher return, higher Sharpe estimate, lower drawdown, lower turnover, and fewer trade events than the prior baseline.
+
+This result should be treated as independent research support, not as a deployment claim. The next validation priority remains testing across later market periods and more realistic broker/path-level simulations.
+
+## Next Recommended Work
+
+1. Add lightweight tests for validation-chain command construction.
+2. Revisit stricter quality rules after additional local validation runs.
+3. Run the unified six-ticker workflow across a later market period to test temporal stability.
+4. Use QuantConnect primarily for execution-path validation until the data-availability issue is resolved.
+5. Keep the six-ticker payload as the controlled research baseline unless a future validation run clearly improves both return and robustness.
