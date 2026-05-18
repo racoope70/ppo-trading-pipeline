@@ -170,8 +170,6 @@ tests/test_validate_payload_manifest.py
 
 After this addition, the local pytest suite increased from 23 tests to 26 tests.
 
-This is documentation-only and will not change the baseline metrics.
-
 ### Lightweight Tests and CI
 
 Lightweight pytest coverage was added for the reproducibility layer:
