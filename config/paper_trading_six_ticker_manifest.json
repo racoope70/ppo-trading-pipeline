@@ -1,0 +1,51 @@
+{
+  "artifact_manifest_version": "0.3",
+  "baseline_name": "six_ticker_ppo_validation_baseline",
+  "source_git_tag": "v0.2-six-ticker-validation-baseline",
+  "universe": [
+    "AAPL",
+    "AMD",
+    "MRK",
+    "PFE",
+    "UNH",
+    "XOM"
+  ],
+  "selected_models": {
+    "AAPL": "ppo_AAPL_window1",
+    "AMD": "ppo_AMD_window3",
+    "MRK": "ppo_MRK_window1",
+    "PFE": "ppo_PFE_window1",
+    "UNH": "ppo_UNH_window1",
+    "XOM": "ppo_XOM_window1"
+  },
+  "artifact_requirements": {
+    "model_zip": true,
+    "vecnormalize_pkl": true,
+    "features_json": true
+  },
+  "paper_trading_defaults": {
+    "data_timeframe": "1H",
+    "train_timeframe": "1H",
+    "bars_feed": "iex",
+    "dry_run": true,
+    "auto_run_live": false,
+    "allow_shorts": false,
+    "use_fractionals": true,
+    "require_paper_endpoint": true
+  },
+  "source_validation": {
+    "validation_type": "unified_independent_six_ticker_validation",
+    "run_dir": "reports/backtests/ppo_walkforward_results_20260517_200251",
+    "final_equity": 113439.87,
+    "net_return_pct": 13.44,
+    "sharpe_estimate": 4.0243,
+    "max_drawdown_pct": 6.45,
+    "total_turnover": 34.3483,
+    "trade_events": 164
+  },
+  "notes": [
+    "This manifest pins the exact model-window choices selected by the unified independent validation run.",
+    "Paper trading should use these selected model prefixes rather than automatically choosing the highest available window.",
+    "The first VS Code paper-trading implementation should be dry-run only."
+  ]
+}
