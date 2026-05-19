@@ -259,18 +259,6 @@ Local VS Code validation remains the primary research benchmark until the QuantC
 
 ---
 
-## Current Status
-
-v0.2 is complete and tagged:
-
-```text
-v0.2-six-ticker-validation-baseline
-```
-
-v0.3 starts with safe paper-trading integration scaffolding.
-
----
-
 ## Step 5 — validate and commit
 
 Run:
@@ -279,4 +267,173 @@ Run:
 python -m json.tool config/paper_trading_six_ticker_manifest.json > /dev/null
 python -m pytest tests -q
 git status --short
+```
+
+---
+
+---
+
+## Stage 2 Result: Broker-Connected Dry Run
+
+The first broker-connected dry-run layer was implemented and validated.
+
+Implemented module:
+
+```text
+src/paper_trading/paper_trade_dry_run.py
+```
+
+Safety-evaluation module:
+
+```text
+src/paper_trading/evaluate_dry_run.py
+```
+
+The dry-run command connects to Alpaca paper, loads the validated six-ticker PPO artifact manifest, verifies the selected artifacts, fetches recent bars, runs PPO inference, compares target weights to actual Alpaca positions, and writes dry-run logs.
+
+It submits no orders.
+
+Dry-run command:
+
+```bash
+python -m src.paper_trading.paper_trade_dry_run \
+  --artifacts-dir models/ppo_models_master
+```
+
+Evaluation command:
+
+```bash
+python -m src.paper_trading.evaluate_dry_run \
+  --run-dir reports/paper_trading_dry_runs/latest
+```
+
+The dry run successfully evaluated all six validated baseline tickers:
+
+```text
+AAPL
+AMD
+MRK
+PFE
+UNH
+XOM
+```
+
+Safety checks passed:
+
+```text
+run_dir_exists: PASS
+targets_csv_exists: PASS
+summary_json_exists: PASS
+targets_non_empty: PASS
+required_columns_present: PASS
+expected_symbols_present: PASS
+one_row_per_expected_symbol: PASS
+summary_rows_match_targets: PASS
+summary_orders_submitted_zero: PASS
+row_orders_submitted_zero: PASS
+dry_run_flag_all_one: PASS
+no_dry_run_errors: PASS
+all_predict_ok: PASS
+latest_bar_time_present: PASS
+raw_action_finite: PASS
+confidence_finite: PASS
+target_weight_finite: PASS
+actual_weight_finite: PASS
+intended_notional_finite: PASS
+confidence_between_0_and_1: PASS
+target_weight_within_bound: PASS
+summary_error_count_zero: PASS
+summary_predict_ok_count_matches: PASS
+```
+
+Final evaluator result:
+
+```text
+Evaluation result: PASS
+rows=6
+predict_ok_count=6
+error_count=0
+orders_submitted=0
+```
+
+This confirms that the VS Code Alpaca paper-trading layer can load the validated six-ticker model artifacts, connect to Alpaca paper, run inference, compare intended exposure against current positions, and log results without submitting orders.
+
+This is the required safety gate before migrating real order-execution logic from the Colab paper-trading prototype.
+
+Generated dry-run outputs are intentionally excluded from Git:
+
+```text
+reports/paper_trading_dry_runs/
+```
+
+---
+
+## Local Alpaca Environment File
+
+Real Alpaca paper-trading credentials must be stored only in a local `.env` file.
+
+The repository tracks:
+
+```text
+.env.example
+```
+
+The repository must not track:
+
+```text
+.env
+```
+
+Required local variables:
+
+```env
+APCA_API_KEY_ID=your_paper_key_here
+APCA_API_SECRET_KEY=your_paper_secret_here
+APCA_API_BASE_URL=https://paper-api.alpaca.markets
+```
+
+The dry-run script requires Alpaca credentials because it connects to the paper account and fetches account, position, and market-bar data.
+
+The evaluator does not require Alpaca credentials because it only reads saved dry-run output files.
+
+---
+
+## Current Status
+
+v0.3 has completed the first broker-connected paper-trading safety layer.
+
+Completed v0.3 components:
+
+```text
+paper-trading scaffold
+six-ticker artifact manifest
+artifact manifest validator
+broker-connected dry-run script
+dry-run evaluator safety gate
+```
+
+Latest validated command sequence:
+
+```bash
+python -m src.paper_trading.paper_trade_dry_run \
+  --artifacts-dir models/ppo_models_master
+
+python -m src.paper_trading.evaluate_dry_run \
+  --run-dir reports/paper_trading_dry_runs/latest
+```
+
+Expected result:
+
+```text
+Evaluation result: PASS
+rows=6
+predict_ok_count=6
+error_count=0
+orders_submitted=0
+```
+
+Next planned step:
+
+```text
+Migrate controlled execution logic from the Colab paper-trading prototype into dedicated VS Code modules, while keeping real paper-order submission behind an explicit opt-in flag.
 ```
