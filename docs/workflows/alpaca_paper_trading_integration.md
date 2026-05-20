@@ -549,6 +549,25 @@ orders_submitted=0
 
 ---
 
+## Paper Account Baseline
+
+A new Alpaca paper account was opened for the v0.3 six-ticker paper-trading validation.
+
+Starting broker state:
+
+```text
+Equity: $100,000
+Cash: $100,000
+Positions: 0
+Open orders: 0
+```
+
+This account serves as the clean baseline for future controlled six-ticker paper-trading tests.
+
+The account should remain flat before any intentional paper-order test. Real paper orders must only be submitted through the guarded runner using the explicit `--submit-orders` flag.
+
+---
+
 ## Next Planned Steptarget-weight clamping
 
 
