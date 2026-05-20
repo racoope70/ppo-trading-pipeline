@@ -2,17 +2,22 @@
 
 ## Objective
 
-This document defines the v0.3 workflow for moving useful Alpaca paper-trading logic from the Colab prototype into the VS Code research repository.
+This document defines the v0.3 workflow for integrating Alpaca paper trading into the validated six-ticker PPO research stack.
 
-The goal is not to immediately enable live paper orders. The goal is to build a safe, auditable broker-connected paper-trading layer around the validated six-ticker PPO baseline.
+The objective is not immediate live execution. The objective is to establish a controlled, auditable broker-connected execution layer around the validated six-ticker baseline.
 
-Validated six-ticker universe:
+Validated universe:
 
 ```text
-AAPL, AMD, MRK, PFE, UNH, XOM
+AAPL
+AMD
+MRK
+PFE
+UNH
+XOM
 ```
 
-Source checkpoint:
+Research checkpoint:
 
 ```text
 v0.2-six-ticker-validation-baseline
@@ -20,9 +25,9 @@ v0.2-six-ticker-validation-baseline
 
 ---
 
-## Why This Phase Exists
+## Research Context
 
-The v0.2 research workflow validated the six-ticker PPO baseline through:
+The v0.2 workflow validated the six-ticker PPO baseline through:
 
 ```text
 local mark-to-market simulation
@@ -36,18 +41,18 @@ partial independent validation
 unified independent six-ticker validation
 ```
 
-The next step is to connect that validated research baseline to the Alpaca paper-trading layer in VS Code.
+The next phase connects the validated research baseline to Alpaca paper trading inside the VS Code research environment.
 
-The previous Alpaca paper-trading implementation proved several broker-facing pieces in Colab, including:
+The original Colab implementation validated several broker-facing components:
 
 ```text
 Alpaca paper endpoint setup
 account and position checks
-recent bar retrieval
+historical bar retrieval
 PPO model loading
 VecNormalize loading
 live feature reconstruction
-PPO predict()
+PPO inference
 target-weight conversion
 order submission
 position reconciliation
@@ -57,30 +62,40 @@ trade_log_master.csv logging
 post-run evaluation reporting
 ```
 
-However, the Colab version should not be copied directly into the repository as one large script because it mixes notebook dependency installation, Google Drive paths, Colab upload/download helpers, live execution, and post-run evaluation logic.
+That implementation was intentionally not migrated directly because it mixed:
+
+```text
+notebook dependency installation
+Google Drive paths
+Colab upload/download helpers
+live execution
+evaluation logic
+```
+
+The v0.3 implementation separates these concerns into audited modules.
 
 ---
 
-## Design Principle
+## System Design
 
-The VS Code paper-trading system should be built in stages:
+The paper-trading layer is structured as a staged execution chain:
 
 ```text
 1. Load validated model artifacts
 2. Run broker-connected dry-run inference
-3. Evaluate dry-run output
+3. Evaluate dry-run outputs
 4. Convert target weights into execution intents
-5. Build an execution plan
-6. Submit paper orders only with an explicit opt-in flag
+5. Build execution plans
+6. Submit paper orders only through explicit opt-in
 ```
 
-The first implementation must remain dry-run only.
+Default behavior remains dry-run only.
 
 ---
 
 ## Safety Defaults
 
-The v0.3 paper-trading layer should default to:
+The v0.3 paper-trading layer defaults to:
 
 ```text
 DRY_RUN=1
@@ -89,13 +104,13 @@ REQUIRE_PAPER=1
 ALLOW_SHORTS=0
 ```
 
-Real paper-order submission should require an explicit command-line flag in a later phase, for example:
+Real paper-order submission requires an explicit command-line flag:
 
 ```bash
 python -m src.paper_trading.paper_trade_loop --submit-orders
 ```
 
-No script should submit orders simply because it was imported or run without an explicit order flag.
+No module should submit orders implicitly during import or standard execution.
 
 ---
 
@@ -107,7 +122,7 @@ The paper-trading layer uses an explicit artifact manifest:
 config/paper_trading_six_ticker_manifest.json
 ```
 
-The manifest pins the validated model-window selections:
+Validated model selections:
 
 ```text
 AAPL    ppo_AAPL_window1
@@ -118,13 +133,13 @@ UNH     ppo_UNH_window1
 XOM     ppo_XOM_window1
 ```
 
-This avoids accidentally selecting the highest available model window when that window was not the one selected by validation.
+This prevents accidental selection of non-validated windows.
 
 ---
 
-## Package Structure
+## Repository Structure
 
-Current implemented modules:
+Implemented modules:
 
 ```text
 src/paper_trading/
@@ -134,35 +149,35 @@ src/paper_trading/
   evaluate_dry_run.py
   execution.py
   build_execution_plan.py
+  paper_trade_loop.py
 ```
 
-Planned future modules:
+Planned modules:
 
 ```text
 src/paper_trading/risk_controls.py
 src/paper_trading/logging_utils.py
-src/paper_trading/paper_trade_loop.py
 ```
 
 ---
 
-## Local Alpaca Environment File
+## Alpaca Environment Configuration
 
-Real Alpaca paper-trading credentials must be stored only in a local `.env` file.
+Broker credentials are stored only in a local `.env` file.
 
-The repository tracks:
+Tracked:
 
 ```text
 .env.example
 ```
 
-The repository must not track:
+Excluded from Git:
 
 ```text
 .env
 ```
 
-Required local variables:
+Required variables:
 
 ```env
 APCA_API_KEY_ID=your_paper_key_here
@@ -170,11 +185,11 @@ APCA_API_SECRET_KEY=your_paper_secret_here
 APCA_API_BASE_URL=https://paper-api.alpaca.markets
 ```
 
-The dry-run script requires Alpaca credentials because it connects to the paper account and fetches account, position, and market-bar data.
+The dry-run layer requires Alpaca credentials because it connects to the paper account and retrieves account, position, and market-bar data.
 
-The evaluator and execution-plan builder do not require Alpaca credentials because they only read saved dry-run output files.
+Evaluation and execution-plan modules do not require broker credentials.
 
-Credential check command:
+Credential validation:
 
 ```bash
 python - <<'PY'
@@ -184,22 +199,15 @@ from alpaca.trading.client import TradingClient
 
 load_dotenv(".env", override=True)
 
-key = os.getenv("APCA_API_KEY_ID", "").strip()
-secret = os.getenv("APCA_API_SECRET_KEY", "").strip()
-base_url = os.getenv("APCA_API_BASE_URL", "").strip()
-
-print("key_loaded:", bool(key), "key_len:", len(key))
-print("secret_loaded:", bool(secret), "secret_len:", len(secret))
-print("base_url:", base_url)
-
 client = TradingClient(
-    api_key=key,
-    secret_key=secret,
+    api_key=os.getenv("APCA_API_KEY_ID"),
+    secret_key=os.getenv("APCA_API_SECRET_KEY"),
     paper=True,
-    url_override=base_url,
+    url_override=os.getenv("APCA_API_BASE_URL"),
 )
 
 account = client.get_account()
+
 print("account_status:", account.status)
 print("account_currency:", account.currency)
 print("credential_check: PASS")
@@ -214,11 +222,9 @@ credential_check: PASS
 
 ---
 
-## Stage 1 Result: Scaffold
+# Stage 1 — Integration Scaffold
 
-Stage 1 created the initial paper-trading integration scaffold.
-
-Implemented files:
+Implemented:
 
 ```text
 docs/workflows/alpaca_paper_trading_integration.md
@@ -227,7 +233,9 @@ config/paper_trading_six_ticker_manifest.json
 src/paper_trading/__init__.py
 ```
 
-This stage did not connect to Alpaca and did not place trades.
+This stage introduced the repository structure only.
+
+No broker connection or order logic was enabled.
 
 Commit:
 
@@ -237,9 +245,7 @@ Commit:
 
 ---
 
-## Stage 2 Result: Broker-Connected Dry Run
-
-The first broker-connected dry-run layer was implemented and validated.
+# Stage 2 — Broker-Connected Dry Run
 
 Implemented module:
 
@@ -247,15 +253,24 @@ Implemented module:
 src/paper_trading/paper_trade_dry_run.py
 ```
 
-Safety-evaluation module:
+Evaluator:
 
 ```text
 src/paper_trading/evaluate_dry_run.py
 ```
 
-The dry-run command connects to Alpaca paper, loads the validated six-ticker PPO artifact manifest, verifies the selected artifacts, fetches recent bars, runs PPO inference, compares target weights to actual Alpaca positions, and writes dry-run logs.
+The dry-run workflow:
 
-It submits no orders.
+```text
+connects to Alpaca paper
+loads validated PPO artifacts
+retrieves recent market bars
+runs PPO inference
+compares target weights to actual exposure
+writes dry-run reports
+```
+
+No orders are submitted.
 
 Dry-run command:
 
@@ -271,7 +286,7 @@ python -m src.paper_trading.evaluate_dry_run \
   --run-dir reports/paper_trading_dry_runs/latest
 ```
 
-The dry run successfully evaluated all six validated baseline tickers:
+Validated symbols:
 
 ```text
 AAPL
@@ -282,35 +297,7 @@ UNH
 XOM
 ```
 
-Safety checks passed:
-
-```text
-run_dir_exists: PASS
-targets_csv_exists: PASS
-summary_json_exists: PASS
-targets_non_empty: PASS
-required_columns_present: PASS
-expected_symbols_present: PASS
-one_row_per_expected_symbol: PASS
-summary_rows_match_targets: PASS
-summary_orders_submitted_zero: PASS
-row_orders_submitted_zero: PASS
-dry_run_flag_all_one: PASS
-no_dry_run_errors: PASS
-all_predict_ok: PASS
-latest_bar_time_present: PASS
-raw_action_finite: PASS
-confidence_finite: PASS
-target_weight_finite: PASS
-actual_weight_finite: PASS
-intended_notional_finite: PASS
-confidence_between_0_and_1: PASS
-target_weight_within_bound: PASS
-summary_error_count_zero: PASS
-summary_predict_ok_count_matches: PASS
-```
-
-Final evaluator result:
+Evaluator result:
 
 ```text
 Evaluation result: PASS
@@ -320,8 +307,6 @@ error_count=0
 orders_submitted=0
 ```
 
-This confirms that the VS Code Alpaca paper-trading layer can load the validated six-ticker model artifacts, connect to Alpaca paper, run inference, compare intended exposure against current positions, and log results without submitting orders.
-
 Commits:
 
 ```text
@@ -330,7 +315,7 @@ b5af6d5 Add paper trading dry run evaluator
 afc2a11 Document Alpaca paper trading dry run checkpoint
 ```
 
-Generated dry-run outputs are intentionally excluded from Git:
+Generated reports remain excluded from Git:
 
 ```text
 reports/paper_trading_dry_runs/
@@ -338,9 +323,9 @@ reports/paper_trading_dry_runs/
 
 ---
 
-## Stage 3 Result: Controlled Execution Intent Layer
+# Stage 3 — Execution Intent Layer
 
-Controlled execution logic was migrated into a dedicated module:
+Implemented module:
 
 ```text
 src/paper_trading/execution.py
@@ -352,36 +337,34 @@ Test coverage:
 tests/test_paper_trading_execution.py
 ```
 
-This module converts target weights into proposed buy/sell/hold intents.
+The execution layer converts target weights into structured execution intents.
 
-It supports:
+Supported controls:
 
 ```text
 target-weight clamping
-short blocking by default
+short blocking
 target notional calculation
 actual exposure comparison
-buy/sell/hold intent creation
+buy/sell/hold intent generation
 minimum-notional filtering
-fractional-quantity rounding
-execution-intent summaries
-guarded order execution
+fractional-share rounding
+execution summaries
+guarded execution
 ```
 
-Safety guard:
+Execution guard:
 
 ```text
 execute_rebalance_intent()
 ```
 
-will not submit an order unless both conditions are true:
+Orders are only submitted when:
 
 ```text
 submit_orders=True
 dry_run=False
 ```
-
-This means execution logic can be tested and audited without enabling real paper-order submission.
 
 Commit:
 
@@ -391,9 +374,9 @@ Commit:
 
 ---
 
-## Stage 4 Result: Execution Plan Builder
+# Stage 4 — Execution Plan Builder
 
-The execution-plan builder was added:
+Implemented module:
 
 ```text
 src/paper_trading/build_execution_plan.py
@@ -405,11 +388,11 @@ Test coverage:
 tests/test_build_execution_plan.py
 ```
 
-This script reads dry-run target outputs and converts them into a structured execution plan.
+The execution-plan builder converts dry-run outputs into a structured execution plan.
 
 It does not connect to Alpaca and does not submit orders.
 
-Command sequence:
+Command chain:
 
 ```bash
 python -m src.paper_trading.paper_trade_dry_run \
@@ -422,13 +405,7 @@ python -m src.paper_trading.build_execution_plan \
   --run-dir reports/paper_trading_dry_runs/latest
 ```
 
-Latest validated result:
-
-```text
-Execution plan complete. No orders were submitted.
-```
-
-Example execution-plan output:
+Example output:
 
 ```text
 AMD  buy   44.285365 shares
@@ -450,24 +427,92 @@ sell_count: 0
 orders_submitted: 0
 ```
 
-This confirms the bridge from model output to proposed execution is working:
-
-```text
-PPO prediction
-target weight
-actual exposure comparison
-buy/sell/hold intent
-execution plan
-zero orders submitted
-```
-
 Commit:
 
 ```text
 89bb0b9 Add paper trading execution plan builder
 ```
 
-Generated execution-plan outputs are intentionally excluded from Git:
+---
+
+# Stage 5 — Guarded Paper-Order Runner
+
+Implemented module:
+
+```text
+src/paper_trading/paper_trade_loop.py
+```
+
+Test coverage:
+
+```text
+tests/test_paper_trade_loop.py
+```
+
+The runner consumes the execution plan and either:
+
+```text
+runs in dry-run mode
+or submits Alpaca paper orders through explicit opt-in
+```
+
+Default behavior submits no orders.
+
+Default command:
+
+```bash
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
+```
+
+Expected result:
+
+```text
+Dry-run mode complete. No orders were submitted.
+orders_submitted=0
+submit_orders=False
+```
+
+Paper-order submission requires:
+
+```bash
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --submit-orders
+```
+
+An intentional paper-order validation was executed once:
+
+```text
+AMD buy
+XOM buy
+orders_submitted=2
+```
+
+The account was subsequently flattened and reset.
+
+Clean paper-account baseline:
+
+```text
+Equity: $100,000
+Cash: $100,000
+Positions: 0
+Open orders: 0
+```
+
+Operational rule:
+
+```text
+Do not use --submit-orders unless intentionally placing paper trades.
+```
+
+Commit:
+
+```text
+4e7b0cc Add guarded paper order runner
+```
+
+Generated reports remain excluded from Git:
 
 ```text
 reports/paper_trading_dry_runs/
@@ -477,56 +522,52 @@ reports/paper_trading_dry_runs/
 
 ## QuantConnect Role
 
-QuantConnect is not the main performance backtest environment for this phase because the previous LEAN test had data-window availability issues.
+QuantConnect is not currently the primary validation environment because earlier LEAN runs encountered data-window availability issues.
 
 QuantConnect remains useful for:
 
 ```text
-Object Store loading checks
+Object Store validation
 payload compatibility checks
 timestamp alignment checks
 execution-path smoke tests
 ```
 
-Local VS Code validation remains the primary research benchmark until the QuantConnect data-window issue is resolved.
+Primary research validation remains local.
 
 ---
 
 ## Current Status
 
-v0.2 is complete and tagged:
+Research checkpoint:
 
 ```text
 v0.2-six-ticker-validation-baseline
 ```
 
-v0.3 has completed the first broker-connected paper-trading safety chain.
-
 Completed v0.3 components:
 
 ```text
 paper-trading scaffold
-six-ticker artifact manifest
-artifact manifest validator
-broker-connected dry-run script
-dry-run evaluator safety gate
-controlled execution-intent module
+artifact manifest
+broker-connected dry run
+dry-run evaluator
+execution-intent layer
 execution-plan builder
+guarded paper-order runner
 ```
 
-Latest validation status:
+Current validation status:
 
 ```text
-52 passed, 1 warning
+59 passed, 1 warning
 ```
 
-The warning is from a dependency deprecation warning in `websockets.legacy` and does not block the test suite.
+The warning originates from a dependency deprecation in `websockets.legacy` and does not affect functionality.
 
 ---
 
-## Current Safe Command Chain
-
-Run the full current paper-trading safety chain:
+## Current Safe Execution Chain
 
 ```bash
 python -m src.paper_trading.paper_trade_dry_run \
@@ -537,6 +578,9 @@ python -m src.paper_trading.evaluate_dry_run \
 
 python -m src.paper_trading.build_execution_plan \
   --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
 ```
 
 Expected result:
@@ -544,47 +588,42 @@ Expected result:
 ```text
 Evaluation result: PASS
 Execution plan complete. No orders were submitted.
+Dry-run mode complete. No orders were submitted.
 orders_submitted=0
+submit_orders=False
 ```
 
 ---
 
-## Paper Account Baseline
+## Next Phase
 
-A new Alpaca paper account was opened for the v0.3 six-ticker paper-trading validation.
+The next phase should focus on stronger risk controls and execution auditability before running extended paper-trading sessions.
 
-Starting broker state:
-
-```text
-Equity: $100,000
-Cash: $100,000
-Positions: 0
-Open orders: 0
-```
-
-This account serves as the clean baseline for future controlled six-ticker paper-trading tests.
-
-The account should remain flat before any intentional paper-order test. Real paper orders must only be submitted through the guarded runner using the explicit `--submit-orders` flag.
-
----
-
-## Next Planned Steptarget-weight clamping
-
-
-The next phase should add controlled order-submission plumbing, but still keep real paper-order submission behind an explicit opt-in flag.
-
-Planned module:
+Planned modules:
 
 ```text
-src/paper_trading/paper_trade_loop.py
+src/paper_trading/risk_controls.py
+src/paper_trading/logging_utils.py
 ```
 
-Required safety behavior:
+Required controls:
+
+```text
+pre-trade exposure validation
+max-position enforcement
+gross-notional limits
+order audit logging
+broker-state snapshots
+submission/fill reconciliation
+persistent execution logs
+```
+
+Core safety requirements remain unchanged:
 
 ```text
 default mode submits no orders
+paper endpoint is mandatory
 real paper orders require --submit-orders
-paper endpoint is required
-dry-run/evaluator/execution-plan checks must pass before order submission
-generated reports stay out of Git
+evaluation gates must pass before execution
+generated reports remain excluded from Git
 ```
