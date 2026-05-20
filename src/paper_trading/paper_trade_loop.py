@@ -7,6 +7,7 @@ Safety rules:
 - Real paper orders require --submit-orders.
 - Alpaca paper endpoint is required before submitting.
 - Execution plan must be clean and generated from the dry-run/evaluation/execution-plan chain.
+- Submit mode is blocked unless risk controls pass.
 """
 
 from __future__ import annotations
@@ -21,6 +22,12 @@ import pandas as pd
 
 from src.adapters.alpaca import create_alpaca_clients
 from src.paper_trading.execution import RebalanceIntent, execute_rebalance_intent
+from src.paper_trading.risk_controls import (
+    RiskContext,
+    RiskControlConfig,
+    assert_risk_report_passes,
+    evaluate_execution_plan_risk,
+)
 
 
 DEFAULT_RUN_DIR = Path("reports/paper_trading_dry_runs/latest")
@@ -133,6 +140,53 @@ def row_to_intent(row: pd.Series, *, submit_orders: bool) -> RebalanceIntent:
     )
 
 
+def build_risk_context(
+    trading_client: Any | None,
+    *,
+    submit_orders: bool,
+) -> RiskContext:
+    """Build optional broker context for risk controls.
+
+    In dry-run mode this intentionally avoids broker calls.
+    In submit mode this attempts to capture current account state.
+    """
+    if not submit_orders or trading_client is None:
+        return RiskContext(submit_orders=submit_orders)
+
+    account_equity = None
+    cash = None
+    positions_count = None
+    open_orders_count = None
+
+    try:
+        account = trading_client.get_account()
+        account_equity = float(getattr(account, "equity", 0.0) or 0.0)
+        cash = float(getattr(account, "cash", 0.0) or 0.0)
+    except Exception:
+        pass
+
+    try:
+        positions = trading_client.get_all_positions() or []
+        positions_count = len(positions)
+    except Exception:
+        pass
+
+    try:
+        open_orders = trading_client.get_orders() or []
+        open_orders_count = len(open_orders)
+    except Exception:
+        pass
+
+    return RiskContext(
+        account_equity=account_equity,
+        cash=cash,
+        positions_count=positions_count,
+        open_orders_count=open_orders_count,
+        now_utc=utc_now_iso(),
+        submit_orders=submit_orders,
+    )
+
+
 def run_paper_order_plan(
     *,
     run_dir: str | Path = DEFAULT_RUN_DIR,
@@ -140,6 +194,7 @@ def run_paper_order_plan(
     submit_orders: bool = False,
     env_path: str | Path = ".env",
     trading_client: Any | None = None,
+    risk_config: RiskControlConfig | None = None,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Run an execution plan in guarded dry-run or submit mode."""
     root = Path(run_dir)
@@ -154,6 +209,21 @@ def run_paper_order_plan(
             require_paper=True,
         )
 
+    risk_ctx = build_risk_context(
+        trading_client,
+        submit_orders=submit_orders,
+    )
+
+    report = evaluate_execution_plan_risk(
+        plan,
+        plan_summary,
+        config=risk_config or RiskControlConfig(),
+        context=risk_ctx,
+    )
+
+    if submit_orders:
+        assert_risk_report_passes(report)
+
     results: list[dict[str, Any]] = []
 
     for _, row in plan.iterrows():
@@ -165,6 +235,7 @@ def run_paper_order_plan(
         )
         result["datetime_utc"] = utc_now_iso()
         result["source_reason"] = str(row["reason"])
+        result["risk_passed"] = bool(report.passed)
         results.append(result)
 
     result_df = pd.DataFrame(results)
@@ -189,6 +260,16 @@ def run_paper_order_plan(
         "orders_required": should_order_count,
         "rows": int(len(result_df)),
         "paper_endpoint_required": True,
+        "risk_passed": bool(report.passed),
+        "risk_report": report.to_dict(),
+        "risk_context": {
+            "account_equity": risk_ctx.account_equity,
+            "cash": risk_ctx.cash,
+            "positions_count": risk_ctx.positions_count,
+            "open_orders_count": risk_ctx.open_orders_count,
+            "now_utc": risk_ctx.now_utc,
+            "submit_orders": risk_ctx.submit_orders,
+        },
         "plan_summary": plan_summary,
     }
 
@@ -267,10 +348,14 @@ def main() -> None:
         "should_order",
         "order_submitted",
         "order_id",
+        "risk_passed",
         "execution_note",
     ]
 
     print(results[display_cols].to_string(index=False))
+    print()
+    print("Risk controls:")
+    print(f"risk_passed={summary['risk_passed']}")
     print()
     print("Paper-order run summary:")
     print(f"rows={summary['rows']}")

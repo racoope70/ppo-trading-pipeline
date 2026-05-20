@@ -5,12 +5,14 @@ import pandas as pd
 import pytest
 
 from src.paper_trading.paper_trade_loop import (
+    build_risk_context,
     load_execution_plan,
     row_to_intent,
     run_paper_order_plan,
     validate_execution_plan,
     write_order_run,
 )
+from src.paper_trading.risk_controls import RiskControlConfig
 
 
 def _write_execution_plan(run_dir: Path) -> None:
@@ -125,6 +127,17 @@ def test_row_to_intent_allows_non_dry_run_with_submit_flag(tmp_path):
     assert intent.dry_run is False
 
 
+def test_build_risk_context_dry_run_does_not_require_broker():
+    context = build_risk_context(
+        trading_client=None,
+        submit_orders=False,
+    )
+
+    assert context.submit_orders is False
+    assert context.account_equity is None
+    assert context.open_orders_count is None
+
+
 def test_run_paper_order_plan_default_submits_no_orders(tmp_path):
     _write_execution_plan(tmp_path)
 
@@ -137,7 +150,39 @@ def test_run_paper_order_plan_default_submits_no_orders(tmp_path):
     assert summary["submit_orders"] is False
     assert summary["orders_required"] == 1
     assert summary["orders_submitted"] == 0
+    assert summary["risk_passed"] is True
     assert results.loc[0, "execution_note"] == "dry_run_no_order_submitted"
+    assert bool(results.loc[0, "risk_passed"]) is True
+
+def test_run_paper_order_plan_submit_mode_blocks_failed_risk_before_orders(tmp_path):
+    _write_execution_plan(tmp_path)
+
+    plan = pd.read_csv(tmp_path / "execution_plan.csv")
+    plan.loc[0, "target_weight"] = 0.80
+    plan.to_csv(tmp_path / "execution_plan.csv", index=False)
+
+    with pytest.raises(RuntimeError, match="Risk controls failed"):
+        run_paper_order_plan(
+            run_dir=tmp_path,
+            submit_orders=True,
+            trading_client=object(),
+            risk_config=RiskControlConfig(max_abs_symbol_weight=0.40),
+        )
+
+
+def test_run_paper_order_plan_submit_mode_blocks_prior_submitted_flag(tmp_path):
+    _write_execution_plan(tmp_path)
+
+    plan = pd.read_csv(tmp_path / "execution_plan.csv")
+    plan.loc[0, "order_submitted"] = True
+    plan.to_csv(tmp_path / "execution_plan.csv", index=False)
+
+    with pytest.raises(ValueError, match="order_submitted"):
+        run_paper_order_plan(
+            run_dir=tmp_path,
+            submit_orders=True,
+            trading_client=object(),
+        )
 
 
 def test_write_order_run_outputs_files(tmp_path):
@@ -156,3 +201,4 @@ def test_write_order_run_outputs_files(tmp_path):
 
     written_summary = json.loads(summary_path.read_text(encoding="utf-8"))
     assert written_summary["orders_submitted"] == 0
+    assert written_summary["risk_passed"] is True
