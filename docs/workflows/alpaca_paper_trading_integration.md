@@ -627,3 +627,184 @@ real paper orders require --submit-orders
 evaluation gates must pass before execution
 generated reports remain excluded from Git
 ```
+## Stage 6 Result: Risk Controls Integrated into Paper-Order Runner
+
+Risk controls were integrated directly into the guarded paper-order runner.
+
+Implemented module:
+
+```text
+src/paper_trading/risk_controls.py
+```
+
+Updated runner:
+
+```text
+src/paper_trading/paper_trade_loop.py
+```
+
+Test coverage:
+
+```text
+tests/test_paper_trading_risk_controls.py
+tests/test_paper_trade_loop.py
+```
+
+The paper-order runner now evaluates risk controls before processing the execution plan.
+
+Safety behavior:
+
+```text
+default mode:
+  runs risk controls
+  writes paper-order run output
+  submits zero orders
+
+--submit-orders mode:
+  connects to Alpaca paper
+  builds broker risk context
+  runs risk controls
+  blocks order submission if risk controls fail
+  only submits paper orders if risk_passed=True
+```
+
+The risk-control layer checks:
+
+```text
+execution plan is non-empty
+required execution-plan columns are present
+quantity, price, equity, target weight, actual weight, and delta notional are finite
+equity is above minimum threshold
+single-symbol target weight is within limit
+gross target exposure is within limit
+net target exposure is within limit
+no prior order_submitted flags exist in the execution plan
+order sides are valid
+rows requiring orders use buy or sell
+quantities are non-negative
+total order notional is within limit
+single-order notional is within limit
+flat-start requirements pass when enabled
+execution-plan summary shows orders_submitted=0
+```
+
+Latest validated no-order command sequence:
+
+```bash
+python -m src.paper_trading.paper_trade_dry_run \
+  --artifacts-dir models/ppo_models_master
+
+python -m src.paper_trading.evaluate_dry_run \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.build_execution_plan \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.risk_controls \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --require-flat-start
+
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
+```
+
+Latest validated result:
+
+```text
+Risk result: PASS
+risk_passed=True
+orders_required=1
+orders_submitted=0
+submit_orders=False
+Dry-run mode complete. No orders were submitted.
+```
+
+Example validated execution-plan intent:
+
+```text
+AMD buy 40.694834 shares
+AAPL hold
+MRK hold
+PFE hold
+UNH hold
+XOM hold
+```
+
+The guarded runner now records risk status in the paper-order run output:
+
+```text
+risk_passed=True
+```
+
+This confirms that the current safe chain is:
+
+```text
+broker-connected dry run
+dry-run evaluator
+execution-plan builder
+risk-control report
+guarded paper-order runner
+zero orders submitted by default
+```
+
+Commit:
+
+```text
+2af7f3a Integrate risk controls into paper order runner
+```
+
+Current validation status:
+
+```text
+71 passed, 1 warning
+```
+
+The remaining warning is a third-party `websockets.legacy` deprecation warning and does not indicate a failed test.
+
+Generated run outputs remain excluded from Git:
+
+```text
+reports/paper_trading_dry_runs/
+```
+
+Safety rule:
+
+```text
+Do not use --submit-orders unless intentionally placing Alpaca paper trades.
+```
+
+```python
+if "## Stage 6 Result: Risk Controls Integrated into Paper-Order Runner" not in text:
+    text = text.replace(
+        "\n---\n\n## QuantConnect Role",
+        "\n" + stage6 + "\n\n## QuantConnect Role"
+    )
+
+# Update current implemented modules if needed.
+
+text = text.replace(
+    """  build_execution_plan.py
+paper_trade_loop.py""",
+    """  build_execution_plan.py
+risk_controls.py
+paper_trade_loop.py"""
+)
+
+# Update completed component list if present.
+
+text = text.replace(
+    """execution-plan builder
+guarded paper-order runner""",
+    """execution-plan builder
+risk-control module
+guarded paper-order runner
+risk controls integrated into guarded runner"""
+)
+
+# Update validation count.
+
+text = text.replace("68 passed, 1 warning", "71 passed, 1 warning")
+text = text.replace("59 passed, 1 warning", "71 passed, 1 warning")
+
+path.write_text(text, encoding="utf-8")
+```
