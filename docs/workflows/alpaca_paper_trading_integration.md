@@ -2,7 +2,7 @@
 
 ## Objective
 
-This document defines the v0.3 workflow for integrating Alpaca paper trading into the validated six-ticker PPO research stack.
+This document defines the v0.4 workflow for integrating Alpaca paper trading into the validated six-ticker PPO research stack.
 
 The objective is not immediate live execution. The objective is to establish a controlled, auditable broker-connected execution layer around the validated six-ticker baseline.
 
@@ -15,12 +15,13 @@ MRK
 PFE
 UNH
 XOM
-```
+````
 
-Research checkpoint:
+Research checkpoints:
 
 ```text
 v0.2-six-ticker-validation-baseline
+v0.3-alpaca-paper-trading-safety-chain
 ```
 
 ---
@@ -72,7 +73,7 @@ live execution
 evaluation logic
 ```
 
-The v0.3 implementation separates these concerns into audited modules.
+The v0.4 implementation separates these concerns into audited modules.
 
 ---
 
@@ -86,7 +87,8 @@ The paper-trading layer is structured as a staged execution chain:
 3. Evaluate dry-run outputs
 4. Convert target weights into execution intents
 5. Build execution plans
-6. Submit paper orders only through explicit opt-in
+6. Run risk controls
+7. Submit paper orders only through explicit opt-in
 ```
 
 Default behavior remains dry-run only.
@@ -95,7 +97,7 @@ Default behavior remains dry-run only.
 
 ## Safety Defaults
 
-The v0.3 paper-trading layer defaults to:
+The paper-trading layer defaults to:
 
 ```text
 DRY_RUN=1
@@ -149,13 +151,13 @@ src/paper_trading/
   evaluate_dry_run.py
   execution.py
   build_execution_plan.py
+  risk_controls.py
   paper_trade_loop.py
 ```
 
 Planned modules:
 
 ```text
-src/paper_trading/risk_controls.py
 src/paper_trading/logging_utils.py
 ```
 
@@ -272,49 +274,6 @@ writes dry-run reports
 
 No orders are submitted.
 
-Dry-run command:
-
-```bash
-python -m src.paper_trading.paper_trade_dry_run \
-  --artifacts-dir models/ppo_models_master
-```
-
-Evaluation command:
-
-```bash
-python -m src.paper_trading.evaluate_dry_run \
-  --run-dir reports/paper_trading_dry_runs/latest
-```
-
-Validated symbols:
-
-```text
-AAPL
-AMD
-MRK
-PFE
-UNH
-XOM
-```
-
-Evaluator result:
-
-```text
-Evaluation result: PASS
-rows=6
-predict_ok_count=6
-error_count=0
-orders_submitted=0
-```
-
-Commits:
-
-```text
-f1ac28b Add Alpaca paper trading dry run
-b5af6d5 Add paper trading dry run evaluator
-afc2a11 Document Alpaca paper trading dry run checkpoint
-```
-
 Generated reports remain excluded from Git:
 
 ```text
@@ -338,26 +297,6 @@ tests/test_paper_trading_execution.py
 ```
 
 The execution layer converts target weights into structured execution intents.
-
-Supported controls:
-
-```text
-target-weight clamping
-short blocking
-target notional calculation
-actual exposure comparison
-buy/sell/hold intent generation
-minimum-notional filtering
-fractional-share rounding
-execution summaries
-guarded execution
-```
-
-Execution guard:
-
-```text
-execute_rebalance_intent()
-```
 
 Orders are only submitted when:
 
@@ -392,41 +331,6 @@ The execution-plan builder converts dry-run outputs into a structured execution 
 
 It does not connect to Alpaca and does not submit orders.
 
-Command chain:
-
-```bash
-python -m src.paper_trading.paper_trade_dry_run \
-  --artifacts-dir models/ppo_models_master
-
-python -m src.paper_trading.evaluate_dry_run \
-  --run-dir reports/paper_trading_dry_runs/latest
-
-python -m src.paper_trading.build_execution_plan \
-  --run-dir reports/paper_trading_dry_runs/latest
-```
-
-Example output:
-
-```text
-AMD  buy   44.285365 shares
-XOM  buy   22.148884 shares
-AAPL hold
-MRK  hold
-PFE  hold
-UNH  hold
-```
-
-Execution-plan summary:
-
-```text
-rows: 6
-orders_required: 2
-gross_intended_notional: 21943.7424
-buy_count: 2
-sell_count: 0
-orders_submitted: 0
-```
-
 Commit:
 
 ```text
@@ -449,56 +353,7 @@ Test coverage:
 tests/test_paper_trade_loop.py
 ```
 
-The runner consumes the execution plan and either:
-
-```text
-runs in dry-run mode
-or submits Alpaca paper orders through explicit opt-in
-```
-
 Default behavior submits no orders.
-
-Default command:
-
-```bash
-python -m src.paper_trading.paper_trade_loop \
-  --run-dir reports/paper_trading_dry_runs/latest
-```
-
-Expected result:
-
-```text
-Dry-run mode complete. No orders were submitted.
-orders_submitted=0
-submit_orders=False
-```
-
-Paper-order submission requires:
-
-```bash
-python -m src.paper_trading.paper_trade_loop \
-  --run-dir reports/paper_trading_dry_runs/latest \
-  --submit-orders
-```
-
-An intentional paper-order validation was executed once:
-
-```text
-AMD buy
-XOM buy
-orders_submitted=2
-```
-
-The account was subsequently flattened and reset.
-
-Clean paper-account baseline:
-
-```text
-Equity: $100,000
-Cash: $100,000
-Positions: 0
-Open orders: 0
-```
 
 Operational rule:
 
@@ -512,121 +367,8 @@ Commit:
 4e7b0cc Add guarded paper order runner
 ```
 
-Generated reports remain excluded from Git:
-
-```text
-reports/paper_trading_dry_runs/
-```
-
 ---
 
-## QuantConnect Role
-
-QuantConnect is not currently the primary validation environment because earlier LEAN runs encountered data-window availability issues.
-
-QuantConnect remains useful for:
-
-```text
-Object Store validation
-payload compatibility checks
-timestamp alignment checks
-execution-path smoke tests
-```
-
-Primary research validation remains local.
-
----
-
-## Current Status
-
-Research checkpoint:
-
-```text
-v0.2-six-ticker-validation-baseline
-```
-
-Completed v0.3 components:
-
-```text
-paper-trading scaffold
-artifact manifest
-broker-connected dry run
-dry-run evaluator
-execution-intent layer
-execution-plan builder
-guarded paper-order runner
-```
-
-Current validation status:
-
-```text
-59 passed, 1 warning
-```
-
-The warning originates from a dependency deprecation in `websockets.legacy` and does not affect functionality.
-
----
-
-## Current Safe Execution Chain
-
-```bash
-python -m src.paper_trading.paper_trade_dry_run \
-  --artifacts-dir models/ppo_models_master
-
-python -m src.paper_trading.evaluate_dry_run \
-  --run-dir reports/paper_trading_dry_runs/latest
-
-python -m src.paper_trading.build_execution_plan \
-  --run-dir reports/paper_trading_dry_runs/latest
-
-python -m src.paper_trading.paper_trade_loop \
-  --run-dir reports/paper_trading_dry_runs/latest
-```
-
-Expected result:
-
-```text
-Evaluation result: PASS
-Execution plan complete. No orders were submitted.
-Dry-run mode complete. No orders were submitted.
-orders_submitted=0
-submit_orders=False
-```
-
----
-
-## Next Phase
-
-The next phase should focus on stronger risk controls and execution auditability before running extended paper-trading sessions.
-
-Planned modules:
-
-```text
-src/paper_trading/risk_controls.py
-src/paper_trading/logging_utils.py
-```
-
-Required controls:
-
-```text
-pre-trade exposure validation
-max-position enforcement
-gross-notional limits
-order audit logging
-broker-state snapshots
-submission/fill reconciliation
-persistent execution logs
-```
-
-Core safety requirements remain unchanged:
-
-```text
-default mode submits no orders
-paper endpoint is mandatory
-real paper orders require --submit-orders
-evaluation gates must pass before execution
-generated reports remain excluded from Git
-```
 ## Stage 6 Result: Risk Controls Integrated into Paper-Order Runner
 
 Risk controls were integrated directly into the guarded paper-order runner.
@@ -719,40 +461,6 @@ submit_orders=False
 Dry-run mode complete. No orders were submitted.
 ```
 
-Example validated execution-plan intent:
-
-```text
-AMD buy 40.694834 shares
-AAPL hold
-MRK hold
-PFE hold
-UNH hold
-XOM hold
-```
-
-The guarded runner now records risk status in the paper-order run output:
-
-```text
-risk_passed=True
-```
-
-This confirms that the current safe chain is:
-
-```text
-broker-connected dry run
-dry-run evaluator
-execution-plan builder
-risk-control report
-guarded paper-order runner
-zero orders submitted by default
-```
-
-Commit:
-
-```text
-2af7f3a Integrate risk controls into paper order runner
-```
-
 Current validation status:
 
 ```text
@@ -773,38 +481,129 @@ Safety rule:
 Do not use --submit-orders unless intentionally placing Alpaca paper trades.
 ```
 
-```python
-if "## Stage 6 Result: Risk Controls Integrated into Paper-Order Runner" not in text:
-    text = text.replace(
-        "\n---\n\n## QuantConnect Role",
-        "\n" + stage6 + "\n\n## QuantConnect Role"
-    )
+---
 
-# Update current implemented modules if needed.
+## QuantConnect Role
 
-text = text.replace(
-    """  build_execution_plan.py
-paper_trade_loop.py""",
-    """  build_execution_plan.py
-risk_controls.py
-paper_trade_loop.py"""
-)
+QuantConnect is not currently the primary validation environment because earlier LEAN runs encountered data-window availability issues.
 
-# Update completed component list if present.
+QuantConnect remains useful for:
 
-text = text.replace(
-    """execution-plan builder
-guarded paper-order runner""",
-    """execution-plan builder
-risk-control module
+```text
+Object Store validation
+payload compatibility checks
+timestamp alignment checks
+execution-path smoke tests
+```
+
+Primary research validation remains local.
+
+---
+
+## Current Status
+
+Research checkpoints:
+
+```text
+v0.2-six-ticker-validation-baseline
+v0.3-alpaca-paper-trading-safety-chain
+```
+
+Current v0.4 progress:
+
+```text
+risk-control module implemented
+risk controls integrated into guarded paper-order runner
+submit-orders mode is blocked unless risk controls pass
+```
+
+Completed paper-trading components:
+
+```text
+paper-trading scaffold
+artifact manifest
+broker-connected dry run
+dry-run evaluator
+execution-intent layer
+execution-plan builder
 guarded paper-order runner
-risk controls integrated into guarded runner"""
-)
+risk-control module
+risk controls integrated into guarded runner
+```
 
-# Update validation count.
+Current validation status:
 
-text = text.replace("68 passed, 1 warning", "71 passed, 1 warning")
-text = text.replace("59 passed, 1 warning", "71 passed, 1 warning")
+```text
+71 passed, 1 warning
+```
 
-path.write_text(text, encoding="utf-8")
+The warning originates from a dependency deprecation in `websockets.legacy` and does not affect functionality.
+
+---
+
+## Current Safe Execution Chain
+
+```bash
+python -m src.paper_trading.paper_trade_dry_run \
+  --artifacts-dir models/ppo_models_master
+
+python -m src.paper_trading.evaluate_dry_run \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.build_execution_plan \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.risk_controls \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --require-flat-start
+
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
+```
+
+Expected result:
+
+```text
+Evaluation result: PASS
+Execution plan complete. No orders were submitted.
+Risk result: PASS
+risk_passed=True
+Dry-run mode complete. No orders were submitted.
+orders_submitted=0
+submit_orders=False
+```
+
+---
+
+## Next Phase
+
+The next phase should focus on execution audit logging before running extended paper-trading sessions.
+
+Planned module:
+
+```text
+src/paper_trading/logging_utils.py
+```
+
+Required logging behavior:
+
+```text
+capture account state before execution
+capture execution plan snapshot
+capture risk-control report
+capture paper-order runner output
+capture submitted order ids when --submit-orders is used
+capture final broker state after execution
+write one auditable run record per paper-trading run
+generated reports remain excluded from Git
+```
+
+Core safety requirements remain unchanged:
+
+```text
+default mode submits no orders
+paper endpoint is mandatory
+real paper orders require --submit-orders
+risk controls must pass before submit-orders mode
+generated reports remain excluded from Git
 ```
