@@ -22,6 +22,7 @@ import pandas as pd
 
 from src.adapters.alpaca import create_alpaca_clients
 from src.paper_trading.execution import RebalanceIntent, execute_rebalance_intent
+from src.paper_trading.logging_utils import build_and_write_audit_record, snapshot_broker_state
 from src.paper_trading.risk_controls import (
     RiskContext,
     RiskControlConfig,
@@ -209,6 +210,12 @@ def run_paper_order_plan(
             require_paper=True,
         )
 
+    broker_state_before = (
+        snapshot_broker_state(trading_client)
+        if trading_client is not None
+        else {}
+    )
+
     risk_ctx = build_risk_context(
         trading_client,
         submit_orders=submit_orders,
@@ -251,6 +258,12 @@ def run_paper_order_plan(
         else 0
     )
 
+    broker_state_after = (
+        snapshot_broker_state(trading_client)
+        if trading_client is not None
+        else {}
+    )
+
     summary = {
         "datetime_utc": utc_now_iso(),
         "source_run_dir": str(root),
@@ -270,6 +283,8 @@ def run_paper_order_plan(
             "now_utc": risk_ctx.now_utc,
             "submit_orders": risk_ctx.submit_orders,
         },
+        "broker_state_before": broker_state_before,
+        "broker_state_after": broker_state_after,
         "plan_summary": plan_summary,
     }
 
@@ -289,6 +304,18 @@ def write_order_run(
 
     results.to_csv(results_path, index=False)
     summary_path.write_text(json.dumps(summary, indent=2, default=str), encoding="utf-8")
+
+    build_and_write_audit_record(
+        run_dir=root,
+        output_dir=root,
+        broker_state_before=summary.get("broker_state_before", {}),
+        broker_state_after=summary.get("broker_state_after", {}),
+        metadata={
+            "source": "paper_trade_loop",
+            "summary_path": str(summary_path),
+            "results_path": str(results_path),
+        },
+    )
 
     return results_path, summary_path
 
@@ -365,6 +392,7 @@ def main() -> None:
     print()
     print(f"Saved order run: {results_path}")
     print(f"Saved order summary: {summary_path}")
+    print(f"Saved audit log: {output_dir / 'paper_trade_audit_log.json'}")
 
     if not args.submit_orders:
         print()

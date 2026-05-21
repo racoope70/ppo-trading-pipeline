@@ -151,6 +151,8 @@ def test_run_paper_order_plan_default_submits_no_orders(tmp_path):
     assert summary["orders_required"] == 1
     assert summary["orders_submitted"] == 0
     assert summary["risk_passed"] is True
+    assert summary["broker_state_before"] == {}
+    assert summary["broker_state_after"] == {}
     assert results.loc[0, "execution_note"] == "dry_run_no_order_submitted"
     assert bool(results.loc[0, "risk_passed"]) is True
 
@@ -199,6 +201,14 @@ def test_write_order_run_outputs_files(tmp_path):
     assert results_path.exists()
     assert summary_path.exists()
 
+    audit_path = out_dir / "paper_trade_audit_log.json"
+    assert audit_path.exists()
+
     written_summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    written_audit = json.loads(audit_path.read_text(encoding="utf-8"))
+
     assert written_summary["orders_submitted"] == 0
     assert written_summary["risk_passed"] is True
+    assert written_audit["orders_submitted"] == 0
+    assert written_audit["risk_passed"] is True
+    assert written_audit["metadata"]["source"] == "paper_trade_loop"
