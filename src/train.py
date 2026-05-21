@@ -63,6 +63,7 @@ from src.training_utils import (
     record_skips_global,
     summarize_skip_log,
 )
+from src.training_splits import split_train_eval_window
 
 
 def parse_args() -> argparse.Namespace:
@@ -469,7 +470,39 @@ def walkforward_ppo(
         if len(df_window) % 2 != 0:
             df_window = df_window.iloc[:-1].reset_index(drop=True)
 
-        env = make_training_env(df_window)
+        try:
+            split = split_train_eval_window(
+                df_window,
+                train_fraction=0.80,
+                min_train_rows=60,
+                min_eval_rows=60,
+            )
+        except ValueError as exc:
+            logging.warning(
+                "Skipping %s | Window %s: invalid train/eval split: %s",
+                ticker,
+                window_idx + 1,
+                exc,
+            )
+            continue
+
+        train_df = split.train_df
+        eval_df = split.eval_df
+
+        logging.info(
+            "%s | Window %s split: train_rows=%s eval_rows=%s train=%s to %s eval=%s to %s",
+            ticker,
+            window_idx + 1,
+            split.train_rows,
+            split.eval_rows,
+            split.train_start,
+            split.train_end,
+            split.eval_start,
+            split.eval_end,
+        )
+
+        env = make_training_env(train_df)
+        eval_env = None
         model = None
 
         try:
@@ -495,10 +528,26 @@ def walkforward_ppo(
             model_path = FINAL_MODEL_DIR / f"{prefix}_model.zip"
             model.save(str(model_path))
 
+            eval_env = make_training_env(eval_df)
+
+            try:
+                eval_env.obs_rms = env.obs_rms
+                eval_env.ret_rms = env.ret_rms
+            except Exception as exc:
+                logging.warning(
+                    "%s | Window %s: could not copy VecNormalize stats to eval env: %s",
+                    ticker,
+                    window_idx + 1,
+                    exc,
+                )
+
+            eval_env.training = False
+            eval_env.norm_reward = False
+
             metrics, predictions_df, compat_df = evaluate_model_on_window(
                 model=model,
-                env=env,
-                df_window=df_window,
+                env=eval_env,
+                df_window=eval_df,
             )
 
             save_window_outputs(
@@ -511,6 +560,13 @@ def walkforward_ppo(
             result_row = {
                 "Ticker": ticker,
                 "Window": f"{start}-{end}",
+                "TrainRows": split.train_rows,
+                "EvalRows": split.eval_rows,
+                "TrainStart": split.train_start,
+                "TrainEnd": split.train_end,
+                "EvalStart": split.eval_start,
+                "EvalEnd": split.eval_end,
+                "ValidationMode": "out_of_sample_eval_slice",
                 **metrics,
             }
 
@@ -518,10 +574,17 @@ def walkforward_ppo(
 
             meta = {
                 "result": result_row,
-                "features": df_window.columns.tolist(),
+                "features": train_df.columns.tolist(),
                 "prefix": prefix,
                 "model_path": str(model_path),
                 "vecnorm_path": str(vecnorm_path),
+                "validation_mode": "out_of_sample_eval_slice",
+                "train_rows": split.train_rows,
+                "eval_rows": split.eval_rows,
+                "train_start": str(split.train_start),
+                "train_end": str(split.train_end),
+                "eval_start": str(split.eval_start),
+                "eval_end": str(split.eval_end),
             }
 
             item = (float(result_row["Sharpe"]), prefix, meta)
@@ -552,13 +615,20 @@ def walkforward_ppo(
             )
 
         finally:
+            for candidate_env in (env, eval_env):
+                try:
+                    if candidate_env is not None:
+                        candidate_env.close()
+                except Exception:
+                    pass
+
             try:
-                env.close()
+                del env
             except Exception:
                 pass
 
             try:
-                del env
+                del eval_env
             except Exception:
                 pass
 
