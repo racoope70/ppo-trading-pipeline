@@ -617,6 +617,156 @@ Do not use --submit-orders unless intentionally placing Alpaca paper trades.
 
 ---
 
+## Stage 8 Result: Audit Logging Integrated into Paper-Order Runner
+
+Audit logging was integrated directly into the guarded paper-order runner.
+
+Updated module:
+
+```text
+src/paper_trading/paper_trade_loop.py
+```
+
+Audit utility module:
+
+```text
+src/paper_trading/logging_utils.py
+```
+
+Updated test coverage:
+
+```text
+tests/test_paper_trade_loop.py
+tests/test_paper_trading_logging_utils.py
+```
+
+The guarded paper-order runner now automatically writes an audit log after every run.
+
+Generated audit file:
+
+```text
+reports/paper_trading_dry_runs/latest/paper_trade_audit_log.json
+```
+
+The runner still submits no orders by default.
+
+Default no-order command:
+
+```bash
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
+```
+
+Expected default behavior:
+
+```text
+runs risk controls
+writes paper_order_run.csv
+writes paper_order_run_summary.json
+writes paper_trade_audit_log.json
+submits zero orders
+```
+
+Latest validated no-order command sequence:
+
+```bash
+python -m src.paper_trading.paper_trade_dry_run \
+  --artifacts-dir models/ppo_models_master
+
+python -m src.paper_trading.evaluate_dry_run \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.build_execution_plan \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.risk_controls \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --require-flat-start
+
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
+```
+
+Latest validated result:
+
+```text
+Risk result: PASS
+risk_passed=True
+orders_required=2
+orders_submitted=0
+submit_orders=False
+Saved audit log: reports/paper_trading_dry_runs/latest/paper_trade_audit_log.json
+Dry-run mode complete. No orders were submitted.
+```
+
+Example validated execution-plan intents:
+
+```text
+AMD buy 56.395654 shares
+XOM buy 14.047095 shares
+AAPL hold
+MRK hold
+PFE hold
+UNH hold
+```
+
+The audit log captures:
+
+```text
+source run directory
+output directory
+dry-run summary
+execution-plan summary
+paper-order run summary
+risk-control result
+orders_required
+orders_submitted
+submit_orders flag
+optional broker state before execution
+optional broker state after execution
+audit metadata
+```
+
+This confirms that the current safe chain is:
+
+```text
+broker-connected dry run
+dry-run evaluator
+execution-plan builder
+risk-control report
+guarded paper-order runner
+automatic audit log generation
+zero orders submitted by default
+```
+
+Commit:
+
+```text
+1acf5c0 Integrate audit logging into paper order runner
+```
+
+Current validation status:
+
+```text
+79 passed, 1 warning
+```
+
+The remaining warning is a third-party `websockets.legacy` deprecation warning and does not indicate a failed test.
+
+Generated run outputs remain excluded from Git:
+
+```text
+reports/paper_trading_dry_runs/
+```
+
+Safety rule:
+
+```text
+Do not use --submit-orders unless intentionally placing Alpaca paper trades.
+```
+
+---
+
 ## QuantConnect Role
 
 QuantConnect is not currently the primary validation environment because earlier LEAN runs encountered data-window availability issues.
@@ -649,7 +799,8 @@ Current v0.5 progress:
 risk-control module implemented
 risk controls integrated into guarded paper-order runner
 audit logging utilities implemented
-paper-trading audit log generated from full no-order safety chain
+audit logging integrated directly into paper-order runner
+paper_trade_audit_log.json is written automatically after guarded runs
 ```
 
 Completed paper-trading components:
@@ -665,6 +816,7 @@ guarded paper-order runner
 risk-control module
 risk controls integrated into guarded runner
 audit logging utilities
+audit logging integrated into paper-order runner
 ```
 
 Current validation status:
@@ -695,10 +847,6 @@ python -m src.paper_trading.risk_controls \
 
 python -m src.paper_trading.paper_trade_loop \
   --run-dir reports/paper_trading_dry_runs/latest
-
-python -m src.paper_trading.logging_utils \
-  --run-dir reports/paper_trading_dry_runs/latest \
-  --tag v0.5_audit_logging_smoke_test
 ```
 
 Expected result:
@@ -708,8 +856,8 @@ Evaluation result: PASS
 Execution plan complete. No orders were submitted.
 Risk result: PASS
 risk_passed=True
+Saved audit log: reports/paper_trading_dry_runs/latest/paper_trade_audit_log.json
 Dry-run mode complete. No orders were submitted.
-risk_passed=True
 orders_submitted=0
 submit_orders=False
 ```
@@ -718,28 +866,21 @@ submit_orders=False
 
 ## Next Phase
 
-The next phase should integrate audit logging directly into the guarded paper-order runner before running longer paper-trading sessions.
+The next phase should prepare for a controlled, intentional paper-order test using the fully guarded workflow.
 
-Planned update:
-
-```text
-src/paper_trading/paper_trade_loop.py
-```
-
-Required behavior:
+Before any `--submit-orders` run, verify:
 
 ```text
-capture broker state before execution when a trading client is available
-run risk controls before execution
-write paper-order run output
-capture broker state after execution when a trading client is available
-write paper_trade_audit_log.json automatically
-keep default mode no-order
-require --submit-orders for any Alpaca paper orders
-keep generated reports excluded from Git
+Alpaca paper account starts from the clean $100,000 baseline
+positions are flat
+open orders are zero
+dry-run evaluator passes
+execution plan is reviewed
+risk controls pass
+paper_trade_loop.py writes an audit log in no-order mode
 ```
 
-Core safety requirements remain unchanged:
+Controlled submit-order behavior must remain:
 
 ```text
 default mode submits no orders
@@ -748,4 +889,10 @@ real paper orders require --submit-orders
 risk controls must pass before submit-orders mode
 audit logs must record risk and order-submission state
 generated reports remain excluded from Git
+```
+
+The next implementation option is to add a small pre-trade checklist utility:
+
+```text
+src/paper_trading/pre_trade_checklist.py
 ```
