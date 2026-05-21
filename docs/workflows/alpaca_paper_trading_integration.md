@@ -153,12 +153,7 @@ src/paper_trading/
   build_execution_plan.py
   risk_controls.py
   paper_trade_loop.py
-```
-
-Planned modules:
-
-```text
-src/paper_trading/logging_utils.py
+  logging_utils.py
 ```
 
 ---
@@ -464,7 +459,146 @@ Dry-run mode complete. No orders were submitted.
 Current validation status:
 
 ```text
-71 passed, 1 warning
+79 passed, 1 warning
+```
+
+The remaining warning is a third-party `websockets.legacy` deprecation warning and does not indicate a failed test.
+
+Generated run outputs remain excluded from Git:
+
+```text
+reports/paper_trading_dry_runs/
+```
+
+Safety rule:
+
+```text
+Do not use --submit-orders unless intentionally placing Alpaca paper trades.
+```
+
+---
+
+## Stage 7 Result: Paper-Trading Audit Logging Utilities
+
+Paper-trading audit logging utilities were added.
+
+Implemented module:
+
+```text
+src/paper_trading/logging_utils.py
+```
+
+Test coverage:
+
+```text
+tests/test_paper_trading_logging_utils.py
+```
+
+The audit logging module builds a single auditable run record from the existing paper-trading safety-chain outputs.
+
+The module reads:
+
+```text
+dry_run_targets.csv
+dry_run_summary.json
+execution_plan.csv
+execution_plan_summary.json
+paper_order_run.csv
+paper_order_run_summary.json
+```
+
+The module writes:
+
+```text
+paper_trade_audit_log.json
+```
+
+The audit record captures:
+
+```text
+source run directory
+output directory
+metadata tag
+input/output file summaries
+dry-run summary
+execution-plan summary
+paper-order run summary
+risk_passed flag
+orders_required
+orders_submitted
+submit_orders flag
+optional broker state before execution
+optional broker state after execution
+```
+
+The first version does not submit orders and does not require Alpaca credentials.
+
+It can also snapshot broker-like objects when a trading client is supplied by another module:
+
+```text
+account state
+open positions
+open orders
+order identifiers
+order status fields
+```
+
+Latest validated no-order command sequence:
+
+```bash
+python -m src.paper_trading.paper_trade_dry_run \
+  --artifacts-dir models/ppo_models_master
+
+python -m src.paper_trading.evaluate_dry_run \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.build_execution_plan \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.risk_controls \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --require-flat-start
+
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.logging_utils \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --tag v0.5_audit_logging_smoke_test
+```
+
+Latest validated audit output:
+
+```text
+PAPER-TRADING AUDIT LOG
+risk_passed=True
+orders_required=2
+orders_submitted=0
+submit_orders=False
+```
+
+This confirms that the current safe chain is:
+
+```text
+broker-connected dry run
+dry-run evaluator
+execution-plan builder
+risk-control report
+guarded paper-order runner
+audit log builder
+zero orders submitted by default
+```
+
+Commit:
+
+```text
+b08d735 Add paper trading audit logging utilities
+```
+
+Current validation status:
+
+```text
+79 passed, 1 warning
 ```
 
 The remaining warning is a third-party `websockets.legacy` deprecation warning and does not indicate a failed test.
@@ -509,12 +643,13 @@ v0.2-six-ticker-validation-baseline
 v0.3-alpaca-paper-trading-safety-chain
 ```
 
-Current v0.4 progress:
+Current v0.5 progress:
 
 ```text
 risk-control module implemented
 risk controls integrated into guarded paper-order runner
-submit-orders mode is blocked unless risk controls pass
+audit logging utilities implemented
+paper-trading audit log generated from full no-order safety chain
 ```
 
 Completed paper-trading components:
@@ -529,12 +664,13 @@ execution-plan builder
 guarded paper-order runner
 risk-control module
 risk controls integrated into guarded runner
+audit logging utilities
 ```
 
 Current validation status:
 
 ```text
-71 passed, 1 warning
+79 passed, 1 warning
 ```
 
 The warning originates from a dependency deprecation in `websockets.legacy` and does not affect functionality.
@@ -559,6 +695,10 @@ python -m src.paper_trading.risk_controls \
 
 python -m src.paper_trading.paper_trade_loop \
   --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.logging_utils \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --tag v0.5_audit_logging_smoke_test
 ```
 
 Expected result:
@@ -569,6 +709,7 @@ Execution plan complete. No orders were submitted.
 Risk result: PASS
 risk_passed=True
 Dry-run mode complete. No orders were submitted.
+risk_passed=True
 orders_submitted=0
 submit_orders=False
 ```
@@ -577,25 +718,25 @@ submit_orders=False
 
 ## Next Phase
 
-The next phase should focus on execution audit logging before running extended paper-trading sessions.
+The next phase should integrate audit logging directly into the guarded paper-order runner before running longer paper-trading sessions.
 
-Planned module:
+Planned update:
 
 ```text
-src/paper_trading/logging_utils.py
+src/paper_trading/paper_trade_loop.py
 ```
 
-Required logging behavior:
+Required behavior:
 
 ```text
-capture account state before execution
-capture execution plan snapshot
-capture risk-control report
-capture paper-order runner output
-capture submitted order ids when --submit-orders is used
-capture final broker state after execution
-write one auditable run record per paper-trading run
-generated reports remain excluded from Git
+capture broker state before execution when a trading client is available
+run risk controls before execution
+write paper-order run output
+capture broker state after execution when a trading client is available
+write paper_trade_audit_log.json automatically
+keep default mode no-order
+require --submit-orders for any Alpaca paper orders
+keep generated reports excluded from Git
 ```
 
 Core safety requirements remain unchanged:
@@ -605,5 +746,6 @@ default mode submits no orders
 paper endpoint is mandatory
 real paper orders require --submit-orders
 risk controls must pass before submit-orders mode
+audit logs must record risk and order-submission state
 generated reports remain excluded from Git
 ```
