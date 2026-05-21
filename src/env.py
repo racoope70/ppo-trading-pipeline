@@ -53,6 +53,11 @@ class ContinuousPositionEnv(StocksEnv):
             window_size=window_size,
         )
 
+        self._parent_action_space = self.action_space
+        self._parent_advance_action = self._resolve_parent_advance_action(
+            self._parent_action_space
+        )
+
         if isinstance(self.observation_space, gym.spaces.Box):
             self.observation_space = Box(
                 low=self.observation_space.low,
@@ -106,14 +111,44 @@ class ContinuousPositionEnv(StocksEnv):
 
         return obs, info
 
+    @staticmethod
+    def _resolve_parent_advance_action(action_space):
+        """Resolve a valid parent action for advancing gym-anytrading.
+
+        The custom PPO environment controls economic position, NAV, reward,
+        transaction costs, and slippage itself. The parent StocksEnv is only
+        used to advance the tick and return the next observation.
+
+        Older code used ``super().step(2)`` directly. That is fragile because
+        gym-anytrading action mappings can differ across versions. This resolver
+        keeps action 2 only when the parent action space accepts it; otherwise it
+        falls back to another valid discrete action.
+        """
+        candidate_actions = [2, 0, 1]
+
+        for candidate in candidate_actions:
+            try:
+                if hasattr(action_space, "contains") and action_space.contains(candidate):
+                    return candidate
+            except Exception:
+                continue
+
+        n = getattr(action_space, "n", None)
+        if n is not None and int(n) > 0:
+            return 0
+
+        raise ValueError(
+            f"Could not resolve a valid parent advance action from {action_space!r}."
+        )
+
     def _step_parent_hold(self):
-        """Advance the parent StocksEnv using a hold action.
+        """Advance the parent StocksEnv using a compatible parent action.
 
         gym-anytrading versions can differ in whether they return the older
         4-value Gym API or the newer 5-value Gymnasium API. This wrapper
         normalizes the return signature.
         """
-        step_result = super().step(2)
+        step_result = super().step(self._parent_advance_action)
 
         if len(step_result) == 5:
             obs, _env_reward, terminated, truncated, info = step_result
@@ -217,6 +252,7 @@ class ContinuousPositionEnv(StocksEnv):
                     "base_ret": base_ret,
                     "rel_alpha": relative_alpha,
                     "mom": self._mom_signal(),
+                    "parent_advance_action": self._parent_advance_action,
                 }
             )
 
