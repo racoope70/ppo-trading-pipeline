@@ -57,6 +57,7 @@ from src.config import (
     pick_params,
 )
 from src.env import ContinuousPositionEnv
+from src.feature_manifest import build_env_feature_frame, build_safe_feature_columns
 from src.training_utils import (
     get_mu_sigma,
     get_walk_forward_windows,
@@ -157,13 +158,19 @@ def validate_symbol_data(df: pd.DataFrame, symbol: str) -> bool:
 
 
 def make_training_env(df_window: pd.DataFrame):
-    """Create the VecNormalize-wrapped PPO training environment."""
-    frame_bound = (50, len(df_window) - 3)
+    """Create the VecNormalize-wrapped PPO training environment.
+
+    The PPO environment receives only safe numeric feature columns.
+    Label/metadata columns such as Return, Target, Symbol, and Datetime are
+    excluded before the environment is created.
+    """
+    env_df = build_env_feature_frame(df_window)
+    frame_bound = (50, len(env_df) - 3)
 
     env = DummyVecEnv(
         [
             lambda: ContinuousPositionEnv(
-                df=df_window,
+                df=env_df,
                 frame_bound=frame_bound,
                 window_size=10,
                 cost_rate=(0.0002 if ENABLE_SLO else 0.0),
@@ -574,7 +581,7 @@ def walkforward_ppo(
 
             meta = {
                 "result": result_row,
-                "features": train_df.columns.tolist(),
+                "features": build_safe_feature_columns(train_df),
                 "prefix": prefix,
                 "model_path": str(model_path),
                 "vecnorm_path": str(vecnorm_path),
