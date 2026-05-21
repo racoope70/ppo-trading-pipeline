@@ -26,6 +26,7 @@ v0.3 = Alpaca paper-trading safety chain
 v0.4 = Risk-controlled paper runner
 v0.5 = Audit logging integrated into paper_trade_loop.py
 v0.6 Step 1 = Pre-trade checklist utility
+v0.7 = Research-hardened PPO training pipeline
 ```
 
 Current safety status:
@@ -41,6 +42,40 @@ risk controls pass
 audit log generated
 default mode submits zero orders
 ```
+
+---
+
+## v0.7 Research Hardening Completed
+
+The first research-hardening phase is complete.
+
+Completed fixes:
+
+```text
+1. Train/evaluate same-window issue fixed
+2. Return/Target leakage risk reduced through safe feature manifest
+3. Parent env hold-action fragility addressed with compatibility checks
+```
+
+Implemented commits:
+
+```text
+707dcaa Add out-of-sample train eval split for PPO windows
+8b49560 Use safe feature manifest in PPO training
+76c3bb3 Add parent environment action compatibility checks
+```
+
+Current validation status:
+
+```text
+109 passed, 1 warning
+```
+
+The remaining warning is a third-party websockets.legacy deprecation warning and does not indicate a project failure.
+
+Next step:
+
+Retrain the six-ticker PPO baseline using the hardened research pipeline.
 
 ---
 
