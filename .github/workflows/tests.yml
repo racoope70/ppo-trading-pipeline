@@ -25,6 +25,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install numpy pandas pytest python-dotenv alpaca-py
+          pip install gymnasium yfinance stable-baselines3 gym-anytrading
 
       - name: Run lightweight reproducibility tests
         run: |
