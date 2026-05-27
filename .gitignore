@@ -80,3 +80,4 @@ live_signals_gist_id.txt
 data/raw/*
 data/processed/*
 data/alpaca_historical/*
+data/alpaca_training/*
