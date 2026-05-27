@@ -30,6 +30,7 @@ def test_split_train_eval_window_creates_non_overlapping_slices():
     )
 
     assert split.train_rows == 80
+    assert split.embargo_rows == 0
     assert split.eval_rows == 20
     assert split.train_end < split.eval_start
     assert split.train_df["Datetime"].max() < split.eval_df["Datetime"].min()
@@ -48,6 +49,52 @@ def test_split_train_eval_window_sorts_by_datetime():
     assert split.train_df["Datetime"].is_monotonic_increasing
     assert split.eval_df["Datetime"].is_monotonic_increasing
     assert split.train_end < split.eval_start
+
+
+def test_split_train_eval_window_creates_embargo_gap():
+    df = _sample_window(100)
+
+    split = split_train_eval_window(
+        df,
+        train_fraction=0.70,
+        min_train_rows=10,
+        min_eval_rows=10,
+        embargo_rows=5,
+    )
+
+    assert split.train_rows == 70
+    assert split.embargo_rows == 5
+    assert split.eval_rows == 25
+    assert split.total_rows == 100
+    assert split.train_rows + split.embargo_rows + split.eval_rows == split.total_rows
+    assert split.train_end < split.embargo_start
+    assert split.embargo_end < split.eval_start
+
+
+def test_split_train_eval_window_rejects_negative_embargo():
+    df = _sample_window(100)
+
+    with pytest.raises(ValueError, match="embargo_rows"):
+        split_train_eval_window(
+            df,
+            train_fraction=0.80,
+            min_train_rows=10,
+            min_eval_rows=10,
+            embargo_rows=-1,
+        )
+
+
+def test_split_train_eval_window_rejects_embargo_that_consumes_eval_slice():
+    df = _sample_window(100)
+
+    with pytest.raises(ValueError, match="Evaluation slice too small"):
+        split_train_eval_window(
+            df,
+            train_fraction=0.80,
+            min_train_rows=10,
+            min_eval_rows=10,
+            embargo_rows=15,
+        )
 
 
 def test_split_train_eval_window_rejects_empty_dataframe():
@@ -93,7 +140,7 @@ def test_split_train_eval_window_rejects_too_few_eval_rows():
         )
 
 
-def test_split_train_eval_window_preserves_total_row_count():
+def test_split_train_eval_window_preserves_total_row_count_without_embargo():
     df = _sample_window(123)
 
     split = split_train_eval_window(
@@ -105,3 +152,18 @@ def test_split_train_eval_window_preserves_total_row_count():
 
     assert split.total_rows == 123
     assert split.train_rows + split.eval_rows == 123
+
+
+def test_split_train_eval_window_preserves_total_row_count_with_embargo():
+    df = _sample_window(123)
+
+    split = split_train_eval_window(
+        df,
+        train_fraction=0.80,
+        min_train_rows=10,
+        min_eval_rows=10,
+        embargo_rows=3,
+    )
+
+    assert split.total_rows == 123
+    assert split.train_rows + split.embargo_rows + split.eval_rows == 123
