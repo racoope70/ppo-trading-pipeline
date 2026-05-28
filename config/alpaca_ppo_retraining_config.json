@@ -1,0 +1,38 @@
+{
+  "config_version": "v1.8.2",
+  "run_name": "standalone_alpaca_ppo_v1_8",
+  "data_source": "alpaca_historical_1h",
+  "timeframe": "1H",
+  "dataset_path": "data/alpaca_training/model_ready/alpaca_ppo_training_dataset.csv",
+  "dataset_provenance_path": "data/alpaca_training/model_ready/alpaca_ppo_training_dataset_provenance.json",
+  "artifacts_dir": "models/alpaca_ppo_models_master",
+  "results_dir": "reports/alpaca_ppo_retraining",
+  "symbols": [
+    "AAPL",
+    "AMD",
+    "MRK",
+    "PFE",
+    "UNH",
+    "XOM"
+  ],
+  "train_fraction": 0.8,
+  "embargo_rows": 5,
+  "min_train_rows": 60,
+  "min_eval_rows": 60,
+  "holdout_fraction": 0.2,
+  "holdout_min_rows_per_symbol": 60,
+  "top_n_windows": 3,
+  "walkforward_window_size": 720,
+  "walkforward_step_size": 120,
+  "smoke_test_timesteps": 2000,
+  "training_timesteps": 100000,
+  "random_seed": 42,
+  "test_mode": true,
+  "notes": [
+    "v1.8.2 configuration only.",
+    "No PPO training performed in this checkpoint.",
+    "Final holdout validation is required before paper-trading redeployment.",
+    "Generated datasets and model artifacts should not be committed to Git."
+  ],
+  "generated_utc": "2026-05-28T14:10:05.017244+00:00"
+}
