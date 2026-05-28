@@ -160,3 +160,72 @@ def test_run_retraining_integration_can_skip_dataset_snapshot(tmp_path):
     )
 
     assert summary["dataset_snapshot_path"] is None
+
+
+def test_call_existing_training_loop_uses_walkforward_ppo(monkeypatch, tmp_path):
+    import sys
+    import types
+
+    from src.alpaca_ppo_retraining_runner import call_existing_training_loop
+
+    calls = []
+
+    fake_train = types.ModuleType("src.train")
+    fake_train.FINAL_MODEL_DIR = Path("old_models")
+    fake_train.TOP_N_WINDOWS = 99
+    fake_train.WINDOW_SIZE = 999
+    fake_train.STEP_SIZE = 999
+
+    def fake_validate_symbol_data(df, symbol):
+        return True
+
+    def fake_pick_params(symbol):
+        return {"lr": 0.001, "batch": 32}
+
+    def fake_walkforward_ppo(**kwargs):
+        calls.append(kwargs)
+        return [
+            {
+                "Ticker": kwargs["ticker"],
+                "Timesteps": kwargs["timesteps"],
+                "WindowSize": kwargs["window_size"],
+                "StepSize": kwargs["step_size"],
+            }
+        ]
+
+    fake_train.validate_symbol_data = fake_validate_symbol_data
+    fake_train.pick_params = fake_pick_params
+    fake_train.walkforward_ppo = fake_walkforward_ppo
+
+    monkeypatch.setitem(sys.modules, "src.train", fake_train)
+
+    df = _model_ready_dataset(symbols=("AAPL", "AMD"), rows_per_symbol=80)
+
+    config = AlpacaPPORetrainingConfig(
+        symbols=("AAPL", "AMD"),
+        artifacts_dir=str(tmp_path / "alpaca_models"),
+        results_dir=str(tmp_path / "alpaca_reports"),
+        walkforward_window_size=60,
+        walkforward_step_size=20,
+        smoke_test_timesteps=123,
+        training_timesteps=999,
+        top_n_windows=2,
+    )
+
+    results = call_existing_training_loop(
+        df=df,
+        config=config,
+        smoke=True,
+    )
+
+    assert len(results) == 2
+    assert len(calls) == 2
+    assert {call["ticker"] for call in calls} == {"AAPL", "AMD"}
+    assert all(call["timesteps"] == 123 for call in calls)
+    assert all(call["window_size"] == 60 for call in calls)
+    assert all(call["step_size"] == 20 for call in calls)
+
+    assert fake_train.FINAL_MODEL_DIR == Path(config.artifacts_dir)
+    assert fake_train.TOP_N_WINDOWS == 2
+    assert fake_train.WINDOW_SIZE == 60
+    assert fake_train.STEP_SIZE == 20

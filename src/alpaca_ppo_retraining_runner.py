@@ -209,40 +209,84 @@ def call_existing_training_loop(
     config: AlpacaPPORetrainingConfig,
     smoke: bool,
 ) -> list[dict[str, Any]]:
-    """Delegate to existing train.py training loop.
+    """Delegate to the existing train.py walk-forward PPO training function.
 
-    This wrapper intentionally imports src.train lazily so dry-run tests do not
-    need to initialize the PPO training stack.
+    The current training module exposes walkforward_ppo(...), not
+    run_parallel_training(...) or train_all_tickers(...).
 
-    v1.8.3 integration keeps full training guarded behind --train.
+    This wrapper:
+    - imports src.train lazily
+    - points train.py artifact globals to the Alpaca artifact directory
+    - applies the Alpaca retraining config window/step/top-N settings
+    - runs one ticker at a time for safer smoke testing
     """
     import src.train as train_module
 
+    if not hasattr(train_module, "walkforward_ppo"):
+        raise AttributeError(
+            "src.train must expose walkforward_ppo(...) for Alpaca PPO retraining."
+        )
+
     timesteps = config.smoke_test_timesteps if smoke else config.training_timesteps
 
-    if hasattr(train_module, "run_parallel_training"):
-        return train_module.run_parallel_training(
-            df,
-            symbols=list(config.symbols),
+    artifacts_dir = Path(config.artifacts_dir)
+    results_dir = Path(config.results_dir)
+    skip_log_path = results_dir / "alpaca_retraining_skipped_windows.csv"
+
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    # Redirect train.py output globals so Alpaca retraining does not overwrite
+    # the previously validated paper-trading artifact directory.
+    if hasattr(train_module, "FINAL_MODEL_DIR"):
+        train_module.FINAL_MODEL_DIR = artifacts_dir
+
+    if hasattr(train_module, "TOP_N_WINDOWS"):
+        train_module.TOP_N_WINDOWS = config.top_n_windows
+
+    if hasattr(train_module, "WINDOW_SIZE"):
+        train_module.WINDOW_SIZE = config.walkforward_window_size
+
+    if hasattr(train_module, "STEP_SIZE"):
+        train_module.STEP_SIZE = config.walkforward_step_size
+
+    all_results: list[dict[str, Any]] = []
+
+    for symbol in config.symbols:
+        ticker_df = df[df["Symbol"] == symbol].copy()
+        ticker_df = ticker_df.sort_values("Datetime").reset_index(drop=True)
+
+        if ticker_df.empty:
+            continue
+
+        if hasattr(train_module, "validate_symbol_data"):
+            if not train_module.validate_symbol_data(ticker_df, symbol):
+                continue
+
+        hyperparams = {}
+        learning_rate = 1e-4
+
+        if hasattr(train_module, "pick_params"):
+            hyperparams = train_module.pick_params(symbol)
+            learning_rate = hyperparams.get("lr", learning_rate)
+
+        ticker_results = train_module.walkforward_ppo(
+            df=ticker_df,
+            ticker=symbol,
+            results_dir=results_dir,
+            skip_log_path=skip_log_path,
+            window_size=config.walkforward_window_size,
+            step_size=config.walkforward_step_size,
             timesteps=timesteps,
-            max_workers=1 if smoke else None,
+            learning_rate=learning_rate,
+            ppo_overrides=hyperparams,
             force_retrain=True,
-            embargo_rows=config.embargo_rows,
         )
 
-    if hasattr(train_module, "train_all_tickers"):
-        return train_module.train_all_tickers(
-            df,
-            symbols=list(config.symbols),
-            timesteps=timesteps,
-            force_retrain=True,
-            embargo_rows=config.embargo_rows,
-        )
+        if ticker_results:
+            all_results.extend(ticker_results)
 
-    raise AttributeError(
-        "Could not find a supported training entry point in src.train. "
-        "Expected run_parallel_training(...) or train_all_tickers(...)."
-    )
+    return all_results
 
 
 def run_retraining_integration(
