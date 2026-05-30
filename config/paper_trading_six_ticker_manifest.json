@@ -1,7 +1,7 @@
 {
-  "artifact_manifest_version": "0.8",
-  "baseline_name": "clean_six_ticker_ppo_v0_8_baseline",
-  "source_git_tag": "v0.8-clean-six-ticker-ppo-baseline",
+  "artifact_manifest_version": "1.9",
+  "baseline_name": "standalone_alpaca_ppo_v1_9_holdout_selected",
+  "source_git_tag": "v1.8.5-alpaca-ppo-final-holdout-validation",
   "universe": [
     "AAPL",
     "AMD",
@@ -11,12 +11,12 @@
     "XOM"
   ],
   "selected_models": {
-    "AAPL": "ppo_AAPL_window2",
-    "AMD": "ppo_AMD_window2",
-    "MRK": "ppo_MRK_window1",
-    "PFE": "ppo_PFE_window3",
-    "UNH": "ppo_UNH_window1",
-    "XOM": "ppo_XOM_window2"
+    "AAPL": "ppo_AAPL_window19",
+    "AMD": "ppo_AMD_window14",
+    "MRK": "ppo_MRK_window20",
+    "PFE": "ppo_PFE_window11",
+    "UNH": "ppo_UNH_window20",
+    "XOM": "ppo_XOM_window15"
   },
   "artifact_requirements": {
     "model_zip": true,
@@ -34,32 +34,22 @@
     "require_paper_endpoint": true
   },
   "source_validation": {
-    "validation_type": "out_of_sample_eval_slice_six_ticker_retrain",
-    "run_dir": "reports/backtests/ppo_walkforward_results_20260521_210445",
-    "summary_file": "reports/backtests/ppo_walkforward_results_20260521_210445/summary_test_mode.csv",
-    "candidate_selection_doc": "docs/runs/v0.8_clean_six_ticker_candidate_selection.md",
-    "selection_method": "risk_adjusted_score_v1",
-    "evaluated_windows": 18,
+    "validation_type": "alpaca_ppo_final_holdout_validation",
+    "holdout_summary_file": "reports/alpaca_ppo_retraining/standalone_alpaca_ppo_v1_8_20260528_175838/holdout_validation_final/final_summary.json",
+    "candidate_selection_doc": "docs/runs/v1.9_alpaca_ppo_candidate_selection.md",
+    "artifact_source_dir": "models/alpaca_ppo_models_master",
+    "selection_method": "holdout_promotion_score_v1",
+    "holdout_start_after_global_eval_end": "2026-01-14T15:00:00+00:00",
+    "candidate_count": 18,
+    "evaluated_count": 18,
+    "pass_count": 18,
     "selected_windows": 6,
-    "feature_artifact_validation": "PASS",
-    "six_ticker_artifact_validation": "PASS",
-    "unit_tests": "116 passed, 1 warning",
-    "previous_source_validation": {
-      "validation_type": "unified_independent_six_ticker_validation",
-      "run_dir": "reports/backtests/ppo_walkforward_results_20260517_200251",
-      "final_equity": 113439.87,
-      "net_return_pct": 13.44,
-      "sharpe_estimate": 4.0243,
-      "max_drawdown_pct": 6.45,
-      "total_turnover": 34.3483,
-      "trade_events": 164
-    }
+    "unit_tests": "pytest tests/test_select_alpaca_ppo_candidates.py"
   },
   "notes": [
-    "This manifest pins the selected model-window choices from the v0.8 clean six-ticker PPO retrain.",
-    "The v0.8 retrain used out-of-sample evaluation slices, safe feature manifests, and parent environment action compatibility checks.",
-    "Selected models were chosen by the v0.8 candidate selector using risk_adjusted_score_v1.",
-    "Paper trading should use these selected model prefixes rather than automatically choosing the highest available window.",
+    "This manifest promotes standalone Alpaca-trained PPO candidates that passed v1.8.5 final holdout validation.",
+    "Selection uses holdout_promotion_score_v1 and selects one candidate per ticker.",
+    "These candidates are approved only for controlled no-submit paper-trading dry runs until v1.9 broker checks pass.",
     "Default paper-trading mode remains dry-run only unless --submit-orders is explicitly used."
   ]
 }
