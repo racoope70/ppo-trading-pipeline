@@ -158,6 +158,7 @@ def test_paper_trade_loop_blocks_stale_submit_before_orders(tmp_path):
             trading_client=object(),
             risk_config=RiskControlConfig(max_plan_age_minutes=30),
             max_plan_age_minutes=30,
+            confirm_run_dir=tmp_path,
         )
 
 
