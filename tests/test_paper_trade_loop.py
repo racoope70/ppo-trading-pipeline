@@ -36,6 +36,7 @@ def _write_execution_plan(run_dir: Path) -> None:
                 "should_order": True,
                 "reason": "rebalance_required",
                 "dry_run": True,
+                "latest_bar_time": "2026-06-04T14:00:00+00:00",
                 "order_submitted": False,
                 "execution_note": "execution_plan_only_no_order_submitted",
             },
@@ -55,6 +56,7 @@ def _write_execution_plan(run_dir: Path) -> None:
                 "should_order": False,
                 "reason": "below_min_notional",
                 "dry_run": True,
+                "latest_bar_time": "2026-06-04T14:00:00+00:00",
                 "order_submitted": False,
                 "execution_note": "below_min_notional",
             },
@@ -156,6 +158,7 @@ def test_run_paper_order_plan_default_submits_no_orders(tmp_path):
     assert results.loc[0, "execution_note"] == "dry_run_no_order_submitted"
     assert bool(results.loc[0, "risk_passed"]) is True
 
+
 def test_run_paper_order_plan_submit_mode_blocks_failed_risk_before_orders(tmp_path):
     _write_execution_plan(tmp_path)
 
@@ -168,7 +171,10 @@ def test_run_paper_order_plan_submit_mode_blocks_failed_risk_before_orders(tmp_p
             run_dir=tmp_path,
             submit_orders=True,
             trading_client=object(),
-            risk_config=RiskControlConfig(max_abs_symbol_weight=0.40),
+            risk_config=RiskControlConfig(
+                max_abs_symbol_weight=0.40,
+                max_plan_age_minutes=1_000_000_000,
+            ),
         )
 
 
@@ -184,6 +190,7 @@ def test_run_paper_order_plan_submit_mode_blocks_prior_submitted_flag(tmp_path):
             run_dir=tmp_path,
             submit_orders=True,
             trading_client=object(),
+            max_plan_age_minutes=90,
         )
 
 
