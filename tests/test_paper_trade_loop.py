@@ -175,6 +175,7 @@ def test_run_paper_order_plan_submit_mode_blocks_failed_risk_before_orders(tmp_p
                 max_abs_symbol_weight=0.40,
                 max_plan_age_minutes=1_000_000_000,
             ),
+            confirm_run_dir=tmp_path,
         )
 
 
@@ -191,6 +192,7 @@ def test_run_paper_order_plan_submit_mode_blocks_prior_submitted_flag(tmp_path):
             submit_orders=True,
             trading_client=object(),
             max_plan_age_minutes=90,
+            confirm_run_dir=tmp_path,
         )
 
 

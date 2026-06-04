@@ -47,6 +47,37 @@ def read_json(path: Path) -> dict[str, Any]:
     return payload
 
 
+def normalize_run_dir_confirmation_value(run_dir: str | Path) -> str:
+    """Return the normalized run-dir string used for submit confirmation."""
+    return str(Path(run_dir).expanduser())
+
+
+def assert_submit_run_dir_confirmed(
+    *,
+    run_dir: str | Path,
+    confirm_run_dir: str | Path | None,
+) -> None:
+    """Require explicit run-dir confirmation before submit mode.
+
+    This prevents accidental submit-orders runs against the wrong directory.
+    """
+    expected = normalize_run_dir_confirmation_value(run_dir)
+
+    if confirm_run_dir is None:
+        raise ValueError(
+            "Submit mode requires explicit run-dir confirmation. "
+            f"Re-run with --confirm-run-dir {expected}"
+        )
+
+    actual = normalize_run_dir_confirmation_value(confirm_run_dir)
+
+    if actual != expected:
+        raise ValueError(
+            "Submit run-dir confirmation mismatch. "
+            f"Expected {expected!r}, received {actual!r}."
+        )
+
+
 def load_execution_plan(run_dir: str | Path = DEFAULT_RUN_DIR) -> tuple[pd.DataFrame, dict[str, Any]]:
     root = Path(run_dir)
     plan_path = root / "execution_plan.csv"
@@ -198,6 +229,7 @@ def run_paper_order_plan(
     trading_client: Any | None = None,
     risk_config: RiskControlConfig | None = None,
     max_plan_age_minutes: float | None = None,
+    confirm_run_dir: str | Path | None = None,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Run an execution plan in guarded dry-run or submit mode."""
     if submit_orders and max_plan_age_minutes is None:
@@ -213,6 +245,12 @@ def run_paper_order_plan(
 
     root = Path(run_dir)
     out_root = Path(output_dir) if output_dir is not None else root
+
+    if submit_orders:
+        assert_submit_run_dir_confirmed(
+            run_dir=root,
+            confirm_run_dir=confirm_run_dir,
+        )
 
     plan, plan_summary = load_execution_plan(root)
     validate_execution_plan(plan, plan_summary)
@@ -295,6 +333,11 @@ def run_paper_order_plan(
         "paper_endpoint_required": True,
         "risk_passed": bool(report.passed),
         "max_plan_age_minutes": effective_risk_config.max_plan_age_minutes,
+        "confirmed_run_dir": (
+            normalize_run_dir_confirmation_value(confirm_run_dir)
+            if confirm_run_dir is not None
+            else None
+        ),
         "risk_report": report.to_dict(),
         "risk_context": {
             "account_equity": risk_ctx.account_equity,
@@ -374,6 +417,13 @@ def parse_args() -> argparse.Namespace:
             "Required for submit mode."
         ),
     )
+    parser.add_argument(
+        "--confirm-run-dir",
+        default=None,
+        help=(
+            "Required in submit mode. Must exactly match --run-dir after path normalization."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -385,6 +435,22 @@ def main() -> None:
         raise SystemExit(
             "Submit mode requires --max-plan-age-minutes to prevent stale-plan submission."
         )
+
+    if args.submit_orders and args.confirm_run_dir is None:
+        expected = normalize_run_dir_confirmation_value(args.run_dir)
+        raise SystemExit(
+            "Submit mode requires explicit run-dir confirmation. "
+            f"Re-run with --confirm-run-dir {expected}"
+        )
+
+    if args.submit_orders:
+        try:
+            assert_submit_run_dir_confirmed(
+                run_dir=args.run_dir,
+                confirm_run_dir=args.confirm_run_dir,
+            )
+        except ValueError as exc:
+            raise SystemExit(str(exc)) from exc
 
     print("=" * 80)
     print("GUARDED ALPACA PAPER-ORDER RUNNER")
@@ -400,6 +466,7 @@ def main() -> None:
         submit_orders=bool(args.submit_orders),
         env_path=args.env,
         max_plan_age_minutes=args.max_plan_age_minutes,
+        confirm_run_dir=args.confirm_run_dir,
     )
 
     results_path, summary_path = write_order_run(results, summary, output_dir)
