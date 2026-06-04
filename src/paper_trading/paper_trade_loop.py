@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from dataclasses import replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -196,8 +197,20 @@ def run_paper_order_plan(
     env_path: str | Path = ".env",
     trading_client: Any | None = None,
     risk_config: RiskControlConfig | None = None,
+    max_plan_age_minutes: float | None = None,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Run an execution plan in guarded dry-run or submit mode."""
+    if submit_orders and max_plan_age_minutes is None:
+        risk_max_age = (
+            risk_config.max_plan_age_minutes
+            if risk_config is not None
+            else None
+        )
+        if risk_max_age is None:
+            raise ValueError(
+                "Submit mode requires max_plan_age_minutes to prevent stale-plan submission."
+            )
+
     root = Path(run_dir)
     out_root = Path(output_dir) if output_dir is not None else root
 
@@ -221,10 +234,17 @@ def run_paper_order_plan(
         submit_orders=submit_orders,
     )
 
+    effective_risk_config = risk_config or RiskControlConfig()
+    if max_plan_age_minutes is not None:
+        effective_risk_config = replace(
+            effective_risk_config,
+            max_plan_age_minutes=float(max_plan_age_minutes),
+        )
+
     report = evaluate_execution_plan_risk(
         plan,
         plan_summary,
-        config=risk_config or RiskControlConfig(),
+        config=effective_risk_config,
         context=risk_ctx,
     )
 
@@ -274,6 +294,7 @@ def run_paper_order_plan(
         "rows": int(len(result_df)),
         "paper_endpoint_required": True,
         "risk_passed": bool(report.passed),
+        "max_plan_age_minutes": effective_risk_config.max_plan_age_minutes,
         "risk_report": report.to_dict(),
         "risk_context": {
             "account_equity": risk_ctx.account_equity,
@@ -344,12 +365,26 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Submit real Alpaca paper orders. Omit this flag for no-order dry-run mode.",
     )
+    parser.add_argument(
+        "--max-plan-age-minutes",
+        type=float,
+        default=None,
+        help=(
+            "Maximum allowed age of latest_bar_time before the plan is considered stale. "
+            "Required for submit mode."
+        ),
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
     output_dir = Path(args.output_dir) if args.output_dir else Path(args.run_dir)
+
+    if args.submit_orders and args.max_plan_age_minutes is None:
+        raise SystemExit(
+            "Submit mode requires --max-plan-age-minutes to prevent stale-plan submission."
+        )
 
     print("=" * 80)
     print("GUARDED ALPACA PAPER-ORDER RUNNER")
@@ -364,6 +399,7 @@ def main() -> None:
         output_dir=output_dir,
         submit_orders=bool(args.submit_orders),
         env_path=args.env,
+        max_plan_age_minutes=args.max_plan_age_minutes,
     )
 
     results_path, summary_path = write_order_run(results, summary, output_dir)

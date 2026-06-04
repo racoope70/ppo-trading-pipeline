@@ -39,6 +39,7 @@ class PreTradeChecklistConfig:
     require_risk_passed: bool = True
     require_no_orders_submitted: bool = True
     require_no_order_mode: bool = True
+    max_plan_age_minutes: float | None = None
 
 
 @dataclass(frozen=True)
@@ -111,6 +112,18 @@ def _safe_int(value: Any, default: int = -1) -> int:
 
 def _bool_value(value: Any) -> bool:
     return str(value).strip().lower() in {"true", "1", "yes", "y"}
+
+
+def _parse_timestamp_utc(value: Any) -> pd.Timestamp | None:
+    try:
+        ts = pd.Timestamp(value)
+        if pd.isna(ts):
+            return None
+        if ts.tzinfo is None:
+            return ts.tz_localize("UTC")
+        return ts.tz_convert("UTC")
+    except Exception:
+        return None
 
 
 def _add_check(
@@ -245,6 +258,44 @@ def evaluate_pre_trade_checklist(
                 f"orders_required={should_order_count}",
                 severity="INFO",
             )
+
+        if cfg.max_plan_age_minutes is not None:
+            if "latest_bar_time" not in execution_plan.columns:
+                _add_check(
+                    checks,
+                    "execution_plan_timestamp_available",
+                    False,
+                    "latest_bar_time column missing",
+                )
+            else:
+                timestamps = [
+                    _parse_timestamp_utc(value)
+                    for value in execution_plan["latest_bar_time"].dropna().tolist()
+                ]
+                timestamps = [ts for ts in timestamps if ts is not None]
+
+                if not timestamps:
+                    _add_check(
+                        checks,
+                        "execution_plan_timestamp_available",
+                        False,
+                        "no parseable latest_bar_time values",
+                    )
+                else:
+                    latest_ts = max(timestamps)
+                    now = pd.Timestamp(datetime.now(timezone.utc))
+                    age_minutes = (now - latest_ts).total_seconds() / 60.0
+
+                    _add_check(
+                        checks,
+                        "execution_plan_not_stale",
+                        age_minutes <= float(cfg.max_plan_age_minutes) + 1e-12,
+                        (
+                            f"age_minutes={age_minutes:.2f}; "
+                            f"limit={cfg.max_plan_age_minutes}; "
+                            f"latest_bar_time={latest_ts.isoformat()}"
+                        ),
+                    )
 
     dry_error_count = _safe_int(dry_run_summary.get("error_count", 0), default=0)
     _add_check(
@@ -485,6 +536,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Do not require zero broker open orders.",
     )
+    parser.add_argument(
+        "--max-plan-age-minutes",
+        type=float,
+        default=None,
+        help="Maximum allowed age of execution_plan latest_bar_time.",
+    )
     return parser.parse_args()
 
 
@@ -498,6 +555,7 @@ def main() -> None:
         equity_tolerance_pct=float(args.equity_tolerance_pct),
         require_flat_positions=not bool(args.allow_open_positions),
         require_no_open_orders=not bool(args.allow_open_orders),
+        max_plan_age_minutes=args.max_plan_age_minutes,
     )
 
     broker_state = None
