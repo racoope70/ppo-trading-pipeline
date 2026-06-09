@@ -1,0 +1,6 @@
+checkpoint,date,mode,run_type,orders_required,orders_submitted,decision_classification,risk_result,checklist_result,broker_open_orders,result,next_action
+v1.21,2026-06-05,Controlled submit,Single-order filtered submit,1,1,Approved controlled submit,PASS,PASS before submit / expected post-submit no-submit checks failed,0,Passed,Monitor after submit
+v1.22,2026-06-08,No-submit monitoring,Post-submit monitoring,1,0,Hold / no-submit,PASS,PASS,0,Passed,Create hold-vs-exit policy
+v1.23,2026-06-08,Policy documentation,Hold-vs-exit policy,N/A,0,Policy adopted,N/A,N/A,N/A,Passed,Run post-policy no-submit review
+v1.24,2026-06-08,No-submit review,Post-policy rebalance review,2,0,Skip / no-submit multi-order proposal,PASS,PASS,0,Passed,Create decision dashboard
+v1.25,2026-06-08,Documentation,Decision log consolidation,N/A,0,Decision log created,N/A,N/A,N/A,Passed,Create compact dashboard
