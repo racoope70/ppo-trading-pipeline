@@ -12,15 +12,15 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.30 Candidate Stability Review / No-Submit Fresh Cycle`
+`v1.31 Multi-Order Candidate Handling Policy`
 
 ## Status
 
-IN PROGRESS
+READY FOR NEXT POLICY CHECKPOINT
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.29 Signal Persistence / Candidate Stability Policy`
+`v1.30 Candidate Stability Review / No-Submit Fresh Cycle`
 
 Latest paper-trading policy checkpoint:
 
@@ -28,6 +28,7 @@ Latest paper-trading policy checkpoint:
 A one-time candidate is not trade approval.
 A candidate must be revalidated on a fresh future run before any controlled submit decision.
 Changed symbol/side/default uncertainty = NO-SUBMIT.
+Multi-order plan without filtered review = NO-SUBMIT.
 ```
 
 Current documented local test status from the latest paper-trading decision cycle:
@@ -51,6 +52,7 @@ docs/workflows/paper_trading_session_policy.md
 docs/runs/paper_trading_decision_dashboard.md
 docs/runs/v1.28_controlled_single_order_submit_decision.md
 docs/runs/v1.29_signal_persistence_candidate_stability_policy.md
+docs/runs/v1.30_candidate_stability_review_no_submit_fresh_cycle.md
 ```
 
 Important context:
@@ -60,7 +62,9 @@ v1.27 candidate = UNH sell
 v1.28 fresh candidate = AMD buy
 v1.28 decision = NO-SUBMIT
 v1.29 policy = candidate persistence required before controlled submit review
-v1.30 next step = fresh no-submit candidate stability review
+v1.30 fresh plan = PFE buy + UNH sell
+v1.30 decision = NO-SUBMIT multi-order plan
+v1.31 next step = multi-order candidate handling policy
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -71,13 +75,11 @@ Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint 
 
 Current operational focus:
 
-Run a fresh no-submit paper-trading cycle under the v1.29 signal-persistence policy and classify the current candidate state as:
+Create a policy for handling fresh multi-order candidate plans after the v1.30 no-submit review produced two eligible orders:
 
 ```txt
-new
-persistent
-changed
-absent
+PFE buy
+UNH sell
 ```
 
 This phase establishes:
@@ -86,7 +88,8 @@ This phase establishes:
 * candidate persistence review
 * no-submit default behavior
 * stale-plan prevention
-* single-order review discipline
+* multi-order handling discipline
+* single-order filtering discipline
 * risk-control and checklist enforcement
 * broker-state verification
 * auditable paper-trading decisions
@@ -123,10 +126,10 @@ Continue supervised Alpaca paper-trading monitoring with no-submit default behav
 Next operational checkpoint:
 
 ```txt
-v1.30 Candidate Stability Review / No-Submit Fresh Cycle
+v1.31 Multi-Order Candidate Handling Policy
 ```
 
-The goal is to determine whether the latest model-generated candidate is new, persistent, changed, or absent. It is not to force a trade.
+The goal is to define how multi-order plans should be classified, filtered, reviewed, or rejected before any future controlled submit decision. It is not to force a trade.
 
 ---
 
@@ -744,13 +747,12 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.30 Candidate Stability Review / No-Submit Fresh Cycle
-fresh no-submit paper-trading run documentation
-candidate classification: new / persistent / changed / absent
-risk-control result
-pre-trade checklist result
-broker-state verification
-next decision classification
+v1.31 Multi-Order Candidate Handling Policy
+multi-order classification rules
+single-order filtering authorization rules
+no-submit default for unfiltered multi-order plans
+controlled submit eligibility boundaries
+documentation requirements for future filtered reviews
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -780,9 +782,9 @@ final holdout validation
 Operational paper-trading milestones:
 
 ```txt
-v1.30 Candidate Stability Review / No-Submit Fresh Cycle
-v1.31 Submit-mode hardening: broker fail-closed + max one order
-v1.32 Post-submit order-status reconciliation
+v1.31 Multi-Order Candidate Handling Policy
+v1.32 Submit-mode hardening: broker fail-closed + max one order
+v1.33 Post-submit order-status reconciliation
 ```
 
 Research milestones:
