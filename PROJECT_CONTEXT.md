@@ -12,7 +12,7 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.32 Multi-Order Filtered Candidate Review / No-Submit`
+`v1.33 Multi-Order Filtered Candidate Review / No-Submit`
 
 ## Status
 
@@ -20,7 +20,7 @@ READY FOR NEXT REVIEW CHECKPOINT
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.31 Multi-Order Candidate Handling Policy`
+`v1.32 Multi-Order Filter Precheck / No-Filter No-Submit Outcome`
 
 Latest paper-trading policy checkpoint:
 
@@ -56,6 +56,7 @@ docs/runs/v1.28_controlled_single_order_submit_decision.md
 docs/runs/v1.29_signal_persistence_candidate_stability_policy.md
 docs/runs/v1.30_candidate_stability_review_no_submit_fresh_cycle.md
 docs/runs/v1.31_multi_order_candidate_handling_policy.md
+docs/runs/v1.32_multi_order_filter_precheck_no_filter_no_submit.md
 ```
 
 Important context:
@@ -68,7 +69,9 @@ v1.29 policy = candidate persistence required before controlled submit review
 v1.30 fresh plan = PFE buy + UNH sell
 v1.30 decision = NO-SUBMIT multi-order plan
 v1.31 policy = do not submit multi-order plans directly
-v1.32 next step = multi-order filtered candidate review / no-submit
+v1.32 fresh plan = orders_required 0
+v1.32 decision = NO-SUBMIT absent / hold
+v1.33 next step = multi-order filtered candidate review / no-submit, only if a future fresh plan has orders_required > 1
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -79,7 +82,7 @@ Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint 
 
 Current operational focus:
 
-Run or document a multi-order filtered candidate review only if a fresh no-submit plan again produces more than one eligible order.
+Run or document a multi-order filtered candidate review only if a future fresh no-submit plan produces more than one eligible order.
 
 ```txt
 default decision = NO-SUBMIT
@@ -131,10 +134,10 @@ Continue supervised Alpaca paper-trading monitoring with no-submit default behav
 Next operational checkpoint:
 
 ```txt
-v1.32 Multi-Order Filtered Candidate Review / No-Submit
+v1.33 Multi-Order Filtered Candidate Review / No-Submit
 ```
 
-The goal is to select at most one candidate from a future multi-order plan for review only, rerun controls on the filtered directory, and still submit no orders. It is not to force a trade.
+The goal is to select at most one candidate from a future multi-order plan for review only, rerun controls on the filtered directory, and still submit no orders. If `orders_required = 0`, no filtered directory should be created.
 
 ---
 
@@ -752,12 +755,13 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.32 Multi-Order Filtered Candidate Review / No-Submit
-fresh no-submit multi-order review if a multi-order plan appears again
+v1.33 Multi-Order Filtered Candidate Review / No-Submit
+fresh no-submit multi-order review only if a multi-order plan appears again
 one filtered candidate directory for review only if explicitly selected
 risk controls rerun on filtered directory
 pre-trade checklist rerun on filtered directory
 documentation that no orders were submitted
+no filtered directory when orders_required = 0
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -787,9 +791,9 @@ final holdout validation
 Operational paper-trading milestones:
 
 ```txt
-v1.32 Multi-Order Filtered Candidate Review / No-Submit
-v1.33 Submit-mode hardening: broker fail-closed + max one order
-v1.34 Post-submit order-status reconciliation
+v1.33 Multi-Order Filtered Candidate Review / No-Submit, if a future fresh plan produces multiple orders
+v1.34 Submit-mode hardening: broker fail-closed + max one order
+v1.35 Post-submit order-status reconciliation
 ```
 
 Research milestones:
