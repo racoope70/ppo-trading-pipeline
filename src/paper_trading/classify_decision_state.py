@@ -13,6 +13,9 @@ from pathlib import Path
 from typing import Any
 
 
+DEFAULT_REPORT_NAME = "decision_state_report.json"
+
+
 @dataclass(frozen=True)
 class DecisionState:
     state: str
@@ -23,6 +26,25 @@ class DecisionState:
     sell_count: int | None
     candidates: list[dict[str, Any]]
     submit_allowed: bool
+
+
+def decision_state_to_dict(result: DecisionState) -> dict[str, Any]:
+    """Convert a DecisionState dataclass to a stable JSON-serializable dict."""
+    return asdict(result)
+
+
+def write_decision_state_report(
+    result: DecisionState,
+    run_dir: Path,
+    report_name: str = DEFAULT_REPORT_NAME,
+) -> Path:
+    """Write the decision state classification report into the run directory."""
+    output_path = run_dir / report_name
+    output_path.write_text(
+        json.dumps(decision_state_to_dict(result), indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return output_path
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -304,6 +326,8 @@ def main() -> None:
     parser.add_argument("--prior-side", choices=["buy", "sell"], default=None)
     parser.add_argument("--filtered-review", action="store_true")
     parser.add_argument("--json", action="store_true", help="Print JSON output.")
+    parser.add_argument("--write-report", action="store_true", help="Write decision_state_report.json into run directory.")
+    parser.add_argument("--report-name", default=DEFAULT_REPORT_NAME, help="Report filename when --write-report is used.")
     args = parser.parse_args()
 
     result = classify_run(
@@ -313,8 +337,16 @@ def main() -> None:
         filtered_review=args.filtered_review,
     )
 
+    if args.write_report:
+        report_path = write_decision_state_report(
+            result=result,
+            run_dir=args.run_dir,
+            report_name=args.report_name,
+        )
+        print(f"Saved decision state report: {report_path}")
+
     if args.json:
-        print(json.dumps(asdict(result), indent=2))
+        print(json.dumps(decision_state_to_dict(result), indent=2))
     else:
         _print_text(result)
 

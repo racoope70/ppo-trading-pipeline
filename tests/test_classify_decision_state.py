@@ -206,3 +206,35 @@ def test_classifies_invalid_fresh_cycle_on_dry_run_errors(tmp_path: Path) -> Non
     assert result.state == "ABORTED_INVALID_FRESH_CYCLE"
     assert result.decision == "NO_SUBMIT"
     assert result.submit_allowed is False
+
+
+def test_writes_decision_state_report(tmp_path: Path) -> None:
+    from src.paper_trading.classify_decision_state import (
+        classify_run,
+        write_decision_state_report,
+    )
+
+    run_dir = _base_run(
+        tmp_path,
+        orders_required=0,
+        rows=[
+            {
+                "symbol": "AAPL",
+                "side": "hold",
+                "qty": "0",
+                "delta_notional": "0",
+                "should_order": False,
+                "reason": "below_min_notional",
+                "execution_note": "below_min_notional",
+            }
+        ],
+    )
+
+    result = classify_run(run_dir)
+    report_path = write_decision_state_report(result, run_dir)
+
+    assert report_path.exists()
+    payload = json.loads(report_path.read_text(encoding="utf-8"))
+    assert payload["state"] == "NO_CANDIDATE_HOLD"
+    assert payload["decision"] == "NO_SUBMIT"
+    assert payload["submit_allowed"] is False
