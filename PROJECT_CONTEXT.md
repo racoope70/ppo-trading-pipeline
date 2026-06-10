@@ -10,28 +10,30 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 # 1. Current Development State
 
-## Active Milestone
+## Active Operational Milestone
 
-`v1.8.2 Standalone Alpaca PPO Retraining Configuration`
+`v1.30 Candidate Stability Review / No-Submit Fresh Cycle`
 
 ## Status
 
 IN PROGRESS
 
-## Latest Completed Milestone
+## Latest Completed Paper-Trading Milestone
 
-`v1.8.1 Alpaca PPO Training Dataset Builder`
+`v1.29 Signal Persistence / Candidate Stability Policy`
 
-Commit:
+Latest paper-trading policy checkpoint:
 
-```txt id="7lfj48"
-f89208b Add Alpaca PPO training dataset builder
+```txt
+A one-time candidate is not trade approval.
+A candidate must be revalidated on a fresh future run before any controlled submit decision.
+Changed symbol/side/default uncertainty = NO-SUBMIT.
 ```
 
-Current local test status:
+Current documented local test status from the latest paper-trading decision cycle:
 
-```txt id="sdf8fb"
-160 passed, 2 warnings
+```txt
+210 passed, 2 warnings
 ```
 
 Known non-blocking warnings:
@@ -39,15 +41,67 @@ Known non-blocking warnings:
 * websockets.legacy deprecation warning
 * protobuf utcfromtimestamp deprecation warning
 
+## Current Paper-Trading Source of Truth
+
+Before making any paper-trading recommendation, review these files first:
+
+```txt
+docs/workflows/signal_persistence_candidate_stability_policy.md
+docs/workflows/paper_trading_session_policy.md
+docs/runs/paper_trading_decision_dashboard.md
+docs/runs/v1.28_controlled_single_order_submit_decision.md
+docs/runs/v1.29_signal_persistence_candidate_stability_policy.md
+```
+
+Important context:
+
+```txt
+v1.27 candidate = UNH sell
+v1.28 fresh candidate = AMD buy
+v1.28 decision = NO-SUBMIT
+v1.29 policy = candidate persistence required before controlled submit review
+v1.30 next step = fresh no-submit candidate stability review
+```
+
+Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
+
 ---
 
 # 2. Current Objective
 
-Current development focus:
+Current operational focus:
 
-Build the retraining configuration layer for standalone Alpaca PPO retraining using historical 1-hour Alpaca market data.
+Run a fresh no-submit paper-trading cycle under the v1.29 signal-persistence policy and classify the current candidate state as:
+
+```txt
+new
+persistent
+changed
+absent
+```
 
 This phase establishes:
+
+* fresh-run discipline
+* candidate persistence review
+* no-submit default behavior
+* stale-plan prevention
+* single-order review discipline
+* risk-control and checklist enforcement
+* broker-state verification
+* auditable paper-trading decisions
+
+A controlled paper submit is not the current default objective.
+
+Any future controlled submit requires a separate decision checkpoint after the full safety stack passes.
+
+## Parallel Research Track
+
+The longer-term research track remains:
+
+Develop and validate a standalone PPO baseline trained on Alpaca historical 1-hour bars using embargo-aware walk-forward evaluation.
+
+This research track includes:
 
 * reproducible retraining configuration
 * artifact isolation
@@ -56,13 +110,27 @@ This phase establishes:
 * holdout reservation standards
 * deployment separation from previously validated models
 
-Full retraining is not part of this milestone.
+Full retraining, model promotion, and hybrid model work must not bypass paper-trading or holdout-validation guardrails.
 
 ---
 
 # 3. Strategic Research Direction
 
-## Near-Term Objective
+## Near-Term Operational Objective
+
+Continue supervised Alpaca paper-trading monitoring with no-submit default behavior.
+
+Next operational checkpoint:
+
+```txt
+v1.30 Candidate Stability Review / No-Submit Fresh Cycle
+```
+
+The goal is to determine whether the latest model-generated candidate is new, persistent, changed, or absent. It is not to force a trade.
+
+---
+
+## Near-Term Research Objective
 
 Develop and validate a standalone PPO baseline trained on Alpaca historical 1-hour bars using embargo-aware walk-forward evaluation.
 
@@ -72,6 +140,8 @@ Promotion requirements:
 * untouched holdout validation
 * deployment review
 * supervised paper-trading verification
+* candidate stability review
+* manual approval before any controlled paper submit
 
 ---
 
@@ -79,7 +149,7 @@ Promotion requirements:
 
 After standalone PPO stabilization:
 
-```txt id="6vxwt2"
+```txt
 PPO
   ↓
 PPO + Random Forest gate
@@ -87,7 +157,9 @@ PPO + Random Forest gate
 PPO + XGBoost gate
 ```
 
-Hybrid systems should only be evaluated after the standalone Alpaca PPO baseline has completed retraining, validation, and supervised paper deployment review.
+Hybrid systems should only be evaluated after the standalone Alpaca PPO baseline has completed retraining, validation, holdout review, and supervised paper deployment review.
+
+Do not move to hybrid systems prematurely.
 
 ---
 
@@ -95,7 +167,7 @@ Hybrid systems should only be evaluated after the standalone Alpaca PPO baseline
 
 Validation hierarchy must remain strictly enforced:
 
-```txt id="xhz7tt"
+```txt
 train_df   = model fitting only
 embargo    = temporal gap
 eval_df    = walk-forward evaluation
@@ -108,12 +180,14 @@ Rules:
 * no leakage
 * holdout isolation required
 * evaluation uses locked train-only normalization statistics
+* no repeated tuning against holdout
+* no model promotion without deployment review
 
 ---
 
 # 5. Core System Architecture
 
-```txt id="2r8v3v"
+```txt
 Market Data Layer
     ↓
 Feature Engineering Layer
@@ -124,12 +198,26 @@ PPO Training Layer
     ↓
 Validation + Candidate Selection
     ↓
-Paper-Trading Deployment
+Paper-Trading Dry Run
+    ↓
+Dry-Run Evaluation
+    ↓
+Execution Plan
+    ↓
+Risk Controls
+    ↓
+Pre-Trade Checklist
+    ↓
+Supervised Paper-Order Runner
     ↓
 Broker Verification
     ↓
 Audit + Monitoring
+    ↓
+Decision Documentation
 ```
+
+The architecture is intentionally staged so that model output is never treated as immediate trade approval.
 
 ---
 
@@ -137,7 +225,7 @@ Audit + Monitoring
 
 ## Data Layer
 
-```txt id="5mjlwm"
+```txt
 src/data/alpaca_historical_data.py
 src/data/alpaca_training_dataset.py
 ```
@@ -153,7 +241,7 @@ Responsibilities:
 
 ## Feature Engineering
 
-```txt id="nl20nk"
+```txt
 src/features.py
 src/feature_manifest.py
 ```
@@ -171,7 +259,7 @@ Responsibilities:
 
 ## Training + Validation
 
-```txt id="qm3eky"
+```txt
 src/train.py
 src/training_splits.py
 src/vecnormalize_utils.py
@@ -188,19 +276,56 @@ Responsibilities:
 
 ---
 
-## Deployment Layer
+## Alpaca Adapter Layer
 
-```txt id="5s6v0x"
-src/paper_trading/
+```txt
+src/adapters/alpaca.py
 ```
 
 Responsibilities:
 
-* dry-run execution
-* execution planning
-* risk controls
+* paper-account connection
+* Alpaca endpoint enforcement
+* account snapshots
+* position reads
+* recent bar downloads
+* latest price lookup
+* controlled market-order helper
+* no live-money endpoint usage for paper-trading workflows
+
+Required Alpaca endpoint:
+
+```txt
+https://paper-api.alpaca.markets
+```
+
+---
+
+## Paper-Trading Deployment Layer
+
+```txt
+src/paper_trading/paper_trade_dry_run.py
+src/paper_trading/evaluate_dry_run.py
+src/paper_trading/build_execution_plan.py
+src/paper_trading/risk_controls.py
+src/paper_trading/filter_execution_plan.py
+src/paper_trading/paper_trade_loop.py
+src/paper_trading/pre_trade_checklist.py
+src/paper_trading/logging_utils.py
+```
+
+Responsibilities:
+
+* broker-connected no-order dry-run inference
+* dry-run validation
+* execution-plan generation
+* single-order filtering
+* risk-control enforcement
+* stale-plan prevention
+* explicit run-directory confirmation
+* supervised Alpaca paper-order submission only when intentionally approved
 * broker-state verification
-* supervised Alpaca paper trading
+* audit logging
 
 ---
 
@@ -208,7 +333,7 @@ Responsibilities:
 
 The following fields must never enter model feature inputs:
 
-```txt id="vst4mk"
+```txt
 Target
 Return
 Datetime
@@ -225,7 +350,7 @@ These columns are permitted for:
 
 Leakage prevention is enforced through:
 
-```txt id="0z72rm"
+```txt
 src/feature_manifest.py
 ```
 
@@ -233,7 +358,7 @@ src/feature_manifest.py
 
 # 8. Current PPO Workflow
 
-Current workflow:
+Current training workflow:
 
 1. construct walk-forward window
 2. split into train / embargo / eval
@@ -242,27 +367,182 @@ Current workflow:
 5. evaluate using locked eval statistics
 6. rank candidate windows
 7. save metrics and artifacts
+8. reserve untouched holdout for final validation
+9. deploy only after review
 
 Evaluation constraints:
 
-```txt id="h2x0g3"
+```txt
 eval_env.training = False
 eval_env.norm_reward = False
 ```
 
 ---
 
-# 9. Current Training Parameters
+# 9. Current Paper-Trading Workflow
+
+Normal monitoring cycle is no-submit by default:
+
+```bash
+python -m src.paper_trading.paper_trade_dry_run \
+  --manifest config/paper_trading_six_ticker_manifest.json \
+  --artifacts-dir models/alpaca_ppo_models_master
+
+python -m src.paper_trading.evaluate_dry_run \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.build_execution_plan \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.risk_controls \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.pre_trade_checklist \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --check-broker \
+  --expected-equity 100000 \
+  --equity-tolerance-pct 0.05 \
+  --allow-open-positions
+```
+
+Expected no-submit pass conditions:
+
+```txt
+Evaluation result = PASS
+Risk result = PASS
+Checklist result = PASS
+predict_ok_count = expected universe size
+error_count = 0
+orders_submitted = 0
+submit_orders = False
+broker_open_orders_zero = PASS
+broker_snapshot_errors_empty = PASS
+```
+
+Hard stop conditions:
+
+```txt
+dry-run evaluation fails
+risk controls fail
+pre-trade checklist fails
+broker open orders are unexpected
+execution plan is stale
+market data is unavailable
+candidate changed unexpectedly
+orders_required > 1 and no single-order filter was used
+manual approval is missing
+```
+
+---
+
+# 10. Candidate Stability Policy
+
+Current active policy:
+
+```txt
+docs/workflows/signal_persistence_candidate_stability_policy.md
+```
+
+Core rule:
+
+```txt
+A candidate must be revalidated on a fresh future run before any submit decision.
+Do not submit from a prior checkpoint's execution plan.
+Do not assume a prior candidate remains valid.
+```
+
+Candidate definition:
+
+```txt
+should_order = True
+side in {buy, sell}
+orders_required >= 1
+```
+
+Changed candidate conditions:
+
+```txt
+symbol changes
+side changes
+candidate disappears
+orders_required changes from 1 to multiple
+candidate becomes below_min_notional
+risk fails
+checklist fails
+plan becomes stale
+```
+
+Candidate stability levels:
+
+```txt
+Level 0 = one-time candidate; review only
+Level 1 = revalidated candidate; eligible for controlled review
+Level 2 = submit-eligible candidate; requires full safety stack and manual approval
+```
+
+Default action when uncertain:
+
+```txt
+NO-SUBMIT
+```
+
+---
+
+# 11. Controlled Submit Requirements
+
+Controlled paper submits are not automatic.
+
+A controlled submit may only be considered after all conditions below are true:
+
+```txt
+fresh dry run completed
+dry-run evaluation passed
+execution plan rebuilt from the fresh dry run
+candidate persisted or was freshly revalidated
+orders_required = 1, or a reviewed single-order filtered directory exists
+risk controls passed
+pre-trade checklist passed
+plan_not_stale = PASS
+execution_plan_not_stale = PASS
+broker open orders = 0
+selected order is explicitly identified
+manual review completed
+manual approval is explicit
+post-submit broker verification is planned
+```
+
+Submit command pattern:
+
+```bash
+python -m src.paper_trading.paper_trade_loop \
+  --run-dir <reviewed_single_order_run_dir> \
+  --submit-orders \
+  --max-plan-age-minutes 90 \
+  --confirm-run-dir <reviewed_single_order_run_dir>
+```
+
+Never use `--submit-orders` against an old checkpoint plan.
+
+Never use `--submit-orders` against `reports/paper_trading_dry_runs/latest` when the original plan has more than one eligible order.
+
+Never treat risk/checklist pass as trade approval by itself.
+
+---
+
+# 12. Current Training Parameters
 
 Defined in:
 
-```txt id="79hl8n"
+```txt
 src/env.py
 ```
 
 Current operational parameters:
 
-```txt id="yjj1n5"
+```txt
 window_size=10
 cost_rate=0.0002
 slip_rate=0.0003
@@ -276,17 +556,17 @@ reward_clip=1.0
 
 ---
 
-# 10. Canonical Data Source
+# 13. Canonical Data Source
 
 Current retraining source:
 
-```txt id="2ob57y"
+```txt
 Alpaca historical 1-hour stock bars
 ```
 
 Canonical baseline universe:
 
-```txt id="s3d0m0"
+```txt
 AAPL
 AMD
 MRK
@@ -297,76 +577,114 @@ XOM
 
 ---
 
-# 11. Artifact Governance
+# 14. Artifact Governance
 
 Validated artifacts must not be overwritten.
 
 Current validated artifact directory:
 
-```txt id="0grqtx"
+```txt
 models/ppo_models_master
+```
+
+Current Alpaca PPO paper-trading artifact directory:
+
+```txt
+models/alpaca_ppo_models_master
 ```
 
 Expected isolated retraining directories:
 
-```txt id="pq6tp7"
+```txt
 models/alpaca_ppo_models_master
 reports/alpaca_ppo_retraining
 ```
 
+Generated datasets, model artifacts, run outputs, reports, logs, and credentials should remain excluded from version control unless intentionally documented otherwise.
+
 ---
 
-# 12. Deployment Constraints
+# 15. Deployment Constraints
 
 Current deployment policy:
 
 * supervised paper trading only
-* manual order review required
-* broker state verification required
+* no real-money trading
 * no unattended execution
+* no automatic multi-order submission
+* no stale-plan submission
+* no forced cleanup of residual positions
+* no automatic exits after recent entries
+* manual order review required
+* broker-state verification required
+* audit logging required
+* documentation required for milestone decisions
 
-Required Alpaca endpoint:
+Approved behavior:
 
-```txt id="x6r1lu"
-https://paper-api.alpaca.markets
+```txt
+supervised no-submit cycles
+controlled one-order paper submit tests
+single-order filtered submit tests
+post-submit monitoring
+residual position monitoring
+candidate stability review
+decision logging
+```
+
+Not approved:
+
+```txt
+unattended trading
+real-money trading
+automatic multi-order submission
+submitting stale candidates
+submitting changed candidates
+submitting from prior checkpoint plans
+forced residual cleanup
+automatic entries
+automatic exits
 ```
 
 ---
 
-# 13. Testing + CI Standards
+# 16. Testing + CI Standards
 
 Primary local test command:
 
-```txt id="bt8zdn"
+```bash
 ../.venv/bin/python -m pytest
 ```
 
 Requirements before milestone promotion:
 
 * local tests passing
-* GitHub Actions passing
+* GitHub Actions passing when available
 * clean git state
 * reviewed artifact changes
+* no generated datasets committed
+* no credentials committed
+* paper-trading docs updated after operational milestones
 
 CI workflow:
 
-```txt id="5j7q4l"
+```txt
 .github/workflows/tests.yml
 ```
 
 ---
 
-# 14. Repository Standards
+# 17. Repository Standards
 
 Expected repository root:
 
-```txt id="ic7w8e"
+```txt
 ppo_research_pipeline/
 ```
 
 Before modifications:
 
-```txt id="ol4u7t"
+```bash
 pwd
 git rev-parse --show-toplevel
 git status --short
@@ -374,74 +692,115 @@ git status --short
 
 Files must not be created outside:
 
-```txt id="ujjjsy"
+```txt
 ppo_research_pipeline
 ```
 
 ---
 
-# 15. Generated Data Policy
+# 18. Generated Data Policy
 
 Generated data must remain excluded from version control.
 
 Ignored paths:
 
-```txt id="eg2bnm"
+```txt
 data/raw/*
 data/processed/*
 data/alpaca_historical/*
 data/alpaca_training/*
+reports/*
+logs/*
+models/*
 ```
 
 Large artifacts generally excluded:
 
-```txt id="7tcfz5"
+```txt
 *.zip
 *.pt
 *.pth
 *.onnx
 *.joblib
+*.pkl
+*.csv
+```
+
+Never commit:
+
+```txt
+.env
+.env.*
+API keys
+broker credentials
+raw account exports
+large generated run outputs
 ```
 
 ---
 
-# 16. Active Deliverables
+# 19. Active Deliverables
 
-Current milestone deliverables:
+Current operational deliverables:
 
-```txt id="0e8h5n"
+```txt
+v1.30 Candidate Stability Review / No-Submit Fresh Cycle
+fresh no-submit paper-trading run documentation
+candidate classification: new / persistent / changed / absent
+risk-control result
+pre-trade checklist result
+broker-state verification
+next decision classification
+```
+
+Current hardening candidates before any future controlled submit:
+
+```txt
+make submit mode fail closed if broker account/positions/open-order reads fail
+add runner-level max_orders_to_submit=1 default
+add post-submit order-status reconciliation by order id
+keep PROJECT_CONTEXT.md aligned with latest paper-trading policy
+```
+
+Longer-term research deliverables:
+
+```txt
 src/config/alpaca_ppo_retraining_config.py
 tests/test_alpaca_ppo_retraining_config.py
 docs/workflows/alpaca_ppo_retraining_configuration.md
-```
-
-Configuration layer should define:
-
-* dataset paths
-* artifact paths
-* results paths
-* embargo settings
-* train/eval settings
-* holdout settings
-* smoke-test mode
-* candidate-selection settings
-
----
-
-# 17. Planned Milestones
-
-```txt id="ol0z3y"
-v1.8.3 Standalone Alpaca PPO training integration
-v1.8.4 Alpaca PPO retrain smoke test
-v1.8.5 Final holdout validation
-v1.9   Alpaca PPO paper-trading redeployment
-v2.0   PPO + Random Forest gate
-v2.1   PPO + XGBoost gate
+standalone Alpaca PPO training integration
+Alpaca PPO retrain smoke test
+final holdout validation
 ```
 
 ---
 
-# 18. Operational Guardrails
+# 20. Planned Milestones
+
+Operational paper-trading milestones:
+
+```txt
+v1.30 Candidate Stability Review / No-Submit Fresh Cycle
+v1.31 Submit-mode hardening: broker fail-closed + max one order
+v1.32 Post-submit order-status reconciliation
+```
+
+Research milestones:
+
+```txt
+Standalone Alpaca PPO training integration
+Alpaca PPO retrain smoke test
+Final holdout validation
+Alpaca PPO paper-trading redeployment review
+PPO + Random Forest gate
+PPO + XGBoost gate
+```
+
+Hybrid model milestones must remain blocked until standalone PPO validation and supervised deployment review are complete.
+
+---
+
+# 21. Operational Guardrails
 
 Do not:
 
@@ -449,13 +808,30 @@ Do not:
 * repeatedly tune against holdout
 * overwrite validated artifacts
 * commit generated datasets
+* commit credentials
 * enable unattended execution
 * move to hybrid systems prematurely
 * submit paper orders without review
+* submit stale candidates
+* submit changed candidates
+* submit from prior checkpoint plans
+* submit from unfiltered multi-order plans
+* treat candidate identification as trade approval
+* treat risk/checklist pass as trade approval by itself
+
+When in doubt:
+
+```txt
+NO-SUBMIT
+rerun a fresh dry run
+review the execution plan
+verify broker state
+document the decision
+```
 
 ---
 
-# 19. Maintenance Requirements
+# 22. Maintenance Requirements
 
 Update this document when:
 
@@ -466,5 +842,8 @@ Update this document when:
 * architecture changes
 * operational constraints change
 * artifact structure changes
+* paper-trading policy changes
+* latest candidate decision changes
+* test status changes
 
 This document functions as the authoritative operational and research reference for the repository.
