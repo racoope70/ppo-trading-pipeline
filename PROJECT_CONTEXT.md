@@ -12,7 +12,7 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.33 Multi-Order Filtered Candidate Review / No-Submit`
+`v1.34 State Machine Dry-Run Classification Utility`
 
 ## Status
 
@@ -20,7 +20,7 @@ READY FOR NEXT REVIEW CHECKPOINT
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.32 Multi-Order Filter Precheck / No-Filter No-Submit Outcome`
+`v1.33 Paper-Trading Decision State Machine`
 
 Latest paper-trading policy checkpoint:
 
@@ -30,6 +30,7 @@ A candidate must be revalidated on a fresh future run before any controlled subm
 Changed symbol/side/default uncertainty = NO-SUBMIT.
 Multi-order plan without filtered review = NO-SUBMIT.
 Multi-order plans are review events, not submit events.
+All fresh runs must be classified by the paper-trading decision state machine.
 ```
 
 Current documented local test status from the latest paper-trading decision cycle:
@@ -50,6 +51,7 @@ Before making any paper-trading recommendation, review these files first:
 ```txt
 docs/workflows/signal_persistence_candidate_stability_policy.md
 docs/workflows/multi_order_candidate_handling_policy.md
+docs/workflows/paper_trading_decision_state_machine.md
 docs/workflows/paper_trading_session_policy.md
 docs/runs/paper_trading_decision_dashboard.md
 docs/runs/v1.28_controlled_single_order_submit_decision.md
@@ -57,6 +59,7 @@ docs/runs/v1.29_signal_persistence_candidate_stability_policy.md
 docs/runs/v1.30_candidate_stability_review_no_submit_fresh_cycle.md
 docs/runs/v1.31_multi_order_candidate_handling_policy.md
 docs/runs/v1.32_multi_order_filter_precheck_no_filter_no_submit.md
+docs/runs/v1.33_paper_trading_decision_state_machine.md
 ```
 
 Important context:
@@ -71,7 +74,8 @@ v1.30 decision = NO-SUBMIT multi-order plan
 v1.31 policy = do not submit multi-order plans directly
 v1.32 fresh plan = orders_required 0
 v1.32 decision = NO-SUBMIT absent / hold
-v1.33 next step = multi-order filtered candidate review / no-submit, only if a future fresh plan has orders_required > 1
+v1.33 policy = paper-trading decision state machine
+v1.34 next step = state-machine dry-run classification utility
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -82,12 +86,12 @@ Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint 
 
 Current operational focus:
 
-Run or document a multi-order filtered candidate review only if a future fresh no-submit plan produces more than one eligible order.
+Create a small utility or report that reads fresh paper-trading outputs and prints the decision state-machine classification.
 
 ```txt
 default decision = NO-SUBMIT
-filtered candidate directory = review only
-submit authorization = separate future checkpoint only
+classification required before any future submit review
+controlled submit remains a separate checkpoint
 ```
 
 This phase establishes:
@@ -98,6 +102,7 @@ This phase establishes:
 * stale-plan prevention
 * multi-order handling discipline
 * single-order filtering discipline
+* state-machine decision classification
 * risk-control and checklist enforcement
 * broker-state verification
 * auditable paper-trading decisions
@@ -134,10 +139,10 @@ Continue supervised Alpaca paper-trading monitoring with no-submit default behav
 Next operational checkpoint:
 
 ```txt
-v1.33 Multi-Order Filtered Candidate Review / No-Submit
+v1.34 State Machine Dry-Run Classification Utility
 ```
 
-The goal is to select at most one candidate from a future multi-order plan for review only, rerun controls on the filtered directory, and still submit no orders. If `orders_required = 0`, no filtered directory should be created.
+The goal is to automate the classification report for fresh dry-run outputs while preserving no-submit as the default and controlled submit as a separate reviewed checkpoint.
 
 ---
 
@@ -755,13 +760,13 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.33 Multi-Order Filtered Candidate Review / No-Submit
-fresh no-submit multi-order review only if a multi-order plan appears again
-one filtered candidate directory for review only if explicitly selected
-risk controls rerun on filtered directory
-pre-trade checklist rerun on filtered directory
-documentation that no orders were submitted
-no filtered directory when orders_required = 0
+v1.34 State Machine Dry-Run Classification Utility
+read dry_run_summary.json and execution_plan_summary.json
+read execution_plan.csv
+include risk/checklist status when available
+print state-machine classification
+print no-submit / review-only / controlled-review eligibility
+preserve no-submit as the default
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -791,9 +796,9 @@ final holdout validation
 Operational paper-trading milestones:
 
 ```txt
-v1.33 Multi-Order Filtered Candidate Review / No-Submit, if a future fresh plan produces multiple orders
-v1.34 Submit-mode hardening: broker fail-closed + max one order
-v1.35 Post-submit order-status reconciliation
+v1.34 State Machine Dry-Run Classification Utility
+v1.35 Submit-mode hardening: broker fail-closed + max one order
+v1.36 Post-submit order-status reconciliation
 ```
 
 Research milestones:
