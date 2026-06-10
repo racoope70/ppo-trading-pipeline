@@ -12,7 +12,7 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.34 State Machine Dry-Run Classification Utility`
+`v1.35 Decision State Classification Report Integration`
 
 ## Status
 
@@ -20,7 +20,7 @@ READY FOR NEXT REVIEW CHECKPOINT
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.33 Paper-Trading Decision State Machine`
+`v1.34 State Machine Dry-Run Classification Utility`
 
 Latest paper-trading policy checkpoint:
 
@@ -31,6 +31,7 @@ Changed symbol/side/default uncertainty = NO-SUBMIT.
 Multi-order plan without filtered review = NO-SUBMIT.
 Multi-order plans are review events, not submit events.
 All fresh runs must be classified by the paper-trading decision state machine.
+The read-only classifier utility does not approve trades or submit orders.
 ```
 
 Current documented local test status from the latest paper-trading decision cycle:
@@ -60,6 +61,7 @@ docs/runs/v1.30_candidate_stability_review_no_submit_fresh_cycle.md
 docs/runs/v1.31_multi_order_candidate_handling_policy.md
 docs/runs/v1.32_multi_order_filter_precheck_no_filter_no_submit.md
 docs/runs/v1.33_paper_trading_decision_state_machine.md
+docs/runs/v1.34_state_machine_dry_run_classification_utility.md
 ```
 
 Important context:
@@ -75,7 +77,8 @@ v1.31 policy = do not submit multi-order plans directly
 v1.32 fresh plan = orders_required 0
 v1.32 decision = NO-SUBMIT absent / hold
 v1.33 policy = paper-trading decision state machine
-v1.34 next step = state-machine dry-run classification utility
+v1.34 utility = read-only dry-run decision-state classifier
+v1.35 next step = persist classifier JSON report in each run directory
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -86,11 +89,12 @@ Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint 
 
 Current operational focus:
 
-Create a small utility or report that reads fresh paper-trading outputs and prints the decision state-machine classification.
+Integrate the decision-state classifier output into paper-trading run artifacts.
 
 ```txt
 default decision = NO-SUBMIT
 classification required before any future submit review
+classifier report = local JSON artifact
 controlled submit remains a separate checkpoint
 ```
 
@@ -139,10 +143,10 @@ Continue supervised Alpaca paper-trading monitoring with no-submit default behav
 Next operational checkpoint:
 
 ```txt
-v1.34 State Machine Dry-Run Classification Utility
+v1.35 Decision State Classification Report Integration
 ```
 
-The goal is to automate the classification report for fresh dry-run outputs while preserving no-submit as the default and controlled submit as a separate reviewed checkpoint.
+The goal is to write the classifier output to a JSON report inside each run directory so future run notes can cite the classification artifact directly.
 
 ---
 
@@ -760,13 +764,12 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.34 State Machine Dry-Run Classification Utility
-read dry_run_summary.json and execution_plan_summary.json
-read execution_plan.csv
-include risk/checklist status when available
-print state-machine classification
-print no-submit / review-only / controlled-review eligibility
-preserve no-submit as the default
+v1.35 Decision State Classification Report Integration
+write classifier output to decision_state_classification.json
+store report inside the reviewed run directory
+include state, decision, reason, candidate rows, and submit_allowed
+ensure report writing remains no-submit and broker-free
+update run-note citation pattern for classification artifacts
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -796,9 +799,9 @@ final holdout validation
 Operational paper-trading milestones:
 
 ```txt
-v1.34 State Machine Dry-Run Classification Utility
-v1.35 Submit-mode hardening: broker fail-closed + max one order
-v1.36 Post-submit order-status reconciliation
+v1.35 Decision State Classification Report Integration
+v1.36 Submit-mode hardening: broker fail-closed + max one order
+v1.37 Post-submit order-status reconciliation
 ```
 
 Research milestones:
