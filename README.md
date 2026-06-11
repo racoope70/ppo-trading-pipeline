@@ -349,3 +349,77 @@ Planned improvements:
 
 This repository is for research, education, and software development practice. Trading involves risk, and model outputs may be wrong, unstable, or unsuitable for live trading.
 
+---
+
+## Paper-Trading Reporting Chain
+
+The paper-trading reporting chain converts a completed no-submit paper-trading run into auditable decision artifacts.
+
+This workflow is reporting-only.
+
+It does not connect to Alpaca, does not submit orders, and does not alter broker state.
+
+### Reporting Chain Artifacts
+
+After a paper-trading dry run and pre-trade checklist have completed, the reporting chain can produce:
+
+```text
+decision_state_report.json
+paper_trading_run_summary.json
+reporting_chain_smoke_test_report.json
+docs/runs/paper_trading_decision_dashboard_with_state.md
+```
+
+### Standard Reporting Commands
+
+Run from the repository root:
+
+```bash
+python -m src.paper_trading.pipeline_decision_state_hook \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --prior-symbol AMD \
+  --prior-side buy
+
+python -m src.paper_trading.build_run_summary_with_decision_state \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.build_decision_dashboard_with_state \
+  --run-dir reports/paper_trading_dry_runs/latest
+
+python -m src.paper_trading.reporting_chain_smoke_test \
+  --run-dir reports/paper_trading_dry_runs/latest \
+  --prior-symbol AMD \
+  --prior-side buy
+```
+
+### Expected Safe Output
+
+The default safe reporting output is:
+
+```text
+decision = NO_SUBMIT
+submit_allowed = False
+```
+
+A reporting artifact is not trade approval.
+A controlled submit still requires a separate controlled-submit checkpoint, fresh validation, manual approval, exact run-directory confirmation, broker verification, and documentation.
+
+### Reporting Runbook
+
+Full operational instructions are documented here:
+
+```text
+docs/workflows/paper_trading_operational_reporting_runbook.md
+```
+
+Latest reporting-chain checkpoints:
+
+```text
+v1.34 = decision-state classifier
+v1.35 = decision_state_report.json writer
+v1.36 = post-checklist classification hook
+v1.37 = run summary includes decision state
+v1.38 = dashboard reads decision state
+v1.39 = reporting chain smoke test
+v1.40 = operational reporting runbook
+```
