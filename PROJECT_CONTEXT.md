@@ -154,9 +154,11 @@ v1.49 = PPO paper-trading stability review / controlled submit eligibility revie
         Only if v1.46 criteria are met.
         This is a review gate, not automatic submit approval.
 
-later = PPO-only baseline performance package
-later = PPO + Random Forest gate
-later = PPO + XGBoost gate
+v1.50 = PPO paper-trading readiness decision
+v1.51 = PPO-only baseline performance package
+later = PPO + Random Forest Gate
+later = PPO + XGBoost Gate
+later = Feature Importance / Model Interpretability Phase
 ```
 
 Hybrid model integration remains blocked until the standalone PPO baseline has enough supervised paper-trading evidence to justify comparison or extension.
