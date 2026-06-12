@@ -12,35 +12,24 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.35 Decision State Classification Report Integration`
+`v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan`
 
 ## Status
 
-READY FOR NEXT REVIEW CHECKPOINT
+READY FOR REPORTING PHASE CLOSEOUT AND PAPER-TRADING OBSERVATION PLANNING
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.34 State Machine Dry-Run Classification Utility`
+`v1.44 Paper-Trading Reporting Chain Final Audit Summary`
 
-Latest paper-trading policy checkpoint:
-
-```txt
-A one-time candidate is not trade approval.
-A candidate must be revalidated on a fresh future run before any controlled submit decision.
-Changed symbol/side/default uncertainty = NO-SUBMIT.
-Multi-order plan without filtered review = NO-SUBMIT.
-Multi-order plans are review events, not submit events.
-All fresh runs must be classified by the paper-trading decision state machine.
-The read-only classifier utility does not approve trades or submit orders.
-```
-
-Current documented local test status from the latest paper-trading decision cycle:
+Latest sealed checkpoint:
 
 ```txt
-210 passed, 2 warnings
+v1.44-paper-trading-reporting-chain-final-audit-summary
+tests = 227 passed, 2 warnings
 ```
 
-Known non-blocking warnings:
+Known non-blocking warnings from the latest local test run:
 
 * websockets.legacy deprecation warning
 * protobuf utcfromtimestamp deprecation warning
@@ -54,7 +43,11 @@ docs/workflows/signal_persistence_candidate_stability_policy.md
 docs/workflows/multi_order_candidate_handling_policy.md
 docs/workflows/paper_trading_decision_state_machine.md
 docs/workflows/paper_trading_session_policy.md
+docs/workflows/paper_trading_operational_reporting_runbook.md
+docs/workflows/paper_trading_reporting_artifact_retention_policy.md
+docs/workflows/README.md
 docs/runs/paper_trading_decision_dashboard.md
+docs/runs/paper_trading_decision_dashboard_with_state.md
 docs/runs/v1.28_controlled_single_order_submit_decision.md
 docs/runs/v1.29_signal_persistence_candidate_stability_policy.md
 docs/runs/v1.30_candidate_stability_review_no_submit_fresh_cycle.md
@@ -62,6 +55,16 @@ docs/runs/v1.31_multi_order_candidate_handling_policy.md
 docs/runs/v1.32_multi_order_filter_precheck_no_filter_no_submit.md
 docs/runs/v1.33_paper_trading_decision_state_machine.md
 docs/runs/v1.34_state_machine_dry_run_classification_utility.md
+docs/runs/v1.35_decision_state_classification_report_integration.md
+docs/runs/v1.36_paper_trading_pipeline_classification_hook_no_submit.md
+docs/runs/v1.37_paper_trading_run_summary_includes_decision_state.md
+docs/runs/v1.38_paper_trading_dashboard_reads_decision_state.md
+docs/runs/v1.39_paper_trading_reporting_chain_smoke_test_no_submit.md
+docs/runs/v1.40_paper_trading_operational_reporting_runbook.md
+docs/runs/v1.41_paper_trading_reporting_chain_readme_update.md
+docs/runs/v1.42_paper_trading_reporting_artifact_retention_policy.md
+docs/runs/v1.43_reporting_artifact_retention_gitignore_review.md
+docs/runs/v1.44_paper_trading_reporting_chain_final_audit_summary.md
 ```
 
 Important context:
@@ -78,10 +81,27 @@ v1.32 fresh plan = orders_required 0
 v1.32 decision = NO-SUBMIT absent / hold
 v1.33 policy = paper-trading decision state machine
 v1.34 utility = read-only dry-run decision-state classifier
-v1.35 next step = persist classifier JSON report in each run directory
+v1.35 = classifier report writer
+v1.36 = post-checklist classification hook
+v1.37 = run summary includes decision state
+v1.38 = dashboard reads decision state
+v1.39 = reporting chain smoke test
+v1.40 = operational reporting runbook
+v1.41 = README / workflow index update
+v1.42 = reporting artifact retention policy
+v1.43 = .gitignore retention review
+v1.44 = final reporting-chain audit summary
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
+
+## Current Interpretation
+
+The PPO-only paper-trading infrastructure is operationally and reporting-stable.
+
+The PPO trading strategy is not yet proven stable over a multi-session paper-trading window.
+
+Passing tests proves that code, controls, and reporting work. It does not prove the model trades profitably over time.
 
 ---
 
@@ -89,16 +109,17 @@ Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint 
 
 Current operational focus:
 
-Integrate the decision-state classifier output into paper-trading run artifacts.
+Close the completed reporting-control phase and define the next supervised paper-trading observation path.
 
 ```txt
 default decision = NO-SUBMIT
 classification required before any future submit review
-classifier report = local JSON artifact
+reporting chain complete through v1.44
 controlled submit remains a separate checkpoint
+PPO+RF deployment remains blocked until PPO-only paper behavior is observed over time
 ```
 
-This phase establishes:
+The completed reporting phase establishes:
 
 * fresh-run discipline
 * candidate persistence review
@@ -107,11 +128,18 @@ This phase establishes:
 * multi-order handling discipline
 * single-order filtering discipline
 * state-machine decision classification
-* risk-control and checklist enforcement
-* broker-state verification
+* decision_state_report.json
+* paper_trading_run_summary.json
+* paper_trading_decision_dashboard_with_state.md
+* reporting_chain_smoke_test_report.json
+* operational reporting runbook
+* artifact retention policy
+* .gitignore alignment
 * auditable paper-trading decisions
 
 A controlled paper submit is not the current default objective.
+
+The next recommended objective is a structured multi-session PPO paper-trading observation phase.
 
 Any future controlled submit requires a separate decision checkpoint after the full safety stack passes.
 
@@ -138,15 +166,29 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Continue supervised Alpaca paper-trading monitoring with no-submit default behavior.
+Close the completed reporting phase and plan supervised PPO paper-trading observation.
 
 Next operational checkpoint:
 
 ```txt
-v1.35 Decision State Classification Report Integration
+v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
 ```
 
-The goal is to write the classifier output to a JSON report inside each run directory so future run notes can cite the classification artifact directly.
+The goal is to formally document:
+
+* what the reporting phase proved
+* what it did not prove
+* why PPO+RF should not be deployed yet
+* why PPO-only needs multi-session paper-trading observation
+* the recommended next observation protocol
+
+The recommended next operating path is:
+
+```txt
+v1.45 = reporting phase closeout / transition plan
+v1.46 = multi-session PPO paper-trading observation protocol
+v1.47+ = observation sessions with reporting-chain outputs
+```
 
 ---
 
@@ -167,7 +209,7 @@ Promotion requirements:
 
 ## Medium-Term Objective
 
-After standalone PPO stabilization:
+After standalone PPO stabilization and multi-session paper-trading observation:
 
 ```txt
 PPO
@@ -177,7 +219,7 @@ PPO + Random Forest gate
 PPO + XGBoost gate
 ```
 
-Hybrid systems should only be evaluated after the standalone Alpaca PPO baseline has completed retraining, validation, holdout review, and supervised paper deployment review.
+Hybrid systems should only be evaluated for deployment after the standalone Alpaca PPO baseline has completed retraining, validation, holdout review, supervised paper deployment review, and multi-session paper-trading behavior review.
 
 Do not move to hybrid systems prematurely.
 
@@ -346,6 +388,28 @@ Responsibilities:
 * supervised Alpaca paper-order submission only when intentionally approved
 * broker-state verification
 * audit logging
+
+---
+
+## Paper-Trading Reporting Layer
+
+```txt
+src/paper_trading/classify_decision_state.py
+src/paper_trading/pipeline_decision_state_hook.py
+src/paper_trading/build_run_summary_with_decision_state.py
+src/paper_trading/build_decision_dashboard_with_state.py
+src/paper_trading/reporting_chain_smoke_test.py
+```
+
+Responsibilities:
+
+* classify paper-trading decision state
+* write decision_state_report.json
+* build paper_trading_run_summary.json
+* build dashboard with decision state
+* run reporting-chain smoke tests
+* preserve NO-SUBMIT default
+* avoid broker calls and order submission in reporting utilities
 
 ---
 
@@ -764,12 +828,25 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.35 Decision State Classification Report Integration
-write classifier output to decision_state_classification.json
-store report inside the reviewed run directory
-include state, decision, reason, candidate rows, and submit_allowed
-ensure report writing remains no-submit and broker-free
-update run-note citation pattern for classification artifacts
+v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
+document completed reporting-control phase
+document what PPO paper-trading infrastructure proves
+document what PPO trading performance still does not prove
+define next path as multi-session PPO paper-trading observation
+block immediate PPO+RF deployment until PPO-only paper behavior is observed over time
+```
+
+Next operational deliverables:
+
+```txt
+v1.46 Multi-Session PPO Paper-Trading Observation Protocol
+define observation window, daily workflow, metrics, no-submit rules, and review criteria
+
+v1.47 First Multi-Session PPO Paper-Trading Observation Run
+run first supervised observation cycle using the completed reporting chain
+
+v1.48+ Continue Observation / Performance Summary
+track candidate stability, P&L, drawdown, turnover, signal persistence, and decision-state outcomes
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -790,6 +867,8 @@ docs/workflows/alpaca_ppo_retraining_configuration.md
 standalone Alpaca PPO training integration
 Alpaca PPO retrain smoke test
 final holdout validation
+PPO + Random Forest gate readiness review
+PPO + XGBoost gate comparison
 ```
 
 ---
@@ -799,9 +878,12 @@ final holdout validation
 Operational paper-trading milestones:
 
 ```txt
-v1.35 Decision State Classification Report Integration
-v1.36 Submit-mode hardening: broker fail-closed + max one order
-v1.37 Post-submit order-status reconciliation
+v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
+v1.46 Multi-Session PPO Paper-Trading Observation Protocol
+v1.47 First Observation Session / No-Submit or Supervised Review
+v1.48 Observation Window Progress Summary
+v1.49 Observation Window Performance Review
+v1.50 PPO Paper-Trading Readiness Decision
 ```
 
 Research milestones:
@@ -815,7 +897,9 @@ PPO + Random Forest gate
 PPO + XGBoost gate
 ```
 
-Hybrid model milestones must remain blocked until standalone PPO validation and supervised deployment review are complete.
+Hybrid model milestones must remain blocked until standalone PPO validation and supervised paper-trading observation are complete.
+
+PPO + Random Forest remains the next hybrid candidate, but it should not be deployed until PPO-only behavior has been observed across a meaningful paper-trading window.
 
 ---
 
