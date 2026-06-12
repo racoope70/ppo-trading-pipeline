@@ -29,6 +29,12 @@ v1.44-paper-trading-reporting-chain-final-audit-summary
 tests = 227 passed, 2 warnings
 ```
 
+Current documented local test status:
+
+```txt
+227 passed, 2 warnings
+```
+
 Known non-blocking warnings from the latest local test run:
 
 * websockets.legacy deprecation warning
@@ -103,13 +109,74 @@ The PPO trading strategy is not yet proven stable over a multi-session paper-tra
 
 Passing tests proves that code, controls, and reporting work. It does not prove the model trades profitably over time.
 
+## Current Transition Plan
+
+Latest sealed milestone:
+
+```txt
+v1.44 Paper-Trading Reporting Chain Final Audit Summary
+```
+
+Current active checkpoint:
+
+```txt
+v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
+```
+
+v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
+It confirms that the no-submit reporting stack, decision-state visibility, artifact flow, smoke-test coverage, documentation, and repository hygiene are mature enough to support supervised paper-trading review.
+
+v1.44 does not prove that the PPO strategy is stable, profitable, or ready for broader controlled submit usage.
+Reporting stability must not be treated as strategy-performance stability.
+
+Current transition direction:
+
+```txt
+v1.45 = Reporting phase closeout / transition plan
+        Close v1.34-v1.44 as the reporting-control phase.
+        Explicitly state that reporting stability does not equal strategy stability.
+        Select the next path: PPO-only observation before hybrid deployment.
+
+v1.46 = PPO paper-trading observation protocol / confirmation window definition
+        Define observation window, minimum cycles, metrics, pass/fail criteria,
+        artifacts, no-submit default, and escalation rules.
+
+v1.47 = Fresh no-submit live-cycle review using completed reporting stack
+        First fresh market-cycle review under the v1.46 protocol.
+        No-submit unless a separate controlled-submit checkpoint is created.
+
+v1.48+ = Multi-session PPO paper-trading observation and interim summaries
+         Continue until v1.46 confirmation-window requirements are satisfied.
+         Track decision states, candidate persistence, P&L, drawdown, turnover,
+         changed candidates, multi-order plans, and broker state.
+
+v1.49 = PPO paper-trading stability review / controlled submit eligibility review
+        Only if v1.46 criteria are met.
+        This is a review gate, not automatic submit approval.
+
+later = PPO-only baseline performance package
+later = PPO + Random Forest gate
+later = PPO + XGBoost gate
+```
+
+Hybrid model integration remains blocked until the standalone PPO baseline has enough supervised paper-trading evidence to justify comparison or extension.
+
+Default posture remains:
+
+```txt
+NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes otherwise.
+```
+
 ---
 
 # 2. Current Objective
 
 Current operational focus:
 
-Close the completed reporting-control phase and define the next supervised paper-trading observation path.
+Close the completed reporting-control phase and define the next supervised PPO paper-trading observation path.
+
+The next objective is not PPO + Random Forest deployment yet.
+The next objective is to define and run a PPO-only paper-trading confirmation window using the completed reporting stack.
 
 ```txt
 default decision = NO-SUBMIT
@@ -186,8 +253,10 @@ The recommended next operating path is:
 
 ```txt
 v1.45 = reporting phase closeout / transition plan
-v1.46 = multi-session PPO paper-trading observation protocol
-v1.47+ = observation sessions with reporting-chain outputs
+v1.46 = PPO paper-trading observation protocol / confirmation window definition
+v1.47 = fresh no-submit live-cycle review using completed reporting stack
+v1.48+ = multi-session PPO paper-trading observation and interim summaries
+v1.49 = PPO paper-trading stability review / controlled submit eligibility review
 ```
 
 ---
@@ -839,14 +908,17 @@ block immediate PPO+RF deployment until PPO-only paper behavior is observed over
 Next operational deliverables:
 
 ```txt
-v1.46 Multi-Session PPO Paper-Trading Observation Protocol
-define observation window, daily workflow, metrics, no-submit rules, and review criteria
+v1.46 PPO Paper-Trading Observation Protocol / Confirmation Window Definition
+define observation window, minimum cycles, metrics, pass/fail criteria, artifacts, no-submit default, and escalation rules
 
-v1.47 First Multi-Session PPO Paper-Trading Observation Run
-run first supervised observation cycle using the completed reporting chain
+v1.47 Fresh No-Submit Live-Cycle Review Using Completed Reporting Stack
+run the first fresh market-cycle review under the v1.46 protocol
 
-v1.48+ Continue Observation / Performance Summary
-track candidate stability, P&L, drawdown, turnover, signal persistence, and decision-state outcomes
+v1.48+ Multi-Session PPO Paper-Trading Observation and Interim Summaries
+track decision states, candidate persistence, P&L, drawdown, turnover, changed candidates, multi-order plans, and broker state
+
+v1.49 PPO Paper-Trading Stability Review / Controlled Submit Eligibility Review
+review eligibility only if v1.46 criteria are met; this is not automatic submit approval
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -879,10 +951,10 @@ Operational paper-trading milestones:
 
 ```txt
 v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
-v1.46 Multi-Session PPO Paper-Trading Observation Protocol
-v1.47 First Observation Session / No-Submit or Supervised Review
-v1.48 Observation Window Progress Summary
-v1.49 Observation Window Performance Review
+v1.46 PPO Paper-Trading Observation Protocol / Confirmation Window Definition
+v1.47 Fresh No-Submit Live-Cycle Review Using Completed Reporting Stack
+v1.48+ Multi-Session PPO Paper-Trading Observation and Interim Summaries
+v1.49 PPO Paper-Trading Stability Review / Controlled Submit Eligibility Review
 v1.50 PPO Paper-Trading Readiness Decision
 ```
 
