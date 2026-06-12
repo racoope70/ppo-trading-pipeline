@@ -133,7 +133,7 @@ Current transition direction:
 
 ```txt
 v1.45 = Reporting phase closeout / transition plan
-        Close v1.34-v1.44 as the reporting-control phase.
+        Close v1.34 through v1.44 as the reporting-control phase.
         Explicitly state that reporting stability does not equal strategy stability.
         Select the next path: PPO-only observation before hybrid deployment.
 
