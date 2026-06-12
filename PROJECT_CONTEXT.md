@@ -141,8 +141,8 @@ v1.46 = PPO paper-trading observation protocol / confirmation window definition
         Define observation window, minimum cycles, metrics, pass/fail criteria,
         artifacts, no-submit default, and escalation rules.
 
-v1.47 = Fresh no-submit live-cycle review using completed reporting stack
-        First fresh market-cycle review under the v1.46 protocol.
+v1.47 = Fresh no-submit market-session review using completed reporting stack
+        First fresh market-session review under the v1.46 protocol.
         No-submit unless a separate controlled-submit checkpoint is created.
 
 v1.48+ = Multi-session PPO paper-trading observation and interim summaries
@@ -178,15 +178,29 @@ Close the completed reporting-control phase and define the next supervised PPO p
 The next objective is not PPO + Random Forest deployment yet.
 The next objective is to define and run a PPO-only paper-trading confirmation window using the completed reporting stack.
 
+The default operating posture remains:
+
 ```txt
 default decision = NO-SUBMIT
 classification required before any future submit review
-reporting chain complete through v1.44
 controlled submit remains a separate checkpoint
-PPO+RF deployment remains blocked until PPO-only paper behavior is observed over time
+PPO + RF deployment remains blocked until PPO-only paper behavior is observed over time
 ```
 
-The completed reporting phase establishes:
+Recommended transition sequence:
+
+```txt
+v1.45 = Reporting phase closeout / transition plan
+v1.46 = PPO paper-trading observation protocol / confirmation window definition
+v1.47 = Fresh no-submit market-session review using completed reporting stack
+v1.48+ = Multi-session PPO paper-trading observation and interim summaries
+v1.49 = PPO paper-trading stability review / controlled submit eligibility review
+later = PPO-only baseline performance package
+later = PPO + Random Forest gate
+later = PPO + XGBoost gate
+```
+
+This phase establishes:
 
 * fresh-run discipline
 * candidate persistence review
@@ -195,18 +209,13 @@ The completed reporting phase establishes:
 * multi-order handling discipline
 * single-order filtering discipline
 * state-machine decision classification
-* decision_state_report.json
-* paper_trading_run_summary.json
-* paper_trading_decision_dashboard_with_state.md
-* reporting_chain_smoke_test_report.json
-* operational reporting runbook
-* artifact retention policy
-* .gitignore alignment
+* risk-control and checklist enforcement
+* broker-state verification
 * auditable paper-trading decisions
+* reporting-chain auditability
+* artifact governance
 
 A controlled paper submit is not the current default objective.
-
-The next recommended objective is a structured multi-session PPO paper-trading observation phase.
 
 Any future controlled submit requires a separate decision checkpoint after the full safety stack passes.
 
@@ -245,7 +254,7 @@ The goal is to formally document:
 
 * what the reporting phase proved
 * what it did not prove
-* why PPO+RF should not be deployed yet
+* why PPO + RF should not be deployed yet
 * why PPO-only needs multi-session paper-trading observation
 * the recommended next observation protocol
 
@@ -254,7 +263,7 @@ The recommended next operating path is:
 ```txt
 v1.45 = reporting phase closeout / transition plan
 v1.46 = PPO paper-trading observation protocol / confirmation window definition
-v1.47 = fresh no-submit live-cycle review using completed reporting stack
+v1.47 = fresh no-submit market-session review using completed reporting stack
 v1.48+ = multi-session PPO paper-trading observation and interim summaries
 v1.49 = PPO paper-trading stability review / controlled submit eligibility review
 ```
@@ -902,7 +911,7 @@ document completed reporting-control phase
 document what PPO paper-trading infrastructure proves
 document what PPO trading performance still does not prove
 define next path as multi-session PPO paper-trading observation
-block immediate PPO+RF deployment until PPO-only paper behavior is observed over time
+block immediate PPO + RF deployment until PPO-only paper behavior is observed over time
 ```
 
 Next operational deliverables:
@@ -911,8 +920,8 @@ Next operational deliverables:
 v1.46 PPO Paper-Trading Observation Protocol / Confirmation Window Definition
 define observation window, minimum cycles, metrics, pass/fail criteria, artifacts, no-submit default, and escalation rules
 
-v1.47 Fresh No-Submit Live-Cycle Review Using Completed Reporting Stack
-run the first fresh market-cycle review under the v1.46 protocol
+v1.47 Fresh No-Submit Market-Session Review Using Completed Reporting Stack
+run the first fresh market-session review under the v1.46 protocol
 
 v1.48+ Multi-Session PPO Paper-Trading Observation and Interim Summaries
 track decision states, candidate persistence, P&L, drawdown, turnover, changed candidates, multi-order plans, and broker state
@@ -952,7 +961,7 @@ Operational paper-trading milestones:
 ```txt
 v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
 v1.46 PPO Paper-Trading Observation Protocol / Confirmation Window Definition
-v1.47 Fresh No-Submit Live-Cycle Review Using Completed Reporting Stack
+v1.47 Fresh No-Submit Market-Session Review Using Completed Reporting Stack
 v1.48+ Multi-Session PPO Paper-Trading Observation and Interim Summaries
 v1.49 PPO Paper-Trading Stability Review / Controlled Submit Eligibility Review
 v1.50 PPO Paper-Trading Readiness Decision
