@@ -21,6 +21,7 @@ paper_trading_session_policy.md
 
 ```text
 paper_trading_operational_reporting_runbook.md
+paper_trading_reporting_artifact_retention_policy.md
 ```
 
 The reporting chain is no-submit and reporting-only.
