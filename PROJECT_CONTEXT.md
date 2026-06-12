@@ -173,10 +173,17 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Close the completed reporting-control phase and define the next supervised PPO paper-trading observation path.
+Close the completed reporting-control phase and define the next supervised PPO paper-trading observation and PPO-only baseline validation path.
+
+The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
+
+This proves that the no-submit reporting stack, decision-state reporting, artifact flow, smoke tests, operational reporting chain, and repository hygiene are working.
+
+This does not prove that the PPO strategy is stable, profitable, or ready for broader controlled submit usage.
 
 The next objective is not PPO + Random Forest deployment yet.
-The next objective is to define and run a PPO-only paper-trading confirmation window using the completed reporting stack.
+
+The next objective is to define, observe, and formally review the PPO-only baseline before any hybrid gate work becomes active.
 
 The default operating posture remains:
 
@@ -184,21 +191,81 @@ The default operating posture remains:
 default decision = NO-SUBMIT
 classification required before any future submit review
 controlled submit remains a separate checkpoint
-PPO + RF deployment remains blocked until PPO-only paper behavior is observed over time
+PPO + RF deployment remains blocked until PPO-only evidence is complete
+PPO + XGBoost deployment remains blocked until PPO-only and PPO + RF readiness are clearer
 ```
 
 Recommended transition sequence:
 
 ```txt
-v1.45 = Reporting phase closeout / transition plan
-v1.46 = PPO paper-trading observation protocol / confirmation window definition
-v1.47 = Fresh no-submit market-session review using completed reporting stack
-v1.48+ = Multi-session PPO paper-trading observation and interim summaries
-v1.49 = PPO paper-trading stability review / controlled submit eligibility review
-later = PPO-only baseline performance package
-later = PPO + Random Forest gate
-later = PPO + XGBoost gate
+v1.45 = Paper-Trading Reporting Phase Closeout / Transition Plan
+v1.46 = PPO Paper-Trading Observation Protocol / Confirmation Window Definition
+v1.47 = Fresh No-Submit Market-Session Review Using Completed Reporting Stack
+v1.48+ = Multi-Session PPO Paper-Trading Observation and Interim Summaries
+v1.49 = PPO Paper-Trading Stability Review / Controlled Submit Eligibility Review
+v1.50 = PPO Paper-Trading Readiness Decision
+v1.51 = PPO-Only Baseline Performance Package
+later = PPO + Random Forest Gate
+later = PPO + XGBoost Gate
+later = Feature Importance / Model Interpretability Phase
 ```
+
+The required PPO-only evidence package must include:
+
+```txt
+historical embargo-aware walk-forward validation
+untouched holdout validation
+leakage review
+train-only normalization / preprocessing controls
+backtest-style performance metrics
+fresh supervised paper-trading observation results
+multi-session stability review
+PPO-only performance package review
+```
+
+The PPO-only baseline package should review:
+
+```txt
+walk-forward returns
+holdout behavior
+Sharpe / Sortino
+max drawdown
+win rate
+turnover
+trade frequency
+slippage / cost assumptions
+candidate persistence
+decision-state distribution
+paper-trading P&L
+paper-trading drawdown
+paper-trading turnover
+changed candidates
+multi-order plans
+broker-state observations
+```
+
+The intended promotion path is:
+
+```txt
+Completed PPO-only model + reporting stack
+-> walk-forward validation review
+-> holdout validation review
+-> leakage / normalization controls review
+-> supervised paper-trading observation
+-> stability review
+-> PPO-only baseline performance package
+-> then consider PPO + RF / PPO + XGBoost gate candidates
+```
+
+This is explicitly not the intended promotion path:
+
+```txt
+Backtest -> paper trade -> move to hybrid gate
+```
+
+PPO + Random Forest should be treated as an extension candidate, not as a replacement for PPO-only validation.
+
+PPO + XGBoost remains a later comparison path after PPO-only and PPO + Random Forest readiness are clearer.
 
 This phase establishes:
 
@@ -214,6 +281,7 @@ This phase establishes:
 * auditable paper-trading decisions
 * reporting-chain auditability
 * artifact governance
+* PPO-only evidence requirements before hybrid gates
 
 A controlled paper submit is not the current default objective.
 
@@ -234,7 +302,7 @@ This research track includes:
 * holdout reservation standards
 * deployment separation from previously validated models
 
-Full retraining, model promotion, and hybrid model work must not bypass paper-trading or holdout-validation guardrails.
+Full retraining, model promotion, and hybrid model work must not bypass paper-trading, holdout-validation, leakage-control, or PPO-only baseline evidence guardrails.
 
 ---
 
@@ -256,6 +324,7 @@ The goal is to formally document:
 * what it did not prove
 * why PPO + RF should not be deployed yet
 * why PPO-only needs multi-session paper-trading observation
+* why PPO-only needs a full baseline performance package before hybrid gates
 * the recommended next observation protocol
 
 The recommended next operating path is:
@@ -266,28 +335,45 @@ v1.46 = PPO paper-trading observation protocol / confirmation window definition
 v1.47 = fresh no-submit market-session review using completed reporting stack
 v1.48+ = multi-session PPO paper-trading observation and interim summaries
 v1.49 = PPO paper-trading stability review / controlled submit eligibility review
+v1.50 = PPO paper-trading readiness decision
+v1.51 = PPO-only baseline performance package
 ```
 
 ---
 
 ## Near-Term Research Objective
 
-Develop and validate a standalone PPO baseline trained on Alpaca historical 1-hour bars using embargo-aware walk-forward evaluation.
+Review the standalone PPO baseline as a complete evidence package before considering hybrid gates.
+
+The PPO-only baseline evidence package must combine:
+
+```txt
+historical walk-forward validation
+untouched holdout validation
+leakage review
+train-only normalization / preprocessing controls
+backtest-style performance metrics
+fresh paper-trading observation results
+multi-session stability review
+```
 
 Promotion requirements:
 
-* out-of-sample validation
+* embargo-aware walk-forward validation
 * untouched holdout validation
-* deployment review
+* leakage-control review
+* locked train-only normalization / preprocessing controls
 * supervised paper-trading verification
 * candidate stability review
+* PPO-only baseline performance package
+* deployment review
 * manual approval before any controlled paper submit
 
 ---
 
 ## Medium-Term Objective
 
-After standalone PPO stabilization and multi-session paper-trading observation:
+After standalone PPO stabilization, observation, and baseline-performance review:
 
 ```txt
 PPO
@@ -297,9 +383,52 @@ PPO + Random Forest gate
 PPO + XGBoost gate
 ```
 
-Hybrid systems should only be evaluated for deployment after the standalone Alpaca PPO baseline has completed retraining, validation, holdout review, supervised paper deployment review, and multi-session paper-trading behavior review.
+Hybrid systems should only be evaluated for deployment after the standalone Alpaca PPO baseline has completed retraining, validation, holdout review, leakage review, supervised paper deployment review, multi-session paper-trading behavior review, and PPO-only baseline performance review.
 
 Do not move to hybrid systems prematurely.
+
+## Future Phase: Feature Importance / Model Interpretability
+
+Feature importance and model interpretability should be treated as a later post-validation research phase.
+This phase is not part of the current PPO-only v1.45 through v1.51 roadmap.
+
+The purpose is different from PPO-only validation:
+
+```txt
+PPO-only validation asks:
+Does the system work, generalize, and behave safely over time?
+
+Feature importance / interpretability asks:
+Why does the model work, and which features or regimes are driving decisions?
+```
+
+Potential future methods:
+
+```txt
+Random Forest MDI / feature_importances_
+MDA / permutation importance
+XGBoost feature importance
+SHAP analysis
+PPO feature ablation studies
+regime-specific feature review
+feature-importance stability across walk-forward windows
+```
+
+Feature importance should not be used as proof of profitability or deployment readiness.
+
+Feature importance can explain which features influence a validated or candidate-valid model, but it does not replace:
+
+```txt
+walk-forward validation
+holdout validation
+leakage review
+train-only normalization / preprocessing controls
+paper-trading observation
+stability review
+PPO-only baseline performance review
+```
+
+Feature importance should be considered during or after PPO + Random Forest and PPO + XGBoost validation, not as a shortcut around PPO-only baseline evidence.
 
 ---
 
@@ -319,7 +448,7 @@ Rules:
 * no temporal overlap
 * no leakage
 * holdout isolation required
-* evaluation uses locked train-only normalization statistics
+* evaluation uses locked train-only normalization / preprocessing statistics
 * no repeated tuning against holdout
 * no model promotion without deployment review
 
@@ -911,7 +1040,9 @@ document completed reporting-control phase
 document what PPO paper-trading infrastructure proves
 document what PPO trading performance still does not prove
 define next path as multi-session PPO paper-trading observation
-block immediate PPO + RF deployment until PPO-only paper behavior is observed over time
+define PPO-only evidence package requirements before hybrid gates
+block immediate PPO + RF deployment until PPO-only evidence is complete
+block immediate PPO + XGBoost deployment until PPO-only and PPO + RF readiness are clearer
 ```
 
 Next operational deliverables:
@@ -928,6 +1059,12 @@ track decision states, candidate persistence, P&L, drawdown, turnover, changed c
 
 v1.49 PPO Paper-Trading Stability Review / Controlled Submit Eligibility Review
 review eligibility only if v1.46 criteria are met; this is not automatic submit approval
+
+v1.50 PPO Paper-Trading Readiness Decision
+decide whether PPO-only paper-trading evidence supports continued observation, controlled-submit review, adjustment, or pause
+
+v1.51 PPO-Only Baseline Performance Package
+combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and paper-trading observation evidence
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -948,8 +1085,10 @@ docs/workflows/alpaca_ppo_retraining_configuration.md
 standalone Alpaca PPO training integration
 Alpaca PPO retrain smoke test
 final holdout validation
+PPO-only baseline performance package
 PPO + Random Forest gate readiness review
 PPO + XGBoost gate comparison
+Feature Importance / Model Interpretability phase
 ```
 
 ---
@@ -965,6 +1104,7 @@ v1.47 Fresh No-Submit Market-Session Review Using Completed Reporting Stack
 v1.48+ Multi-Session PPO Paper-Trading Observation and Interim Summaries
 v1.49 PPO Paper-Trading Stability Review / Controlled Submit Eligibility Review
 v1.50 PPO Paper-Trading Readiness Decision
+v1.51 PPO-Only Baseline Performance Package
 ```
 
 Research milestones:
@@ -974,13 +1114,20 @@ Standalone Alpaca PPO training integration
 Alpaca PPO retrain smoke test
 Final holdout validation
 Alpaca PPO paper-trading redeployment review
-PPO + Random Forest gate
-PPO + XGBoost gate
+PPO-Only Baseline Performance Package
+PPO + Random Forest Gate
+PPO + XGBoost Gate
+Feature Importance / Model Interpretability Phase
 ```
 
 Hybrid model milestones must remain blocked until standalone PPO validation and supervised paper-trading observation are complete.
 
-PPO + Random Forest remains the next hybrid candidate, but it should not be deployed until PPO-only behavior has been observed across a meaningful paper-trading window.
+PPO + Random Forest remains the next hybrid candidate, but it should not be deployed until PPO-only behavior has been observed across a meaningful paper-trading window and reviewed in a PPO-only baseline performance package.
+
+PPO + XGBoost remains a later comparison path after PPO-only and PPO + Random Forest readiness are clearer.
+
+Feature Importance / Model Interpretability is a later post-validation research phase.
+It should not be used as proof of profitability, generalization, or deployment readiness.
 
 ---
 
