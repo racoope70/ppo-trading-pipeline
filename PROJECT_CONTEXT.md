@@ -12,20 +12,20 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan`
+`v1.47 Fresh No-Submit Market-Session Review Using Completed Reporting Stack`
 
 ## Status
 
-READY FOR REPORTING PHASE CLOSEOUT AND PAPER-TRADING OBSERVATION PLANNING
+READY FOR FRESH NO-SUBMIT MARKET-SESSION REVIEW PLANNING UNDER V1.46 PROTOCOL
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.44 Paper-Trading Reporting Chain Final Audit Summary`
+`v1.46 PPO Paper-Trading Observation Protocol / Confirmation Window Definition`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.44-paper-trading-reporting-chain-final-audit-summary
+v1.46-ppo-paper-trading-observation-protocol-confirmation-window-definition
 tests = 227 passed, 2 warnings
 ```
 
@@ -51,6 +51,7 @@ docs/workflows/paper_trading_decision_state_machine.md
 docs/workflows/paper_trading_session_policy.md
 docs/workflows/paper_trading_operational_reporting_runbook.md
 docs/workflows/paper_trading_reporting_artifact_retention_policy.md
+docs/workflows/ppo_paper_trading_observation_protocol.md
 docs/workflows/README.md
 docs/runs/paper_trading_decision_dashboard.md
 docs/runs/paper_trading_decision_dashboard_with_state.md
@@ -71,6 +72,8 @@ docs/runs/v1.41_paper_trading_reporting_chain_readme_update.md
 docs/runs/v1.42_paper_trading_reporting_artifact_retention_policy.md
 docs/runs/v1.43_reporting_artifact_retention_gitignore_review.md
 docs/runs/v1.44_paper_trading_reporting_chain_final_audit_summary.md
+docs/runs/v1.45_paper_trading_reporting_phase_closeout_transition_plan.md
+docs/runs/v1.46_ppo_paper_trading_observation_protocol_confirmation_window_definition.md
 ```
 
 Important context:
@@ -97,6 +100,8 @@ v1.41 = README / workflow index update
 v1.42 = reporting artifact retention policy
 v1.43 = .gitignore retention review
 v1.44 = final reporting-chain audit summary
+v1.45 = reporting phase closeout / transition plan
+v1.46 = PPO observation protocol / confirmation window definition
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -114,13 +119,13 @@ Passing tests proves that code, controls, and reporting work. It does not prove 
 Latest sealed milestone:
 
 ```txt
-v1.44 Paper-Trading Reporting Chain Final Audit Summary
+v1.46 PPO Paper-Trading Observation Protocol / Confirmation Window Definition
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
+v1.47 Fresh No-Submit Market-Session Review Using Completed Reporting Stack
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -175,7 +180,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Close the completed reporting-control phase and define the next supervised PPO paper-trading observation and PPO-only baseline validation path.
+Prepare the first fresh no-submit market-session review using the completed reporting stack and the v1.46 PPO paper-trading observation protocol.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -185,7 +190,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 The next objective is not PPO + Random Forest deployment yet.
 
-The next objective is to define, observe, and formally review the PPO-only baseline before any hybrid gate work becomes active.
+The next objective is to run the first fresh no-submit PPO-only market-session review under the v1.46 observation protocol before any hybrid gate work becomes active.
 
 The default operating posture remains:
 
@@ -1037,14 +1042,13 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.45 Paper-Trading Reporting Phase Closeout / Transition Plan
-document completed reporting-control phase
-document what PPO paper-trading infrastructure proves
-document what PPO trading performance still does not prove
-define next path as multi-session PPO paper-trading observation
-define PPO-only evidence package requirements before hybrid gates
-block immediate PPO + RF deployment until PPO-only evidence is complete
-block immediate PPO + XGBoost deployment until PPO-only and PPO + RF readiness are clearer
+v1.47 Fresh No-Submit Market-Session Review Using Completed Reporting Stack
+run the first fresh no-submit market-session review under the v1.46 protocol
+use completed reporting stack from v1.34 through v1.46
+preserve NO-SUBMIT default
+document decision state, candidate behavior, risk/checklist result, and broker-state observations
+do not submit paper orders unless a separate controlled-submit checkpoint explicitly authorizes otherwise
+keep PPO + RF and PPO + XGBoost blocked until PPO-only evidence is complete
 ```
 
 Next operational deliverables:
