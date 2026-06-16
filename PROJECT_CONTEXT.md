@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test`
+`v1.55 PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision`
 
 ## Status
 
-READY FOR FRESH PPO NO-SUBMIT OBSERVATION CYCLE 4 / CONSECUTIVE PERSISTENCE TEST
+READY FOR PPO OBSERVATION WINDOW INTERIM BASELINE SUMMARY / CONTINUE NO-SUBMIT DECISION
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.53 PPO Candidate Persistence Review / Observation Window Extension Decision`
+`v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.53-ppo-candidate-persistence-review-observation-window-extension-decision
-latest sealed commit = 3699d8e
+v1.54-ppo-continued-no-submit-observation-cycle-4-consecutive-persistence-test
+latest sealed commit = 77fdd06
 tests = 227 passed, 2 warnings
 ```
 
@@ -82,6 +82,7 @@ docs/runs/v1.50_ppo_readiness_decision_continue_observation_decision.md
 docs/runs/v1.51_ppo_only_baseline_performance_package_continued_observation_plan.md
 docs/runs/v1.52_ppo_continued_no_submit_observation_cycle_3_candidate_persistence_tracking.md
 docs/runs/v1.53_ppo_candidate_persistence_review_observation_window_extension_decision.md
+docs/runs/v1.54_ppo_continued_no_submit_observation_cycle_4_consecutive_persistence_test.md
 ```
 
 Important context:
@@ -117,6 +118,7 @@ v1.50 = PPO readiness decision / continue observation
 v1.51 = PPO-only baseline package plan / continued observation plan
 v1.52 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / UNH sell
 v1.53 = EXTEND_NO_SUBMIT_OBSERVATION_WINDOW
+v1.54 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / AMD buy
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -134,8 +136,10 @@ v1.47 = MULTI_ORDER_PLAN / NO_SUBMIT / PFE buy + UNH sell
 v1.48 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / AMD buy
 v1.52 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / UNH sell
 v1.53 = EXTEND_NO_SUBMIT_OBSERVATION_WINDOW
+v1.54 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / AMD buy
 consecutive_candidate_persistence = false
-non_consecutive_reappearance = true for UNH sell
+UNH_sell_non_consecutive_reappearance = true
+AMD_buy_non_consecutive_reappearance = true
 candidate_persistence_established = false
 controlled_submit_eligibility = BLOCKED
 hybrid_gate_status = BLOCKED
@@ -149,13 +153,13 @@ Passing tests proves that code, controls, and reporting work. It does not prove 
 Latest sealed milestone:
 
 ```txt
-v1.53 PPO Candidate Persistence Review / Observation Window Extension Decision
+v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
+v1.55 PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -194,6 +198,7 @@ v1.51 = PPO-only baseline performance package
 v1.52 = PPO continued no-submit observation cycle 3 / candidate persistence tracking
 v1.53 = PPO candidate persistence review / observation window extension decision
 v1.54 = PPO continued no-submit observation cycle 4 / consecutive persistence test
+v1.55 = PPO observation window interim baseline summary / continue no-submit decision
 later = PPO + Random Forest Gate
 later = PPO + XGBoost Gate
 later = Feature Importance / Model Interpretability Phase
@@ -213,7 +218,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Prepare the fourth supervised PPO-only no-submit observation cycle to test whether the latest UNH sell candidate persists consecutively or changes again.
+Summarize v1.47 through v1.54 PPO-only no-submit observation evidence and decide whether the system should continue no-submit observation.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -223,7 +228,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 The next objective is not PPO + Random Forest deployment yet.
 
-The next objective is to complete the v1.54 no-submit observation cycle 4 / consecutive persistence test before any controlled-submit or hybrid gate work becomes active.
+The next objective is to complete the v1.55 observation-window interim baseline summary / continue no-submit decision before any controlled-submit or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -232,8 +237,10 @@ v1.47 = MULTI_ORDER_PLAN / NO_SUBMIT / PFE buy + UNH sell
 v1.48 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / AMD buy
 v1.52 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / UNH sell
 v1.53 = EXTEND_NO_SUBMIT_OBSERVATION_WINDOW
+v1.54 = SINGLE_NEW_CANDIDATE / NO_SUBMIT / AMD buy
 consecutive_candidate_persistence = false
-non_consecutive_reappearance = true for UNH sell
+UNH_sell_non_consecutive_reappearance = true
+AMD_buy_non_consecutive_reappearance = true
 candidate_persistence_established = false
 controlled_submit_eligibility = BLOCKED
 hybrid_gate_status = BLOCKED
@@ -263,6 +270,7 @@ v1.51 = PPO-Only Baseline Performance Package
 v1.52 = PPO Continued No-Submit Observation Cycle 3 / Candidate Persistence Tracking
 v1.53 = PPO Candidate Persistence Review / Observation Window Extension Decision
 v1.54 = PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
+v1.55 = PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision
 later = PPO + Random Forest Gate
 later = PPO + XGBoost Gate
 later = Feature Importance / Model Interpretability Phase
@@ -368,19 +376,20 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Run the next supervised PPO-only no-submit observation cycle and test consecutive candidate persistence.
+Summarize the completed PPO-only no-submit observation window and decide whether no-submit observation should continue.
 
 Next operational checkpoint:
 
 ```txt
-v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
+v1.55 PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision
 ```
 
 The goal is to formally document:
 
-* whether UNH sell persists consecutively from v1.52 into v1.54 or changes again
-* raw_action and confidence diagnostics if available
-* updated decision-state, risk/checklist, and dashboard evidence
+* v1.47 through v1.54 observation evidence
+* repeated non-consecutive reappearance patterns
+* confirmation that consecutive persistence remains absent
+* whether additional no-submit observation cycles are required
 * why controlled submit remains blocked unless a separate checkpoint explicitly authorizes otherwise
 * why PPO + RF and PPO + XGBoost remain blocked until PPO-only evidence is complete
 
@@ -397,6 +406,7 @@ v1.51 = PPO-only baseline performance package / continued observation plan
 v1.52 = PPO continued no-submit observation cycle 3 / candidate persistence tracking
 v1.53 = PPO candidate persistence review / observation window extension decision
 v1.54 = PPO continued no-submit observation cycle 4 / consecutive persistence test
+v1.55 = PPO observation window interim baseline summary / continue no-submit decision
 ```
 
 ---
@@ -450,7 +460,7 @@ Do not move to hybrid systems prematurely.
 ## Future Phase: Feature Importance / Model Interpretability
 
 Feature importance and model interpretability should be treated as a later post-validation research phase.
-This phase is not part of the current PPO-only v1.45 through v1.54 roadmap.
+This phase is not part of the current PPO-only v1.45 through v1.55 roadmap.
 
 The purpose is different from PPO-only validation:
 
@@ -1095,10 +1105,11 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
-run another fresh supervised no-submit observation cycle
-test whether UNH sell persists consecutively or changes again
-record raw_action and confidence diagnostics if available
+v1.55 PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision
+summarize v1.47 through v1.54 observation evidence
+evaluate repeated non-consecutive reappearance patterns
+confirm consecutive persistence remains absent
+decide whether additional no-submit observation cycles are required
 preserve NO-SUBMIT default
 keep controlled submit blocked unless a separate checkpoint explicitly authorizes otherwise
 keep PPO + RF and PPO + XGBoost blocked until PPO-only evidence is complete
@@ -1107,13 +1118,14 @@ keep PPO + RF and PPO + XGBoost blocked until PPO-only evidence is complete
 Next operational deliverables:
 
 ```txt
-v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
-run another fresh supervised no-submit observation cycle
-test whether UNH sell persists consecutively or changes again
-update the decision dashboard
+v1.55 PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision
+summarize v1.47 through v1.54 observation evidence
+evaluate repeated non-consecutive reappearance patterns
+confirm consecutive persistence remains absent
+decide whether additional no-submit observation cycles are required
 
-v1.55+ Continued PPO-Only No-Submit Observation, if required
-continue fresh supervised no-submit observation cycles if v1.54 does not establish consecutive persistence
+v1.56+ Continued PPO-Only No-Submit Observation, if required
+continue fresh supervised no-submit observation cycles if v1.55 keeps the observation window open
 
 later PPO-Only Baseline Performance Package Completion
 combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and paper-trading observation evidence after sufficient PPO-only observation exists
@@ -1160,6 +1172,7 @@ v1.51 PPO-Only Baseline Performance Package / Continued Observation Plan
 v1.52 PPO Continued No-Submit Observation Cycle 3 / Candidate Persistence Tracking
 v1.53 PPO Candidate Persistence Review / Observation Window Extension Decision
 v1.54 PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
+v1.55 PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision
 ```
 
 Research milestones:
