@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.65 Legacy PPO Final Audit Decision`
+`v1.66 PPO v2 Retraining Design`
 
 ## Status
 
-READY FOR LEGACY PPO FINAL AUDIT DECISION
+READY FOR PPO V2 RETRAINING DESIGN
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.64 PPO Promotion Standard / Acceptance Criteria`
+`v1.65 Legacy PPO Final Audit Decision`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.64-ppo-promotion-standard-acceptance-criteria
-latest sealed commit = 5d4d0b4
+v1.65-legacy-ppo-final-audit-decision
+latest sealed commit = 23d7736
 tests = 227 passed, 2 warnings
 ```
 
@@ -40,6 +40,20 @@ Known non-blocking warnings from the latest local test run:
 
 * websockets.legacy deprecation warning
 * protobuf utcfromtimestamp deprecation warning
+
+## 2. Inspect the v1.66 files were saved correctly
+
+Run:
+
+```bash
+cd "/Users/richardcooper/Desktop/Day Trading/Deployable Code Setup - VS Code/quantitative-trading-system-main/ppo_research_pipeline"
+
+ls -la docs/runs/v1.66_ppo_v2_retraining_design.md
+ls -la docs/designs/v1.66_ppo_v2_retraining_design.md
+
+sed -n '1,80p' docs/runs/v1.66_ppo_v2_retraining_design.md
+sed -n '1,80p' docs/designs/v1.66_ppo_v2_retraining_design.md
+```
 
 ## Current Paper-Trading Source of Truth
 
@@ -137,6 +151,12 @@ v1.56 = MULTI_ORDER_PLAN / NO_SUBMIT / AAPL buy + AMD buy
 v1.57 = CONTINUE_NO_SUBMIT_OBSERVATION after multi-order recurrence review
 v1.58 = MULTI_ORDER_PLAN / NO_SUBMIT / AMD buy + UNH sell
 v1.59 = CONTINUE_NO_SUBMIT_OBSERVATION after AMD recurrence and multi-order instability review
+v1.60 = legacy PPO baseline reclassification / no-submit observation closeout
+v1.61 = PPO baseline model-quality audit scope
+v1.62 = PPO baseline artifact inventory
+v1.63 = PPO baseline model-quality audit report
+v1.64 = PPO promotion standard / acceptance criteria
+v1.65 = legacy PPO final audit decision
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -249,9 +269,11 @@ v1.65 Legacy PPO Final Audit Decision
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
+
 It confirms that the no-submit reporting stack, decision-state visibility, artifact flow, smoke-test coverage, documentation, and repository hygiene are mature enough to support supervised paper-trading review.
 
 v1.44 does not prove that the PPO strategy is stable, profitable, or ready for broader controlled submit usage.
+
 Reporting stability must not be treated as strategy-performance stability.
 
 Current transition direction:
@@ -264,7 +286,7 @@ controlled submit remains blocked.
 PPO + RF and PPO + XGBoost remain blocked.
 ```
 
-Hybrid model integration remains blocked until the standalone PPO baseline has enough supervised paper-trading evidence to justify comparison or extension.
+Hybrid model integration remains blocked until a standalone PPO baseline has enough validation, audit, and supervised paper-trading evidence to justify comparison or extension.
 
 Default posture remains:
 
@@ -539,6 +561,7 @@ Do not move to hybrid systems prematurely.
 ## Future Phase: Feature Importance / Model Interpretability
 
 Feature importance and model interpretability should be treated as a later post-validation research phase.
+
 This phase is not part of the current PPO-only v1.45 through v1.60 closeout or the v1.61 through v1.66 audit roadmap.
 
 The purpose is different from PPO-only validation:
@@ -954,19 +977,13 @@ manual approval is explicit
 post-submit broker verification is planned
 ```
 
-Submit command pattern:
+Controlled submit commands are intentionally omitted from this context file.
 
-```bash
-python -m src.paper_trading.paper_trade_loop \
-  --run-dir <reviewed_single_order_run_dir> \
-  --submit-orders \
-  --max-plan-age-minutes 90 \
-  --confirm-run-dir <reviewed_single_order_run_dir>
-```
+Any future controlled-submit command must be generated only inside a separate controlled-submit checkpoint after the required evidence, safety stack, manual approval, and broker-state verification are complete.
 
-Never use `--submit-orders` against an old checkpoint plan.
+Never submit against an old checkpoint plan.
 
-Never use `--submit-orders` against `reports/paper_trading_dry_runs/latest` when the original plan has more than one eligible order.
+Never submit against `reports/paper_trading_dry_runs/latest` when the original plan has more than one eligible order.
 
 Never treat risk/checklist pass as trade approval by itself.
 
@@ -1064,9 +1081,9 @@ Approved behavior:
 
 ```txt
 supervised no-submit cycles
-controlled one-order paper submit tests
-single-order filtered submit tests
-post-submit monitoring
+controlled one-order paper submit tests only after a separate approval checkpoint
+single-order filtered review tests
+post-submit monitoring only after a separately approved controlled-submit checkpoint
 residual position monitoring
 candidate stability review
 decision logging
@@ -1093,7 +1110,7 @@ automatic exits
 Primary local test command:
 
 ```bash
-../.venv/bin/python -m pytest
+python -m pytest
 ```
 
 Requirements before milestone promotion:
@@ -1269,6 +1286,9 @@ v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
 v1.61 PPO Baseline Model Quality Audit Scope
 v1.62 PPO Baseline Artifact Inventory
 v1.63 PPO Baseline Model Quality Audit Report
+v1.64 PPO Promotion Standard / Acceptance Criteria
+v1.65 Legacy PPO Final Audit Decision
+v1.66 PPO v2 Retraining Design
 ```
 
 Research milestones:
@@ -1291,6 +1311,7 @@ PPO + Random Forest remains the next hybrid candidate, but it should not be depl
 PPO + XGBoost remains a later comparison path after PPO-only and PPO + Random Forest readiness are clearer.
 
 Feature Importance / Model Interpretability is a later post-validation research phase.
+
 It should not be used as proof of profitability, generalization, or deployment readiness.
 
 ---
