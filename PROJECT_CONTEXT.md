@@ -257,48 +257,11 @@ Reporting stability must not be treated as strategy-performance stability.
 Current transition direction:
 
 ```txt
-v1.45 = Reporting phase closeout / transition plan
-        Close v1.34 through v1.44 as the reporting-control phase.
-        Explicitly state that reporting stability does not equal strategy stability.
-        Select the next path: PPO-only observation before hybrid deployment.
-
-v1.46 = PPO paper-trading observation protocol / confirmation window definition
-        Define observation window, minimum cycles, metrics, pass/fail criteria,
-        artifacts, no-submit default, and escalation rules.
-
-v1.47 = Fresh no-submit market-session review using completed reporting stack
-        First fresh market-session review under the v1.46 protocol.
-        No-submit unless a separate controlled-submit checkpoint is created.
-
-v1.48+ = Multi-session PPO paper-trading observation and interim summaries
-         Continue until v1.46 confirmation-window requirements are satisfied.
-         Track decision states, candidate persistence, P&L, drawdown, turnover,
-         changed candidates, multi-order plans, and broker state.
-
-v1.49 = PPO paper-trading stability review / controlled submit eligibility review
-        Only if v1.46 criteria are met.
-        This is a review gate, not automatic submit approval.
-
-v1.50 = PPO paper-trading readiness decision
-v1.51 = PPO-only baseline performance package
-v1.52 = PPO continued no-submit observation cycle 3 / candidate persistence tracking
-v1.53 = PPO candidate persistence review / observation window extension decision
-v1.54 = PPO continued no-submit observation cycle 4 / consecutive persistence test
-v1.55 = PPO observation window interim baseline summary / continue no-submit decision
-v1.56 = PPO continued no-submit observation cycle 5 / adjacent candidate persistence test
-v1.57 = PPO multi-order recurrence review / continue no-submit decision
-v1.58 = PPO continued no-submit observation cycle 6 / AMD recurrence confirmation test
-v1.59 = PPO AMD recurrence / multi-order instability review
-v1.60 = Legacy PPO baseline reclassification / no-submit observation closeout
-v1.61 = PPO baseline model quality audit scope
-v1.62 = PPO baseline artifact inventory
-v1.63 = PPO baseline model quality audit report
-v1.64 = PPO promotion standard / acceptance criteria
-v1.65 = Legacy PPO final audit decision
-v1.66 = PPO v2 retraining design
-later = PPO + Random Forest Gate remains blocked until PPO baseline standards justify comparison
-later = PPO + XGBoost Gate remains blocked until PPO baseline standards justify comparison
-later = Feature Importance / Model Interpretability Phase; must not be used as evidence of trading edge
+v1.65 closes the legacy PPO decision.
+v1.66 designs PPO v2 retraining only.
+actual retraining execution requires a later checkpoint.
+controlled submit remains blocked.
+PPO + RF and PPO + XGBoost remain blocked.
 ```
 
 Hybrid model integration remains blocked until the standalone PPO baseline has enough supervised paper-trading evidence to justify comparison or extension.
@@ -383,34 +346,14 @@ feature importance must not be used as evidence of trading edge
 retraining is not yet
 ```
 
-Recommended transition sequence:
+Near-term operating path:
 
 ```txt
-v1.45 = Paper-Trading Reporting Phase Closeout / Transition Plan
-v1.46 = PPO Paper-Trading Observation Protocol / Confirmation Window Definition
-v1.47 = Fresh No-Submit Market-Session Review Using Completed Reporting Stack
-v1.48 = Multi-Session PPO Paper-Trading Observation and Interim Summary
-v1.49 = PPO Paper-Trading Stability Review / Controlled Submit Eligibility Review
-v1.50 = PPO Paper-Trading Readiness Decision
-v1.51 = PPO-Only Baseline Performance Package
-v1.52 = PPO Continued No-Submit Observation Cycle 3 / Candidate Persistence Tracking
-v1.53 = PPO Candidate Persistence Review / Observation Window Extension Decision
-v1.54 = PPO Continued No-Submit Observation Cycle 4 / Consecutive Persistence Test
-v1.55 = PPO Observation Window Interim Baseline Summary / Continue No-Submit Decision
-v1.56 = PPO Continued No-Submit Observation Cycle 5 / Adjacent Candidate Persistence Test
-v1.57 = PPO Multi-Order Recurrence Review / Continue No-Submit Decision
-v1.58 = PPO Continued No-Submit Observation Cycle 6 / AMD Recurrence Confirmation Test
-v1.59 = PPO AMD Recurrence / Multi-Order Instability Review
-v1.60 = Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
-v1.61 = PPO Baseline Model Quality Audit Scope
-v1.62 = PPO Baseline Artifact Inventory
-v1.63 = PPO Baseline Model Quality Audit Report
-v1.64 = PPO Promotion Standard / Acceptance Criteria
-v1.65 = Legacy PPO Final Audit Decision
-v1.66 = PPO v2 Retraining Design
-later = PPO + Random Forest Gate remains blocked until PPO baseline standards justify comparison
-later = PPO + XGBoost Gate remains blocked until PPO baseline standards justify comparison
-later = Feature Importance / Model Interpretability Phase; must not be used as evidence of trading edge
+v1.65 closes the legacy PPO decision.
+v1.66 designs PPO v2 retraining only.
+actual retraining execution requires a later checkpoint.
+controlled submit remains blocked.
+PPO + RF and PPO + XGBoost remain blocked.
 ```
 
 The required PPO-only evidence package must include:
@@ -535,39 +478,14 @@ The goal is to formally document:
 * PPO + RF and PPO + XGBoost remain blocked
 * actual retraining execution remains unauthorized
 
-The recommended next operating path is:
+Near-term operating path:
 
 ```txt
-v1.45 = reporting phase closeout / transition plan
-v1.46 = PPO paper-trading observation protocol / confirmation window definition
-v1.47 = fresh no-submit market-session review using completed reporting stack
-v1.48 = multi-session PPO paper-trading observation and interim summary
-v1.49 = PPO paper-trading stability review / controlled submit eligibility review
-v1.50 = PPO paper-trading readiness decision
-v1.51 = PPO-only baseline performance package / continued observation plan
-v1.52 = PPO continued no-submit observation cycle 3 / candidate persistence tracking
-v1.53 = PPO candidate persistence review / observation window extension decision
-v1.54 = PPO continued no-submit observation cycle 4 / consecutive persistence test
-v1.55 = PPO observation window interim baseline summary / continue no-submit decision
-v1.56 = PPO continued no-submit observation cycle 5 / adjacent candidate persistence test
-v1.57 = PPO multi-order recurrence review / continue no-submit decision
-v1.58 = PPO continued no-submit observation cycle 6 / AMD recurrence confirmation test
-v1.59 = PPO AMD recurrence / multi-order instability review
-v1.60 = Legacy PPO baseline reclassification / no-submit observation closeout
-v1.61 = PPO baseline model quality audit scope
-v1.62 = PPO baseline artifact inventory
-v1.63 = PPO baseline model quality audit report
-v1.64 = PPO promotion standard / acceptance criteria
-        Define standards and acceptance criteria.
-
-v1.65 = Legacy PPO final audit decision
-        Close the legacy PPO decision.
-
-v1.66 = PPO v2 retraining design
-        Design PPO v2 retraining only.
-        Actual retraining execution requires a later checkpoint.
-        Controlled submit remains blocked.
-        PPO + RF and PPO + XGBoost remain blocked.
+v1.65 closes the legacy PPO decision.
+v1.66 designs PPO v2 retraining only.
+actual retraining execution requires a later checkpoint.
+controlled submit remains blocked.
+PPO + RF and PPO + XGBoost remain blocked.
 ```
 
 ---
@@ -1351,9 +1269,6 @@ v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
 v1.61 PPO Baseline Model Quality Audit Scope
 v1.62 PPO Baseline Artifact Inventory
 v1.63 PPO Baseline Model Quality Audit Report
-v1.64 PPO Promotion Standard / Acceptance Criteria
-v1.65 Legacy PPO Final Audit Decision
-v1.66 PPO v2 Retraining Design
 ```
 
 Research milestones:
