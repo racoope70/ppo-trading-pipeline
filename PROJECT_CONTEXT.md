@@ -456,7 +456,7 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Apply the v1.64 promotion standard to close the legacy PPO audit decision.
+Apply the v1.64 promotion standard to issue the final legacy PPO audit decision.
 
 Next operational checkpoint:
 
