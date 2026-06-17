@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.66 PPO v2 Retraining Design`
+`v1.67 PPO v2 Retraining Authorization Review`
 
 ## Status
 
-READY FOR PPO V2 RETRAINING DESIGN
+READY FOR PPO V2 RETRAINING AUTHORIZATION REVIEW
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.65 Legacy PPO Final Audit Decision`
+`v1.66 PPO v2 Retraining Design`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.65-legacy-ppo-final-audit-decision
-latest sealed commit = 23d7736
+v1.66-ppo-v2-retraining-design
+latest sealed commit = 94f2a8c
 tests = 227 passed, 2 warnings
 ```
 
@@ -40,20 +40,6 @@ Known non-blocking warnings from the latest local test run:
 
 * websockets.legacy deprecation warning
 * protobuf utcfromtimestamp deprecation warning
-
-## 2. Inspect the v1.66 files were saved correctly
-
-Run:
-
-```bash
-cd "/Users/richardcooper/Desktop/Day Trading/Deployable Code Setup - VS Code/quantitative-trading-system-main/ppo_research_pipeline"
-
-ls -la docs/runs/v1.66_ppo_v2_retraining_design.md
-ls -la docs/designs/v1.66_ppo_v2_retraining_design.md
-
-sed -n '1,80p' docs/runs/v1.66_ppo_v2_retraining_design.md
-sed -n '1,80p' docs/designs/v1.66_ppo_v2_retraining_design.md
-```
 
 ## Current Paper-Trading Source of Truth
 
@@ -110,6 +96,10 @@ docs/runs/v1.64_ppo_promotion_standard_acceptance_criteria.md
 docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
 docs/runs/v1.65_legacy_ppo_final_audit_decision.md
 docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
+docs/runs/v1.66_ppo_v2_retraining_design.md
+docs/designs/v1.66_ppo_v2_retraining_design.md
+docs/runs/v1.67_ppo_v2_retraining_authorization_review.md
+docs/decisions/v1.67_ppo_v2_retraining_authorization_review.md
 ```
 
 Important context:
@@ -157,6 +147,8 @@ v1.62 = PPO baseline artifact inventory
 v1.63 = PPO baseline model-quality audit report
 v1.64 = PPO promotion standard / acceptance criteria
 v1.65 = legacy PPO final audit decision
+v1.66 = PPO v2 retraining design
+v1.67 = PPO v2 retraining authorization review
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -213,7 +205,7 @@ paper order submission = not authorized
 live orders = not authorized
 PPO + Random Forest deployment = blocked
 PPO + XGBoost deployment = blocked
-retraining = not yet
+retraining = not authorized by v1.67
 NO-SUBMIT = default
 ```
 
@@ -233,6 +225,34 @@ ppo_xgboost_deployment_decision = BLOCKED
 legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
 ppo_v2_retraining_design_decision = AUTHORIZED_FOR_DESIGN_ONLY
 actual_retraining_execution = NOT_AUTHORIZED_BY_v1.65
+```
+
+Current v1.66 design decision:
+
+```txt
+ppo_v2_retraining_design_decision = AUTHORIZED_FOR_DESIGN_ONLY
+legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
+actual_retraining_execution = NOT_AUTHORIZED_BY_v1.66
+controlled_submit_decision = BLOCKED
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+ppo_rf_deployment_decision = BLOCKED
+ppo_xgboost_deployment_decision = BLOCKED
+```
+
+Current v1.67 authorization review decision:
+
+```txt
+v1.66_design_review_decision = SUFFICIENT_FOR_CONTROLLED_IMPLEMENTATION_PLAN
+ppo_v2_retraining_implementation_plan_decision = AUTHORIZED_FOR_PLANNING_ONLY
+actual_retraining_execution = NOT_AUTHORIZED_BY_v1.67
+generated_dataset_creation = NOT_AUTHORIZED_BY_v1.67
+model_artifact_creation = NOT_AUTHORIZED_BY_v1.67
+controlled_submit_decision = BLOCKED
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+ppo_rf_deployment_decision = BLOCKED
+ppo_xgboost_deployment_decision = BLOCKED
 ```
 
 Current v1.62 inventory summary:
@@ -259,13 +279,13 @@ Passing tests proves code, control, and reporting stability. It does not prove t
 Latest completed milestone:
 
 ```txt
-v1.64 PPO Promotion Standard / Acceptance Criteria
+v1.66 PPO v2 Retraining Design
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.65 Legacy PPO Final Audit Decision
+v1.67 PPO v2 Retraining Authorization Review
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -279,10 +299,15 @@ Reporting stability must not be treated as strategy-performance stability.
 Current transition direction:
 
 ```txt
-v1.65 closes the legacy PPO decision.
-v1.66 designs PPO v2 retraining only.
+v1.66 designed PPO v2 retraining only.
+v1.67 reviews whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
+v1.67 authorization is planning-only.
 actual retraining execution requires a later checkpoint.
+generated dataset creation remains unauthorized.
+model artifact creation remains unauthorized.
 controlled submit remains blocked.
+paper orders remain unauthorized.
+live orders remain unauthorized.
 PPO + RF and PPO + XGBoost remain blocked.
 ```
 
@@ -300,7 +325,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Apply the v1.64 promotion standard to issue the final legacy PPO audit decision.
+Review whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -310,7 +335,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 Next objective:
 
-Complete v1.65 Legacy PPO Final Audit Decision before v1.66 PPO v2 Retraining Design, actual retraining execution, controlled submit, or hybrid gate work becomes active.
+Complete v1.67 PPO v2 Retraining Authorization Review before any implementation-plan work, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -352,7 +377,7 @@ paper order submission = not authorized
 live orders = not authorized
 PPO + Random Forest deployment = blocked
 PPO + XGBoost deployment = blocked
-retraining = not yet
+retraining = not authorized by v1.67
 NO-SUBMIT = default
 ```
 
@@ -365,16 +390,28 @@ controlled submit remains a separate checkpoint
 PPO + RF deployment remains blocked until PPO-only evidence is complete
 PPO + XGBoost deployment remains blocked until PPO-only and PPO + RF readiness are clearer
 feature importance must not be used as evidence of trading edge
-retraining is not yet
+v1.67 does not run training
+v1.67 does not create generated datasets
+v1.67 does not create model artifacts
+v1.67 does not authorize paper orders
+v1.67 does not authorize live orders
+v1.67 does not authorize controlled submit
+v1.67 does not unblock PPO + RF
+v1.67 does not unblock PPO + XGBoost
 ```
 
 Near-term operating path:
 
 ```txt
-v1.65 closes the legacy PPO decision.
-v1.66 designs PPO v2 retraining only.
+v1.67 reviews whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
+v1.67 authorization is planning-only.
+v1.68 may define the controlled PPO v2 retraining implementation plan.
 actual retraining execution requires a later checkpoint.
+generated dataset creation remains unauthorized.
+model artifact creation remains unauthorized.
 controlled submit remains blocked.
+paper orders remain unauthorized.
+live orders remain unauthorized.
 PPO + RF and PPO + XGBoost remain blocked.
 ```
 
@@ -478,35 +515,38 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Apply the v1.64 promotion standard to issue the final legacy PPO audit decision.
+Review whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
 
 Next operational checkpoint:
 
 ```txt
-v1.66 PPO v2 Retraining Design
+v1.68 PPO v2 Controlled Retraining Implementation Plan
 ```
 
 The goal is to formally document:
 
-* legacy_ppo_final_classification = INFRASTRUCTURE_FIXTURE_ONLY
-* infrastructure_baseline_decision = PASS
-* offline_model_quality_decision = FAIL
-* trading_edge_decision = FAIL_FOR_TRADING_EDGE
-* no_submit_observation_decision = FAILED_TO_ESTABLISH_STABLE_PROMOTION_EVIDENCE
-* controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
-* legacy PPO retraining is rejected
-* PPO v2 retraining design is authorized as a planning checkpoint only
+* v1.66 design sufficiency for controlled implementation planning
+* PPO v2 retraining implementation plan authorization is planning-only
+* actual retraining execution remains unauthorized
+* generated dataset creation remains unauthorized
+* model artifact creation remains unauthorized
+* paper order authorization remains unauthorized
+* live order authorization remains unauthorized
 * controlled submit remains blocked
 * PPO + RF and PPO + XGBoost remain blocked
-* actual retraining execution remains unauthorized
 
 Near-term operating path:
 
 ```txt
-v1.65 closes the legacy PPO decision.
-v1.66 designs PPO v2 retraining only.
+v1.67 reviews whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
+v1.67 authorization is planning-only.
+v1.68 may define the controlled PPO v2 retraining implementation plan.
 actual retraining execution requires a later checkpoint.
+generated dataset creation remains unauthorized.
+model artifact creation remains unauthorized.
 controlled submit remains blocked.
+paper orders remain unauthorized.
+live orders remain unauthorized.
 PPO + RF and PPO + XGBoost remain blocked.
 ```
 
@@ -562,7 +602,7 @@ Do not move to hybrid systems prematurely.
 
 Feature importance and model interpretability should be treated as a later post-validation research phase.
 
-This phase is not part of the current PPO-only v1.45 through v1.60 closeout or the v1.61 through v1.66 audit roadmap.
+This phase is not part of the current PPO-only v1.45 through v1.60 closeout or the v1.61 through v1.67 audit and retraining-governance roadmap.
 
 The purpose is different from PPO-only validation:
 
@@ -1015,7 +1055,7 @@ reward_clip=1.0
 
 # 13. Canonical Data Source
 
-Current retraining source:
+Current planned retraining source:
 
 ```txt
 Alpaca historical 1-hour stock bars
@@ -1031,6 +1071,8 @@ PFE
 UNH
 XOM
 ```
+
+v1.67 does not authorize data extraction, generated dataset creation, training execution, or model artifact creation.
 
 ---
 
@@ -1050,7 +1092,7 @@ Current Alpaca PPO paper-trading artifact directory:
 models/alpaca_ppo_models_master
 ```
 
-Expected isolated retraining directories:
+Expected isolated retraining directories for a future implementation plan:
 
 ```txt
 models/alpaca_ppo_models_master
@@ -1058,6 +1100,8 @@ reports/alpaca_ppo_retraining
 ```
 
 Generated datasets, model artifacts, run outputs, reports, logs, and credentials should remain excluded from version control unless intentionally documented otherwise.
+
+v1.67 does not authorize creating generated datasets, model artifacts, or retraining reports.
 
 ---
 
@@ -1201,39 +1245,43 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.65 Legacy PPO Final Audit Decision
-apply the v1.64 promotion standard to the legacy PPO baseline
-legacy_ppo_final_classification = INFRASTRUCTURE_FIXTURE_ONLY
-infrastructure_baseline_decision = PASS
-offline_model_quality_decision = FAIL
-trading_edge_decision = FAIL_FOR_TRADING_EDGE
-no_submit_observation_decision = FAILED_TO_ESTABLISH_STABLE_PROMOTION_EVIDENCE
-controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
+v1.67 PPO v2 Retraining Authorization Review
+review whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan
+v1.66_design_review_decision = SUFFICIENT_FOR_CONTROLLED_IMPLEMENTATION_PLAN
+ppo_v2_retraining_implementation_plan_decision = AUTHORIZED_FOR_PLANNING_ONLY
+actual_retraining_execution = NOT_AUTHORIZED_BY_v1.67
+generated_dataset_creation = NOT_AUTHORIZED_BY_v1.67
+model_artifact_creation = NOT_AUTHORIZED_BY_v1.67
+controlled_submit_decision = BLOCKED
 paper_order_authorization = NOT_AUTHORIZED
 live_order_authorization = NOT_AUTHORIZED
 ppo_rf_deployment_decision = BLOCKED
 ppo_xgboost_deployment_decision = BLOCKED
-legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
-ppo_v2_retraining_design_decision = AUTHORIZED_FOR_DESIGN_ONLY
-actual_retraining_execution = NOT_AUTHORIZED_BY_v1.65
+do not run training
+do not create generated datasets
+do not create model artifacts
 do not submit orders
 preserve NO-SUBMIT default
 keep controlled submit blocked
 keep PPO + RF and PPO + XGBoost blocked
-do not execute retraining
 ```
 
 Next operational deliverables:
 
 ```txt
-v1.66 PPO v2 Retraining Design
-design PPO v2 retraining only
+v1.68 PPO v2 Controlled Retraining Implementation Plan
+define implementation files, planned configuration, tests, validation utilities, runbook steps, artifact paths, and safety checks
+implementation planning only
 actual retraining execution requires a later checkpoint
+generated dataset creation requires a later checkpoint
+model artifact creation requires a later checkpoint
 controlled submit remains blocked
+paper orders remain unauthorized
+live orders remain unauthorized
 PPO + RF and PPO + XGBoost remain blocked
 
 later PPO-Only Baseline Performance Package Completion
-combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and paper-trading observation evidence after sufficient PPO-only observation exists
+combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and supervised paper-trading observation evidence after PPO v2 completes the required offline and no-submit gates
 ```
 
 Current hardening candidates before any future controlled submit:
@@ -1248,16 +1296,14 @@ keep PROJECT_CONTEXT.md aligned with latest paper-trading policy
 Longer-term research deliverables:
 
 ```txt
-src/config/alpaca_ppo_retraining_config.py
-tests/test_alpaca_ppo_retraining_config.py
-docs/workflows/alpaca_ppo_retraining_configuration.md
-standalone Alpaca PPO training integration
-Alpaca PPO retrain smoke test
-final holdout validation
-PPO-only baseline performance package
-PPO + Random Forest gate readiness review
-PPO + XGBoost gate comparison
-Feature Importance / Model Interpretability phase
+future controlled PPO v2 retraining implementation plan
+future standalone Alpaca PPO training integration
+future Alpaca PPO retrain smoke test
+future final holdout validation
+future PPO-only baseline performance package
+future PPO + Random Forest gate readiness review
+future PPO + XGBoost gate comparison
+future Feature Importance / Model Interpretability phase
 ```
 
 ---
@@ -1289,6 +1335,8 @@ v1.63 PPO Baseline Model Quality Audit Report
 v1.64 PPO Promotion Standard / Acceptance Criteria
 v1.65 Legacy PPO Final Audit Decision
 v1.66 PPO v2 Retraining Design
+v1.67 PPO v2 Retraining Authorization Review
+v1.68 PPO v2 Controlled Retraining Implementation Plan
 ```
 
 Research milestones:
@@ -1334,6 +1382,11 @@ Do not:
 * submit from unfiltered multi-order plans
 * treat candidate identification as trade approval
 * treat risk/checklist pass as trade approval by itself
+* run PPO v2 training before a later checkpoint authorizes execution
+* create PPO v2 generated datasets before a later checkpoint authorizes execution
+* create PPO v2 model artifacts before a later checkpoint authorizes execution
+* unblock PPO + RF from the legacy PPO
+* unblock PPO + XGBoost from the legacy PPO
 
 When in doubt:
 
