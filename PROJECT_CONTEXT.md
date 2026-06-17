@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.59 PPO AMD Recurrence / Multi-Order Instability Review`
+`v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test`
 
 ## Status
 
-READY FOR PPO AMD RECURRENCE / MULTI-ORDER INSTABILITY REVIEW
+READY FOR PPO CONTINUED NO-SUBMIT OBSERVATION CYCLE 7 / MULTI-ORDER STABILITY TEST
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.58 PPO Continued No-Submit Observation Cycle 6 / AMD Recurrence Confirmation Test`
+`v1.59 PPO AMD Recurrence / Multi-Order Instability Review`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.58-ppo-continued-no-submit-observation-cycle-6-amd-recurrence-confirmation-test
-latest sealed commit = 151fb6f
+v1.59-ppo-amd-recurrence-multi-order-instability-review
+latest sealed commit = a73ecbe
 tests = 227 passed, 2 warnings
 ```
 
@@ -87,6 +87,7 @@ docs/runs/v1.55_ppo_observation_window_interim_baseline_summary_continue_no_subm
 docs/runs/v1.56_ppo_continued_no_submit_observation_cycle_5_adjacent_candidate_persistence_test.md
 docs/runs/v1.57_ppo_multi_order_recurrence_review_continue_no_submit_decision.md
 docs/runs/v1.58_ppo_continued_no_submit_observation_cycle_6_amd_recurrence_confirmation_test.md
+docs/runs/v1.59_ppo_amd_recurrence_multi_order_instability_review.md
 ```
 
 Important context:
@@ -127,6 +128,7 @@ v1.55 = CONTINUE_NO_SUBMIT_OBSERVATION
 v1.56 = MULTI_ORDER_PLAN / NO_SUBMIT / AAPL buy + AMD buy
 v1.57 = CONTINUE_NO_SUBMIT_OBSERVATION after multi-order recurrence review
 v1.58 = MULTI_ORDER_PLAN / NO_SUBMIT / AMD buy + UNH sell
+v1.59 = CONTINUE_NO_SUBMIT_OBSERVATION after AMD recurrence and multi-order instability review
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
@@ -149,6 +151,7 @@ v1.55 = CONTINUE_NO_SUBMIT_OBSERVATION
 v1.56 = MULTI_ORDER_PLAN / NO_SUBMIT / AAPL buy + AMD buy
 v1.57 = CONTINUE_NO_SUBMIT_OBSERVATION after multi-order recurrence review
 v1.58 = MULTI_ORDER_PLAN / NO_SUBMIT / AMD buy + UNH sell
+v1.59 = CONTINUE_NO_SUBMIT_OBSERVATION after AMD recurrence and multi-order instability review
 AMD_buy_recurrent = true
 AMD_buy_seen_in_v1_48 = true
 AMD_buy_seen_in_v1_54 = true
@@ -158,11 +161,8 @@ UNH_sell_recurrent = true
 UNH_sell_seen_in_v1_47 = true
 UNH_sell_seen_in_v1_52 = true
 UNH_sell_seen_in_v1_58 = true
-AAPL_buy_seen_in_v1_56 = true
-AAPL_buy_seen_in_v1_58 = false
-AAPL_buy_disappeared = true
-multi_order_plan_detected_in_v1_56 = true
-multi_order_plan_detected_in_v1_58 = true
+AAPL_buy_disappeared_after_v1_56 = true
+multi_order_instability = true
 consecutive_single_candidate_persistence = false
 controlled_submit_eligibility = BLOCKED
 hybrid_gate_status = BLOCKED
@@ -176,13 +176,13 @@ Passing tests proves that code, controls, and reporting work. It does not prove 
 Latest sealed milestone:
 
 ```txt
-v1.58 PPO Continued No-Submit Observation Cycle 6 / AMD Recurrence Confirmation Test
+v1.59 PPO AMD Recurrence / Multi-Order Instability Review
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.59 PPO AMD Recurrence / Multi-Order Instability Review
+v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -226,6 +226,7 @@ v1.56 = PPO continued no-submit observation cycle 5 / adjacent candidate persist
 v1.57 = PPO multi-order recurrence review / continue no-submit decision
 v1.58 = PPO continued no-submit observation cycle 6 / AMD recurrence confirmation test
 v1.59 = PPO AMD recurrence / multi-order instability review
+v1.60 = PPO continued no-submit observation cycle 7 / multi-order stability test
 later = PPO + Random Forest Gate
 later = PPO + XGBoost Gate
 later = Feature Importance / Model Interpretability Phase
@@ -245,7 +246,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Review the v1.58 AMD buy and UNH sell recurrence evidence, AAPL buy disappearance, and repeated multi-order plan behavior before deciding whether PPO-only no-submit observation should continue.
+Run another fresh supervised PPO-only no-submit observation cycle to test whether AMD buy and UNH sell persist again, and whether the multi-order set stabilizes or changes again.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -255,7 +256,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 The next objective is not PPO + Random Forest deployment yet.
 
-The next objective is to complete the v1.59 AMD recurrence / multi-order instability review before any controlled-submit or hybrid gate work becomes active.
+The next objective is to complete the v1.60 continued no-submit observation cycle 7 / multi-order stability test before any controlled-submit or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -269,6 +270,7 @@ v1.55 = CONTINUE_NO_SUBMIT_OBSERVATION
 v1.56 = MULTI_ORDER_PLAN / NO_SUBMIT / AAPL buy + AMD buy
 v1.57 = CONTINUE_NO_SUBMIT_OBSERVATION after multi-order recurrence review
 v1.58 = MULTI_ORDER_PLAN / NO_SUBMIT / AMD buy + UNH sell
+v1.59 = CONTINUE_NO_SUBMIT_OBSERVATION after AMD recurrence and multi-order instability review
 AMD_buy_recurrent = true
 AMD_buy_seen_in_v1_48 = true
 AMD_buy_seen_in_v1_54 = true
@@ -278,11 +280,8 @@ UNH_sell_recurrent = true
 UNH_sell_seen_in_v1_47 = true
 UNH_sell_seen_in_v1_52 = true
 UNH_sell_seen_in_v1_58 = true
-AAPL_buy_seen_in_v1_56 = true
-AAPL_buy_seen_in_v1_58 = false
-AAPL_buy_disappeared = true
-multi_order_plan_detected_in_v1_56 = true
-multi_order_plan_detected_in_v1_58 = true
+AAPL_buy_disappeared_after_v1_56 = true
+multi_order_instability = true
 consecutive_single_candidate_persistence = false
 controlled_submit_eligibility = BLOCKED
 hybrid_gate_status = BLOCKED
@@ -317,6 +316,7 @@ v1.56 = PPO Continued No-Submit Observation Cycle 5 / Adjacent Candidate Persist
 v1.57 = PPO Multi-Order Recurrence Review / Continue No-Submit Decision
 v1.58 = PPO Continued No-Submit Observation Cycle 6 / AMD Recurrence Confirmation Test
 v1.59 = PPO AMD Recurrence / Multi-Order Instability Review
+v1.60 = PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
 later = PPO + Random Forest Gate
 later = PPO + XGBoost Gate
 later = Feature Importance / Model Interpretability Phase
@@ -422,21 +422,21 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Review AMD recurrence, UNH recurrence, AAPL disappearance, and repeated multi-order instability from the completed PPO-only no-submit observation window.
+Run another fresh supervised no-submit observation cycle and test whether AMD buy, UNH sell, and the multi-order set persist or change again.
 
 Next operational checkpoint:
 
 ```txt
-v1.59 PPO AMD Recurrence / Multi-Order Instability Review
+v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
 ```
 
 The goal is to formally document:
 
-* AMD buy recurrence across v1.48, v1.54, v1.56, and v1.58
-* UNH sell recurrence across v1.47, v1.52, and v1.58
-* AAPL buy disappearance after v1.56
-* multi-order instability in v1.56 and v1.58
-* whether observation should continue
+* whether AMD buy persists again
+* whether UNH sell persists again
+* whether the multi-order set stabilizes or changes again
+* raw_action and confidence diagnostics, if available
+* decision dashboard updates
 * no paper-order submission
 * why controlled submit remains blocked unless a separate checkpoint explicitly authorizes otherwise
 * why PPO + RF and PPO + XGBoost remain blocked until PPO-only evidence is complete
@@ -459,6 +459,7 @@ v1.56 = PPO continued no-submit observation cycle 5 / adjacent candidate persist
 v1.57 = PPO multi-order recurrence review / continue no-submit decision
 v1.58 = PPO continued no-submit observation cycle 6 / AMD recurrence confirmation test
 v1.59 = PPO AMD recurrence / multi-order instability review
+v1.60 = PPO continued no-submit observation cycle 7 / multi-order stability test
 ```
 
 ---
@@ -512,7 +513,7 @@ Do not move to hybrid systems prematurely.
 ## Future Phase: Feature Importance / Model Interpretability
 
 Feature importance and model interpretability should be treated as a later post-validation research phase.
-This phase is not part of the current PPO-only v1.45 through v1.59 roadmap.
+This phase is not part of the current PPO-only v1.45 through v1.60 roadmap.
 
 The purpose is different from PPO-only validation:
 
@@ -1157,12 +1158,13 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.59 PPO AMD Recurrence / Multi-Order Instability Review
-review AMD buy recurrence
-review UNH sell recurrence
-review AAPL buy disappearance
-review multi-order instability
-decide whether observation should continue
+v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
+run another fresh supervised no-submit observation cycle
+test whether AMD buy persists again
+test whether UNH sell persists again
+test whether the multi-order set stabilizes or changes again
+record raw_action and confidence diagnostics if available
+update the decision dashboard
 do not submit orders
 preserve NO-SUBMIT default
 keep controlled submit blocked unless a separate checkpoint explicitly authorizes otherwise
@@ -1172,17 +1174,18 @@ keep PPO + RF and PPO + XGBoost blocked until PPO-only evidence is complete
 Next operational deliverables:
 
 ```txt
-v1.59 PPO AMD Recurrence / Multi-Order Instability Review
-review AMD recurrence
-review UNH recurrence
-review AAPL disappearance
-review multi-order instability
-decide whether observation should continue
+v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
+run another fresh supervised no-submit observation cycle
+test whether AMD buy persists again
+test whether UNH sell persists again
+test whether the multi-order set stabilizes or changes again
+record raw_action and confidence diagnostics if available
+update the decision dashboard
 do not submit orders
 keep controlled submit blocked
 
-v1.60+ Continued PPO-Only No-Submit Observation, if required
-continue supervised no-submit observation cycles only if v1.59 keeps the observation window open
+v1.61+ Continued PPO-Only No-Submit Observation, if required
+continue supervised no-submit observation cycles only if v1.60 keeps the observation window open
 
 later PPO-Only Baseline Performance Package Completion
 combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and paper-trading observation evidence after sufficient PPO-only observation exists
@@ -1234,6 +1237,7 @@ v1.56 PPO Continued No-Submit Observation Cycle 5 / Adjacent Candidate Persisten
 v1.57 PPO Multi-Order Recurrence Review / Continue No-Submit Decision
 v1.58 PPO Continued No-Submit Observation Cycle 6 / AMD Recurrence Confirmation Test
 v1.59 PPO AMD Recurrence / Multi-Order Instability Review
+v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
 ```
 
 Research milestones:
