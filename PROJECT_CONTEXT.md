@@ -12,54 +12,54 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.68 PPO v2 Controlled Retraining Implementation Plan`
+`v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review`
 
 ## Status
 
-READY FOR PPO V2 CONTROLLED RETRAINING IMPLEMENTATION PLAN
+READY FOR PPO V2 CONTROLLED RETRAINING IMPLEMENTATION SCAFFOLD REVIEW
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.67 PPO v2 Retraining Authorization Review`
+`v1.68 PPO v2 Controlled Retraining Implementation Plan`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.67-ppo-v2-retraining-authorization-review
-latest sealed commit = b6db747
+v1.68-ppo-v2-controlled-retraining-implementation-plan
+latest sealed commit = 857ec5f
 tests = 227 passed, 2 warnings
 ```
 
 Current operational focus:
 
-Define the controlled PPO v2 retraining implementation plan.
+Review whether the v1.68 PPO v2 Controlled Retraining Implementation Plan is sufficient to authorize a future scaffold and safety-test package.
 
 Next objective:
 
-Complete v1.68 PPO v2 Controlled Retraining Implementation Plan before any implementation scaffold work, source-code creation, training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review before any scaffold-file creation, source-code creation, training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Next operational checkpoint:
 
 ```txt
-v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review
+v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests
 ```
 
 Current guardrails:
 
 ```txt
-v1.68 does not create source code
-v1.68 does not create training scripts
-v1.68 does not run training
-v1.68 does not create generated datasets
-v1.68 does not create model artifacts
-v1.68 does not authorize paper orders
-v1.68 does not authorize live orders
-v1.68 does not authorize controlled submit
-v1.68 does not unblock PPO + RF
-v1.68 does not unblock PPO + XGBoost
+v1.69 does not create source code
+v1.69 does not create training scripts
+v1.69 does not create scaffold files
+v1.69 does not run training
+v1.69 does not create generated datasets
+v1.69 does not create model artifacts
+v1.69 does not authorize paper orders
+v1.69 does not authorize live orders
+v1.69 does not authorize controlled submit
+v1.69 does not unblock PPO + RF
+v1.69 does not unblock PPO + XGBoost
 NO-SUBMIT remains default
 ```
-
 
 Known non-blocking warnings from the latest local test run:
 
