@@ -12,11 +12,11 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test`
+`v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout`
 
 ## Status
 
-READY FOR PPO CONTINUED NO-SUBMIT OBSERVATION CYCLE 7 / MULTI-ORDER STABILITY TEST
+READY FOR LEGACY PPO BASELINE RECLASSIFICATION / NO-SUBMIT OBSERVATION CLOSEOUT
 
 ## Latest Completed Paper-Trading Milestone
 
@@ -88,6 +88,7 @@ docs/runs/v1.56_ppo_continued_no_submit_observation_cycle_5_adjacent_candidate_p
 docs/runs/v1.57_ppo_multi_order_recurrence_review_continue_no_submit_decision.md
 docs/runs/v1.58_ppo_continued_no_submit_observation_cycle_6_amd_recurrence_confirmation_test.md
 docs/runs/v1.59_ppo_amd_recurrence_multi_order_instability_review.md
+docs/runs/v1.60_legacy_ppo_baseline_reclassification_no_submit_observation_closeout.md
 ```
 
 Important context:
@@ -137,7 +138,13 @@ Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint 
 
 The PPO-only paper-trading infrastructure is operationally and reporting-stable.
 
-The PPO trading strategy is not yet proven stable over a multi-session paper-trading window.
+The PPO trading edge is not proven.
+
+The current PPO model is reclassified as a legacy baseline / infrastructure validation fixture.
+
+The current PPO model remains useful as a test fixture, infrastructure validation artifact, audit baseline, and evidence source for PPO v2 standards.
+
+It should not be treated as paper-submit ready.
 
 Current candidate persistence findings:
 
@@ -169,7 +176,19 @@ hybrid_gate_status = BLOCKED
 NO-SUBMIT remains default
 ```
 
-Passing tests proves that code, controls, and reporting work. It does not prove the model trades profitably over time.
+Current classification:
+
+```txt
+PPO model = legacy baseline / infrastructure validation fixture
+PPO trading edge = unproven
+controlled paper submit = blocked
+PPO + Random Forest deployment = blocked
+PPO + XGBoost deployment = blocked
+retraining = not yet
+NO-SUBMIT = default
+```
+
+Passing tests proves code, control, and reporting stability. It does not prove trading profitability.
 
 ## Current Transition Plan
 
@@ -182,7 +201,7 @@ v1.59 PPO AMD Recurrence / Multi-Order Instability Review
 Current active checkpoint:
 
 ```txt
-v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
+v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -226,10 +245,16 @@ v1.56 = PPO continued no-submit observation cycle 5 / adjacent candidate persist
 v1.57 = PPO multi-order recurrence review / continue no-submit decision
 v1.58 = PPO continued no-submit observation cycle 6 / AMD recurrence confirmation test
 v1.59 = PPO AMD recurrence / multi-order instability review
-v1.60 = PPO continued no-submit observation cycle 7 / multi-order stability test
-later = PPO + Random Forest Gate
-later = PPO + XGBoost Gate
-later = Feature Importance / Model Interpretability Phase
+v1.60 = Legacy PPO baseline reclassification / no-submit observation closeout
+v1.61 = PPO baseline model quality audit scope
+v1.62 = PPO baseline artifact inventory
+v1.63 = PPO baseline model quality audit report
+v1.64 = PPO promotion standard / acceptance criteria
+v1.65 = Legacy PPO final audit decision
+v1.66 = PPO v2 retraining design, only if justified
+later = PPO + Random Forest Gate remains blocked until PPO baseline standards justify comparison
+later = PPO + XGBoost Gate remains blocked until PPO baseline standards justify comparison
+later = Feature Importance / Model Interpretability Phase; must not be used as evidence of trading edge
 ```
 
 Hybrid model integration remains blocked until the standalone PPO baseline has enough supervised paper-trading evidence to justify comparison or extension.
@@ -246,7 +271,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Run another fresh supervised PPO-only no-submit observation cycle to test whether AMD buy and UNH sell persist again, and whether the multi-order set stabilizes or changes again.
+Formally reclassify the current PPO model as a legacy baseline / infrastructure validation fixture and close out the current no-submit observation path as lower priority than model-quality audit work.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -256,7 +281,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 The next objective is not PPO + Random Forest deployment yet.
 
-The next objective is to complete the v1.60 continued no-submit observation cycle 7 / multi-order stability test before any controlled-submit or hybrid gate work becomes active.
+The next objective is to complete the v1.60 legacy PPO baseline reclassification / no-submit observation closeout before any retraining, controlled-submit, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -288,6 +313,18 @@ hybrid_gate_status = BLOCKED
 NO-SUBMIT remains default
 ```
 
+Current classification:
+
+```txt
+PPO model = legacy baseline / infrastructure validation fixture
+PPO trading edge = unproven
+controlled paper submit = blocked
+PPO + Random Forest deployment = blocked
+PPO + XGBoost deployment = blocked
+retraining = not yet
+NO-SUBMIT = default
+```
+
 The default operating posture remains:
 
 ```txt
@@ -296,6 +333,8 @@ classification required before any future submit review
 controlled submit remains a separate checkpoint
 PPO + RF deployment remains blocked until PPO-only evidence is complete
 PPO + XGBoost deployment remains blocked until PPO-only and PPO + RF readiness are clearer
+feature importance must not be used as evidence of trading edge
+retraining is not started in v1.60
 ```
 
 Recommended transition sequence:
@@ -316,10 +355,16 @@ v1.56 = PPO Continued No-Submit Observation Cycle 5 / Adjacent Candidate Persist
 v1.57 = PPO Multi-Order Recurrence Review / Continue No-Submit Decision
 v1.58 = PPO Continued No-Submit Observation Cycle 6 / AMD Recurrence Confirmation Test
 v1.59 = PPO AMD Recurrence / Multi-Order Instability Review
-v1.60 = PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
-later = PPO + Random Forest Gate
-later = PPO + XGBoost Gate
-later = Feature Importance / Model Interpretability Phase
+v1.60 = Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
+v1.61 = PPO Baseline Model Quality Audit Scope
+v1.62 = PPO Baseline Artifact Inventory
+v1.63 = PPO Baseline Model Quality Audit Report
+v1.64 = PPO Promotion Standard / Acceptance Criteria
+v1.65 = Legacy PPO Final Audit Decision
+v1.66 = PPO v2 Retraining Design, only if justified
+later = PPO + Random Forest Gate remains blocked until PPO baseline standards justify comparison
+later = PPO + XGBoost Gate remains blocked until PPO baseline standards justify comparison
+later = Feature Importance / Model Interpretability Phase; must not be used as evidence of trading edge
 ```
 
 The required PPO-only evidence package must include:
@@ -422,24 +467,26 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Run another fresh supervised no-submit observation cycle and test whether AMD buy, UNH sell, and the multi-order set persist or change again.
+Reclassify the current PPO model as a legacy baseline / infrastructure validation fixture and move the next active work toward model-quality audit scope, artifact inventory, promotion standards, and a later retraining design only if justified.
 
 Next operational checkpoint:
 
 ```txt
-v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
+v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
 ```
 
 The goal is to formally document:
 
-* whether AMD buy persists again
-* whether UNH sell persists again
-* whether the multi-order set stabilizes or changes again
-* raw_action and confidence diagnostics, if available
-* decision dashboard updates
+* the current PPO model is a legacy baseline / infrastructure validation fixture
+* AMD buy and UNH sell showed recurrence, but candidate-set stability was not established
+* multi-order instability remains true
+* consecutive single-candidate persistence remains false
+* PPO trading edge remains unproven
+* additional no-submit observation cycles are now lower priority than model-quality audit work
 * no paper-order submission
-* why controlled submit remains blocked unless a separate checkpoint explicitly authorizes otherwise
-* why PPO + RF and PPO + XGBoost remain blocked until PPO-only evidence is complete
+* why controlled submit remains blocked
+* why PPO + RF and PPO + XGBoost remain blocked
+* why retraining is not starting yet
 
 The recommended next operating path is:
 
@@ -459,7 +506,13 @@ v1.56 = PPO continued no-submit observation cycle 5 / adjacent candidate persist
 v1.57 = PPO multi-order recurrence review / continue no-submit decision
 v1.58 = PPO continued no-submit observation cycle 6 / AMD recurrence confirmation test
 v1.59 = PPO AMD recurrence / multi-order instability review
-v1.60 = PPO continued no-submit observation cycle 7 / multi-order stability test
+v1.60 = Legacy PPO baseline reclassification / no-submit observation closeout
+v1.61 = PPO baseline model quality audit scope
+v1.62 = PPO baseline artifact inventory
+v1.63 = PPO baseline model quality audit report
+v1.64 = PPO promotion standard / acceptance criteria
+v1.65 = Legacy PPO final audit decision
+v1.66 = PPO v2 retraining design, only if justified
 ```
 
 ---
@@ -513,7 +566,7 @@ Do not move to hybrid systems prematurely.
 ## Future Phase: Feature Importance / Model Interpretability
 
 Feature importance and model interpretability should be treated as a later post-validation research phase.
-This phase is not part of the current PPO-only v1.45 through v1.60 roadmap.
+This phase is not part of the current PPO-only v1.45 through v1.60 closeout or the v1.61 through v1.66 audit roadmap.
 
 The purpose is different from PPO-only validation:
 
@@ -1158,34 +1211,46 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
-run another fresh supervised no-submit observation cycle
-test whether AMD buy persists again
-test whether UNH sell persists again
-test whether the multi-order set stabilizes or changes again
-record raw_action and confidence diagnostics if available
-update the decision dashboard
+v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
+formally reclassify the current PPO model as a legacy baseline / infrastructure validation fixture
+preserve v1.47 through v1.59 as historical no-submit observation evidence
+summarize AMD buy and UNH sell recurrence without treating recurrence as trading edge
+document that candidate-set stability was not established
+document that multi-order instability remains true
+document that consecutive single-candidate persistence remains false
+define the v1.61 through v1.66 audit path
 do not submit orders
 preserve NO-SUBMIT default
-keep controlled submit blocked unless a separate checkpoint explicitly authorizes otherwise
-keep PPO + RF and PPO + XGBoost blocked until PPO-only evidence is complete
+keep controlled submit blocked
+keep PPO + RF and PPO + XGBoost blocked
+do not start retraining
 ```
 
 Next operational deliverables:
 
 ```txt
-v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
-run another fresh supervised no-submit observation cycle
-test whether AMD buy persists again
-test whether UNH sell persists again
-test whether the multi-order set stabilizes or changes again
-record raw_action and confidence diagnostics if available
-update the decision dashboard
+v1.61 PPO Baseline Model Quality Audit Scope
+define the model-quality audit scope
+identify required evidence categories
+define audit questions for the legacy PPO baseline
+keep additional no-submit observation cycles lower priority than audit work
 do not submit orders
 keep controlled submit blocked
 
-v1.61+ Continued PPO-Only No-Submit Observation, if required
-continue supervised no-submit observation cycles only if v1.60 keeps the observation window open
+v1.62 PPO Baseline Artifact Inventory
+inventory baseline artifacts, documentation, and prior evidence
+
+v1.63 PPO Baseline Model Quality Audit Report
+assess whether the legacy PPO baseline can support any future promotion standard
+
+v1.64 PPO Promotion Standard / Acceptance Criteria
+define acceptance criteria for any future PPO model
+
+v1.65 Legacy PPO Final Audit Decision
+decide whether the legacy PPO baseline remains fixture-only or supports any further work
+
+v1.66 PPO v2 Retraining Design, only if justified
+design PPO v2 retraining only after the audit path justifies it
 
 later PPO-Only Baseline Performance Package Completion
 combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and paper-trading observation evidence after sufficient PPO-only observation exists
@@ -1237,7 +1302,13 @@ v1.56 PPO Continued No-Submit Observation Cycle 5 / Adjacent Candidate Persisten
 v1.57 PPO Multi-Order Recurrence Review / Continue No-Submit Decision
 v1.58 PPO Continued No-Submit Observation Cycle 6 / AMD Recurrence Confirmation Test
 v1.59 PPO AMD Recurrence / Multi-Order Instability Review
-v1.60 PPO Continued No-Submit Observation Cycle 7 / Multi-Order Stability Test
+v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
+v1.61 PPO Baseline Model Quality Audit Scope
+v1.62 PPO Baseline Artifact Inventory
+v1.63 PPO Baseline Model Quality Audit Report
+v1.64 PPO Promotion Standard / Acceptance Criteria
+v1.65 Legacy PPO Final Audit Decision
+v1.66 PPO v2 Retraining Design, only if justified
 ```
 
 Research milestones:
