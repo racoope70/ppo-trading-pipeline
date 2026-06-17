@@ -216,7 +216,7 @@ Passing tests proves code, control, and reporting stability. It does not prove t
 
 ## Current Transition Plan
 
-Latest sealed milestone:
+Latest completed milestone:
 
 ```txt
 v1.63 PPO Baseline Model Quality Audit Report
@@ -303,9 +303,9 @@ This proves that the no-submit reporting stack, decision-state reporting, artifa
 
 This does not prove that the PPO strategy is stable, profitable, or ready for broader controlled submit usage.
 
-The next objective is not PPO + Random Forest deployment yet.
+Next objective:
 
-The next objective is to complete v1.64 PPO Promotion Standard / Acceptance Criteria before the v1.65 legacy PPO final audit decision, any retraining design, controlled submit, or hybrid gate work becomes active.
+Complete v1.64 PPO Promotion Standard / Acceptance Criteria before the v1.65 legacy PPO final audit decision, any retraining design, controlled submit, or hybrid gate work becomes active.
 
 Current observation findings:
 
