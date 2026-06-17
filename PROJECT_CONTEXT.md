@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.63 PPO Baseline Model Quality Audit Report`
+`v1.64 PPO Promotion Standard / Acceptance Criteria`
 
 ## Status
 
-READY FOR PPO BASELINE MODEL QUALITY AUDIT REPORT
+READY FOR PPO PROMOTION STANDARD / ACCEPTANCE CRITERIA
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.62 PPO Baseline Artifact Inventory`
+`v1.63 PPO Baseline Model Quality Audit Report`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.62-ppo-baseline-artifact-inventory
-latest sealed commit = a0d0d9c
+v1.63-ppo-baseline-model-quality-audit-report
+latest sealed commit = 401672d
 tests = 227 passed, 2 warnings
 ```
 
@@ -92,6 +92,8 @@ docs/runs/v1.60_legacy_ppo_baseline_reclassification_no_submit_observation_close
 docs/runs/v1.61_ppo_baseline_model_quality_audit_scope.md
 docs/runs/v1.62_ppo_baseline_artifact_inventory.md
 docs/runs/v1.63_ppo_baseline_model_quality_audit_report.md
+docs/runs/v1.64_ppo_promotion_standard_acceptance_criteria.md
+docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
 ```
 
 Important context:
@@ -141,7 +143,7 @@ Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint 
 
 The PPO-only paper-trading infrastructure is operationally and reporting-stable.
 
-The PPO trading edge is not proven.
+The PPO trading edge failed under the v1.63 stricter audit standard.
 
 The current PPO model is reclassified as a legacy baseline / infrastructure validation fixture.
 
@@ -183,7 +185,7 @@ Current classification:
 
 ```txt
 PPO model = legacy baseline / infrastructure validation fixture
-PPO trading edge = unproven unless proven by audit
+PPO trading edge = failed under v1.63 stricter audit standard
 controlled paper submit = blocked
 paper order submission = not authorized
 live orders = not authorized
@@ -217,13 +219,13 @@ Passing tests proves code, control, and reporting stability. It does not prove t
 Latest sealed milestone:
 
 ```txt
-v1.62 PPO Baseline Artifact Inventory
+v1.63 PPO Baseline Model Quality Audit Report
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.63 PPO Baseline Model Quality Audit Report
+v1.64 PPO Promotion Standard / Acceptance Criteria
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -293,7 +295,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Produce the formal model-quality audit report for the legacy PPO baseline using the v1.62 artifact inventory and prior no-submit observation evidence.
+Define the promotion standard and acceptance criteria any PPO model must satisfy before it can move from infrastructure/audit use toward controlled-submit eligibility.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -303,7 +305,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 The next objective is not PPO + Random Forest deployment yet.
 
-The next objective is to complete the v1.63 PPO baseline model-quality audit report before promotion standards, final legacy PPO decisions, retraining, controlled submit, or hybrid gate work becomes active.
+The next objective is to complete v1.64 PPO Promotion Standard / Acceptance Criteria before the v1.65 legacy PPO final audit decision, any retraining design, controlled submit, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -339,7 +341,7 @@ Current classification:
 
 ```txt
 PPO model = legacy baseline / infrastructure validation fixture
-PPO trading edge = unproven unless proven by audit
+PPO trading edge = failed under v1.63 stricter audit standard
 controlled paper submit = blocked
 paper order submission = not authorized
 live orders = not authorized
@@ -491,27 +493,23 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Produce the formal model-quality audit report for the legacy PPO baseline using the v1.62 artifact inventory and prior no-submit observation evidence.
+Define the promotion standard and acceptance criteria any PPO model must satisfy before promotion beyond infrastructure/audit use.
 
 Next operational checkpoint:
 
 ```txt
-v1.63 PPO Baseline Model Quality Audit Report
+v1.65 Legacy PPO Final Audit Decision
 ```
 
 The goal is to formally document:
 
-* the legacy PPO baseline can support infrastructure validation and audit work
-* complete artifact availability does not prove trading edge
-* benchmark evidence is mixed
-* cash-baseline evidence alone is insufficient
-* no-submit behavior did not establish stable single-candidate persistence
-* multi-order instability remains unresolved
-* trading_edge_decision = FAIL_FOR_TRADING_EDGE
-* controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
+* five promotion levels from infrastructure baseline through production/live trading candidate
+* evidence required before any PPO model can advance beyond infrastructure/audit use
+* rejection criteria for weak benchmark evidence, unstable no-submit behavior, missing costs, missing leakage controls, or feature-importance-only claims
+* current legacy PPO classification under the standard
 * controlled submit remains blocked
 * PPO + RF and PPO + XGBoost remain blocked
-* retraining is not authorized by v1.63
+* retraining remains not yet authorized
 
 The recommended next operating path is:
 
@@ -536,8 +534,13 @@ v1.61 = PPO baseline model quality audit scope
 v1.62 = PPO baseline artifact inventory
 v1.63 = PPO baseline model quality audit report
 v1.64 = PPO promotion standard / acceptance criteria
+        Define standards and acceptance criteria.
+
 v1.65 = Legacy PPO final audit decision
+        Apply the v1.64 standards to close out the legacy PPO decision.
+
 v1.66 = PPO v2 retraining design, only if justified
+        Only becomes relevant if v1.65 explicitly justifies it.
 ```
 
 ---
@@ -1236,16 +1239,17 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.63 PPO Baseline Model Quality Audit Report
-produce the formal model-quality audit report for the legacy PPO baseline
-use docs/audits/v1.63_ppo_baseline_model_quality_audit_report.csv
-use docs/audits/v1.63_ppo_baseline_model_quality_audit_summary.md
-use v1.62 artifact inventory evidence
-use v1.47-v1.59 no-submit observation evidence
-separate infrastructure completeness from trading-edge evidence
-record infrastructure_baseline_decision = PASS_FOR_INFRASTRUCTURE_BASELINE
-record trading_edge_decision = FAIL_FOR_TRADING_EDGE
-record controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
+v1.64 PPO Promotion Standard / Acceptance Criteria
+define acceptance criteria for future PPO models
+define Level 0 through Level 4 promotion standards
+document current legacy PPO classification under v1.64
+legacy PPO remains infrastructure baseline only
+legacy PPO remains failed for trading edge
+controlled submit remains blocked
+paper orders remain unauthorized
+live orders remain unauthorized
+PPO + RF and PPO + XGBoost remain blocked
+retraining remains not yet authorized
 do not submit orders
 preserve NO-SUBMIT default
 keep controlled submit blocked
@@ -1256,9 +1260,6 @@ do not start retraining
 Next operational deliverables:
 
 ```txt
-v1.64 PPO Promotion Standard / Acceptance Criteria
-define acceptance criteria for any future PPO model
-
 v1.65 Legacy PPO Final Audit Decision
 decide whether the legacy PPO baseline remains fixture-only or supports any further work
 
