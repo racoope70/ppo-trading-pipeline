@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.61 PPO Baseline Model Quality Audit Scope`
+`v1.62 PPO Baseline Artifact Inventory`
 
 ## Status
 
-READY FOR PPO BASELINE MODEL QUALITY AUDIT SCOPE
+READY FOR PPO BASELINE ARTIFACT INVENTORY
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout`
+`v1.61 PPO Baseline Model Quality Audit Scope`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.60-legacy-ppo-baseline-reclassification-no-submit-observation-closeout
-latest sealed commit = 4d0631b
+v1.61-ppo-baseline-model-quality-audit-scope
+latest sealed commit = eeddf96
 tests = 227 passed, 2 warnings
 ```
 
@@ -90,6 +90,7 @@ docs/runs/v1.58_ppo_continued_no_submit_observation_cycle_6_amd_recurrence_confi
 docs/runs/v1.59_ppo_amd_recurrence_multi_order_instability_review.md
 docs/runs/v1.60_legacy_ppo_baseline_reclassification_no_submit_observation_closeout.md
 docs/runs/v1.61_ppo_baseline_model_quality_audit_scope.md
+docs/runs/v1.62_ppo_baseline_artifact_inventory.md
 ```
 
 Important context:
@@ -198,13 +199,13 @@ Passing tests proves code, control, and reporting stability. It does not prove t
 Latest sealed milestone:
 
 ```txt
-v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
+v1.61 PPO Baseline Model Quality Audit Scope
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.61 PPO Baseline Model Quality Audit Scope
+v1.62 PPO Baseline Artifact Inventory
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -274,7 +275,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Define the model-quality audit scope for the legacy PPO baseline before any artifact inventory, model-quality audit report, retraining decision, controlled-submit decision, or hybrid deployment decision.
+Inventory the legacy PPO baseline artifacts and prepare evidence for the v1.63 model-quality audit report.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -284,7 +285,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 The next objective is not PPO + Random Forest deployment yet.
 
-The next objective is to complete the v1.61 PPO baseline model quality audit scope before artifact inventory, audit reporting, retraining, controlled submit, or hybrid gate work becomes active.
+The next objective is to complete the v1.62 PPO baseline artifact inventory before model-quality audit reporting, retraining, controlled submit, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -472,26 +473,25 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Reclassify the current PPO model as a legacy baseline / infrastructure validation fixture and move the next active work toward model-quality audit scope, artifact inventory, promotion standards, and a later retraining design only if justified.
+Inventory the legacy PPO baseline artifacts and prepare evidence for the v1.63 model-quality audit report.
 
 Next operational checkpoint:
 
 ```txt
-v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
+v1.62 PPO Baseline Artifact Inventory
 ```
 
 The goal is to formally document:
 
-* the current PPO model is a legacy baseline / infrastructure validation fixture
-* AMD buy and UNH sell showed recurrence, but candidate-set stability was not established
-* multi-order instability remains true
-* consecutive single-candidate persistence remains false
-* PPO trading edge remains unproven
-* additional no-submit observation cycles are now lower priority than model-quality audit work
-* no paper-order submission
-* why controlled submit remains blocked
-* why PPO + RF and PPO + XGBoost remain blocked
-* why retraining is not starting yet
+* artifact files exist or do not exist
+* artifact sets are complete or incomplete
+* model_info metadata is available or missing
+* benchmark fields are available or missing
+* the legacy PPO baseline can be prepared for v1.63 audit
+* final model-quality interpretation is deferred to v1.63
+* controlled submit remains blocked
+* PPO + RF and PPO + XGBoost remain blocked
+* retraining is not authorized by this inventory
 
 The recommended next operating path is:
 
@@ -1216,15 +1216,13 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.61 PPO Baseline Model Quality Audit Scope
-define the model-quality audit scope for the legacy PPO baseline
-identify evidence sources to review later
-define core audit questions
-define required v1.62 artifact inventory fields
-define required v1.63 audit report fields
-define decision categories
-define promotion guardrails
-do not perform the audit
+v1.62 PPO Baseline Artifact Inventory
+inventory legacy PPO baseline artifact coverage
+reference docs/audits/v1.62_ppo_baseline_artifact_inventory.csv
+reference docs/audits/v1.62_ppo_baseline_artifact_inventory_summary.md
+summarize artifact completeness and missing evidence
+prepare evidence for the v1.63 model-quality audit report
+do not make a final model-quality pass/fail decision
 do not submit orders
 preserve NO-SUBMIT default
 keep controlled submit blocked
@@ -1235,9 +1233,6 @@ do not start retraining
 Next operational deliverables:
 
 ```txt
-v1.62 PPO Baseline Artifact Inventory
-inventory baseline artifacts, documentation, and prior evidence
-
 v1.63 PPO Baseline Model Quality Audit Report
 assess whether the legacy PPO baseline can support any future promotion standard
 
