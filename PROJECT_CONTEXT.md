@@ -192,6 +192,23 @@ retraining = not yet
 NO-SUBMIT = default
 ```
 
+Current v1.62 inventory summary:
+
+```txt
+manifest_path = config/paper_trading_six_ticker_manifest.json
+symbols = AAPL, AMD, MRK, PFE, UNH, XOM
+artifact_dirs_found = models/alpaca_ppo_models_master, trained_models
+inventory_rows = 120
+complete_artifact_rows = 18
+incomplete_or_missing_rows = 102
+AAPL rows = 20, complete_artifact_sets = 3
+AMD rows = 20, complete_artifact_sets = 3
+MRK rows = 20, complete_artifact_sets = 3
+PFE rows = 20, complete_artifact_sets = 3
+UNH rows = 20, complete_artifact_sets = 3
+XOM rows = 20, complete_artifact_sets = 3
+```
+
 Passing tests proves code, control, and reporting stability. It does not prove trading profitability.
 
 ## Current Transition Plan
