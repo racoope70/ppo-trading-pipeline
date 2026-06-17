@@ -12,29 +12,54 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.67 PPO v2 Retraining Authorization Review`
+`v1.68 PPO v2 Controlled Retraining Implementation Plan`
 
 ## Status
 
-READY FOR PPO V2 RETRAINING AUTHORIZATION REVIEW
+READY FOR PPO V2 CONTROLLED RETRAINING IMPLEMENTATION PLAN
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.66 PPO v2 Retraining Design`
+`v1.67 PPO v2 Retraining Authorization Review`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.66-ppo-v2-retraining-design
-latest sealed commit = 94f2a8c
+v1.67-ppo-v2-retraining-authorization-review
+latest sealed commit = b6db747
 tests = 227 passed, 2 warnings
 ```
 
-Current documented local test status:
+Current operational focus:
+
+Define the controlled PPO v2 retraining implementation plan.
+
+Next objective:
+
+Complete v1.68 PPO v2 Controlled Retraining Implementation Plan before any implementation scaffold work, source-code creation, training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+
+Next operational checkpoint:
 
 ```txt
-227 passed, 2 warnings
+v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review
 ```
+
+Current guardrails:
+
+```txt
+v1.68 does not create source code
+v1.68 does not create training scripts
+v1.68 does not run training
+v1.68 does not create generated datasets
+v1.68 does not create model artifacts
+v1.68 does not authorize paper orders
+v1.68 does not authorize live orders
+v1.68 does not authorize controlled submit
+v1.68 does not unblock PPO + RF
+v1.68 does not unblock PPO + XGBoost
+NO-SUBMIT remains default
+```
+
 
 Known non-blocking warnings from the latest local test run:
 
