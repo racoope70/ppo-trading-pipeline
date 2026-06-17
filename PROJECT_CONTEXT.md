@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout`
+`v1.61 PPO Baseline Model Quality Audit Scope`
 
 ## Status
 
-READY FOR LEGACY PPO BASELINE RECLASSIFICATION / NO-SUBMIT OBSERVATION CLOSEOUT
+READY FOR PPO BASELINE MODEL QUALITY AUDIT SCOPE
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.59 PPO AMD Recurrence / Multi-Order Instability Review`
+`v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.59-ppo-amd-recurrence-multi-order-instability-review
-latest sealed commit = a73ecbe
+v1.60-legacy-ppo-baseline-reclassification-no-submit-observation-closeout
+latest sealed commit = 4d0631b
 tests = 227 passed, 2 warnings
 ```
 
@@ -89,6 +89,7 @@ docs/runs/v1.57_ppo_multi_order_recurrence_review_continue_no_submit_decision.md
 docs/runs/v1.58_ppo_continued_no_submit_observation_cycle_6_amd_recurrence_confirmation_test.md
 docs/runs/v1.59_ppo_amd_recurrence_multi_order_instability_review.md
 docs/runs/v1.60_legacy_ppo_baseline_reclassification_no_submit_observation_closeout.md
+docs/runs/v1.61_ppo_baseline_model_quality_audit_scope.md
 ```
 
 Important context:
@@ -182,6 +183,8 @@ Current classification:
 PPO model = legacy baseline / infrastructure validation fixture
 PPO trading edge = unproven
 controlled paper submit = blocked
+paper order submission = not authorized
+live orders = not authorized
 PPO + Random Forest deployment = blocked
 PPO + XGBoost deployment = blocked
 retraining = not yet
@@ -195,13 +198,13 @@ Passing tests proves code, control, and reporting stability. It does not prove t
 Latest sealed milestone:
 
 ```txt
-v1.59 PPO AMD Recurrence / Multi-Order Instability Review
+v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
+v1.61 PPO Baseline Model Quality Audit Scope
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -271,7 +274,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Formally reclassify the current PPO model as a legacy baseline / infrastructure validation fixture and close out the current no-submit observation path as lower priority than model-quality audit work.
+Define the model-quality audit scope for the legacy PPO baseline before any artifact inventory, model-quality audit report, retraining decision, controlled-submit decision, or hybrid deployment decision.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -281,7 +284,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 The next objective is not PPO + Random Forest deployment yet.
 
-The next objective is to complete the v1.60 legacy PPO baseline reclassification / no-submit observation closeout before any retraining, controlled-submit, or hybrid gate work becomes active.
+The next objective is to complete the v1.61 PPO baseline model quality audit scope before artifact inventory, audit reporting, retraining, controlled submit, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -319,6 +322,8 @@ Current classification:
 PPO model = legacy baseline / infrastructure validation fixture
 PPO trading edge = unproven
 controlled paper submit = blocked
+paper order submission = not authorized
+live orders = not authorized
 PPO + Random Forest deployment = blocked
 PPO + XGBoost deployment = blocked
 retraining = not yet
@@ -334,7 +339,7 @@ controlled submit remains a separate checkpoint
 PPO + RF deployment remains blocked until PPO-only evidence is complete
 PPO + XGBoost deployment remains blocked until PPO-only and PPO + RF readiness are clearer
 feature importance must not be used as evidence of trading edge
-retraining is not started in v1.60
+retraining is not yet
 ```
 
 Recommended transition sequence:
@@ -1211,14 +1216,15 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.60 Legacy PPO Baseline Reclassification / No-Submit Observation Closeout
-formally reclassify the current PPO model as a legacy baseline / infrastructure validation fixture
-preserve v1.47 through v1.59 as historical no-submit observation evidence
-summarize AMD buy and UNH sell recurrence without treating recurrence as trading edge
-document that candidate-set stability was not established
-document that multi-order instability remains true
-document that consecutive single-candidate persistence remains false
-define the v1.61 through v1.66 audit path
+v1.61 PPO Baseline Model Quality Audit Scope
+define the model-quality audit scope for the legacy PPO baseline
+identify evidence sources to review later
+define core audit questions
+define required v1.62 artifact inventory fields
+define required v1.63 audit report fields
+define decision categories
+define promotion guardrails
+do not perform the audit
 do not submit orders
 preserve NO-SUBMIT default
 keep controlled submit blocked
@@ -1229,14 +1235,6 @@ do not start retraining
 Next operational deliverables:
 
 ```txt
-v1.61 PPO Baseline Model Quality Audit Scope
-define the model-quality audit scope
-identify required evidence categories
-define audit questions for the legacy PPO baseline
-keep additional no-submit observation cycles lower priority than audit work
-do not submit orders
-keep controlled submit blocked
-
 v1.62 PPO Baseline Artifact Inventory
 inventory baseline artifacts, documentation, and prior evidence
 
