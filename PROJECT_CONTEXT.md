@@ -12,21 +12,21 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.64 PPO Promotion Standard / Acceptance Criteria`
+`v1.65 Legacy PPO Final Audit Decision`
 
 ## Status
 
-READY FOR PPO PROMOTION STANDARD / ACCEPTANCE CRITERIA
+READY FOR LEGACY PPO FINAL AUDIT DECISION
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.63 PPO Baseline Model Quality Audit Report`
+`v1.64 PPO Promotion Standard / Acceptance Criteria`
 
 Latest sealed checkpoint:
 
 ```txt
-v1.63-ppo-baseline-model-quality-audit-report
-latest sealed commit = 401672d
+v1.64-ppo-promotion-standard-acceptance-criteria
+latest sealed commit = 5d4d0b4
 tests = 227 passed, 2 warnings
 ```
 
@@ -94,6 +94,8 @@ docs/runs/v1.62_ppo_baseline_artifact_inventory.md
 docs/runs/v1.63_ppo_baseline_model_quality_audit_report.md
 docs/runs/v1.64_ppo_promotion_standard_acceptance_criteria.md
 docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
+docs/runs/v1.65_legacy_ppo_final_audit_decision.md
+docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
 ```
 
 Important context:
@@ -195,6 +197,24 @@ retraining = not yet
 NO-SUBMIT = default
 ```
 
+Current v1.65 final audit decision:
+
+```txt
+legacy_ppo_final_classification = INFRASTRUCTURE_FIXTURE_ONLY
+infrastructure_baseline_decision = PASS
+offline_model_quality_decision = FAIL
+trading_edge_decision = FAIL_FOR_TRADING_EDGE
+no_submit_observation_decision = FAILED_TO_ESTABLISH_STABLE_PROMOTION_EVIDENCE
+controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+ppo_rf_deployment_decision = BLOCKED
+ppo_xgboost_deployment_decision = BLOCKED
+legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
+ppo_v2_retraining_design_decision = AUTHORIZED_FOR_DESIGN_ONLY
+actual_retraining_execution = NOT_AUTHORIZED_BY_v1.65
+```
+
 Current v1.62 inventory summary:
 
 ```txt
@@ -219,13 +239,13 @@ Passing tests proves code, control, and reporting stability. It does not prove t
 Latest completed milestone:
 
 ```txt
-v1.63 PPO Baseline Model Quality Audit Report
+v1.64 PPO Promotion Standard / Acceptance Criteria
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.64 PPO Promotion Standard / Acceptance Criteria
+v1.65 Legacy PPO Final Audit Decision
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -275,7 +295,7 @@ v1.62 = PPO baseline artifact inventory
 v1.63 = PPO baseline model quality audit report
 v1.64 = PPO promotion standard / acceptance criteria
 v1.65 = Legacy PPO final audit decision
-v1.66 = PPO v2 retraining design, only if justified
+v1.66 = PPO v2 retraining design
 later = PPO + Random Forest Gate remains blocked until PPO baseline standards justify comparison
 later = PPO + XGBoost Gate remains blocked until PPO baseline standards justify comparison
 later = Feature Importance / Model Interpretability Phase; must not be used as evidence of trading edge
@@ -295,7 +315,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Define the promotion standard and acceptance criteria any PPO model must satisfy before it can move from infrastructure/audit use toward controlled-submit eligibility.
+Apply the v1.64 promotion standard to issue the final legacy PPO audit decision.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -305,7 +325,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 Next objective:
 
-Complete v1.64 PPO Promotion Standard / Acceptance Criteria before the v1.65 legacy PPO final audit decision, any retraining design, controlled submit, or hybrid gate work becomes active.
+Complete v1.65 Legacy PPO Final Audit Decision before v1.66 PPO v2 Retraining Design, actual retraining execution, controlled submit, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -387,7 +407,7 @@ v1.62 = PPO Baseline Artifact Inventory
 v1.63 = PPO Baseline Model Quality Audit Report
 v1.64 = PPO Promotion Standard / Acceptance Criteria
 v1.65 = Legacy PPO Final Audit Decision
-v1.66 = PPO v2 Retraining Design, only if justified
+v1.66 = PPO v2 Retraining Design
 later = PPO + Random Forest Gate remains blocked until PPO baseline standards justify comparison
 later = PPO + XGBoost Gate remains blocked until PPO baseline standards justify comparison
 later = Feature Importance / Model Interpretability Phase; must not be used as evidence of trading edge
@@ -493,23 +513,27 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Define the promotion standard and acceptance criteria any PPO model must satisfy before promotion beyond infrastructure/audit use.
+Apply the v1.64 promotion standard to close the legacy PPO audit decision.
 
 Next operational checkpoint:
 
 ```txt
-v1.65 Legacy PPO Final Audit Decision
+v1.66 PPO v2 Retraining Design
 ```
 
 The goal is to formally document:
 
-* five promotion levels from infrastructure baseline through production/live trading candidate
-* evidence required before any PPO model can advance beyond infrastructure/audit use
-* rejection criteria for weak benchmark evidence, unstable no-submit behavior, missing costs, missing leakage controls, or feature-importance-only claims
-* current legacy PPO classification under the standard
+* legacy_ppo_final_classification = INFRASTRUCTURE_FIXTURE_ONLY
+* infrastructure_baseline_decision = PASS
+* offline_model_quality_decision = FAIL
+* trading_edge_decision = FAIL_FOR_TRADING_EDGE
+* no_submit_observation_decision = FAILED_TO_ESTABLISH_STABLE_PROMOTION_EVIDENCE
+* controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
+* legacy PPO retraining is rejected
+* PPO v2 retraining design is authorized as a planning checkpoint only
 * controlled submit remains blocked
 * PPO + RF and PPO + XGBoost remain blocked
-* retraining remains not yet authorized
+* actual retraining execution remains unauthorized
 
 The recommended next operating path is:
 
@@ -537,10 +561,13 @@ v1.64 = PPO promotion standard / acceptance criteria
         Define standards and acceptance criteria.
 
 v1.65 = Legacy PPO final audit decision
-        Apply the v1.64 standards to close out the legacy PPO decision.
+        Close the legacy PPO decision.
 
-v1.66 = PPO v2 retraining design, only if justified
-        Only becomes relevant if v1.65 explicitly justifies it.
+v1.66 = PPO v2 retraining design
+        Design PPO v2 retraining only.
+        Actual retraining execution requires a later checkpoint.
+        Controlled submit remains blocked.
+        PPO + RF and PPO + XGBoost remain blocked.
 ```
 
 ---
@@ -1239,32 +1266,36 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.64 PPO Promotion Standard / Acceptance Criteria
-define acceptance criteria for future PPO models
-define Level 0 through Level 4 promotion standards
-document current legacy PPO classification under v1.64
-legacy PPO remains infrastructure baseline only
-legacy PPO remains failed for trading edge
-controlled submit remains blocked
-paper orders remain unauthorized
-live orders remain unauthorized
-PPO + RF and PPO + XGBoost remain blocked
-retraining remains not yet authorized
+v1.65 Legacy PPO Final Audit Decision
+apply the v1.64 promotion standard to the legacy PPO baseline
+legacy_ppo_final_classification = INFRASTRUCTURE_FIXTURE_ONLY
+infrastructure_baseline_decision = PASS
+offline_model_quality_decision = FAIL
+trading_edge_decision = FAIL_FOR_TRADING_EDGE
+no_submit_observation_decision = FAILED_TO_ESTABLISH_STABLE_PROMOTION_EVIDENCE
+controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+ppo_rf_deployment_decision = BLOCKED
+ppo_xgboost_deployment_decision = BLOCKED
+legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
+ppo_v2_retraining_design_decision = AUTHORIZED_FOR_DESIGN_ONLY
+actual_retraining_execution = NOT_AUTHORIZED_BY_v1.65
 do not submit orders
 preserve NO-SUBMIT default
 keep controlled submit blocked
 keep PPO + RF and PPO + XGBoost blocked
-do not start retraining
+do not execute retraining
 ```
 
 Next operational deliverables:
 
 ```txt
-v1.65 Legacy PPO Final Audit Decision
-decide whether the legacy PPO baseline remains fixture-only or supports any further work
-
-v1.66 PPO v2 Retraining Design, only if justified
-design PPO v2 retraining only after the audit path justifies it
+v1.66 PPO v2 Retraining Design
+design PPO v2 retraining only
+actual retraining execution requires a later checkpoint
+controlled submit remains blocked
+PPO + RF and PPO + XGBoost remain blocked
 
 later PPO-Only Baseline Performance Package Completion
 combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and paper-trading observation evidence after sufficient PPO-only observation exists
@@ -1322,7 +1353,7 @@ v1.62 PPO Baseline Artifact Inventory
 v1.63 PPO Baseline Model Quality Audit Report
 v1.64 PPO Promotion Standard / Acceptance Criteria
 v1.65 Legacy PPO Final Audit Decision
-v1.66 PPO v2 Retraining Design, only if justified
+v1.66 PPO v2 Retraining Design
 ```
 
 Research milestones:
