@@ -12,50 +12,53 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests`
+`v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review`
 
 ## Status
 
-READY FOR PPO V2 CONTROLLED RETRAINING SCAFFOLD AND SAFETY TESTS
+READY FOR PPO V2 SCAFFOLD SAFETY AUDIT AND EXECUTION BOUNDARY REVIEW
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review`
+`v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests`
 
 ## Latest Sealed Checkpoint
 
 ```txt
-v1.69-ppo-v2-controlled-retraining-implementation-scaffold-review
-latest sealed commit = 106eead
-tests = 227 passed, 2 warnings
+v1.70-ppo-v2-controlled-retraining-scaffold-and-safety-tests
+latest sealed commit = 6016807
+tests = 246 passed, 2 warnings
 ```
 
 ## Current Operational Focus
 
-Create a non-executing PPO v2 controlled retraining scaffold and safety-test package.
+Audit the v1.70 PPO v2 controlled retraining scaffold and safety-test package to confirm that the scaffold remains fail-closed and non-executing.
 
 ## Next Objective
 
-Complete v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests before any training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review before any data-contract specification, split specification, training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 ## Next Operational Checkpoint
 
-`v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review`
+```txt
+v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification
+```
 
-Current guardrails:
+## Current Guardrails
 
 ```txt
-v1.70 creates non-executing scaffold/config code only
-v1.70 creates safety tests only
-v1.70 does not create a training script
-v1.70 does not run training
-v1.70 does not create generated datasets
-v1.70 does not create model artifacts
-v1.70 does not authorize paper orders
-v1.70 does not authorize live orders
-v1.70 does not authorize controlled submit
-v1.70 does not unblock PPO + RF
-v1.70 does not unblock PPO + XGBoost
+v1.71 is audit/review only
+v1.71 does not create new source code
+v1.71 does not create new scaffold files
+v1.71 does not create a training script
+v1.71 does not run training
+v1.71 does not create generated datasets
+v1.71 does not create model artifacts
+v1.71 does not authorize paper orders
+v1.71 does not authorize live orders
+v1.71 does not authorize controlled submit
+v1.71 does not unblock PPO + RF
+v1.71 does not unblock PPO + XGBoost
 NO-SUBMIT remains default
 ```
 
