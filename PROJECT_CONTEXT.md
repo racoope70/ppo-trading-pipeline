@@ -12,53 +12,54 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review`
+`v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification`
 
 ## Status
 
-READY FOR PPO V2 SCAFFOLD SAFETY AUDIT AND EXECUTION BOUNDARY REVIEW
+READY FOR PPO V2 CONTROLLED RETRAINING DATA CONTRACT AND SPLIT SPECIFICATION
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests`
+`v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review`
 
 ## Latest Sealed Checkpoint
 
 ```txt
-v1.70-ppo-v2-controlled-retraining-scaffold-and-safety-tests
-latest sealed commit = 6016807
+v1.71-ppo-v2-scaffold-safety-audit-and-execution-boundary-review
+latest sealed commit = 5e0868b
 tests = 246 passed, 2 warnings
 ```
 
-## Current Operational Focus
+Current operational focus:
 
-Audit the v1.70 PPO v2 controlled retraining scaffold and safety-test package to confirm that the scaffold remains fail-closed and non-executing.
+Define the PPO v2 controlled retraining data contract, raw column expectations, feature boundary, split boundaries, embargo rule, holdout policy, preprocessing boundary, and leakage-control requirements.
 
-## Next Objective
+Next objective:
 
-Complete v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review before any data-contract specification, split specification, training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification before any data-contract validation test creation, source-code creation, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
-## Next Operational Checkpoint
+Next operational checkpoint:
 
 ```txt
-v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification
+v1.73 PPO v2 Data Contract Validation Tests
 ```
 
-## Current Guardrails
+Current guardrails:
 
 ```txt
-v1.71 is audit/review only
-v1.71 does not create new source code
-v1.71 does not create new scaffold files
-v1.71 does not create a training script
-v1.71 does not run training
-v1.71 does not create generated datasets
-v1.71 does not create model artifacts
-v1.71 does not authorize paper orders
-v1.71 does not authorize live orders
-v1.71 does not authorize controlled submit
-v1.71 does not unblock PPO + RF
-v1.71 does not unblock PPO + XGBoost
+v1.72 is documentation/specification only
+v1.72 does not create source code
+v1.72 does not create tests
+v1.72 does not create a training script
+v1.72 does not fetch data
+v1.72 does not create generated datasets
+v1.72 does not run training
+v1.72 does not create model artifacts
+v1.72 does not authorize paper orders
+v1.72 does not authorize live orders
+v1.72 does not authorize controlled submit
+v1.72 does not unblock PPO + RF
+v1.72 does not unblock PPO + XGBoost
 NO-SUBMIT remains default
 ```
 
