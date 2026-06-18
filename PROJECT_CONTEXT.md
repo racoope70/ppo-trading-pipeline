@@ -12,52 +12,50 @@ It should be reviewed before modifying training logic, validation methodology, d
 
 ## Active Operational Milestone
 
-`v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review`
+`v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests`
 
 ## Status
 
-READY FOR PPO V2 CONTROLLED RETRAINING IMPLEMENTATION SCAFFOLD REVIEW
+READY FOR PPO V2 CONTROLLED RETRAINING SCAFFOLD AND SAFETY TESTS
 
 ## Latest Completed Paper-Trading Milestone
 
-`v1.68 PPO v2 Controlled Retraining Implementation Plan`
+`v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review`
 
-Latest sealed checkpoint:
+## Latest Sealed Checkpoint
 
 ```txt
-v1.68-ppo-v2-controlled-retraining-implementation-plan
-latest sealed commit = 857ec5f
+v1.69-ppo-v2-controlled-retraining-implementation-scaffold-review
+latest sealed commit = 106eead
 tests = 227 passed, 2 warnings
 ```
 
-Current operational focus:
+## Current Operational Focus
 
-Review whether the v1.68 PPO v2 Controlled Retraining Implementation Plan is sufficient to authorize a future scaffold and safety-test package.
+Create a non-executing PPO v2 controlled retraining scaffold and safety-test package.
 
-Next objective:
+## Next Objective
 
-Complete v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review before any scaffold-file creation, source-code creation, training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests before any training-script creation, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
-Next operational checkpoint:
+## Next Operational Checkpoint
 
-```txt
-v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests
-```
+`v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review`
 
 Current guardrails:
 
 ```txt
-v1.69 does not create source code
-v1.69 does not create training scripts
-v1.69 does not create scaffold files
-v1.69 does not run training
-v1.69 does not create generated datasets
-v1.69 does not create model artifacts
-v1.69 does not authorize paper orders
-v1.69 does not authorize live orders
-v1.69 does not authorize controlled submit
-v1.69 does not unblock PPO + RF
-v1.69 does not unblock PPO + XGBoost
+v1.70 creates non-executing scaffold/config code only
+v1.70 creates safety tests only
+v1.70 does not create a training script
+v1.70 does not run training
+v1.70 does not create generated datasets
+v1.70 does not create model artifacts
+v1.70 does not authorize paper orders
+v1.70 does not authorize live orders
+v1.70 does not authorize controlled submit
+v1.70 does not unblock PPO + RF
+v1.70 does not unblock PPO + XGBoost
 NO-SUBMIT remains default
 ```
 
