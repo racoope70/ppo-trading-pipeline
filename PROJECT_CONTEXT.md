@@ -55,13 +55,13 @@ tests = 246 passed, 2 warnings
 
 Current operational focus:
 
-Create validation tests for the v1.72 PPO v2 data contract and split specification.
+Create non-executing validation utilities and tests for the v1.72 PPO v2 data contract and split specification.
 
-v1.73 may add tests only. It does not authorize data fetching, generated dataset creation, training execution, model artifact creation, paper orders, live orders, controlled submit, or hybrid deployment.
+v1.73 may add non-executing validation utilities and tests only. It does not authorize data fetching, generated dataset creation, training execution, model artifact creation, paper orders, live orders, controlled submit, or hybrid deployment.
 
 Next objective:
 
-Complete v1.73 PPO v2 Data Contract Validation Tests before any non-test source-code creation, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.73 PPO v2 Data Contract Validation Tests before any source-code creation beyond non-executing data-contract validation utilities, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Next operational checkpoint:
 
@@ -73,9 +73,9 @@ Current guardrails:
 
 ```txt
 v1.72 sealed the PPO v2 data contract and split specification
-v1.73 may create data-contract validation tests only
-v1.73 may create validation-test code only if limited to enforcing the v1.72 data contract
-v1.73 does not authorize non-test source-code creation
+v1.73 may create data-contract validation utilities and tests only
+v1.73 may create validation utility/test code only if limited to enforcing the v1.72 data contract
+v1.73 does not authorize source-code creation beyond non-executing data-contract validation utilities
 v1.73 does not authorize training-script creation
 v1.73 does not authorize data fetching
 v1.73 does not authorize generated dataset creation
@@ -359,7 +359,7 @@ Current transition direction:
 ```txt
 v1.72 specified the PPO v2 data contract and split boundaries only.
 v1.73 may add data-contract validation tests only.
-source-code creation beyond validation tests requires a later checkpoint.
+source-code creation beyond non-executing data-contract validation utilities requires a later checkpoint.
 training-script creation requires a later checkpoint.
 data fetching requires a later checkpoint.
 generated dataset creation remains unauthorized.
@@ -384,7 +384,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Create validation tests for the v1.72 PPO v2 data contract and split specification.
+Create non-executing validation utilities and tests for the v1.72 PPO v2 data contract and split specification.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -394,7 +394,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 Next objective:
 
-Complete v1.73 PPO v2 Data Contract Validation Tests before any non-test source-code creation, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.73 PPO v2 Data Contract Validation Tests before any source-code creation beyond non-executing data-contract validation utilities, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -450,7 +450,7 @@ PPO + RF deployment remains blocked until PPO-only evidence is complete
 PPO + XGBoost deployment remains blocked until PPO-only and PPO + RF readiness are clearer
 feature importance must not be used as evidence of trading edge
 v1.72 sealed as documentation/specification only
-v1.73 may create data-contract validation tests only
+v1.73 may create data-contract validation utilities and tests only
 v1.73 does not create a training script
 v1.73 does not fetch data
 v1.73 does not create generated datasets
@@ -468,7 +468,7 @@ Near-term operating path:
 ```txt
 v1.72 specified the PPO v2 data contract and split boundaries only.
 v1.73 may add data-contract validation tests only.
-source-code creation beyond validation tests requires a later checkpoint.
+source-code creation beyond non-executing data-contract validation utilities requires a later checkpoint.
 training-script creation requires a later checkpoint.
 data fetching requires a later checkpoint.
 generated dataset creation remains unauthorized.
@@ -579,7 +579,7 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Create validation tests for the v1.72 PPO v2 data contract and split specification.
+Create non-executing validation utilities and tests for the v1.72 PPO v2 data contract and split specification.
 
 Next operational checkpoint:
 
@@ -609,7 +609,7 @@ Near-term operating path:
 ```txt
 v1.72 specified the PPO v2 data contract and split boundaries only.
 v1.73 may add data-contract validation tests only.
-source-code creation beyond validation tests requires a later checkpoint.
+source-code creation beyond non-executing data-contract validation utilities requires a later checkpoint.
 training-script creation requires a later checkpoint.
 data fetching requires a later checkpoint.
 generated dataset creation remains unauthorized.
@@ -1319,7 +1319,7 @@ v1.74 PPO v2 Data Contract Validation Review / Next Implementation Boundary
 review v1.73 validation-test coverage
 decide whether the data-contract test layer is sufficient
 decide whether to authorize the next controlled implementation boundary
-data-contract validation tests must complete before any broader implementation work becomes active
+data-contract validation utilities and tests must complete before any broader implementation work becomes active
 non-test source-code creation requires a later checkpoint unless explicitly authorized
 training-script creation requires a later checkpoint unless explicitly authorized
 data fetching requires a later checkpoint unless explicitly authorized
@@ -1351,7 +1351,7 @@ controlled submit remains blocked
 paper orders remain unauthorized
 live orders remain unauthorized
 PPO + RF and PPO + XGBoost remain blocked
-data-contract validation tests must complete before any broader implementation work becomes active
+data-contract validation utilities and tests must complete before any broader implementation work becomes active
 training-script creation requires a later checkpoint
 data fetching requires a later checkpoint
 actual retraining execution requires a later checkpoint
