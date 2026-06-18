@@ -10,6 +10,18 @@ This project is for research and educational purposes only. It is not financial 
 
 ---
 
+## Current Governance Status
+
+Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) before making training, retraining, paper-trading, or deployment recommendations.
+
+Legacy PPO is an infrastructure fixture only, not a promoted trading model.
+
+Controlled submit, paper orders, live orders, PPO + Random Forest, and PPO + XGBoost remain blocked unless a later checkpoint explicitly authorizes them.
+
+Passing tests prove infrastructure, control, and reporting stability. They do not prove trading profitability.
+
+---
+
 ## Workflows
 
 - [Six-Ticker Quality Baseline](docs/workflows/six_ticker_quality_baseline.md)

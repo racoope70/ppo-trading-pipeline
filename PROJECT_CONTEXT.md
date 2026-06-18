@@ -6,60 +6,86 @@ This document defines the current system architecture, validation standards, dep
 
 It should be reviewed before modifying training logic, validation methodology, deployment workflows, artifact management, or broker integration behavior.
 
+## Source-of-Truth Summary
+
+```txt
+latest_completed_milestone = v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification
+latest_completed_tag = v1.72-ppo-v2-controlled-retraining-data-contract-and-split-specification
+latest_completed_commit = b9e9a73
+active_milestone = v1.73 PPO v2 Data Contract Validation Tests
+next_checkpoint = v1.74 PPO v2 Data Contract Validation Review / Next Implementation Boundary
+legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
+infrastructure_baseline_decision = PASS
+offline_model_quality_decision = FAIL
+trading_edge_decision = FAIL_FOR_TRADING_EDGE
+controlled_submit_decision = BLOCKED / REJECT_FOR_CONTROLLED_SUBMIT
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+ppo_rf_deployment_decision = BLOCKED
+ppo_xgboost_deployment_decision = BLOCKED
+legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
+ppo_v2_status = specification / planning / scaffold only unless a later checkpoint explicitly authorizes execution
+test_evidence_scope = infrastructure / control / reporting stability only; not trading profitability
+NO-SUBMIT remains default
+```
+
 ---
 
 # 1. Current Development State
 
 ## Active Operational Milestone
 
-`v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification`
+`v1.73 PPO v2 Data Contract Validation Tests`
 
 ## Status
 
-READY FOR PPO V2 CONTROLLED RETRAINING DATA CONTRACT AND SPLIT SPECIFICATION
+READY FOR PPO V2 DATA CONTRACT VALIDATION TESTS
 
-## Latest Completed Paper-Trading Milestone
+## Latest Completed Milestone
 
-`v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review`
+`v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification`
 
 ## Latest Sealed Checkpoint
 
 ```txt
-v1.71-ppo-v2-scaffold-safety-audit-and-execution-boundary-review
-latest sealed commit = 5e0868b
+v1.72-ppo-v2-controlled-retraining-data-contract-and-split-specification
+latest sealed commit = b9e9a73
 tests = 246 passed, 2 warnings
 ```
 
 Current operational focus:
 
-Define the PPO v2 controlled retraining data contract, raw column expectations, feature boundary, split boundaries, embargo rule, holdout policy, preprocessing boundary, and leakage-control requirements.
+Create validation tests for the v1.72 PPO v2 data contract and split specification.
+
+v1.73 may add tests only. It does not authorize data fetching, generated dataset creation, training execution, model artifact creation, paper orders, live orders, controlled submit, or hybrid deployment.
 
 Next objective:
 
-Complete v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification before any data-contract validation test creation, source-code creation, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.73 PPO v2 Data Contract Validation Tests before any non-test source-code creation, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Next operational checkpoint:
 
 ```txt
-v1.73 PPO v2 Data Contract Validation Tests
+v1.74 PPO v2 Data Contract Validation Review / Next Implementation Boundary
 ```
 
 Current guardrails:
 
 ```txt
-v1.72 is documentation/specification only
-v1.72 does not create source code
-v1.72 does not create tests
-v1.72 does not create a training script
-v1.72 does not fetch data
-v1.72 does not create generated datasets
-v1.72 does not run training
-v1.72 does not create model artifacts
-v1.72 does not authorize paper orders
-v1.72 does not authorize live orders
-v1.72 does not authorize controlled submit
-v1.72 does not unblock PPO + RF
-v1.72 does not unblock PPO + XGBoost
+v1.72 sealed the PPO v2 data contract and split specification
+v1.73 may create data-contract validation tests only
+v1.73 may create validation-test code only if limited to enforcing the v1.72 data contract
+v1.73 does not authorize non-test source-code creation
+v1.73 does not authorize training-script creation
+v1.73 does not authorize data fetching
+v1.73 does not authorize generated dataset creation
+v1.73 does not authorize retraining execution
+v1.73 does not authorize model artifact creation
+v1.73 does not authorize paper orders
+v1.73 does not authorize live orders
+v1.73 does not authorize controlled submit
+v1.73 does not unblock PPO + RF
+v1.73 does not unblock PPO + XGBoost
 NO-SUBMIT remains default
 ```
 
@@ -127,6 +153,11 @@ docs/runs/v1.66_ppo_v2_retraining_design.md
 docs/designs/v1.66_ppo_v2_retraining_design.md
 docs/runs/v1.67_ppo_v2_retraining_authorization_review.md
 docs/decisions/v1.67_ppo_v2_retraining_authorization_review.md
+docs/runs/v1.68_ppo_v2_controlled_retraining_implementation_plan.md
+docs/runs/v1.69_ppo_v2_controlled_retraining_implementation_scaffold_review.md
+docs/runs/v1.70_ppo_v2_controlled_retraining_scaffold_and_safety_tests.md
+docs/runs/v1.71_ppo_v2_scaffold_safety_audit_and_execution_boundary_review.md
+docs/runs/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
 ```
 
 Important context:
@@ -232,11 +263,11 @@ paper order submission = not authorized
 live orders = not authorized
 PPO + Random Forest deployment = blocked
 PPO + XGBoost deployment = blocked
-retraining = not authorized by v1.67
+ppo_v2_retraining_execution = not authorized unless a later checkpoint explicitly authorizes execution
 NO-SUBMIT = default
 ```
 
-Current v1.65 final audit decision:
+Historical v1.65 final audit decision:
 
 ```txt
 legacy_ppo_final_classification = INFRASTRUCTURE_FIXTURE_ONLY
@@ -254,7 +285,7 @@ ppo_v2_retraining_design_decision = AUTHORIZED_FOR_DESIGN_ONLY
 actual_retraining_execution = NOT_AUTHORIZED_BY_v1.65
 ```
 
-Current v1.66 design decision:
+Historical v1.66 design decision:
 
 ```txt
 ppo_v2_retraining_design_decision = AUTHORIZED_FOR_DESIGN_ONLY
@@ -267,7 +298,7 @@ ppo_rf_deployment_decision = BLOCKED
 ppo_xgboost_deployment_decision = BLOCKED
 ```
 
-Current v1.67 authorization review decision:
+Historical v1.67 authorization review decision:
 
 ```txt
 v1.66_design_review_decision = SUFFICIENT_FOR_CONTROLLED_IMPLEMENTATION_PLAN
@@ -282,7 +313,7 @@ ppo_rf_deployment_decision = BLOCKED
 ppo_xgboost_deployment_decision = BLOCKED
 ```
 
-Current v1.62 inventory summary:
+Historical v1.62 inventory summary:
 
 ```txt
 manifest_path = config/paper_trading_six_ticker_manifest.json
@@ -306,13 +337,13 @@ Passing tests proves code, control, and reporting stability. It does not prove t
 Latest completed milestone:
 
 ```txt
-v1.66 PPO v2 Retraining Design
+v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification
 ```
 
 Current active checkpoint:
 
 ```txt
-v1.67 PPO v2 Retraining Authorization Review
+v1.73 PPO v2 Data Contract Validation Tests
 ```
 
 v1.44 closes the paper-trading reporting-control phase from v1.34 through v1.44.
@@ -326,10 +357,11 @@ Reporting stability must not be treated as strategy-performance stability.
 Current transition direction:
 
 ```txt
-v1.66 designed PPO v2 retraining only.
-v1.67 reviews whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
-v1.67 authorization is planning-only.
-actual retraining execution requires a later checkpoint.
+v1.72 specified the PPO v2 data contract and split boundaries only.
+v1.73 may add data-contract validation tests only.
+source-code creation beyond validation tests requires a later checkpoint.
+training-script creation requires a later checkpoint.
+data fetching requires a later checkpoint.
 generated dataset creation remains unauthorized.
 model artifact creation remains unauthorized.
 controlled submit remains blocked.
@@ -352,7 +384,7 @@ NO-SUBMIT unless a separate controlled-submit checkpoint explicitly authorizes o
 
 Current operational focus:
 
-Review whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
+Create validation tests for the v1.72 PPO v2 data contract and split specification.
 
 The v1.34 through v1.44 milestones completed the engineering, safety, reporting-control, and artifact-governance layer.
 
@@ -362,7 +394,7 @@ This does not prove that the PPO strategy is stable, profitable, or ready for br
 
 Next objective:
 
-Complete v1.67 PPO v2 Retraining Authorization Review before any implementation-plan work, retraining execution, generated dataset creation, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.73 PPO v2 Data Contract Validation Tests before any non-test source-code creation, training-script creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Current observation findings:
 
@@ -404,7 +436,7 @@ paper order submission = not authorized
 live orders = not authorized
 PPO + Random Forest deployment = blocked
 PPO + XGBoost deployment = blocked
-retraining = not authorized by v1.67
+ppo_v2_retraining_execution = not authorized unless a later checkpoint explicitly authorizes execution
 NO-SUBMIT = default
 ```
 
@@ -417,23 +449,28 @@ controlled submit remains a separate checkpoint
 PPO + RF deployment remains blocked until PPO-only evidence is complete
 PPO + XGBoost deployment remains blocked until PPO-only and PPO + RF readiness are clearer
 feature importance must not be used as evidence of trading edge
-v1.67 does not run training
-v1.67 does not create generated datasets
-v1.67 does not create model artifacts
-v1.67 does not authorize paper orders
-v1.67 does not authorize live orders
-v1.67 does not authorize controlled submit
-v1.67 does not unblock PPO + RF
-v1.67 does not unblock PPO + XGBoost
+v1.72 sealed as documentation/specification only
+v1.73 may create data-contract validation tests only
+v1.73 does not create a training script
+v1.73 does not fetch data
+v1.73 does not create generated datasets
+v1.73 does not run training
+v1.73 does not create model artifacts
+v1.73 does not authorize paper orders
+v1.73 does not authorize live orders
+v1.73 does not authorize controlled submit
+v1.73 does not unblock PPO + RF
+v1.73 does not unblock PPO + XGBoost
 ```
 
 Near-term operating path:
 
 ```txt
-v1.67 reviews whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
-v1.67 authorization is planning-only.
-v1.68 may define the controlled PPO v2 retraining implementation plan.
-actual retraining execution requires a later checkpoint.
+v1.72 specified the PPO v2 data contract and split boundaries only.
+v1.73 may add data-contract validation tests only.
+source-code creation beyond validation tests requires a later checkpoint.
+training-script creation requires a later checkpoint.
+data fetching requires a later checkpoint.
 generated dataset creation remains unauthorized.
 model artifact creation remains unauthorized.
 controlled submit remains blocked.
@@ -542,19 +579,24 @@ Full retraining, model promotion, and hybrid model work must not bypass paper-tr
 
 ## Near-Term Operational Objective
 
-Review whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
+Create validation tests for the v1.72 PPO v2 data contract and split specification.
 
 Next operational checkpoint:
 
 ```txt
-v1.68 PPO v2 Controlled Retraining Implementation Plan
+v1.74 PPO v2 Data Contract Validation Review / Next Implementation Boundary
 ```
 
 The goal is to formally document:
 
-* v1.66 design sufficiency for controlled implementation planning
-* PPO v2 retraining implementation plan authorization is planning-only
-* actual retraining execution remains unauthorized
+* data-contract validation tests
+* required-column validation coverage
+* approved-universe validation coverage
+* split-boundary validation coverage
+* embargo-rule validation coverage
+* holdout-policy validation coverage
+* leakage-control validation coverage
+* retraining execution remains unauthorized
 * generated dataset creation remains unauthorized
 * model artifact creation remains unauthorized
 * paper order authorization remains unauthorized
@@ -565,10 +607,11 @@ The goal is to formally document:
 Near-term operating path:
 
 ```txt
-v1.67 reviews whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan.
-v1.67 authorization is planning-only.
-v1.68 may define the controlled PPO v2 retraining implementation plan.
-actual retraining execution requires a later checkpoint.
+v1.72 specified the PPO v2 data contract and split boundaries only.
+v1.73 may add data-contract validation tests only.
+source-code creation beyond validation tests requires a later checkpoint.
+training-script creation requires a later checkpoint.
+data fetching requires a later checkpoint.
 generated dataset creation remains unauthorized.
 model artifact creation remains unauthorized.
 controlled submit remains blocked.
@@ -1099,7 +1142,7 @@ UNH
 XOM
 ```
 
-v1.67 does not authorize data extraction, generated dataset creation, training execution, or model artifact creation.
+v1.72 does not authorize creating generated datasets, model artifacts, or retraining reports.
 
 ---
 
@@ -1128,7 +1171,7 @@ reports/alpaca_ppo_retraining
 
 Generated datasets, model artifacts, run outputs, reports, logs, and credentials should remain excluded from version control unless intentionally documented otherwise.
 
-v1.67 does not authorize creating generated datasets, model artifacts, or retraining reports.
+v1.72 does not authorize creating generated datasets, model artifacts, or retraining reports.
 
 ---
 
@@ -1272,33 +1315,45 @@ large generated run outputs
 Current operational deliverables:
 
 ```txt
-v1.67 PPO v2 Retraining Authorization Review
-review whether v1.66 is sufficient to authorize a controlled PPO v2 retraining implementation plan
-v1.66_design_review_decision = SUFFICIENT_FOR_CONTROLLED_IMPLEMENTATION_PLAN
-ppo_v2_retraining_implementation_plan_decision = AUTHORIZED_FOR_PLANNING_ONLY
-actual_retraining_execution = NOT_AUTHORIZED_BY_v1.67
-generated_dataset_creation = NOT_AUTHORIZED_BY_v1.67
-model_artifact_creation = NOT_AUTHORIZED_BY_v1.67
-controlled_submit_decision = BLOCKED
-paper_order_authorization = NOT_AUTHORIZED
-live_order_authorization = NOT_AUTHORIZED
-ppo_rf_deployment_decision = BLOCKED
-ppo_xgboost_deployment_decision = BLOCKED
-do not run training
-do not create generated datasets
-do not create model artifacts
-do not submit orders
-preserve NO-SUBMIT default
-keep controlled submit blocked
-keep PPO + RF and PPO + XGBoost blocked
+v1.74 PPO v2 Data Contract Validation Review / Next Implementation Boundary
+review v1.73 validation-test coverage
+decide whether the data-contract test layer is sufficient
+decide whether to authorize the next controlled implementation boundary
+data-contract validation tests must complete before any broader implementation work becomes active
+non-test source-code creation requires a later checkpoint unless explicitly authorized
+training-script creation requires a later checkpoint unless explicitly authorized
+data fetching requires a later checkpoint unless explicitly authorized
+actual retraining execution remains unauthorized unless explicitly authorized
+generated dataset creation remains unauthorized unless explicitly authorized
+model artifact creation remains unauthorized unless explicitly authorized
+controlled submit remains blocked
+paper orders remain unauthorized
+live orders remain unauthorized
+PPO + RF and PPO + XGBoost remain blocked
+
+later PPO-Only Baseline Performance Package Completion
+combine historical validation, holdout evidence, leakage controls, normalization controls, backtest-style metrics, and supervised paper-trading observation evidence after PPO v2 completes the required offline and no-submit gates
 ```
 
 Next operational deliverables:
 
 ```txt
-v1.68 PPO v2 Controlled Retraining Implementation Plan
-define implementation files, planned configuration, tests, validation utilities, runbook steps, artifact paths, and safety checks
-implementation planning only
+v1.74 PPO v2 Data Contract Validation Review / Next Implementation Boundary
+review v1.73 validation-test coverage
+decide whether the data-contract test layer is sufficient
+decide whether to authorize the next controlled implementation boundary
+training-script creation still requires a later checkpoint unless explicitly authorized
+data fetching still requires a later checkpoint unless explicitly authorized
+actual retraining execution remains unauthorized unless explicitly authorized
+generated dataset creation remains unauthorized unless explicitly authorized
+model artifact creation remains unauthorized unless explicitly authorized
+controlled submit remains blocked
+paper orders remain unauthorized
+live orders remain unauthorized
+PPO + RF and PPO + XGBoost remain blocked
+data-contract validation tests must complete before any broader implementation work becomes active
+training-script creation requires a later checkpoint
+data fetching requires a later checkpoint
 actual retraining execution requires a later checkpoint
 generated dataset creation requires a later checkpoint
 model artifact creation requires a later checkpoint
@@ -1364,6 +1419,11 @@ v1.65 Legacy PPO Final Audit Decision
 v1.66 PPO v2 Retraining Design
 v1.67 PPO v2 Retraining Authorization Review
 v1.68 PPO v2 Controlled Retraining Implementation Plan
+v1.69 PPO v2 Controlled Retraining Implementation Scaffold Review
+v1.70 PPO v2 Controlled Retraining Scaffold and Safety Tests
+v1.71 PPO v2 Scaffold Safety Audit and Execution Boundary Review
+v1.72 PPO v2 Controlled Retraining Data Contract and Split Specification
+v1.73 PPO v2 Data Contract Validation Tests
 ```
 
 Research milestones:
