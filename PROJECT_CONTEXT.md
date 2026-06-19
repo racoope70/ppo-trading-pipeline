@@ -9,11 +9,11 @@ It should be reviewed before modifying training logic, validation methodology, d
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v1.77 PPO v2 Data Preparation Interface Scaffold Review / Next Boundary Decision
-latest_completed_tag = v1.77-ppo-v2-data-preparation-interface-scaffold-review-next-boundary-decision
-latest_completed_commit = b4dcf13
-active_milestone = v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan
-next_checkpoint = v1.79 PPO v2 Data Preparation Interface Integration Scaffold and Tests
+latest_completed_milestone = v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan
+latest_completed_tag = v1.78-ppo-v2-data-preparation-interface-integration-boundary-plan
+latest_completed_commit = f38e8d5
+active_milestone = v1.79 PPO v2 Data Preparation Interface Integration Scaffold and Tests
+next_checkpoint = v1.80 PPO v2 Data Preparation Integration Scaffold Review / Next Boundary Decision
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -35,55 +35,54 @@ NO-SUBMIT remains default
 
 ## Active Operational Milestone
 
-`v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan`
+`v1.79 PPO v2 Data Preparation Interface Integration Scaffold and Tests`
 
 ## Status
 
-READY FOR PPO V2 DATA PREPARATION INTERFACE INTEGRATION BOUNDARY PLAN
+READY FOR PPO V2 DATA PREPARATION INTERFACE INTEGRATION SCAFFOLD AND TESTS
 
 ## Latest Completed Milestone
 
-`v1.77 PPO v2 Data Preparation Interface Scaffold Review / Next Boundary Decision`
+`v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan`
 
 ## Latest Sealed Checkpoint
 
 ```txt
-v1.77-ppo-v2-data-preparation-interface-scaffold-review-next-boundary-decision
-latest sealed commit = b4dcf13
+v1.78-ppo-v2-data-preparation-interface-integration-boundary-plan
+latest sealed commit = f38e8d5
 tests = 311 passed, 2 warnings
 ```
 
 Current operational focus:
 
-Define the controlled PPO v2 data-preparation interface integration boundary plan before any integration scaffold or implementation checkpoint becomes active.
+Create the controlled PPO v2 data-preparation integration scaffold and tests inside the v1.78 boundary.
 
-v1.78 is a planning checkpoint only. It does not create source code, create tests, fetch data, generate datasets, create a training script, run retraining, create model artifacts, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
+v1.79 may create non-executing source code and tests for the in-memory integration scaffold only. It does not fetch data, generate datasets, create a training script, run retraining, create model artifacts, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
 
 Next objective:
 
-Complete v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan before any integration source-code scaffold, test-code creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.79 PPO v2 Data Preparation Interface Integration Scaffold and Tests before any scaffold review, next-boundary decision, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Next operational checkpoint:
 
-v1.79 PPO v2 Data Preparation Interface Integration Scaffold and Tests
+v1.80 PPO v2 Data Preparation Integration Scaffold Review / Next Boundary Decision
 
 Current guardrails:
 
-v1.77 sealed the PPO v2 data-preparation interface scaffold review / next boundary decision
-v1.78 defines the PPO v2 data-preparation interface integration boundary plan only
-v1.78 does not create source code
-v1.78 does not create tests
-v1.78 does not authorize data fetching
-v1.78 does not authorize generated dataset creation
-v1.78 does not authorize training-script creation
-v1.78 does not authorize retraining execution
-v1.78 does not authorize model artifact creation
-v1.78 does not authorize paper orders
-v1.78 does not authorize live orders
-v1.78 does not authorize controlled submit
-v1.78 does not unblock PPO + RF
-v1.78 does not unblock PPO + XGBoost
+v1.78 sealed the PPO v2 data-preparation interface integration boundary plan
+v1.79 creates a non-executing in-memory integration scaffold and tests only
+v1.79 does not authorize data fetching
+v1.79 does not authorize generated dataset creation
+v1.79 does not authorize training-script creation
+v1.79 does not authorize retraining execution
+v1.79 does not authorize model artifact creation
+v1.79 does not authorize paper orders
+v1.79 does not authorize live orders
+v1.79 does not authorize controlled submit
+v1.79 does not unblock PPO + RF
+v1.79 does not unblock PPO + XGBoost
 NO-SUBMIT remains default
+
 
 ## Current Paper-Trading Source of Truth
 
@@ -158,6 +157,7 @@ docs/runs/v1.75_ppo_v2_controlled_data_preparation_interface_boundary_plan.md
 docs/runs/v1.76_ppo_v2_controlled_data_preparation_interface_scaffold_and_tests.md
 docs/runs/v1.77_ppo_v2_data_preparation_interface_scaffold_review_next_boundary_decision.md
 docs/runs/v1.78_ppo_v2_data_preparation_interface_integration_boundary_plan.md
+docs/runs/v1.79_ppo_v2_data_preparation_interface_integration_scaffold_and_tests.md
 docs/reviews/v1.77_ppo_v2_data_preparation_interface_scaffold_review_next_boundary_decision.md
 ```
 
@@ -219,6 +219,7 @@ v1.75 = PPO v2 controlled data preparation interface boundary plan
 v1.76 = PPO v2 controlled data preparation interface scaffold and tests
 v1.77 = PPO v2 data preparation interface scaffold review / next boundary decision
 v1.78 = PPO v2 data preparation interface integration boundary plan
+v1.79 = PPO v2 data preparation interface integration scaffold and tests
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
