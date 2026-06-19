@@ -9,11 +9,11 @@ It should be reviewed before modifying training logic, validation methodology, d
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v1.76 PPO v2 Controlled Data Preparation Interface Scaffold and Tests
-latest_completed_tag = v1.76-ppo-v2-controlled-data-preparation-interface-scaffold-and-tests
-latest_completed_commit = 448c48d
-active_milestone = v1.77 PPO v2 Data Preparation Interface Scaffold Review / Next Boundary Decision
-next_checkpoint = v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan
+latest_completed_milestone = v1.77 PPO v2 Data Preparation Interface Scaffold Review / Next Boundary Decision
+latest_completed_tag = v1.77-ppo-v2-data-preparation-interface-scaffold-review-next-boundary-decision
+latest_completed_commit = b4dcf13
+active_milestone = v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan
+next_checkpoint = v1.79 PPO v2 Data Preparation Interface Integration Scaffold and Tests
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -35,54 +35,54 @@ NO-SUBMIT remains default
 
 ## Active Operational Milestone
 
-`v1.77 PPO v2 Data Preparation Interface Scaffold Review / Next Boundary Decision`
+`v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan`
 
 ## Status
 
-READY FOR PPO V2 DATA PREPARATION INTERFACE SCAFFOLD REVIEW
+READY FOR PPO V2 DATA PREPARATION INTERFACE INTEGRATION BOUNDARY PLAN
 
 ## Latest Completed Milestone
 
-`v1.76 PPO v2 Controlled Data Preparation Interface Scaffold and Tests`
+`v1.77 PPO v2 Data Preparation Interface Scaffold Review / Next Boundary Decision`
 
 ## Latest Sealed Checkpoint
 
 ```txt
-v1.76-ppo-v2-controlled-data-preparation-interface-scaffold-and-tests
-latest sealed commit = 448c48d
+v1.77-ppo-v2-data-preparation-interface-scaffold-review-next-boundary-decision
+latest sealed commit = b4dcf13
 tests = 311 passed, 2 warnings
 ```
 
 Current operational focus:
 
-Review the v1.76 PPO v2 data-preparation interface scaffold and tests before any next implementation boundary becomes active.
+Define the controlled PPO v2 data-preparation interface integration boundary plan before any integration scaffold or implementation checkpoint becomes active.
 
-v1.77 is a review checkpoint only. It does not create source code, create tests, fetch data, generate datasets, create a training script, run retraining, create model artifacts, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
+v1.78 is a planning checkpoint only. It does not create source code, create tests, fetch data, generate datasets, create a training script, run retraining, create model artifacts, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
 
 Next objective:
 
-Complete v1.77 PPO v2 Data Preparation Interface Scaffold Review / Next Boundary Decision before any integration-boundary planning, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
+Complete v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan before any integration source-code scaffold, test-code creation, data fetching, generated dataset creation, retraining execution, model artifact creation, controlled submit, paper order authorization, live order authorization, or hybrid gate work becomes active.
 
 Next operational checkpoint:
 
-v1.78 PPO v2 Data Preparation Interface Integration Boundary Plan
+v1.79 PPO v2 Data Preparation Interface Integration Scaffold and Tests
 
 Current guardrails:
 
-v1.76 sealed the PPO v2 controlled data-preparation interface scaffold and tests
-v1.77 reviews the v1.76 scaffold and tests only
-v1.77 does not create source code
-v1.77 does not create tests
-v1.77 does not authorize data fetching
-v1.77 does not authorize generated dataset creation
-v1.77 does not authorize training-script creation
-v1.77 does not authorize retraining execution
-v1.77 does not authorize model artifact creation
-v1.77 does not authorize paper orders
-v1.77 does not authorize live orders
-v1.77 does not authorize controlled submit
-v1.77 does not unblock PPO + RF
-v1.77 does not unblock PPO + XGBoost
+v1.77 sealed the PPO v2 data-preparation interface scaffold review / next boundary decision
+v1.78 defines the PPO v2 data-preparation interface integration boundary plan only
+v1.78 does not create source code
+v1.78 does not create tests
+v1.78 does not authorize data fetching
+v1.78 does not authorize generated dataset creation
+v1.78 does not authorize training-script creation
+v1.78 does not authorize retraining execution
+v1.78 does not authorize model artifact creation
+v1.78 does not authorize paper orders
+v1.78 does not authorize live orders
+v1.78 does not authorize controlled submit
+v1.78 does not unblock PPO + RF
+v1.78 does not unblock PPO + XGBoost
 NO-SUBMIT remains default
 
 ## Current Paper-Trading Source of Truth
@@ -153,9 +153,11 @@ docs/runs/v1.73_ppo_v2_data_contract_validation_tests.md
 docs/runs/v1.74_ppo_v2_data_contract_validation_review_next_implementation_boundary.md
 docs/reviews/v1.74_ppo_v2_data_contract_validation_review_next_implementation_boundary.md
 docs/plans/v1.75_ppo_v2_controlled_data_preparation_interface_boundary_plan.md
+docs/plans/v1.78_ppo_v2_data_preparation_interface_integration_boundary_plan.md
 docs/runs/v1.75_ppo_v2_controlled_data_preparation_interface_boundary_plan.md
 docs/runs/v1.76_ppo_v2_controlled_data_preparation_interface_scaffold_and_tests.md
 docs/runs/v1.77_ppo_v2_data_preparation_interface_scaffold_review_next_boundary_decision.md
+docs/runs/v1.78_ppo_v2_data_preparation_interface_integration_boundary_plan.md
 docs/reviews/v1.77_ppo_v2_data_preparation_interface_scaffold_review_next_boundary_decision.md
 ```
 
@@ -216,6 +218,7 @@ v1.74 = PPO v2 data contract validation review / next implementation boundary
 v1.75 = PPO v2 controlled data preparation interface boundary plan
 v1.76 = PPO v2 controlled data preparation interface scaffold and tests
 v1.77 = PPO v2 data preparation interface scaffold review / next boundary decision
+v1.78 = PPO v2 data preparation interface integration boundary plan
 ```
 
 Do not rely on stale checkpoint candidates. Do not submit from prior checkpoint plans.
