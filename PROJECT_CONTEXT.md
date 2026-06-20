@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v1.89 PPO v2 Controlled Training Execution Dry-Run Scaffold and Tests
-latest_completed_tag = v1.89-ppo-v2-controlled-training-execution-dry-run-scaffold-and-tests
-latest_completed_commit = 66126c2
-active_milestone = v1.90 PPO v2 Controlled Training Execution Dry-Run Review / Next Boundary Decision
-next_checkpoint = v1.91 PPO v2 Controlled Training Execution Implementation Plan
+latest_completed_milestone = v1.92 PPO v2 Controlled Training Execution Implementation Scaffold and Tests
+latest_completed_tag = v1.92-ppo-v2-controlled-training-execution-implementation-scaffold-and-tests
+latest_completed_commit = fe017e7
+active_milestone = v1.93 PPO v2 Controlled Training Execution Scaffold Review / Execution Boundary Decision
+next_checkpoint = v1.94 PPO v2 Controlled Training Execution Authorization Plan
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -26,8 +26,8 @@ live_order_authorization = NOT_AUTHORIZED
 ppo_rf_deployment_decision = BLOCKED
 ppo_xgboost_deployment_decision = BLOCKED
 legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
-ppo_v2_status = specification / planning / scaffold / configuration / dry-run only unless a later checkpoint explicitly authorizes execution
-test_evidence_scope = infrastructure / control / reporting / configuration / dry-run stability only; not trading profitability
+ppo_v2_status = specification / planning / scaffold / configuration / dry-run / controlled-execution scaffold only unless a later checkpoint explicitly authorizes execution
+test_evidence_scope = infrastructure / control / reporting / configuration / dry-run / controlled-execution scaffold stability only; not trading profitability
 milestone_review_reference_map_role = navigation only; non-authorizing
 NO-SUBMIT remains default
 ```
@@ -38,54 +38,57 @@ NO-SUBMIT remains default
 
 ## Active Operational Milestone
 
-`v1.90 PPO v2 Controlled Training Execution Dry-Run Review / Next Boundary Decision`
+`v1.93 PPO v2 Controlled Training Execution Scaffold Review / Execution Boundary Decision`
 
 ## Status
 
-READY FOR PPO V2 CONTROLLED TRAINING EXECUTION DRY-RUN REVIEW / NEXT BOUNDARY DECISION
+READY FOR PPO V2 CONTROLLED TRAINING EXECUTION SCAFFOLD REVIEW / EXECUTION BOUNDARY DECISION
 
 ## Latest Completed Milestone
 
-`v1.89 PPO v2 Controlled Training Execution Dry-Run Scaffold and Tests`
+`v1.92 PPO v2 Controlled Training Execution Implementation Scaffold and Tests`
 
 ## Latest Sealed Checkpoint
 
 ```txt
-v1.89-ppo-v2-controlled-training-execution-dry-run-scaffold-and-tests
-latest sealed commit = 66126c2
-tests = 406 passed, 2 warnings
+v1.92-ppo-v2-controlled-training-execution-implementation-scaffold-and-tests
+latest sealed commit = fe017e7
+tests = 448 passed, 2 warnings
 ```
 
 Current operational focus:
 
-Review the v1.89 PPO v2 controlled training execution dry-run scaffold and close the dry-run scaffold section for its current non-executing scope.
+Review the v1.92 PPO v2 controlled training execution scaffold and close the controlled execution scaffold section for its current non-executing scope.
 
-v1.90 may create review documentation, run documentation, and a single PROJECT_CONTEXT.md section-closeout update. It does not create production source code, create tests, fetch data, generate datasets, create a training script, run retraining, create model artifacts, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
+v1.93 may create review documentation, run documentation, and a single PROJECT_CONTEXT.md section-closeout update. It does not fetch data, generate datasets, create a training script, run PPO training, create model artifacts, promote models, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
 
 Next objective:
 
-Complete v1.90 PPO v2 Controlled Training Execution Dry-Run Review / Next Boundary Decision before controlled PPO v2 training execution implementation planning becomes active.
+Complete v1.93 PPO v2 Controlled Training Execution Scaffold Review / Execution Boundary Decision before controlled PPO v2 training execution authorization planning becomes active.
 
 Next operational checkpoint:
 
-v1.91 PPO v2 Controlled Training Execution Implementation Plan
+v1.94 PPO v2 Controlled Training Execution Authorization Plan
 
 Current guardrails:
 
-v1.89 sealed the PPO v2 controlled training execution dry-run scaffold and tests
-v1.90 closes the PPO v2 controlled training execution dry-run section
-v1.90 does not authorize data fetching
-v1.90 does not authorize generated dataset creation
-v1.90 does not authorize training-script creation
-v1.90 does not authorize PPO training execution
-v1.90 does not authorize model artifact creation
-v1.90 does not authorize paper orders
-v1.90 does not authorize live orders
-v1.90 does not authorize controlled submit
-v1.90 does not unblock PPO + RF
-v1.90 does not unblock PPO + XGBoost
-v1.90 only allows movement to controlled training execution implementation planning
+v1.92 sealed the PPO v2 controlled training execution scaffold and tests
+v1.93 closes the PPO v2 controlled training execution scaffold section
+v1.93 does not authorize data fetching
+v1.93 does not authorize generated dataset creation
+v1.93 does not authorize training-script creation
+v1.93 does not authorize PPO training execution
+v1.93 does not authorize model artifact creation
+v1.93 does not authorize model promotion
+v1.93 does not authorize paper orders
+v1.93 does not authorize live orders
+v1.93 does not authorize controlled submit
+v1.93 does not unblock PPO + RF
+v1.93 does not unblock PPO + XGBoost
+v1.93 only allows movement to controlled training execution authorization planning
 actual PPO v2 training remains blocked until a later checkpoint explicitly authorizes it
+historical validation and retraining protections are required and non-optional
+Alpaca historical loader, embargo compliance, train-only normalization controls, untouched holdout validation, PPO-only baseline performance package, candidate stability review, fresh no-submit paper observation evidence, no-submit paper observation review, and leakage-prevention controls remain required before any promotion discussion
 docs/workflows/milestone_review_reference_map.md is a navigation map only and does not authorize work
 NO-SUBMIT remains default
 
