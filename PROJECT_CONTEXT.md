@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v1.82 PPO v2 Training Input Handoff Interface Scaffold and Tests
-latest_completed_tag = v1.82-ppo-v2-training-input-handoff-interface-scaffold-and-tests
-latest_completed_commit = dae49d5
-active_milestone = v1.83 PPO v2 Training Input Handoff Interface Review / Section Closeout
-next_checkpoint = v1.84 PPO v2 Training Configuration Boundary Plan
+latest_completed_milestone = v1.85 PPO v2 Training Configuration Scaffold and Tests
+latest_completed_tag = v1.85-ppo-v2-training-configuration-scaffold-and-tests
+latest_completed_commit = c881429
+active_milestone = v1.86 PPO v2 Training Configuration Review / Execution Readiness Boundary
+next_checkpoint = v1.87 PPO v2 Controlled Training Execution Authorization Plan
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -26,8 +26,8 @@ live_order_authorization = NOT_AUTHORIZED
 ppo_rf_deployment_decision = BLOCKED
 ppo_xgboost_deployment_decision = BLOCKED
 legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
-ppo_v2_status = specification / planning / scaffold / handoff only unless a later checkpoint explicitly authorizes execution
-test_evidence_scope = infrastructure / control / reporting / handoff stability only; not trading profitability
+ppo_v2_status = specification / planning / scaffold / configuration only unless a later checkpoint explicitly authorizes execution
+test_evidence_scope = infrastructure / control / reporting / configuration stability only; not trading profitability
 milestone_review_reference_map_role = navigation only; non-authorizing
 NO-SUBMIT remains default
 ```
@@ -38,52 +38,54 @@ NO-SUBMIT remains default
 
 ## Active Operational Milestone
 
-`v1.83 PPO v2 Training Input Handoff Interface Review / Section Closeout`
+`v1.86 PPO v2 Training Configuration Review / Execution Readiness Boundary`
 
 ## Status
 
-READY FOR PPO V2 TRAINING INPUT HANDOFF INTERFACE REVIEW / SECTION CLOSEOUT
+READY FOR PPO V2 TRAINING CONFIGURATION REVIEW / EXECUTION-READINESS BOUNDARY
 
 ## Latest Completed Milestone
 
-`v1.82 PPO v2 Training Input Handoff Interface Scaffold and Tests`
+`v1.85 PPO v2 Training Configuration Scaffold and Tests`
 
 ## Latest Sealed Checkpoint
 
 ```txt
-v1.82-ppo-v2-training-input-handoff-interface-scaffold-and-tests
-latest sealed commit = dae49d5
-tests = 335 passed, 2 warnings
+v1.85-ppo-v2-training-configuration-scaffold-and-tests
+latest sealed commit = c881429
+tests = 376 passed, 2 warnings
 ```
 
 Current operational focus:
 
-Review the v1.82 PPO v2 training-input handoff interface scaffold and close the training-input handoff section.
+Review the v1.85 PPO v2 training-configuration scaffold and close the training-configuration section for its current non-executing scope.
 
-v1.83 may create review documentation, run documentation, and a single PROJECT_CONTEXT.md section-closeout update. It does not create production source code, create tests, fetch data, generate datasets, create a training script, run retraining, create model artifacts, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
+v1.86 may create review documentation, run documentation, and a single PROJECT_CONTEXT.md section-closeout update. It does not create production source code, create tests, fetch data, generate datasets, create a training script, run retraining, create model artifacts, authorize paper orders, authorize live orders, authorize controlled submit, or unblock hybrid deployment.
 
 Next objective:
 
-Complete v1.83 PPO v2 Training Input Handoff Interface Review / Section Closeout before PPO v2 training-configuration boundary planning becomes active.
+Complete v1.86 PPO v2 Training Configuration Review / Execution Readiness Boundary before controlled PPO v2 training execution authorization planning becomes active.
 
 Next operational checkpoint:
 
-v1.84 PPO v2 Training Configuration Boundary Plan
+v1.87 PPO v2 Controlled Training Execution Authorization Plan
 
 Current guardrails:
 
-v1.82 sealed the PPO v2 training-input handoff interface scaffold and tests
-v1.83 closes the PPO v2 training-input handoff section
-v1.83 does not authorize data fetching
-v1.83 does not authorize generated dataset creation
-v1.83 does not authorize training-script creation
-v1.83 does not authorize retraining execution
-v1.83 does not authorize model artifact creation
-v1.83 does not authorize paper orders
-v1.83 does not authorize live orders
-v1.83 does not authorize controlled submit
-v1.83 does not unblock PPO + RF
-v1.83 does not unblock PPO + XGBoost
+v1.85 sealed the PPO v2 training-configuration scaffold and tests
+v1.86 closes the PPO v2 training-configuration section
+v1.86 does not authorize data fetching
+v1.86 does not authorize generated dataset creation
+v1.86 does not authorize training-script creation
+v1.86 does not authorize retraining execution
+v1.86 does not authorize model artifact creation
+v1.86 does not authorize paper orders
+v1.86 does not authorize live orders
+v1.86 does not authorize controlled submit
+v1.86 does not unblock PPO + RF
+v1.86 does not unblock PPO + XGBoost
+v1.86 only allows movement to controlled training execution authorization planning
+actual PPO v2 training remains blocked until a later checkpoint explicitly authorizes it
 docs/workflows/milestone_review_reference_map.md is a navigation map only and does not authorize work
 NO-SUBMIT remains default
 
