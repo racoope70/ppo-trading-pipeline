@@ -2,6 +2,18 @@
 
 This directory contains operational policies, runbooks, and workflow controls for the PPO-only supervised paper-trading pipeline.
 
+## Milestone Review Reference Map
+
+Before advancing, proposing, or implementing any milestone, review:
+
+```text
+docs/workflows/milestone_review_reference_map.md
+```
+
+This map identifies the relevant audit, standard, design, plan, run, and review documents for each project phase.
+
+It does not authorize work. `PROJECT_CONTEXT.md` remains the controlling source of truth.
+
 ## Paper-Trading Safety and Reporting
 
 ### Decision and Candidate Policies
@@ -18,6 +30,7 @@ paper_trading_session_policy.md
 ```
 
 ### Reporting Chain
+
 
 ```text
 paper_trading_operational_reporting_runbook.md

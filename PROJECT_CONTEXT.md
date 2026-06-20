@@ -6,6 +6,8 @@ This document defines the current system architecture, validation standards, dep
 
 It should be reviewed before modifying training logic, validation methodology, deployment workflows, artifact management, or broker integration behavior.
 
+Before advancing, proposing, or implementing any milestone, review `docs/workflows/milestone_review_reference_map.md` to identify the relevant audit, standard, design, plan, run, and review documents for the current phase.
+
 ## Source-of-Truth Summary
 
 ```txt
