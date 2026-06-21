@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v1.99 PPO v2 One-Time Controlled Training Execution Checkpoint Authorization Review
-latest_completed_tag = v1.99-ppo-v2-one-time-controlled-training-execution-checkpoint-authorization-review
-latest_completed_commit = pending v1.99 sealed checkpoint
-active_milestone = v2.00 PPO v2 One-Time Controlled Training Execution Checkpoint
-next_checkpoint = v2.00 PPO v2 One-Time Controlled Training Execution Checkpoint
+latest_completed_milestone = v2.00 PPO v2 One-Time Controlled Training Execution Checkpoint
+latest_completed_tag = v2.00-ppo-v2-one-time-controlled-training-execution-checkpoint
+latest_completed_commit = pending v2.00 sealed checkpoint
+active_milestone = v2.01 PPO v2 Controlled Training Execution Wrapper Scaffold
+next_checkpoint = v2.01 PPO v2 Controlled Training Execution Wrapper Scaffold
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -42,8 +42,18 @@ v1.99 does not authorize live orders
 v1.99 does not authorize controlled submit
 v1.99 does not unblock PPO + RF
 v1.99 does not unblock PPO + XGBoost
-v2.00 may define and execute exactly one controlled PPO v2 training run only if all fail-closed controls pass
-v2.00 outputs remain quarantined training output only until separately reviewed
+v2.00 fail-closed decision = EXECUTION_NOT_PERFORMED because no controlled execution wrapper or safe CLI entrypoint exists yet
+v2.00 did not run PPO training
+v2.00 did not fetch data
+v2.00 did not generate datasets
+v2.00 did not create model artifacts
+v2.00 did not authorize model promotion
+v2.00 did not authorize paper orders
+v2.00 did not authorize live orders
+v2.00 did not authorize controlled submit
+v2.00 did not unblock PPO + RF
+v2.00 did not unblock PPO + XGBoost
+v2.01 next checkpoint = controlled training execution wrapper scaffold before any actual PPO training
 ```
 
 ---
