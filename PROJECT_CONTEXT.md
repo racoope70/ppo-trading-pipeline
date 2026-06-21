@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v1.96 PPO v2 Controlled Training Execution Checkpoint Design Plan
-latest_completed_tag = v1.96-ppo-v2-controlled-training-execution-checkpoint-design-plan
-latest_completed_commit = fedf402
-active_milestone = v1.97 PPO v2 Controlled Training Execution Checkpoint Design Review
-next_checkpoint = v1.98 PPO v2 One-Time Controlled Training Execution Checkpoint Plan
+latest_completed_milestone = v1.99 PPO v2 One-Time Controlled Training Execution Checkpoint Authorization Review
+latest_completed_tag = v1.99-ppo-v2-one-time-controlled-training-execution-checkpoint-authorization-review
+latest_completed_commit = pending v1.99 sealed checkpoint
+active_milestone = v2.00 PPO v2 One-Time Controlled Training Execution Checkpoint
+next_checkpoint = v2.00 PPO v2 One-Time Controlled Training Execution Checkpoint
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -26,10 +26,24 @@ live_order_authorization = NOT_AUTHORIZED
 ppo_rf_deployment_decision = BLOCKED
 ppo_xgboost_deployment_decision = BLOCKED
 legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
-ppo_v2_status = specification / planning / scaffold / configuration / dry-run / controlled-execution scaffold / authorization review / checkpoint design plan accepted for planning-only next checkpoint; actual training execution remains blocked unless a later checkpoint explicitly authorizes execution
+ppo_v2_status = specification / planning / scaffold / configuration / dry-run / controlled-execution scaffold / authorization review / checkpoint design plan / one-time controlled execution checkpoint plan / authorization review completed; v1.99 authorizes movement to a later one-time controlled training execution checkpoint only
 test_evidence_scope = infrastructure / control / reporting / configuration / dry-run / controlled-execution scaffold / authorization-review / design-review stability only; not trading profitability
 milestone_review_reference_map_role = navigation only; non-authorizing
 NO-SUBMIT remains default
+v1.99 authorizes movement to a later one-time controlled PPO v2 training execution checkpoint only
+v1.99 does not run PPO training
+v1.99 does not fetch data
+v1.99 does not generate datasets
+v1.99 does not create executable training scripts
+v1.99 does not create model artifacts
+v1.99 does not authorize model promotion
+v1.99 does not authorize paper orders
+v1.99 does not authorize live orders
+v1.99 does not authorize controlled submit
+v1.99 does not unblock PPO + RF
+v1.99 does not unblock PPO + XGBoost
+v2.00 may define and execute exactly one controlled PPO v2 training run only if all fail-closed controls pass
+v2.00 outputs remain quarantined training output only until separately reviewed
 ```
 
 ---
