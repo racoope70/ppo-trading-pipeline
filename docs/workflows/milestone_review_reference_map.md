@@ -195,37 +195,113 @@ docs/reviews/v1.86_ppo_v2_training_configuration_review_execution_readiness_boun
 
 **Then move to**
 
-v1.87+ if the task involves controlled PPO v2 training execution authorization planning.
+v1.87-v1.90 if the task involves controlled PPO v2 training execution authorization planning, dry-run readiness, or non-executing scaffold review.
 
 ---
 
-### v1.87+ — PPO v2 Controlled Training Execution Authorization Planning
+### v1.87-v1.90 - Controlled Training Execution Dry-Run and Scaffold Readiness
 
 **Use when reviewing**
 
-* whether PPO v2 can request controlled training execution
-* final pre-execution routing
-* whether all prior governance, validation, handoff, and configuration docs are complete
+* controlled training execution authorization planning
+* dry-run scaffold readiness
+* non-executing scaffold behavior
+* whether training execution remains blocked
+* whether artifact creation, promotion, broker integration, submit, and hybrid paths remain disabled
+
+**Review first**
+
+```txt
+PROJECT_CONTEXT.md
+docs/plans/v1.87_ppo_v2_controlled_training_execution_authorization_plan.md
+docs/plans/v1.88_ppo_v2_controlled_training_execution_scaffold_dry_run_plan.md
+docs/runs/v1.89_ppo_v2_controlled_training_execution_dry_run_scaffold_and_tests.md
+docs/reviews/v1.90_ppo_v2_controlled_training_execution_dry_run_review_next_boundary_decision.md
+```
+
+**Then move to**
+
+v1.91-v1.94 if the task involves controlled training execution implementation scaffolding or authorization planning.
+
+---
+
+### v1.91-v1.94 - Controlled Training Execution Implementation and Authorization Planning
+
+**Use when reviewing**
+
+* controlled execution implementation scaffold
+* execution boundary decisions
+* future training execution authorization planning
+* preconditions before any one-time controlled execution checkpoint can be considered
+* quarantine, audit-package, model-quality, and hybrid-gate restrictions
+
+**Review first**
+
+```txt
+PROJECT_CONTEXT.md
+docs/plans/v1.91_ppo_v2_controlled_training_execution_implementation_plan.md
+docs/runs/v1.92_ppo_v2_controlled_training_execution_implementation_scaffold_and_tests.md
+docs/reviews/v1.93_ppo_v2_controlled_training_execution_scaffold_review_execution_boundary_decision.md
+docs/plans/v1.94_ppo_v2_controlled_training_execution_authorization_plan.md
+```
+
+**Then move to**
+
+v1.95-v1.97 if the task involves authorization review, checkpoint design planning, or design review.
+
+---
+
+### v1.95-v1.97 - Controlled Training Execution Checkpoint Design Review
+
+**Use when reviewing**
+
+* controlled training execution authorization review
+* controlled execution checkpoint design requirements
+* single-command specification requirements
+* runtime capture, quarantine paths, artifact inventory, checksums, and fail-closed behavior
+* whether the project may move to one-time controlled execution checkpoint planning
+
+**Review first**
+
+```txt
+PROJECT_CONTEXT.md
+docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
+docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
+docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
+```
+
+**Then move to**
+
+v1.98+ if the task involves planning a one-time controlled PPO v2 training execution checkpoint.
+
+---
+
+### v1.98+ - One-Time Controlled Training Execution Checkpoint Planning
+
+**Use when reviewing**
+
+* one-time controlled PPO v2 training execution checkpoint planning
+* whether a future checkpoint may define an execution command
+* source-of-truth, runtime capture, quarantine, artifact inventory, checksum, and post-training audit requirements
+* preventing planning from being mistaken for permission to train
 
 **Review first**
 
 ```txt
 PROJECT_CONTEXT.md
 docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
-docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
-docs/designs/v1.66_ppo_v2_retraining_design.md
-docs/decisions/v1.67_ppo_v2_retraining_authorization_review.md
 docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
-docs/reviews/v1.74_ppo_v2_data_contract_validation_review_next_implementation_boundary.md
-docs/reviews/v1.77_ppo_v2_data_preparation_interface_scaffold_review_next_boundary_decision.md
-docs/reviews/v1.80_ppo_v2_data_preparation_integration_scaffold_review_next_boundary_decision.md
+docs/plans/v1.94_ppo_v2_controlled_training_execution_authorization_plan.md
+docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
+docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
+docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
 ```
-
-Also review v1.81-v1.86 handoff and configuration documents when created.
 
 **Then move to**
 
-Stop and create a separate controlled training execution authorization checklist before any actual PPO v2 training run.
+Stop unless the task is explicitly a v1.98 planning checkpoint. v1.98 planning does not automatically authorize PPO training. Actual PPO training execution remains blocked unless a later sealed checkpoint explicitly authorizes one-time controlled execution.
+
+NO-SUBMIT remains default. Paper orders, live orders, controlled submit, PPO + Random Forest, and PPO + XGBoost remain blocked.
 
 ---
 
@@ -314,19 +390,30 @@ v1.60-v1.65
 
 ```txt
 PROJECT_CONTEXT.md
-v1.60-v1.65 governance reset
-v1.66-v1.72 PPO v2 design and data contract
-v1.73-v1.80 validation, data-preparation, and integration boundaries
-v1.81-v1.86 training handoff and configuration documents, when present
+docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
+docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
+docs/plans/v1.94_ppo_v2_controlled_training_execution_authorization_plan.md
+docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
+docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
+docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
 ```
 
 **Relevant milestone ranges**
 
 ```txt
-v1.60-v1.87+
+v1.60—v1.65  legacy PPO audit and governance reset
+v1.66—v1.86  PPO v2 design, data-contract, validation, handoff, and training-configuration controls
+v1.87—v1.97  controlled execution authorization, scaffold, checkpoint design, and design-review controls
+v1.98+       one-time controlled training execution checkpoint planning
 ```
 
-Before any actual PPO v2 training run, stop and create a separate controlled training execution authorization checklist.
+v1.98 planning does not automatically authorize PPO training.
+
+Actual PPO training execution remains blocked unless a later sealed checkpoint explicitly authorizes one-time controlled execution.
+
+NO-SUBMIT remains default.
+
+Paper orders, live orders, controlled submit, PPO + RF, and PPO + XGBoost remain blocked.
 
 ---
 
@@ -338,6 +425,10 @@ Before any actual PPO v2 training run, stop and create a separate controlled tra
 PROJECT_CONTEXT.md
 docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
 docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
+docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
+docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
+docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
+docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
 future PPO-only baseline performance package
 future PPO + Random Forest readiness review
 future PPO + XGBoost comparison review
@@ -346,12 +437,23 @@ future PPO + XGBoost comparison review
 **Relevant milestone ranges**
 
 ```txt
-v1.60-v1.87+
+v1.60-v1.65  legacy PPO audit and governance reset
+v1.66-v1.86  PPO v2 design, data-contract, validation, handoff, and training-configuration controls
+v1.87-v1.97  controlled execution authorization, scaffold, checkpoint design, and design-review controls
+v1.98+       one-time controlled training execution checkpoint planning
 future standalone PPO v2 validation and baseline performance package
 future hybrid-gate readiness documents
 ```
 
-Do not unblock hybrid work from the legacy PPO; hybrid work requires a validated standalone PPO v2 baseline first.
+v1.98 planning does not automatically authorize PPO training.
+
+Actual PPO training execution remains blocked unless a later sealed checkpoint explicitly authorizes one-time controlled execution.
+
+NO-SUBMIT remains default.
+
+Paper orders, live orders, controlled submit, PPO + RF, and PPO + XGBoost remain blocked.
+
+Do not unblock hybrid work from the legacy PPO or from v1.98 planning. Hybrid work requires a validated standalone PPO v2 baseline and a separate sealed hybrid authorization first.
 
 ---
 
