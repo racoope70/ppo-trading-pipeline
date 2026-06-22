@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.08 PPO v2 One-Time Controlled Training Execution Package Implementation Scaffold
-latest_completed_tag = v2.08-ppo-v2-one-time-controlled-training-execution-package-implementation-scaffold
-latest_completed_commit = pending v2.08 sealed checkpoint
-active_milestone = v2.09 PPO v2 One-Time Controlled Training Execution Package Implementation Scaffold Review
-next_checkpoint = v2.09 PPO v2 One-Time Controlled Training Execution Package Implementation Scaffold Review
+latest_completed_milestone = v2.09 PPO v2 One-Time Controlled Training Execution Package Implementation Scaffold Review
+latest_completed_tag = v2.09-ppo-v2-one-time-controlled-training-execution-package-implementation-scaffold-review
+latest_completed_commit = pending v2.09 sealed checkpoint
+active_milestone = v2.10 PPO v2 One-Time Controlled Training Execution Readiness Review
+next_checkpoint = v2.10 PPO v2 One-Time Controlled Training Execution Readiness Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -131,7 +131,18 @@ v2.08 did not authorize live orders
 v2.08 did not authorize controlled submit
 v2.08 did not unblock PPO + RF
 v2.08 did not unblock PPO + XGBoost
-v2.09 next checkpoint = one-time controlled training execution package implementation scaffold review; no training execution
+v2.09 implementation scaffold review = accepted for controlled execution readiness review; no training execution
+v2.09 did not run PPO training
+v2.09 did not fetch data
+v2.09 did not generate datasets
+v2.09 did not create model artifacts
+v2.09 did not authorize model promotion
+v2.09 did not authorize paper orders
+v2.09 did not authorize live orders
+v2.09 did not authorize controlled submit
+v2.09 did not unblock PPO + RF
+v2.09 did not unblock PPO + XGBoost
+v2.10 next checkpoint = one-time controlled training execution readiness review; no training execution
 ```
 
 ---
