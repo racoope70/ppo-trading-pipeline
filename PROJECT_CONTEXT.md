@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.06 PPO v2 One-Time Controlled Training Execution Package Plan
-latest_completed_tag = v2.06-ppo-v2-one-time-controlled-training-execution-package-plan
-latest_completed_commit = pending v2.06 sealed checkpoint
-active_milestone = v2.07 PPO v2 One-Time Controlled Training Execution Package Plan Review
-next_checkpoint = v2.07 PPO v2 One-Time Controlled Training Execution Package Plan Review
+latest_completed_milestone = v2.07 PPO v2 One-Time Controlled Training Execution Package Plan Review
+latest_completed_tag = v2.07-ppo-v2-one-time-controlled-training-execution-package-plan-review
+latest_completed_commit = pending v2.07 sealed checkpoint
+active_milestone = v2.08 PPO v2 One-Time Controlled Training Execution Package Implementation Scaffold
+next_checkpoint = v2.08 PPO v2 One-Time Controlled Training Execution Package Implementation Scaffold
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -109,7 +109,18 @@ v2.06 did not authorize live orders
 v2.06 did not authorize controlled submit
 v2.06 did not unblock PPO + RF
 v2.06 did not unblock PPO + XGBoost
-v2.07 next checkpoint = one-time controlled training execution package plan review; no training execution
+v2.07 package plan review = accepted for implementation scaffold planning; no training execution
+v2.07 did not run PPO training
+v2.07 did not fetch data
+v2.07 did not generate datasets
+v2.07 did not create model artifacts
+v2.07 did not authorize model promotion
+v2.07 did not authorize paper orders
+v2.07 did not authorize live orders
+v2.07 did not authorize controlled submit
+v2.07 did not unblock PPO + RF
+v2.07 did not unblock PPO + XGBoost
+v2.08 next checkpoint = one-time controlled training execution package implementation scaffold; no training execution
 ```
 
 ---
