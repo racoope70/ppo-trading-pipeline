@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.18 PPO v2 Controlled Training Execution Package Validation Review
-latest_completed_tag = v2.18-ppo-v2-controlled-training-execution-package-validation-review
-latest_completed_commit = pending v2.18 sealed checkpoint
-active_milestone = v2.19 PPO v2 Controlled Training Execution Authorization Planning Review
-next_checkpoint = v2.19 PPO v2 Controlled Training Execution Authorization Planning Review
+latest_completed_milestone = v2.19 PPO v2 Controlled Training Execution Authorization Planning Review
+latest_completed_tag = v2.19-ppo-v2-controlled-training-execution-authorization-planning-review
+latest_completed_commit = pending v2.19 sealed checkpoint
+active_milestone = v2.20 PPO v2 Controlled Training Execution Authorization Decision Review
+next_checkpoint = v2.20 PPO v2 Controlled Training Execution Authorization Decision Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -250,7 +250,21 @@ v2.18 did not authorize live orders
 v2.18 did not authorize controlled submit
 v2.18 did not unblock PPO + RF
 v2.18 did not unblock PPO + XGBoost
-v2.19 next checkpoint = controlled training execution authorization planning review; no training execution
+v2.19 authorization planning review = future controlled training execution authorization decision structure defined; no training execution
+v2.19 did not authorize PPO training
+v2.19 did not run PPO training
+v2.19 did not fetch data
+v2.19 did not generate datasets
+v2.19 did not create model artifacts
+v2.19 did not create quarantine training outputs
+v2.19 did not write new package artifacts
+v2.19 did not authorize model promotion
+v2.19 did not authorize paper orders
+v2.19 did not authorize live orders
+v2.19 did not authorize controlled submit
+v2.19 did not unblock PPO + RF
+v2.19 did not unblock PPO + XGBoost
+v2.20 next checkpoint = controlled training execution authorization decision review; no training execution
 ```
 
 ---
