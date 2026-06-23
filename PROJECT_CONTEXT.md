@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.17 PPO v2 Controlled Training Execution Package Preparation Checkpoint Review
-latest_completed_tag = v2.17-ppo-v2-controlled-training-execution-package-preparation-checkpoint-review
-latest_completed_commit = pending v2.17 sealed checkpoint
-active_milestone = v2.18 PPO v2 Controlled Training Execution Package Validation Review
-next_checkpoint = v2.18 PPO v2 Controlled Training Execution Package Validation Review
+latest_completed_milestone = v2.18 PPO v2 Controlled Training Execution Package Validation Review
+latest_completed_tag = v2.18-ppo-v2-controlled-training-execution-package-validation-review
+latest_completed_commit = pending v2.18 sealed checkpoint
+active_milestone = v2.19 PPO v2 Controlled Training Execution Authorization Planning Review
+next_checkpoint = v2.19 PPO v2 Controlled Training Execution Authorization Planning Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -237,7 +237,20 @@ v2.17 did not authorize live orders
 v2.17 did not authorize controlled submit
 v2.17 did not unblock PPO + RF
 v2.17 did not unblock PPO + XGBoost
-v2.18 next checkpoint = controlled training execution package validation review; no training execution
+v2.18 package validation review = passed for controlled training execution authorization planning review; no training execution
+v2.18 did not run PPO training
+v2.18 did not fetch data
+v2.18 did not generate datasets
+v2.18 did not create model artifacts
+v2.18 did not create quarantine training outputs
+v2.18 did not write new package artifacts
+v2.18 did not authorize model promotion
+v2.18 did not authorize paper orders
+v2.18 did not authorize live orders
+v2.18 did not authorize controlled submit
+v2.18 did not unblock PPO + RF
+v2.18 did not unblock PPO + XGBoost
+v2.19 next checkpoint = controlled training execution authorization planning review; no training execution
 ```
 
 ---
