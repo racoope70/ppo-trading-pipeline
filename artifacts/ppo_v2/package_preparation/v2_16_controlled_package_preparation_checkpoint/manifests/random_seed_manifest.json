@@ -1,0 +1,20 @@
+{
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "live_orders_authorized": false,
+  "manifest_type": "random_seed_manifest",
+  "model_artifact_creation_performed": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "notes": "Seed manifest placeholder only.",
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "random_seed_status": "placeholder_required_for_future_checkpoint",
+  "random_seed_used_for_training_in_v2_16": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "training_execution_performed": false
+}

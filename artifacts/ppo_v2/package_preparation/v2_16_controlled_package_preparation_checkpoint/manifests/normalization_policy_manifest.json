@@ -1,0 +1,21 @@
+{
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "live_orders_authorized": false,
+  "locked_eval_stats_required": true,
+  "manifest_type": "normalization_policy_manifest",
+  "model_artifact_creation_performed": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "normalization_fitted_in_v2_16": false,
+  "notes": "Policy definition only. No normalization is fitted in v2.16.",
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "train_only_normalization_required": true,
+  "training_execution_performed": false
+}

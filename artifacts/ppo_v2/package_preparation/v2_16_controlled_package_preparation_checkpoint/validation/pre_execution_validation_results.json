@@ -1,0 +1,21 @@
+{
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "execution_authorized": false,
+  "live_orders_authorized": false,
+  "manifest_type": "pre_execution_validation_results",
+  "model_artifact_creation_performed": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "paper_or_live_authorized": false,
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "training_execution_performed": false,
+  "training_execution_ready": false,
+  "v2_16_result": "PACKAGE_PREPARATION_CREATED_NON_EXECUTING"
+}

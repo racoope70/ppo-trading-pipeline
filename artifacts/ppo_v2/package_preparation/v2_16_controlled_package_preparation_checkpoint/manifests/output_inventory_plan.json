@@ -1,0 +1,22 @@
+{
+  "allowed_future_quarantine_root": "artifacts/ppo_v2/quarantine/v2_16_controlled_package_preparation_checkpoint",
+  "allowed_preparation_root": "artifacts/ppo_v2/package_preparation/v2_16_controlled_package_preparation_checkpoint",
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "live_orders_authorized": false,
+  "manifest_type": "output_inventory_plan",
+  "model_artifact_creation_performed": false,
+  "model_artifacts_created_in_v2_16": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "notes": "Preparation package inventory only. No model artifacts are created.",
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "training_execution_performed": false,
+  "training_outputs_created_in_v2_16": false
+}

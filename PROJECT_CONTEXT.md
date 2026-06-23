@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.15 PPO v2 Controlled Training Execution Package Preparation Readiness Review
-latest_completed_tag = v2.15-ppo-v2-controlled-training-execution-package-preparation-readiness-review
-latest_completed_commit = pending v2.15 sealed checkpoint
-active_milestone = v2.16 PPO v2 Controlled Training Execution Package Preparation Checkpoint
-next_checkpoint = v2.16 PPO v2 Controlled Training Execution Package Preparation Checkpoint
+latest_completed_milestone = v2.16 PPO v2 Controlled Training Execution Package Preparation Checkpoint
+latest_completed_tag = v2.16-ppo-v2-controlled-training-execution-package-preparation-checkpoint
+latest_completed_commit = pending v2.16 sealed checkpoint
+active_milestone = v2.17 PPO v2 Controlled Training Execution Package Preparation Checkpoint Review
+next_checkpoint = v2.17 PPO v2 Controlled Training Execution Package Preparation Checkpoint Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -211,7 +211,20 @@ v2.15 did not authorize live orders
 v2.15 did not authorize controlled submit
 v2.15 did not unblock PPO + RF
 v2.15 did not unblock PPO + XGBoost
-v2.16 next checkpoint = controlled training execution package preparation checkpoint; no training execution
+v2.16 package preparation checkpoint = non-executing controlled package preparation files created; no training execution
+v2.16 did not run PPO training
+v2.16 did not fetch data
+v2.16 did not generate datasets
+v2.16 did not create model artifacts
+v2.16 did not create quarantine training outputs
+v2.16 wrote preparation package artifacts only
+v2.16 did not authorize model promotion
+v2.16 did not authorize paper orders
+v2.16 did not authorize live orders
+v2.16 did not authorize controlled submit
+v2.16 did not unblock PPO + RF
+v2.16 did not unblock PPO + XGBoost
+v2.17 next checkpoint = controlled training execution package preparation checkpoint review; no training execution
 ```
 
 ---

@@ -1,0 +1,22 @@
+{
+  "broker_trading_client": false,
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_in_v2_16": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "historical_data_source_only": true,
+  "live_market_stream": false,
+  "live_orders_authorized": false,
+  "manifest_type": "data_source_manifest",
+  "model_artifact_creation_performed": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "notes": "Data source definition only. No data is fetched in v2.16.",
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "training_execution_performed": false
+}

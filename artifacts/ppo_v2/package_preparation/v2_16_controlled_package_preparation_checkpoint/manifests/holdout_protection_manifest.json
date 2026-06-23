@@ -1,0 +1,21 @@
+{
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "holdout_accessed_in_v2_16": false,
+  "holdout_audit_required": true,
+  "live_orders_authorized": false,
+  "manifest_type": "holdout_protection_manifest",
+  "model_artifact_creation_performed": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "notes": "Holdout protection policy only.",
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "training_execution_performed": false,
+  "untouched_holdout_required": true
+}

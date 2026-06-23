@@ -1,0 +1,20 @@
+{
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "feature_generation_performed": false,
+  "feature_set_defined": false,
+  "live_orders_authorized": false,
+  "manifest_type": "feature_set_manifest",
+  "model_artifact_creation_performed": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "notes": "Feature-set manifest placeholder only. No features are generated in v2.16.",
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "training_execution_performed": false
+}

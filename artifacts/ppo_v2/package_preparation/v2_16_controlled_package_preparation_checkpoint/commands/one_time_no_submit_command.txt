@@ -1,0 +1,6 @@
+python -m ppo_v2_controlled_training_execution \
+  --mode controlled-training \
+  --run-id v2_16_controlled_package_preparation_checkpoint \
+  --config artifacts/ppo_v2/package_preparation/v2_16_controlled_package_preparation_checkpoint/config/controlled_training_config.yaml \
+  --quarantine-root artifacts/ppo_v2/quarantine/v2_16_controlled_package_preparation_checkpoint \
+  --no-submit

@@ -1,0 +1,20 @@
+# v2.16 PPO v2 controlled training execution package preparation config
+# Non-executing package-preparation artifact only.
+schema_version: v2.16
+classification: CONTROLLED_PACKAGE_PREPARATION_ONLY
+run_id: v2_16_controlled_package_preparation_checkpoint
+mode: package-preparation-only
+training_execution_authorized: false
+data_fetching_authorized: false
+dataset_generation_authorized: false
+model_artifact_creation_authorized: false
+model_promotion_authorized: false
+paper_orders_authorized: false
+live_orders_authorized: false
+controlled_submit_authorized: false
+ppo_rf_authorized: false
+ppo_xgboost_authorized: false
+no_submit_default: true
+preparation_root: artifacts/ppo_v2/package_preparation/v2_16_controlled_package_preparation_checkpoint
+quarantine_root: artifacts/ppo_v2/quarantine/v2_16_controlled_package_preparation_checkpoint
+required_command_suffix: --no-submit

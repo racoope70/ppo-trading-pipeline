@@ -1,0 +1,22 @@
+{
+  "classification": "CONTROLLED_PACKAGE_PREPARATION_ONLY",
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "embargo_window_defined": false,
+  "holdout_window_defined": false,
+  "live_orders_authorized": false,
+  "manifest_type": "temporal_boundary_manifest",
+  "model_artifact_creation_performed": false,
+  "model_promotion_authorized": false,
+  "no_submit_default": true,
+  "notes": "Temporal windows are placeholders only and must be sealed later.",
+  "paper_orders_authorized": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "run_id": "v2_16_controlled_package_preparation_checkpoint",
+  "schema_version": "v2.16",
+  "training_execution_performed": false,
+  "training_window_defined": false,
+  "validation_window_defined": false
+}
