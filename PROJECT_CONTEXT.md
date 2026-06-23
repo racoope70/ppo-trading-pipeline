@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.14 PPO v2 Controlled Training Execution Package Preparation Scaffold Review
-latest_completed_tag = v2.14-ppo-v2-controlled-training-execution-package-preparation-scaffold-review
-latest_completed_commit = pending v2.14 sealed checkpoint
-active_milestone = v2.15 PPO v2 Controlled Training Execution Package Preparation Readiness Review
-next_checkpoint = v2.15 PPO v2 Controlled Training Execution Package Preparation Readiness Review
+latest_completed_milestone = v2.15 PPO v2 Controlled Training Execution Package Preparation Readiness Review
+latest_completed_tag = v2.15-ppo-v2-controlled-training-execution-package-preparation-readiness-review
+latest_completed_commit = pending v2.15 sealed checkpoint
+active_milestone = v2.16 PPO v2 Controlled Training Execution Package Preparation Checkpoint
+next_checkpoint = v2.16 PPO v2 Controlled Training Execution Package Preparation Checkpoint
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -199,7 +199,19 @@ v2.14 did not authorize live orders
 v2.14 did not authorize controlled submit
 v2.14 did not unblock PPO + RF
 v2.14 did not unblock PPO + XGBoost
-v2.15 next checkpoint = controlled training execution package preparation readiness review; no training execution
+v2.15 package preparation readiness review = accepted for controlled package preparation checkpoint; no training execution
+v2.15 did not run PPO training
+v2.15 did not fetch data
+v2.15 did not generate datasets
+v2.15 did not create model artifacts
+v2.15 did not write package artifacts
+v2.15 did not authorize model promotion
+v2.15 did not authorize paper orders
+v2.15 did not authorize live orders
+v2.15 did not authorize controlled submit
+v2.15 did not unblock PPO + RF
+v2.15 did not unblock PPO + XGBoost
+v2.16 next checkpoint = controlled training execution package preparation checkpoint; no training execution
 ```
 
 ---
