@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.12 PPO v2 Controlled Training Execution Package Preparation Plan
-latest_completed_tag = v2.12-ppo-v2-controlled-training-execution-package-preparation-plan
-latest_completed_commit = pending v2.12 sealed checkpoint
-active_milestone = v2.13 PPO v2 Controlled Training Execution Package Preparation Scaffold
-next_checkpoint = v2.13 PPO v2 Controlled Training Execution Package Preparation Scaffold
+latest_completed_milestone = v2.13 PPO v2 Controlled Training Execution Package Preparation Scaffold
+latest_completed_tag = v2.13-ppo-v2-controlled-training-execution-package-preparation-scaffold
+latest_completed_commit = pending v2.13 sealed checkpoint
+active_milestone = v2.14 PPO v2 Controlled Training Execution Package Preparation Scaffold Review
+next_checkpoint = v2.14 PPO v2 Controlled Training Execution Package Preparation Scaffold Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -175,7 +175,19 @@ v2.12 did not authorize live orders
 v2.12 did not authorize controlled submit
 v2.12 did not unblock PPO + RF
 v2.12 did not unblock PPO + XGBoost
-v2.13 next checkpoint = controlled training execution package preparation scaffold; no training execution
+v2.13 package preparation scaffold = non-executing controlled training execution package preparation scaffold created; no training execution
+v2.13 did not run PPO training
+v2.13 did not fetch data
+v2.13 did not generate datasets
+v2.13 did not create model artifacts
+v2.13 did not write package artifacts
+v2.13 did not authorize model promotion
+v2.13 did not authorize paper orders
+v2.13 did not authorize live orders
+v2.13 did not authorize controlled submit
+v2.13 did not unblock PPO + RF
+v2.13 did not unblock PPO + XGBoost
+v2.14 next checkpoint = controlled training execution package preparation scaffold review; no training execution
 ```
 
 ---
