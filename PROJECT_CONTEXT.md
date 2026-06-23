@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.11 PPO v2 One-Time Controlled Training Execution Checkpoint
-latest_completed_tag = v2.11-ppo-v2-one-time-controlled-training-execution-checkpoint
-latest_completed_commit = pending v2.11 sealed checkpoint
-active_milestone = v2.12 PPO v2 Controlled Training Execution Package Preparation Plan
-next_checkpoint = v2.12 PPO v2 Controlled Training Execution Package Preparation Plan
+latest_completed_milestone = v2.12 PPO v2 Controlled Training Execution Package Preparation Plan
+latest_completed_tag = v2.12-ppo-v2-controlled-training-execution-package-preparation-plan
+latest_completed_commit = pending v2.12 sealed checkpoint
+active_milestone = v2.13 PPO v2 Controlled Training Execution Package Preparation Scaffold
+next_checkpoint = v2.13 PPO v2 Controlled Training Execution Package Preparation Scaffold
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -164,7 +164,18 @@ v2.11 did not authorize live orders
 v2.11 did not authorize controlled submit
 v2.11 did not unblock PPO + RF
 v2.11 did not unblock PPO + XGBoost
-v2.12 next checkpoint = controlled training execution package preparation plan; no training execution
+v2.12 package preparation plan = controlled training execution package preparation requirements defined; no training execution
+v2.12 did not run PPO training
+v2.12 did not fetch data
+v2.12 did not generate datasets
+v2.12 did not create model artifacts
+v2.12 did not authorize model promotion
+v2.12 did not authorize paper orders
+v2.12 did not authorize live orders
+v2.12 did not authorize controlled submit
+v2.12 did not unblock PPO + RF
+v2.12 did not unblock PPO + XGBoost
+v2.13 next checkpoint = controlled training execution package preparation scaffold; no training execution
 ```
 
 ---
