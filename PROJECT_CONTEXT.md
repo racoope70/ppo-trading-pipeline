@@ -1053,6 +1053,52 @@ Rules:
 
 ---
 
+## Future Validation / Reporting Expansion — Standalone PPO v2 Baseline Candidate Only
+
+Future validation/reporting expansion after a valid standalone PPO v2 baseline candidate exists:
+
+Core published validation:
+
+- $100,000 baseline simulation / paper-account equivalent
+- realistic slippage, spread, and cost assumptions
+- turnover, drawdown, Sharpe, Sortino
+- position sizing, exposure, concentration, and max-position controls
+
+Capacity / sensitivity analysis:
+
+- $50,000
+- $100,000
+- $250,000
+- $500,000
+- $1,000,000
+- purpose: test whether liquidity, slippage, turnover, or concentration degrade performance as account size changes
+
+Personal feasibility appendix:
+
+- $10,000 small-account feasibility test
+- no leverage
+- minimum notional filter
+- realistic spread/slippage
+- max position cap
+- purpose: assess personal-account feasibility without changing the core institutional-style validation baseline
+
+Required scope boundary:
+
+- This is future validation/reporting scope only.
+- It is not active implementation scope.
+- It is not required before the current controlled execution/package-preparation checkpoints.
+- It is not evidence of trading edge, deployment readiness, or promotion readiness by itself.
+- The $100,000 baseline remains the core published validation reference.
+- The $10,000 case is a personal feasibility appendix only.
+- This does not authorize training.
+- This does not authorize model promotion.
+- This does not authorize paper orders.
+- This does not authorize live orders.
+- This does not authorize controlled submit.
+- This does not unblock PPO + RF.
+- This does not unblock PPO + XGBoost.
+
+
 # 5. Core System Architecture
 
 ```txt
