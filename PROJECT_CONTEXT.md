@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.27 PPO v2 One-Time No-Submit Controlled Training Execution Post-Run Audit Preparation
-latest_completed_tag = v2.27-ppo-v2-one-time-no-submit-controlled-training-execution-post-run-audit-preparation
-latest_completed_commit = pending v2.27 sealed checkpoint
-active_milestone = v2.28 PPO v2 One-Time No-Submit Controlled Training Execution Attempt Review
-next_checkpoint = v2.28 PPO v2 One-Time No-Submit Controlled Training Execution Attempt Review
+latest_completed_milestone = v2.28 PPO v2 One-Time No-Submit Controlled Training Execution Attempt Review
+latest_completed_tag = v2.28-ppo-v2-one-time-no-submit-controlled-training-execution-attempt-review
+latest_completed_commit = pending v2.28 sealed checkpoint
+active_milestone = v2.29 PPO v2 One-Time No-Submit Controlled Training Execution Attempt Final Gate Review
+next_checkpoint = v2.29 PPO v2 One-Time No-Submit Controlled Training Execution Attempt Final Gate Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -376,7 +376,21 @@ v2.27 did not authorize live orders
 v2.27 did not authorize controlled submit
 v2.27 did not unblock PPO + RF
 v2.27 did not unblock PPO + XGBoost
-v2.28 next checkpoint = one-time no-submit controlled training execution attempt review; no paper/live/controlled submit
+v2.28 one-time no-submit controlled training execution attempt review = attempt boundary reviewed; no training execution in v2.28
+v2.28 did not perform immediate PPO training
+v2.28 did not run PPO training
+v2.28 did not fetch data
+v2.28 did not generate datasets
+v2.28 did not create model artifacts
+v2.28 did not create quarantine training outputs
+v2.28 did not write new package artifacts
+v2.28 did not authorize model promotion
+v2.28 did not authorize paper orders
+v2.28 did not authorize live orders
+v2.28 did not authorize controlled submit
+v2.28 did not unblock PPO + RF
+v2.28 did not unblock PPO + XGBoost
+v2.29 next checkpoint = one-time no-submit controlled training execution attempt final gate review; no paper/live/controlled submit
 ```
 
 ---
