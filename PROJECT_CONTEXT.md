@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.35 PPO v2 One-Time No-Submit Controlled Training Execution Checkpoint
-latest_completed_tag = v2.35-ppo-v2-one-time-no-submit-controlled-training-execution-checkpoint
-latest_completed_commit = pending v2.35 sealed checkpoint
-active_milestone = v2.36 PPO v2 One-Time No-Submit Controlled Training Execution Post-Run Audit Checkpoint
-next_checkpoint = v2.36 PPO v2 One-Time No-Submit Controlled Training Execution Post-Run Audit Checkpoint
+latest_completed_milestone = v2.36 PPO v2 One-Time No-Submit Controlled Training Execution Post-Run Audit Checkpoint
+latest_completed_tag = v2.36-ppo-v2-one-time-no-submit-controlled-training-execution-post-run-audit-checkpoint
+latest_completed_commit = pending v2.36 sealed checkpoint
+active_milestone = v2.37 PPO v2 One-Time No-Submit Controlled Training Execution Chain Closeout Review
+next_checkpoint = v2.37 PPO v2 One-Time No-Submit Controlled Training Execution Chain Closeout Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -499,7 +499,24 @@ v2.35 did not authorize live orders
 v2.35 did not authorize controlled submit
 v2.35 did not unblock PPO + RF
 v2.35 did not unblock PPO + XGBoost
-v2.36 next checkpoint = one-time no-submit controlled training execution post-run audit checkpoint; no paper/live/controlled submit
+v2.36 one-time no-submit controlled training execution post-run audit checkpoint = no-run audit completed; no training outputs existed to audit
+v2.36 confirmed v2.35 did not perform PPO training
+v2.36 did not perform immediate PPO training
+v2.36 did not execute the command file
+v2.36 did not release a training command for execution
+v2.36 did not run PPO training
+v2.36 did not fetch data
+v2.36 did not generate datasets
+v2.36 did not create model artifacts
+v2.36 did not create quarantine training outputs
+v2.36 did not write new package artifacts
+v2.36 did not authorize model promotion
+v2.36 did not authorize paper orders
+v2.36 did not authorize live orders
+v2.36 did not authorize controlled submit
+v2.36 did not unblock PPO + RF
+v2.36 did not unblock PPO + XGBoost
+v2.37 next checkpoint = one-time no-submit controlled training execution chain closeout review; no paper/live/controlled submit
 ```
 
 ---
