@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.34 PPO v2 One-Time No-Submit Controlled Training Execution Final Authorization Decision Review
-latest_completed_tag = v2.34-ppo-v2-one-time-no-submit-controlled-training-execution-final-authorization-decision-review
-latest_completed_commit = pending v2.34 sealed checkpoint
-active_milestone = v2.35 PPO v2 One-Time No-Submit Controlled Training Execution Checkpoint
-next_checkpoint = v2.35 PPO v2 One-Time No-Submit Controlled Training Execution Checkpoint
+latest_completed_milestone = v2.35 PPO v2 One-Time No-Submit Controlled Training Execution Checkpoint
+latest_completed_tag = v2.35-ppo-v2-one-time-no-submit-controlled-training-execution-checkpoint
+latest_completed_commit = pending v2.35 sealed checkpoint
+active_milestone = v2.36 PPO v2 One-Time No-Submit Controlled Training Execution Post-Run Audit Checkpoint
+next_checkpoint = v2.36 PPO v2 One-Time No-Submit Controlled Training Execution Post-Run Audit Checkpoint
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -483,7 +483,23 @@ v2.34 did not authorize live orders
 v2.34 did not authorize controlled submit
 v2.34 did not unblock PPO + RF
 v2.34 did not unblock PPO + XGBoost
-v2.35 next checkpoint = one-time no-submit controlled training execution checkpoint; no paper/live/controlled submit
+v2.35 one-time no-submit controlled training execution checkpoint = execution checkpoint established; no training execution in v2.35
+v2.35 did not perform immediate PPO training
+v2.35 did not execute the command file
+v2.35 did not release a training command for execution
+v2.35 did not run PPO training
+v2.35 did not fetch data
+v2.35 did not generate datasets
+v2.35 did not create model artifacts
+v2.35 did not create quarantine training outputs
+v2.35 did not write new package artifacts
+v2.35 did not authorize model promotion
+v2.35 did not authorize paper orders
+v2.35 did not authorize live orders
+v2.35 did not authorize controlled submit
+v2.35 did not unblock PPO + RF
+v2.35 did not unblock PPO + XGBoost
+v2.36 next checkpoint = one-time no-submit controlled training execution post-run audit checkpoint; no paper/live/controlled submit
 ```
 
 ---
