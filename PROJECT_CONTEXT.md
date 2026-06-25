@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.36 PPO v2 One-Time No-Submit Controlled Training Execution Post-Run Audit Checkpoint
-latest_completed_tag = v2.36-ppo-v2-one-time-no-submit-controlled-training-execution-post-run-audit-checkpoint
-latest_completed_commit = pending v2.36 sealed checkpoint
-active_milestone = v2.37 PPO v2 One-Time No-Submit Controlled Training Execution Chain Closeout Review
-next_checkpoint = v2.37 PPO v2 One-Time No-Submit Controlled Training Execution Chain Closeout Review
+latest_completed_milestone = v2.37 PPO v2 One-Time No-Submit Controlled Training Execution Chain Closeout Review
+latest_completed_tag = v2.37-ppo-v2-one-time-no-submit-controlled-training-execution-chain-closeout-review
+latest_completed_commit = pending v2.37 sealed checkpoint
+active_milestone = v2.38 PPO v2 Controlled Training Execution Chain Archive Review
+next_checkpoint = v2.38 PPO v2 Controlled Training Execution Chain Archive Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -516,7 +516,21 @@ v2.36 did not authorize live orders
 v2.36 did not authorize controlled submit
 v2.36 did not unblock PPO + RF
 v2.36 did not unblock PPO + XGBoost
-v2.37 next checkpoint = one-time no-submit controlled training execution chain closeout review; no paper/live/controlled submit
+v2.37 one-time no-submit controlled training execution chain closeout review = chain closed no-run; no training execution in chain
+v2.37 confirmed no PPO training was performed in the chain
+v2.37 confirmed no command file was executed in the chain
+v2.37 confirmed no training command was released for execution
+v2.37 confirmed no data fetching occurred in the chain
+v2.37 confirmed no dataset generation occurred in the chain
+v2.37 confirmed no model artifacts were created in the chain
+v2.37 confirmed no quarantine training outputs were created in the chain
+v2.37 did not authorize model promotion
+v2.37 did not authorize paper orders
+v2.37 did not authorize live orders
+v2.37 did not authorize controlled submit
+v2.37 did not unblock PPO + RF
+v2.37 did not unblock PPO + XGBoost
+v2.38 next checkpoint = controlled training execution chain archive review; no paper/live/controlled submit
 ```
 
 ---
