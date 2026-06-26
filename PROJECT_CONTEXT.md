@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.37 PPO v2 One-Time No-Submit Controlled Training Execution Chain Closeout Review
-latest_completed_tag = v2.37-ppo-v2-one-time-no-submit-controlled-training-execution-chain-closeout-review
-latest_completed_commit = pending v2.37 sealed checkpoint
-active_milestone = v2.38 PPO v2 Controlled Training Execution Chain Archive Review
-next_checkpoint = v2.38 PPO v2 Controlled Training Execution Chain Archive Review
+latest_completed_milestone = v2.38 PPO v2 Controlled Training Execution Chain Archive Review
+latest_completed_tag = v2.38-ppo-v2-controlled-training-execution-chain-archive-review
+latest_completed_commit = pending v2.38 sealed checkpoint
+active_milestone = v2.39 PPO v2 Validation Reporting Roadmap Review
+next_checkpoint = v2.39 PPO v2 Validation Reporting Roadmap Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -530,7 +530,21 @@ v2.37 did not authorize live orders
 v2.37 did not authorize controlled submit
 v2.37 did not unblock PPO + RF
 v2.37 did not unblock PPO + XGBoost
-v2.38 next checkpoint = controlled training execution chain archive review; no paper/live/controlled submit
+v2.38 controlled training execution chain archive review = archived closed no-run chain; no training execution in archived chain
+v2.38 confirmed no PPO training was performed in the archived chain
+v2.38 confirmed no command file was executed in the archived chain
+v2.38 confirmed no training command was released for execution
+v2.38 confirmed no data fetching occurred in the archived chain
+v2.38 confirmed no dataset generation occurred in the archived chain
+v2.38 confirmed no model artifacts were created in the archived chain
+v2.38 confirmed no quarantine training outputs were created in the archived chain
+v2.38 did not authorize model promotion
+v2.38 did not authorize paper orders
+v2.38 did not authorize live orders
+v2.38 did not authorize controlled submit
+v2.38 did not unblock PPO + RF
+v2.38 did not unblock PPO + XGBoost
+v2.39 next checkpoint = validation reporting roadmap review; no paper/live/controlled submit
 ```
 
 ---
