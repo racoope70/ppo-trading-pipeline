@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.43 PPO v2 Validation Reporting Scaffold Implementation Plan Review
-latest_completed_tag = v2.43-ppo-v2-validation-reporting-scaffold-implementation-plan-review
-latest_completed_commit = pending v2.43 sealed checkpoint
-active_milestone = v2.44 PPO v2 Validation Reporting Scaffold Implementation Checkpoint Plan
-next_checkpoint = v2.44 PPO v2 Validation Reporting Scaffold Implementation Checkpoint Plan
+latest_completed_milestone = v2.44 PPO v2 Validation Reporting Scaffold Implementation Checkpoint Plan
+latest_completed_tag = v2.44-ppo-v2-validation-reporting-scaffold-implementation-checkpoint-plan
+latest_completed_commit = pending v2.44 sealed checkpoint
+active_milestone = v2.45 PPO v2 Validation Reporting Scaffold Implementation Checkpoint
+next_checkpoint = v2.45 PPO v2 Validation Reporting Scaffold Implementation Checkpoint
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -632,7 +632,25 @@ v2.43 did not authorize live orders
 v2.43 did not authorize controlled submit
 v2.43 did not unblock PPO + RF
 v2.43 did not unblock PPO + XGBoost
-v2.44 next checkpoint = validation reporting scaffold implementation checkpoint plan; no paper/live/controlled submit
+v2.44 validation reporting scaffold implementation checkpoint plan = future implementation checkpoint plan defined only; no reporting code or test code created
+v2.44 confirmed no PPO training was performed
+v2.44 confirmed no command file was executed
+v2.44 confirmed no training command was released for execution
+v2.44 confirmed no data fetching occurred
+v2.44 confirmed no dataset generation occurred
+v2.44 confirmed no model artifacts were created
+v2.44 confirmed no quarantine training outputs were created
+v2.44 did not compute new validation metrics
+v2.44 did not generate reports, plots, or dashboards
+v2.44 did not create reporting code
+v2.44 did not create test code
+v2.44 did not authorize model promotion
+v2.44 did not authorize paper orders
+v2.44 did not authorize live orders
+v2.44 did not authorize controlled submit
+v2.44 did not unblock PPO + RF
+v2.44 did not unblock PPO + XGBoost
+v2.45 next checkpoint = validation reporting scaffold implementation checkpoint; no paper/live/controlled submit
 ```
 
 ---
