@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.45 PPO v2 Validation Reporting Scaffold Implementation Checkpoint
-latest_completed_tag = v2.45-ppo-v2-validation-reporting-scaffold-implementation-checkpoint
-latest_completed_commit = pending v2.45 sealed checkpoint
-active_milestone = v2.46 PPO v2 Validation Reporting Scaffold Implementation Review
-next_checkpoint = v2.46 PPO v2 Validation Reporting Scaffold Implementation Review
+latest_completed_milestone = v2.46 PPO v2 Validation Reporting Scaffold Implementation Review
+latest_completed_tag = v2.46-ppo-v2-validation-reporting-scaffold-implementation-review
+latest_completed_commit = pending v2.46 sealed checkpoint
+active_milestone = v2.47 PPO v2 Validation Reporting Scaffold Post-Implementation Audit Plan
+next_checkpoint = v2.47 PPO v2 Validation Reporting Scaffold Post-Implementation Audit Plan
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -668,7 +668,25 @@ v2.45 did not authorize live orders
 v2.45 did not authorize controlled submit
 v2.45 did not unblock PPO + RF
 v2.45 did not unblock PPO + XGBoost
-v2.46 next checkpoint = validation reporting scaffold implementation review; no paper/live/controlled submit
+v2.46 validation reporting scaffold implementation review = v2.45 scaffold accepted; no reporting code or test code modified
+v2.46 confirmed no PPO training was performed
+v2.46 confirmed no command file was executed
+v2.46 confirmed no training command was released for execution
+v2.46 confirmed no data fetching occurred
+v2.46 confirmed no dataset generation occurred
+v2.46 confirmed no model artifacts were created
+v2.46 confirmed no quarantine training outputs were created
+v2.46 did not compute new validation metrics
+v2.46 did not generate reports, plots, or dashboards
+v2.46 did not modify reporting scaffold source
+v2.46 did not modify reporting scaffold tests
+v2.46 did not authorize model promotion
+v2.46 did not authorize paper orders
+v2.46 did not authorize live orders
+v2.46 did not authorize controlled submit
+v2.46 did not unblock PPO + RF
+v2.46 did not unblock PPO + XGBoost
+v2.47 next checkpoint = validation reporting scaffold post-implementation audit plan; no paper/live/controlled submit
 ```
 
 ---
