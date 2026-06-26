@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.38 PPO v2 Controlled Training Execution Chain Archive Review
-latest_completed_tag = v2.38-ppo-v2-controlled-training-execution-chain-archive-review
-latest_completed_commit = pending v2.38 sealed checkpoint
-active_milestone = v2.39 PPO v2 Validation Reporting Roadmap Review
-next_checkpoint = v2.39 PPO v2 Validation Reporting Roadmap Review
+latest_completed_milestone = v2.39 PPO v2 Validation Reporting Roadmap Review
+latest_completed_tag = v2.39-ppo-v2-validation-reporting-roadmap-review
+latest_completed_commit = pending v2.39 sealed checkpoint
+active_milestone = v2.40 PPO v2 Validation Reporting Scaffold Plan
+next_checkpoint = v2.40 PPO v2 Validation Reporting Scaffold Plan
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -544,7 +544,23 @@ v2.38 did not authorize live orders
 v2.38 did not authorize controlled submit
 v2.38 did not unblock PPO + RF
 v2.38 did not unblock PPO + XGBoost
-v2.39 next checkpoint = validation reporting roadmap review; no paper/live/controlled submit
+v2.39 validation reporting roadmap review = roadmap defined only; no metrics computed and no reports generated
+v2.39 confirmed no PPO training was performed
+v2.39 confirmed no command file was executed
+v2.39 confirmed no training command was released for execution
+v2.39 confirmed no data fetching occurred
+v2.39 confirmed no dataset generation occurred
+v2.39 confirmed no model artifacts were created
+v2.39 confirmed no quarantine training outputs were created
+v2.39 did not compute new validation metrics
+v2.39 did not generate reports, plots, or dashboards
+v2.39 did not authorize model promotion
+v2.39 did not authorize paper orders
+v2.39 did not authorize live orders
+v2.39 did not authorize controlled submit
+v2.39 did not unblock PPO + RF
+v2.39 did not unblock PPO + XGBoost
+v2.40 next checkpoint = validation reporting scaffold plan; no paper/live/controlled submit
 ```
 
 ---
