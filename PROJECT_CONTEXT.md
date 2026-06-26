@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.40 PPO v2 Validation Reporting Scaffold Plan
-latest_completed_tag = v2.40-ppo-v2-validation-reporting-scaffold-plan
-latest_completed_commit = pending v2.40 sealed checkpoint
-active_milestone = v2.41 PPO v2 Validation Reporting Scaffold Plan Review
-next_checkpoint = v2.41 PPO v2 Validation Reporting Scaffold Plan Review
+latest_completed_milestone = v2.41 PPO v2 Validation Reporting Scaffold Plan Review
+latest_completed_tag = v2.41-ppo-v2-validation-reporting-scaffold-plan-review
+latest_completed_commit = pending v2.41 sealed checkpoint
+active_milestone = v2.42 PPO v2 Validation Reporting Scaffold Implementation Plan
+next_checkpoint = v2.42 PPO v2 Validation Reporting Scaffold Implementation Plan
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -578,7 +578,25 @@ v2.40 did not authorize live orders
 v2.40 did not authorize controlled submit
 v2.40 did not unblock PPO + RF
 v2.40 did not unblock PPO + XGBoost
-v2.41 next checkpoint = validation reporting scaffold plan review; no paper/live/controlled submit
+v2.41 validation reporting scaffold plan review = scaffold plan accepted for future scaffold planning only; no reporting code or test code created
+v2.41 confirmed no PPO training was performed
+v2.41 confirmed no command file was executed
+v2.41 confirmed no training command was released for execution
+v2.41 confirmed no data fetching occurred
+v2.41 confirmed no dataset generation occurred
+v2.41 confirmed no model artifacts were created
+v2.41 confirmed no quarantine training outputs were created
+v2.41 did not compute new validation metrics
+v2.41 did not generate reports, plots, or dashboards
+v2.41 did not create reporting code
+v2.41 did not create test code
+v2.41 did not authorize model promotion
+v2.41 did not authorize paper orders
+v2.41 did not authorize live orders
+v2.41 did not authorize controlled submit
+v2.41 did not unblock PPO + RF
+v2.41 did not unblock PPO + XGBoost
+v2.42 next checkpoint = validation reporting scaffold implementation plan; no paper/live/controlled submit
 ```
 
 ---
