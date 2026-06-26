@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.39 PPO v2 Validation Reporting Roadmap Review
-latest_completed_tag = v2.39-ppo-v2-validation-reporting-roadmap-review
-latest_completed_commit = pending v2.39 sealed checkpoint
-active_milestone = v2.40 PPO v2 Validation Reporting Scaffold Plan
-next_checkpoint = v2.40 PPO v2 Validation Reporting Scaffold Plan
+latest_completed_milestone = v2.40 PPO v2 Validation Reporting Scaffold Plan
+latest_completed_tag = v2.40-ppo-v2-validation-reporting-scaffold-plan
+latest_completed_commit = pending v2.40 sealed checkpoint
+active_milestone = v2.41 PPO v2 Validation Reporting Scaffold Plan Review
+next_checkpoint = v2.41 PPO v2 Validation Reporting Scaffold Plan Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -560,7 +560,25 @@ v2.39 did not authorize live orders
 v2.39 did not authorize controlled submit
 v2.39 did not unblock PPO + RF
 v2.39 did not unblock PPO + XGBoost
-v2.40 next checkpoint = validation reporting scaffold plan; no paper/live/controlled submit
+v2.40 validation reporting scaffold plan = scaffold plan defined only; no reporting code or test code created
+v2.40 confirmed no PPO training was performed
+v2.40 confirmed no command file was executed
+v2.40 confirmed no training command was released for execution
+v2.40 confirmed no data fetching occurred
+v2.40 confirmed no dataset generation occurred
+v2.40 confirmed no model artifacts were created
+v2.40 confirmed no quarantine training outputs were created
+v2.40 did not compute new validation metrics
+v2.40 did not generate reports, plots, or dashboards
+v2.40 did not create reporting code
+v2.40 did not create test code
+v2.40 did not authorize model promotion
+v2.40 did not authorize paper orders
+v2.40 did not authorize live orders
+v2.40 did not authorize controlled submit
+v2.40 did not unblock PPO + RF
+v2.40 did not unblock PPO + XGBoost
+v2.41 next checkpoint = validation reporting scaffold plan review; no paper/live/controlled submit
 ```
 
 ---
