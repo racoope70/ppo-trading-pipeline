@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.56 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Authorization Plan
-latest_completed_tag = v2.56-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-checkpoint-authorization-plan
-latest_completed_commit = pending v2.56 sealed checkpoint
-active_milestone = v2.57 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Authorization Plan Review
-next_checkpoint = v2.57 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Authorization Plan Review
+latest_completed_milestone = v2.57 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Authorization Plan Review
+latest_completed_tag = v2.57-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-checkpoint-authorization-plan-review
+latest_completed_commit = pending v2.57 sealed checkpoint
+active_milestone = v2.58 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Authorization Decision
+next_checkpoint = v2.58 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Authorization Decision
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -872,7 +872,26 @@ v2.56 did not authorize live orders
 v2.56 did not authorize controlled submit
 v2.56 did not unblock PPO + RF
 v2.56 did not unblock PPO + XGBoost
-v2.57 next checkpoint = validation reporting scaffold evidence contract implementation checkpoint authorization plan review; no paper/live/controlled submit
+v2.57 validation reporting scaffold evidence contract implementation checkpoint authorization plan review = v2.56 authorization plan accepted for a future separate authorization decision checkpoint; no implementation authorized
+v2.57 confirmed no evidence contract implementation was performed
+v2.57 confirmed no PPO training was performed
+v2.57 confirmed no command file was executed
+v2.57 confirmed no training command was released for execution
+v2.57 confirmed no data fetching occurred
+v2.57 confirmed no dataset generation occurred
+v2.57 confirmed no model artifacts were created
+v2.57 confirmed no quarantine training outputs were created
+v2.57 did not compute new validation metrics
+v2.57 did not generate reports, plots, or dashboards
+v2.57 did not modify reporting scaffold source
+v2.57 did not modify reporting scaffold tests
+v2.57 did not authorize model promotion
+v2.57 did not authorize paper orders
+v2.57 did not authorize live orders
+v2.57 did not authorize controlled submit
+v2.57 did not unblock PPO + RF
+v2.57 did not unblock PPO + XGBoost
+v2.58 next checkpoint = validation reporting scaffold evidence contract implementation checkpoint authorization decision; no paper/live/controlled submit
 ```
 
 ---
