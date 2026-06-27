@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.53 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Plan Review
-latest_completed_tag = v2.53-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-plan-review
-latest_completed_commit = pending v2.53 sealed checkpoint
-active_milestone = v2.54 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Plan
-next_checkpoint = v2.54 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Plan
+latest_completed_milestone = v2.54 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Plan
+latest_completed_tag = v2.54-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-checkpoint-plan
+latest_completed_commit = pending v2.54 sealed checkpoint
+active_milestone = v2.55 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Plan Review
+next_checkpoint = v2.55 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Plan Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -815,7 +815,26 @@ v2.53 did not authorize live orders
 v2.53 did not authorize controlled submit
 v2.53 did not unblock PPO + RF
 v2.53 did not unblock PPO + XGBoost
-v2.54 next checkpoint = validation reporting scaffold evidence contract implementation checkpoint plan; no paper/live/controlled submit
+v2.54 validation reporting scaffold evidence contract implementation checkpoint plan = future implementation checkpoint boundary defined only; no reporting code or test code modified
+v2.54 confirmed no evidence contract implementation was performed
+v2.54 confirmed no PPO training was performed
+v2.54 confirmed no command file was executed
+v2.54 confirmed no training command was released for execution
+v2.54 confirmed no data fetching occurred
+v2.54 confirmed no dataset generation occurred
+v2.54 confirmed no model artifacts were created
+v2.54 confirmed no quarantine training outputs were created
+v2.54 did not compute new validation metrics
+v2.54 did not generate reports, plots, or dashboards
+v2.54 did not modify reporting scaffold source
+v2.54 did not modify reporting scaffold tests
+v2.54 did not authorize model promotion
+v2.54 did not authorize paper orders
+v2.54 did not authorize live orders
+v2.54 did not authorize controlled submit
+v2.54 did not unblock PPO + RF
+v2.54 did not unblock PPO + XGBoost
+v2.55 next checkpoint = validation reporting scaffold evidence contract implementation checkpoint plan review; no paper/live/controlled submit
 ```
 
 ---
