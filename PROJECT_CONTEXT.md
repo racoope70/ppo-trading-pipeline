@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.52 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Plan
-latest_completed_tag = v2.52-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-plan
-latest_completed_commit = pending v2.52 sealed checkpoint
-active_milestone = v2.53 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Plan Review
-next_checkpoint = v2.53 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Plan Review
+latest_completed_milestone = v2.53 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Plan Review
+latest_completed_tag = v2.53-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-plan-review
+latest_completed_commit = pending v2.53 sealed checkpoint
+active_milestone = v2.54 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Plan
+next_checkpoint = v2.54 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Plan
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -796,7 +796,26 @@ v2.52 did not authorize live orders
 v2.52 did not authorize controlled submit
 v2.52 did not unblock PPO + RF
 v2.52 did not unblock PPO + XGBoost
-v2.53 next checkpoint = validation reporting scaffold evidence contract implementation plan review; no paper/live/controlled submit
+v2.53 validation reporting scaffold evidence contract implementation plan review = v2.52 implementation plan accepted for a future separate implementation checkpoint; no reporting code or test code modified
+v2.53 confirmed no evidence contract implementation was performed
+v2.53 confirmed no PPO training was performed
+v2.53 confirmed no command file was executed
+v2.53 confirmed no training command was released for execution
+v2.53 confirmed no data fetching occurred
+v2.53 confirmed no dataset generation occurred
+v2.53 confirmed no model artifacts were created
+v2.53 confirmed no quarantine training outputs were created
+v2.53 did not compute new validation metrics
+v2.53 did not generate reports, plots, or dashboards
+v2.53 did not modify reporting scaffold source
+v2.53 did not modify reporting scaffold tests
+v2.53 did not authorize model promotion
+v2.53 did not authorize paper orders
+v2.53 did not authorize live orders
+v2.53 did not authorize controlled submit
+v2.53 did not unblock PPO + RF
+v2.53 did not unblock PPO + XGBoost
+v2.54 next checkpoint = validation reporting scaffold evidence contract implementation checkpoint plan; no paper/live/controlled submit
 ```
 
 ---
