@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.60 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Review
-latest_completed_tag = v2.60-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-review
-latest_completed_commit = pending v2.60 sealed checkpoint
-active_milestone = v2.61 PPO v2 Validation Reporting Scaffold Evidence Contract Post-Implementation Audit
-next_checkpoint = v2.61 PPO v2 Validation Reporting Scaffold Evidence Contract Post-Implementation Audit
+latest_completed_milestone = v2.61 PPO v2 Validation Reporting Scaffold Evidence Contract Post-Implementation Audit
+latest_completed_tag = v2.61-ppo-v2-validation-reporting-scaffold-evidence-contract-post-implementation-audit
+latest_completed_commit = pending v2.61 sealed checkpoint
+active_milestone = v2.62 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning
+next_checkpoint = v2.62 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -953,7 +953,29 @@ v2.60 did not authorize live orders
 v2.60 did not authorize controlled submit
 v2.60 did not unblock PPO + RF
 v2.60 did not unblock PPO + XGBoost
-v2.61 next checkpoint = validation reporting scaffold evidence contract post-implementation audit; no paper/live/controlled submit
+v2.61 validation reporting scaffold evidence contract post-implementation audit = v2.59 implementation and v2.60 review audited accepted
+v2.61 audited EvidenceContract and EvidenceContractResult implementation
+v2.61 audited EvidenceDomainStatus, EvidencePathStatus, EvidenceHashStatus, and EvidenceContractDecision implementation
+v2.61 audited build_evidence_contract, validate_evidence_contract, build_fail_closed_evidence_contract_result, and validate_evidence_contract_no_submit_boundary implementation
+v2.61 confirmed evidence contract was not modified in v2.61
+v2.61 confirmed reporting scaffold source was not modified in v2.61
+v2.61 confirmed reporting scaffold tests were not modified in v2.61
+v2.61 confirmed no PPO training was performed
+v2.61 confirmed no command file was executed
+v2.61 confirmed no training command was released for execution
+v2.61 confirmed no data fetching occurred
+v2.61 confirmed no dataset generation occurred
+v2.61 confirmed no model artifacts were created
+v2.61 confirmed no quarantine training outputs were created
+v2.61 did not compute new validation metrics
+v2.61 did not generate reports, plots, or dashboards
+v2.61 did not authorize model promotion
+v2.61 did not authorize paper orders
+v2.61 did not authorize live orders
+v2.61 did not authorize controlled submit
+v2.61 did not unblock PPO + RF
+v2.61 did not unblock PPO + XGBoost
+v2.62 next checkpoint = validation reporting scaffold evidence contract usage planning; no paper/live/controlled submit
 ```
 
 ---
