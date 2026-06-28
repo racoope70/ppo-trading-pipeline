@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.61 PPO v2 Validation Reporting Scaffold Evidence Contract Post-Implementation Audit
-latest_completed_tag = v2.61-ppo-v2-validation-reporting-scaffold-evidence-contract-post-implementation-audit
-latest_completed_commit = pending v2.61 sealed checkpoint
-active_milestone = v2.62 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning
-next_checkpoint = v2.62 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning
+latest_completed_milestone = v2.62 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning
+latest_completed_tag = v2.62-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-planning
+latest_completed_commit = pending v2.62 sealed checkpoint
+active_milestone = v2.63 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning Review
+next_checkpoint = v2.63 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -975,7 +975,29 @@ v2.61 did not authorize live orders
 v2.61 did not authorize controlled submit
 v2.61 did not unblock PPO + RF
 v2.61 did not unblock PPO + XGBoost
-v2.62 next checkpoint = validation reporting scaffold evidence contract usage planning; no paper/live/controlled submit
+v2.62 validation reporting scaffold evidence contract usage planning = future read-only pre-report evidence gate planned
+v2.62 planned evidence manifest usage only for future separate checkpoint
+v2.62 planned fail-closed behavior for missing evidence, missing path metadata, missing hash metadata, and no-submit boundary relaxation
+v2.62 confirmed evidence contract usage was not implemented in v2.62
+v2.62 confirmed evidence contract was not modified in v2.62
+v2.62 confirmed reporting scaffold source was not modified in v2.62
+v2.62 confirmed reporting scaffold tests were not modified in v2.62
+v2.62 confirmed no PPO training was performed
+v2.62 confirmed no command file was executed
+v2.62 confirmed no training command was released for execution
+v2.62 confirmed no data fetching occurred
+v2.62 confirmed no dataset generation occurred
+v2.62 confirmed no model artifacts were created
+v2.62 confirmed no quarantine training outputs were created
+v2.62 did not compute new validation metrics
+v2.62 did not generate reports, plots, or dashboards
+v2.62 did not authorize model promotion
+v2.62 did not authorize paper orders
+v2.62 did not authorize live orders
+v2.62 did not authorize controlled submit
+v2.62 did not unblock PPO + RF
+v2.62 did not unblock PPO + XGBoost
+v2.63 next checkpoint = validation reporting scaffold evidence contract usage planning review; no paper/live/controlled submit
 ```
 
 ---
