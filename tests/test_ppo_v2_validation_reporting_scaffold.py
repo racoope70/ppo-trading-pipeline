@@ -206,3 +206,170 @@ def test_validate_no_submit_boundary_matches_status_defaults():
     assert boundary["controlled_submit"] == status.controlled_submit
     assert boundary["ppo_rf"] == status.ppo_rf
     assert boundary["ppo_xgboost"] == status.ppo_xgboost
+
+# ---------------------------------------------------------------------------
+# v2.59 PPO v2 validation reporting scaffold evidence contract tests
+# ---------------------------------------------------------------------------
+
+import importlib.util as _v259_importlib_util
+import sys as _v259_sys
+from pathlib import Path as _V259Path
+
+
+def _load_v259_reporting_module():
+    repo_root = _V259Path(__file__).resolve().parents[1]
+    module_path = repo_root / "src" / "ppo_v2_validation_reporting_scaffold.py"
+    spec = _v259_importlib_util.spec_from_file_location(
+        "ppo_v2_validation_reporting_scaffold_v259",
+        module_path,
+    )
+    module = _v259_importlib_util.module_from_spec(spec)
+    _v259_sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _v259_complete_manifest(module):
+    return {
+        key: {
+            "path": f"artifacts/ppo_v2/quarantine/example/{key}.json",
+            "sha256": "0" * 64,
+        }
+        for key in module.EVIDENCE_CONTRACT_REQUIRED_KEYS
+    }
+
+
+def test_v259_evidence_contract_defaults_fail_closed():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract({})
+
+    assert result.passed is False
+    assert result.decision == module.EvidenceContractDecision.FAIL_CLOSED_MISSING_EVIDENCE
+    assert tuple(result.missing_evidence_keys) == tuple(module.EVIDENCE_CONTRACT_REQUIRED_KEYS)
+    assert result.no_submit_preserved is True
+    assert result.controlled_submit_blocked is True
+    assert result.paper_orders_blocked is True
+    assert result.live_orders_blocked is True
+    assert result.model_promotion_blocked is True
+    assert result.hybrid_unblock_blocked is True
+    assert result.read_only is True
+
+
+def test_v259_evidence_contract_requires_all_evidence_domains():
+    module = _load_v259_reporting_module()
+    manifest = _v259_complete_manifest(module)
+    removed_key = module.EVIDENCE_CONTRACT_REQUIRED_KEYS[0]
+    manifest.pop(removed_key)
+
+    result = module.validate_evidence_contract(manifest)
+
+    assert result.passed is False
+    assert removed_key in result.missing_evidence_keys
+    assert result.domain_status[removed_key] == module.EvidenceDomainStatus.MISSING
+
+
+def test_v259_evidence_contract_fails_when_path_missing():
+    module = _load_v259_reporting_module()
+    manifest = _v259_complete_manifest(module)
+    broken_key = module.EVIDENCE_CONTRACT_REQUIRED_KEYS[1]
+    manifest[broken_key] = {"sha256": "1" * 64}
+
+    result = module.validate_evidence_contract(manifest)
+
+    assert result.passed is False
+    assert broken_key in result.missing_path_keys
+    assert result.path_status[broken_key] == module.EvidencePathStatus.MISSING
+
+
+def test_v259_evidence_contract_fails_when_hash_missing():
+    module = _load_v259_reporting_module()
+    manifest = _v259_complete_manifest(module)
+    broken_key = module.EVIDENCE_CONTRACT_REQUIRED_KEYS[2]
+    manifest[broken_key] = {"path": f"artifacts/ppo_v2/quarantine/example/{broken_key}.json"}
+
+    result = module.validate_evidence_contract(manifest)
+
+    assert result.passed is False
+    assert broken_key in result.missing_hash_keys
+    assert result.hash_status[broken_key] == module.EvidenceHashStatus.MISSING
+
+
+def test_v259_evidence_contract_passes_with_complete_manifest():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract(_v259_complete_manifest(module))
+
+    assert result.passed is True
+    assert result.decision == module.EvidenceContractDecision.PASS_READ_ONLY_NO_SUBMIT
+    assert result.missing_evidence_keys == ()
+    assert result.missing_path_keys == ()
+    assert result.missing_hash_keys == ()
+    assert all(status == module.EvidenceDomainStatus.PRESENT for status in result.domain_status.values())
+    assert result.no_submit_preserved is True
+    assert result.controlled_submit_blocked is True
+    assert result.paper_orders_blocked is True
+    assert result.live_orders_blocked is True
+    assert result.model_promotion_blocked is True
+    assert result.hybrid_unblock_blocked is True
+    assert result.read_only is True
+
+
+def test_v259_evidence_contract_no_submit_boundary_fails_closed_when_relaxed():
+    module = _load_v259_reporting_module()
+    contract = module.EvidenceContract(controlled_submit_blocked=False)
+
+    result = module.validate_evidence_contract_no_submit_boundary(contract)
+
+    assert result.passed is False
+    assert result.decision == module.EvidenceContractDecision.FAIL_CLOSED_NO_SUBMIT_BOUNDARY
+
+
+def test_v259_evidence_contract_exposes_required_domains():
+    module = _load_v259_reporting_module()
+
+    expected = {
+        "training_outputs_inventory",
+        "quarantine_output_manifest",
+        "dataset_boundary_manifest",
+        "leakage_control_evidence",
+        "normalization_evidence",
+        "locked_eval_stats_evidence",
+        "untouched_holdout_evidence",
+        "ppo_only_baseline_evidence",
+        "post_run_audit",
+    }
+
+    assert expected.issubset(set(module.EVIDENCE_CONTRACT_REQUIRED_KEYS))
+
+
+def test_v259_evidence_contract_source_has_no_broker_training_fetch_or_write_calls():
+    module_path = (
+        _V259Path(__file__).resolve().parents[1]
+        / "src"
+        / "ppo_v2_validation_reporting_scaffold.py"
+    )
+    source = module_path.read_text(encoding="utf-8")
+
+    forbidden_tokens = [
+        "from alpaca",
+        "import alpaca",
+        "TradingClient(",
+        "StockHistoricalDataClient(",
+        "submit_order(",
+        "PPO.load(",
+        "PPO(",
+        ".learn(",
+        ".fit(",
+        "joblib.dump(",
+        "torch.save(",
+        "pickle.dump(",
+        ".to_csv(",
+        ".to_parquet(",
+        "read_csv(",
+        "read_parquet(",
+        "requests.get(",
+    ]
+
+    for token in forbidden_tokens:
+        assert token not in source

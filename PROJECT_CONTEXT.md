@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.58 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint Authorization Decision
-latest_completed_tag = v2.58-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-checkpoint-authorization-decision
-latest_completed_commit = pending v2.58 sealed checkpoint
-active_milestone = v2.59 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint
-next_checkpoint = v2.59 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint
+latest_completed_milestone = v2.59 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Checkpoint
+latest_completed_tag = v2.59-ppo-v2-validation-reporting-scaffold-evidence-contract-implementation-checkpoint
+latest_completed_commit = pending v2.59 sealed checkpoint
+active_milestone = v2.60 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Review
+next_checkpoint = v2.60 PPO v2 Validation Reporting Scaffold Evidence Contract Implementation Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -911,7 +911,27 @@ v2.58 did not authorize live orders
 v2.58 did not authorize controlled submit
 v2.58 did not unblock PPO + RF
 v2.58 did not unblock PPO + XGBoost
-v2.59 next checkpoint = validation reporting scaffold evidence contract implementation checkpoint; no paper/live/controlled submit
+v2.59 validation reporting scaffold evidence contract implementation checkpoint = evidence contract implemented in reporting scaffold source and tests
+v2.59 implemented read-only fail-closed evidence contract validation
+v2.59 implemented EvidenceContract and EvidenceContractResult
+v2.59 implemented EvidenceDomainStatus, EvidencePathStatus, EvidenceHashStatus, and EvidenceContractDecision
+v2.59 implemented build_evidence_contract, validate_evidence_contract, build_fail_closed_evidence_contract_result, and validate_evidence_contract_no_submit_boundary
+v2.59 confirmed no PPO training was performed
+v2.59 confirmed no command file was executed
+v2.59 confirmed no training command was released for execution
+v2.59 confirmed no data fetching occurred
+v2.59 confirmed no dataset generation occurred
+v2.59 confirmed no model artifacts were created
+v2.59 confirmed no quarantine training outputs were created
+v2.59 did not compute new validation metrics
+v2.59 did not generate reports, plots, or dashboards
+v2.59 did not authorize model promotion
+v2.59 did not authorize paper orders
+v2.59 did not authorize live orders
+v2.59 did not authorize controlled submit
+v2.59 did not unblock PPO + RF
+v2.59 did not unblock PPO + XGBoost
+v2.60 next checkpoint = validation reporting scaffold evidence contract implementation review; no paper/live/controlled submit
 ```
 
 ---

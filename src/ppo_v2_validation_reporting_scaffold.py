@@ -199,3 +199,292 @@ __all__ = [
     "check_required_evidence",
     "validate_no_submit_boundary",
 ]
+
+# ---------------------------------------------------------------------------
+# v2.59 PPO v2 validation reporting scaffold evidence contract implementation
+# ---------------------------------------------------------------------------
+#
+# This section is intentionally read-only and non-executing.
+#
+# It does not train PPO.
+# It does not fetch market data.
+# It does not load broker clients.
+# It does not create datasets.
+# It does not write artifacts.
+# It does not compute trading metrics.
+# It does not authorize paper, live, or controlled-submit orders.
+# It does not unblock PPO + Random Forest or PPO + XGBoost.
+#
+# The contract exists only to validate whether required post-run evidence is
+# present in a supplied evidence manifest. Missing evidence fails closed.
+
+from dataclasses import dataclass, field
+from typing import Any, Mapping
+
+
+EVIDENCE_CONTRACT_REQUIRED_KEYS = tuple(REQUIRED_EVIDENCE_KEYS)
+
+
+class EvidenceDomainStatus:
+    """Domain-level evidence state values."""
+
+    PRESENT = "present"
+    MISSING = "missing"
+
+
+class EvidencePathStatus:
+    """Path-level evidence state values."""
+
+    PRESENT = "present"
+    MISSING = "missing"
+
+
+class EvidenceHashStatus:
+    """Hash-level evidence state values."""
+
+    PRESENT = "present"
+    MISSING = "missing"
+
+
+class EvidenceContractDecision:
+    """Fail-closed evidence contract decisions."""
+
+    PASS_READ_ONLY_NO_SUBMIT = "PASS_READ_ONLY_NO_SUBMIT"
+    FAIL_CLOSED_MISSING_EVIDENCE = "FAIL_CLOSED_MISSING_EVIDENCE"
+    FAIL_CLOSED_NO_SUBMIT_BOUNDARY = "FAIL_CLOSED_NO_SUBMIT_BOUNDARY"
+
+
+@dataclass(frozen=True)
+class EvidenceContract:
+    """Read-only evidence contract for PPO v2 validation reporting."""
+
+    required_evidence_keys: tuple[str, ...] = EVIDENCE_CONTRACT_REQUIRED_KEYS
+    no_submit_required: bool = True
+    controlled_submit_blocked: bool = True
+    paper_orders_blocked: bool = True
+    live_orders_blocked: bool = True
+    model_promotion_blocked: bool = True
+    hybrid_unblock_blocked: bool = True
+    read_only: bool = True
+
+
+@dataclass(frozen=True)
+class EvidenceContractResult:
+    """Result returned by the read-only evidence contract validator."""
+
+    decision: str
+    passed: bool
+    missing_evidence_keys: tuple[str, ...] = field(default_factory=tuple)
+    missing_path_keys: tuple[str, ...] = field(default_factory=tuple)
+    missing_hash_keys: tuple[str, ...] = field(default_factory=tuple)
+    domain_status: Mapping[str, str] = field(default_factory=dict)
+    path_status: Mapping[str, str] = field(default_factory=dict)
+    hash_status: Mapping[str, str] = field(default_factory=dict)
+    no_submit_preserved: bool = True
+    controlled_submit_blocked: bool = True
+    paper_orders_blocked: bool = True
+    live_orders_blocked: bool = True
+    model_promotion_blocked: bool = True
+    hybrid_unblock_blocked: bool = True
+    read_only: bool = True
+
+
+def build_evidence_contract() -> EvidenceContract:
+    """Build the fail-closed PPO v2 reporting evidence contract."""
+
+    return EvidenceContract()
+
+
+def _evidence_value_has_path(evidence_value: Any) -> bool:
+    if not isinstance(evidence_value, Mapping):
+        return False
+
+    path_value = evidence_value.get("path")
+    return isinstance(path_value, str) and bool(path_value.strip())
+
+
+def _evidence_value_has_hash(evidence_value: Any) -> bool:
+    if not isinstance(evidence_value, Mapping):
+        return False
+
+    hash_value = evidence_value.get("sha256") or evidence_value.get("hash")
+    return isinstance(hash_value, str) and bool(hash_value.strip())
+
+
+def build_fail_closed_evidence_contract_result(
+    *,
+    contract: EvidenceContract | None = None,
+    missing_evidence_keys: tuple[str, ...] = (),
+    missing_path_keys: tuple[str, ...] = (),
+    missing_hash_keys: tuple[str, ...] = (),
+    decision: str = EvidenceContractDecision.FAIL_CLOSED_MISSING_EVIDENCE,
+) -> EvidenceContractResult:
+    """Build a fail-closed result without executing external work."""
+
+    active_contract = contract or build_evidence_contract()
+
+    domain_status = {
+        key: (
+            EvidenceDomainStatus.MISSING
+            if key in missing_evidence_keys
+            else EvidenceDomainStatus.PRESENT
+        )
+        for key in active_contract.required_evidence_keys
+    }
+
+    path_status = {
+        key: (
+            EvidencePathStatus.MISSING
+            if key in missing_path_keys
+            else EvidencePathStatus.PRESENT
+        )
+        for key in active_contract.required_evidence_keys
+    }
+
+    hash_status = {
+        key: (
+            EvidenceHashStatus.MISSING
+            if key in missing_hash_keys
+            else EvidenceHashStatus.PRESENT
+        )
+        for key in active_contract.required_evidence_keys
+    }
+
+    return EvidenceContractResult(
+        decision=decision,
+        passed=False,
+        missing_evidence_keys=tuple(missing_evidence_keys),
+        missing_path_keys=tuple(missing_path_keys),
+        missing_hash_keys=tuple(missing_hash_keys),
+        domain_status=domain_status,
+        path_status=path_status,
+        hash_status=hash_status,
+        no_submit_preserved=active_contract.no_submit_required,
+        controlled_submit_blocked=active_contract.controlled_submit_blocked,
+        paper_orders_blocked=active_contract.paper_orders_blocked,
+        live_orders_blocked=active_contract.live_orders_blocked,
+        model_promotion_blocked=active_contract.model_promotion_blocked,
+        hybrid_unblock_blocked=active_contract.hybrid_unblock_blocked,
+        read_only=active_contract.read_only,
+    )
+
+
+def validate_evidence_contract_no_submit_boundary(
+    contract: EvidenceContract | None = None,
+) -> EvidenceContractResult:
+    """Validate the no-submit safety boundary without executing any orders."""
+
+    active_contract = contract or build_evidence_contract()
+
+    no_submit_ok = (
+        active_contract.no_submit_required
+        and active_contract.controlled_submit_blocked
+        and active_contract.paper_orders_blocked
+        and active_contract.live_orders_blocked
+        and active_contract.model_promotion_blocked
+        and active_contract.hybrid_unblock_blocked
+        and active_contract.read_only
+    )
+
+    if not no_submit_ok:
+        return build_fail_closed_evidence_contract_result(
+            contract=active_contract,
+            decision=EvidenceContractDecision.FAIL_CLOSED_NO_SUBMIT_BOUNDARY,
+        )
+
+    return EvidenceContractResult(
+        decision=EvidenceContractDecision.PASS_READ_ONLY_NO_SUBMIT,
+        passed=True,
+        missing_evidence_keys=(),
+        missing_path_keys=(),
+        missing_hash_keys=(),
+        domain_status={
+            key: EvidenceDomainStatus.PRESENT
+            for key in active_contract.required_evidence_keys
+        },
+        path_status={
+            key: EvidencePathStatus.PRESENT
+            for key in active_contract.required_evidence_keys
+        },
+        hash_status={
+            key: EvidenceHashStatus.PRESENT
+            for key in active_contract.required_evidence_keys
+        },
+        no_submit_preserved=True,
+        controlled_submit_blocked=True,
+        paper_orders_blocked=True,
+        live_orders_blocked=True,
+        model_promotion_blocked=True,
+        hybrid_unblock_blocked=True,
+        read_only=True,
+    )
+
+
+def validate_evidence_contract(
+    evidence_manifest: Mapping[str, Mapping[str, Any]] | None,
+    contract: EvidenceContract | None = None,
+) -> EvidenceContractResult:
+    """Validate required evidence metadata and fail closed on any gap.
+
+    The supplied manifest is an in-memory mapping. This function intentionally
+    does not read files from disk, write files, call a broker, fetch data, load
+    a model, train a model, compute validation metrics, or submit orders.
+    """
+
+    active_contract = contract or build_evidence_contract()
+    manifest = evidence_manifest or {}
+
+    boundary_result = validate_evidence_contract_no_submit_boundary(active_contract)
+    if not boundary_result.passed:
+        return boundary_result
+
+    missing_evidence_keys = tuple(
+        key for key in active_contract.required_evidence_keys if key not in manifest
+    )
+
+    missing_path_keys = tuple(
+        key
+        for key in active_contract.required_evidence_keys
+        if key in manifest and not _evidence_value_has_path(manifest[key])
+    )
+
+    missing_hash_keys = tuple(
+        key
+        for key in active_contract.required_evidence_keys
+        if key in manifest and not _evidence_value_has_hash(manifest[key])
+    )
+
+    if missing_evidence_keys or missing_path_keys or missing_hash_keys:
+        return build_fail_closed_evidence_contract_result(
+            contract=active_contract,
+            missing_evidence_keys=missing_evidence_keys,
+            missing_path_keys=missing_path_keys,
+            missing_hash_keys=missing_hash_keys,
+        )
+
+    return EvidenceContractResult(
+        decision=EvidenceContractDecision.PASS_READ_ONLY_NO_SUBMIT,
+        passed=True,
+        missing_evidence_keys=(),
+        missing_path_keys=(),
+        missing_hash_keys=(),
+        domain_status={
+            key: EvidenceDomainStatus.PRESENT
+            for key in active_contract.required_evidence_keys
+        },
+        path_status={
+            key: EvidencePathStatus.PRESENT
+            for key in active_contract.required_evidence_keys
+        },
+        hash_status={
+            key: EvidenceHashStatus.PRESENT
+            for key in active_contract.required_evidence_keys
+        },
+        no_submit_preserved=True,
+        controlled_submit_blocked=True,
+        paper_orders_blocked=True,
+        live_orders_blocked=True,
+        model_promotion_blocked=True,
+        hybrid_unblock_blocked=True,
+        read_only=True,
+    )
