@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.66 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Authorization Plan
-latest_completed_tag = v2.66-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-implementation-authorization-plan
-latest_completed_commit = pending v2.66 sealed checkpoint
-active_milestone = v2.67 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Authorization Plan Review
-next_checkpoint = v2.67 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Authorization Plan Review
+latest_completed_milestone = v2.67 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Authorization Plan Review
+latest_completed_tag = v2.67-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-implementation-authorization-plan-review
+latest_completed_commit = pending v2.67 sealed checkpoint
+active_milestone = v2.68 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Authorization Decision
+next_checkpoint = v2.68 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Authorization Decision
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1096,7 +1096,34 @@ v2.66 did not authorize live orders
 v2.66 did not authorize controlled submit
 v2.66 did not unblock PPO + RF
 v2.66 did not unblock PPO + XGBoost
-v2.67 next checkpoint = validation reporting scaffold evidence contract usage implementation authorization plan review; no paper/live/controlled submit
+v2.67 validation reporting scaffold evidence contract usage implementation authorization plan review = v2.66 authorization plan reviewed accepted
+v2.67 reviewed future authorization decision checkpoint requirement before any implementation
+v2.67 reviewed future implementation scope as read-only evidence-contract usage adapter only
+v2.67 reviewed future static evidence manifest input only
+v2.67 reviewed future pass/fail EvidenceContractResult output only
+v2.67 reviewed no side effects and no file writes for future usage adapter
+v2.67 reviewed blocklist for broker calls, training calls, data fetching, metric computation, report generation, artifact writes, model promotion, paper/live orders, controlled submit, and hybrid unblock
+v2.67 confirmed future implementation was not authorized in v2.67
+v2.67 confirmed evidence contract usage was not implemented in v2.67
+v2.67 confirmed evidence contract was not modified in v2.67
+v2.67 confirmed reporting scaffold source was not modified in v2.67
+v2.67 confirmed reporting scaffold tests were not modified in v2.67
+v2.67 confirmed no PPO training was performed
+v2.67 confirmed no command file was executed
+v2.67 confirmed no training command was released for execution
+v2.67 confirmed no data fetching occurred
+v2.67 confirmed no dataset generation occurred
+v2.67 confirmed no model artifacts were created
+v2.67 confirmed no quarantine training outputs were created
+v2.67 did not compute new validation metrics
+v2.67 did not generate reports, plots, or dashboards
+v2.67 did not authorize model promotion
+v2.67 did not authorize paper orders
+v2.67 did not authorize live orders
+v2.67 did not authorize controlled submit
+v2.67 did not unblock PPO + RF
+v2.67 did not unblock PPO + XGBoost
+v2.68 next checkpoint = validation reporting scaffold evidence contract usage implementation authorization decision; no paper/live/controlled submit
 ```
 
 ---
