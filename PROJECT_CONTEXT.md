@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.63 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Planning Review
-latest_completed_tag = v2.63-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-planning-review
-latest_completed_commit = pending v2.63 sealed checkpoint
-active_milestone = v2.64 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Plan
-next_checkpoint = v2.64 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Plan
+latest_completed_milestone = v2.64 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Plan
+latest_completed_tag = v2.64-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-implementation-plan
+latest_completed_commit = pending v2.64 sealed checkpoint
+active_milestone = v2.65 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Plan Review
+next_checkpoint = v2.65 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Plan Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1020,7 +1020,31 @@ v2.63 did not authorize live orders
 v2.63 did not authorize controlled submit
 v2.63 did not unblock PPO + RF
 v2.63 did not unblock PPO + XGBoost
-v2.64 next checkpoint = validation reporting scaffold evidence contract usage implementation plan; no paper/live/controlled submit
+v2.64 validation reporting scaffold evidence contract usage implementation plan = future read-only pre-report evidence gate implementation planned
+v2.64 planned future adapter for evidence manifest input only
+v2.64 planned future pass/fail EvidenceContractResult output only
+v2.64 planned no side effects and no file writes for future usage gate
+v2.64 planned required tests for missing manifest, missing domains, missing path metadata, missing hash metadata, no-submit boundary relaxation, complete manifest pass, executable-call absence, no report or metric generation, and hybrid unblock prevention
+v2.64 confirmed evidence contract usage was not implemented in v2.64
+v2.64 confirmed evidence contract was not modified in v2.64
+v2.64 confirmed reporting scaffold source was not modified in v2.64
+v2.64 confirmed reporting scaffold tests were not modified in v2.64
+v2.64 confirmed no PPO training was performed
+v2.64 confirmed no command file was executed
+v2.64 confirmed no training command was released for execution
+v2.64 confirmed no data fetching occurred
+v2.64 confirmed no dataset generation occurred
+v2.64 confirmed no model artifacts were created
+v2.64 confirmed no quarantine training outputs were created
+v2.64 did not compute new validation metrics
+v2.64 did not generate reports, plots, or dashboards
+v2.64 did not authorize model promotion
+v2.64 did not authorize paper orders
+v2.64 did not authorize live orders
+v2.64 did not authorize controlled submit
+v2.64 did not unblock PPO + RF
+v2.64 did not unblock PPO + XGBoost
+v2.65 next checkpoint = validation reporting scaffold evidence contract usage implementation plan review; no paper/live/controlled submit
 ```
 
 ---
