@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.79 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Checkpoint
-latest_completed_tag = v2.79-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-implementation-checkpoint
-latest_completed_commit = pending v2.79 sealed checkpoint
-active_milestone = v2.80 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Checkpoint Review
-next_checkpoint = v2.80 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Checkpoint Review
+latest_completed_milestone = v2.80 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Checkpoint Review
+latest_completed_tag = v2.80-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-implementation-checkpoint-review
+latest_completed_commit = pending v2.80 sealed checkpoint
+active_milestone = v2.81 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Post-Implementation Audit Plan
+next_checkpoint = v2.81 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Post-Implementation Audit Plan
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1437,7 +1437,32 @@ v2.79 did not authorize live orders
 v2.79 did not authorize controlled submit
 v2.79 did not unblock PPO + RF
 v2.79 did not unblock PPO + XGBoost
-v2.80 next checkpoint = validation reporting scaffold evidence contract usage implementation checkpoint review; no paper/live/controlled submit
+v2.80 validation reporting scaffold evidence contract usage implementation checkpoint review = v2.79 implementation reviewed accepted
+v2.80 reviewed validate_evidence_contract_usage around existing v2.59 evidence contract
+v2.80 reviewed build_read_only_evidence_contract_usage_result returning EvidenceContractResult only
+v2.80 reviewed evidence contract usage input = static evidence manifest only
+v2.80 reviewed evidence contract usage output = EvidenceContractResult only
+v2.80 reviewed evidence contract usage failure mode = fail closed
+v2.80 confirmed source code was not modified in v2.80
+v2.80 confirmed test code was not modified in v2.80
+v2.80 confirmed evidence contract usage was not implemented in v2.80
+v2.80 confirmed evidence contract itself was not modified in v2.80
+v2.80 confirmed no PPO training was performed
+v2.80 confirmed no command file was executed
+v2.80 confirmed no training command was released for execution
+v2.80 confirmed no data fetching occurred
+v2.80 confirmed no dataset generation occurred
+v2.80 confirmed no model artifacts were created
+v2.80 confirmed no quarantine training outputs were created
+v2.80 did not compute new validation metrics
+v2.80 did not generate reports, plots, or dashboards
+v2.80 did not authorize model promotion
+v2.80 did not authorize paper orders
+v2.80 did not authorize live orders
+v2.80 did not authorize controlled submit
+v2.80 did not unblock PPO + RF
+v2.80 did not unblock PPO + XGBoost
+v2.81 next checkpoint = validation reporting scaffold evidence contract usage post-implementation audit plan; no paper/live/controlled submit
 ```
 
 ---
