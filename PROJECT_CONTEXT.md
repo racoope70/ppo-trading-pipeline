@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.80 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Implementation Checkpoint Review
-latest_completed_tag = v2.80-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-implementation-checkpoint-review
-latest_completed_commit = pending v2.80 sealed checkpoint
-active_milestone = v2.81 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Post-Implementation Audit Plan
-next_checkpoint = v2.81 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Post-Implementation Audit Plan
+latest_completed_milestone = v2.81 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Post-Implementation Audit Plan
+latest_completed_tag = v2.81-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-post-implementation-audit-plan
+latest_completed_commit = pending v2.81 sealed checkpoint
+active_milestone = v2.82 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Post-Implementation Audit Plan Review
+next_checkpoint = v2.82 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Post-Implementation Audit Plan Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1462,7 +1462,33 @@ v2.80 did not authorize live orders
 v2.80 did not authorize controlled submit
 v2.80 did not unblock PPO + RF
 v2.80 did not unblock PPO + XGBoost
-v2.81 next checkpoint = validation reporting scaffold evidence contract usage post-implementation audit plan; no paper/live/controlled submit
+v2.81 validation reporting scaffold evidence contract usage post-implementation audit plan = post-implementation audit plan completed
+v2.81 planned audit of validate_evidence_contract_usage around existing v2.59 evidence contract
+v2.81 planned audit of build_read_only_evidence_contract_usage_result returning EvidenceContractResult only
+v2.81 planned audit of static evidence manifest input only
+v2.81 planned audit of EvidenceContractResult output only
+v2.81 planned audit of fail-closed behavior
+v2.81 planned audit of no broker calls, no training calls, no model loading, no data fetching, no file writes, no artifact creation, no metric computation, no report generation, no plot generation, no dashboard generation, no model promotion, no order submission, no controlled submit, and no hybrid unblock
+v2.81 confirmed source code was not modified in v2.81
+v2.81 confirmed test code was not modified in v2.81
+v2.81 confirmed evidence contract usage was not implemented in v2.81
+v2.81 confirmed evidence contract itself was not modified in v2.81
+v2.81 confirmed no PPO training was performed
+v2.81 confirmed no command file was executed
+v2.81 confirmed no training command was released for execution
+v2.81 confirmed no data fetching occurred
+v2.81 confirmed no dataset generation occurred
+v2.81 confirmed no model artifacts were created
+v2.81 confirmed no quarantine training outputs were created
+v2.81 did not compute new validation metrics
+v2.81 did not generate reports, plots, or dashboards
+v2.81 did not authorize model promotion
+v2.81 did not authorize paper orders
+v2.81 did not authorize live orders
+v2.81 did not authorize controlled submit
+v2.81 did not unblock PPO + RF
+v2.81 did not unblock PPO + XGBoost
+v2.82 next checkpoint = validation reporting scaffold evidence contract usage post-implementation audit plan review; no paper/live/controlled submit
 ```
 
 ---
