@@ -373,3 +373,172 @@ def test_v259_evidence_contract_source_has_no_broker_training_fetch_or_write_cal
 
     for token in forbidden_tokens:
         assert token not in source
+
+
+# ---------------------------------------------------------------------------
+# v2.79 PPO v2 validation reporting scaffold evidence contract usage tests
+# ---------------------------------------------------------------------------
+
+
+def test_v279_usage_adapter_missing_manifest_fails_closed():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract_usage(None)
+
+    assert isinstance(result, module.EvidenceContractResult)
+    assert result.passed is False
+    assert result.decision == module.EvidenceContractDecision.FAIL_CLOSED_MISSING_EVIDENCE
+    assert tuple(result.missing_evidence_keys) == tuple(module.EVIDENCE_CONTRACT_REQUIRED_KEYS)
+    assert result.read_only is True
+    assert result.no_submit_preserved is True
+    assert result.controlled_submit_blocked is True
+
+
+def test_v279_usage_adapter_missing_required_domain_fails_closed():
+    module = _load_v259_reporting_module()
+    manifest = _v259_complete_manifest(module)
+    removed_key = module.EVIDENCE_CONTRACT_REQUIRED_KEYS[0]
+    manifest.pop(removed_key)
+
+    result = module.validate_evidence_contract_usage(manifest)
+
+    assert result.passed is False
+    assert removed_key in result.missing_evidence_keys
+    assert result.domain_status[removed_key] == module.EvidenceDomainStatus.MISSING
+
+
+def test_v279_usage_adapter_missing_path_metadata_fails_closed():
+    module = _load_v259_reporting_module()
+    manifest = _v259_complete_manifest(module)
+    broken_key = module.EVIDENCE_CONTRACT_REQUIRED_KEYS[1]
+    manifest[broken_key] = {"sha256": "1" * 64}
+
+    result = module.validate_evidence_contract_usage(manifest)
+
+    assert result.passed is False
+    assert broken_key in result.missing_path_keys
+    assert result.path_status[broken_key] == module.EvidencePathStatus.MISSING
+
+
+def test_v279_usage_adapter_missing_hash_metadata_fails_closed():
+    module = _load_v259_reporting_module()
+    manifest = _v259_complete_manifest(module)
+    broken_key = module.EVIDENCE_CONTRACT_REQUIRED_KEYS[2]
+    manifest[broken_key] = {
+        "path": f"artifacts/ppo_v2/quarantine/example/{broken_key}.json"
+    }
+
+    result = module.validate_evidence_contract_usage(manifest)
+
+    assert result.passed is False
+    assert broken_key in result.missing_hash_keys
+    assert result.hash_status[broken_key] == module.EvidenceHashStatus.MISSING
+
+
+def test_v279_usage_adapter_no_submit_relaxation_fails_closed():
+    module = _load_v259_reporting_module()
+    contract = module.EvidenceContract(controlled_submit_blocked=False)
+
+    result = module.validate_evidence_contract_usage(
+        _v259_complete_manifest(module),
+        contract=contract,
+    )
+
+    assert result.passed is False
+    assert result.decision == module.EvidenceContractDecision.FAIL_CLOSED_NO_SUBMIT_BOUNDARY
+    assert result.controlled_submit_blocked is False
+
+
+def test_v279_usage_adapter_complete_manifest_passes_read_only_no_submit():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract_usage(_v259_complete_manifest(module))
+
+    assert result.passed is True
+    assert result.decision == module.EvidenceContractDecision.PASS_READ_ONLY_NO_SUBMIT
+    assert result.missing_evidence_keys == ()
+    assert result.missing_path_keys == ()
+    assert result.missing_hash_keys == ()
+    assert result.read_only is True
+    assert result.no_submit_preserved is True
+    assert result.controlled_submit_blocked is True
+    assert result.paper_orders_blocked is True
+    assert result.live_orders_blocked is True
+    assert result.model_promotion_blocked is True
+    assert result.hybrid_unblock_blocked is True
+
+
+def test_v279_usage_adapter_returns_evidence_contract_result_only():
+    module = _load_v259_reporting_module()
+
+    result = module.build_read_only_evidence_contract_usage_result(
+        _v259_complete_manifest(module)
+    )
+
+    assert type(result) is module.EvidenceContractResult
+
+
+def test_v279_usage_adapter_has_no_broker_training_fetch_or_write_calls():
+    source = source_text()
+
+    forbidden_tokens = [
+        "from alpaca",
+        "import alpaca",
+        "TradingClient(",
+        "StockHistoricalDataClient(",
+        "submit_order(",
+        "PPO.load(",
+        "PPO(",
+        ".learn(",
+        ".fit(",
+        "joblib.dump(",
+        "torch.save(",
+        "pickle.dump(",
+        ".to_csv(",
+        ".to_parquet(",
+        "read_csv(",
+        "read_parquet(",
+        "requests.get(",
+    ]
+
+    for token in forbidden_tokens:
+        assert token not in source
+
+
+def test_v279_usage_adapter_does_not_generate_reports_metrics_plots_or_dashboards():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract_usage(_v259_complete_manifest(module))
+
+    assert isinstance(result, module.EvidenceContractResult)
+    assert not hasattr(result, "metrics")
+    assert not hasattr(result, "report")
+    assert not hasattr(result, "plot")
+    assert not hasattr(result, "dashboard")
+
+
+def test_v279_usage_adapter_blocks_model_promotion_and_orders():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract_usage(_v259_complete_manifest(module))
+
+    assert result.model_promotion_blocked is True
+    assert result.paper_orders_blocked is True
+    assert result.live_orders_blocked is True
+
+
+def test_v279_usage_adapter_preserves_controlled_submit_block():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract_usage(_v259_complete_manifest(module))
+
+    assert result.controlled_submit_blocked is True
+    assert result.no_submit_preserved is True
+
+
+def test_v279_usage_adapter_preserves_hybrid_blocks():
+    module = _load_v259_reporting_module()
+
+    result = module.validate_evidence_contract_usage(_v259_complete_manifest(module))
+
+    assert result.hybrid_unblock_blocked is True

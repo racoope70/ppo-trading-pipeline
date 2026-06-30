@@ -488,3 +488,69 @@ def validate_evidence_contract(
         hybrid_unblock_blocked=True,
         read_only=True,
     )
+
+
+# ---------------------------------------------------------------------------
+# v2.79 PPO v2 validation reporting scaffold evidence contract usage adapter
+# ---------------------------------------------------------------------------
+#
+# This adapter is intentionally read-only and non-executing.
+#
+# It accepts only an in-memory static evidence manifest.
+# It returns only EvidenceContractResult.
+# It delegates to the existing v2.59 evidence contract validator.
+#
+# It does not train PPO.
+# It does not fetch market data.
+# It does not load broker clients.
+# It does not create datasets.
+# It does not write artifacts.
+# It does not compute trading metrics.
+# It does not authorize paper, live, or controlled-submit orders.
+# It does not unblock PPO + Random Forest or PPO + XGBoost.
+
+
+def validate_evidence_contract_usage(
+    evidence_manifest: Mapping[str, Mapping[str, Any]] | None,
+    contract: EvidenceContract | None = None,
+) -> EvidenceContractResult:
+    """Apply the read-only evidence contract to a static evidence manifest.
+
+    The usage adapter performs no external work. It only delegates to the
+    existing fail-closed contract validator and returns the resulting
+    EvidenceContractResult.
+    """
+
+    return validate_evidence_contract(
+        evidence_manifest=evidence_manifest,
+        contract=contract,
+    )
+
+
+def build_read_only_evidence_contract_usage_result(
+    evidence_manifest: Mapping[str, Mapping[str, Any]] | None,
+    contract: EvidenceContract | None = None,
+) -> EvidenceContractResult:
+    """Build the read-only usage result without generating reporting outputs."""
+
+    return validate_evidence_contract_usage(
+        evidence_manifest=evidence_manifest,
+        contract=contract,
+    )
+
+
+__all__ += [
+    "EVIDENCE_CONTRACT_REQUIRED_KEYS",
+    "EvidenceContract",
+    "EvidenceContractDecision",
+    "EvidenceContractResult",
+    "EvidenceDomainStatus",
+    "EvidenceHashStatus",
+    "EvidencePathStatus",
+    "build_evidence_contract",
+    "build_fail_closed_evidence_contract_result",
+    "build_read_only_evidence_contract_usage_result",
+    "validate_evidence_contract",
+    "validate_evidence_contract_no_submit_boundary",
+    "validate_evidence_contract_usage",
+]
