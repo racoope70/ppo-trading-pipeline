@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.85 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Chain Closeout Review
-latest_completed_tag = v2.85-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-chain-closeout-review
-latest_completed_commit = pending v2.85 sealed checkpoint
-active_milestone = v2.86 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Chain Archive Review
-next_checkpoint = v2.86 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Chain Archive Review
+latest_completed_milestone = v2.86 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Chain Archive Review
+latest_completed_tag = v2.86-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-chain-archive-review
+latest_completed_commit = pending v2.86 sealed checkpoint
+active_milestone = v2.87 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Review
+next_checkpoint = v2.87 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1595,7 +1595,34 @@ v2.85 did not authorize live orders
 v2.85 did not authorize controlled submit
 v2.85 did not unblock PPO + RF
 v2.85 did not unblock PPO + XGBoost
-v2.86 next checkpoint = validation reporting scaffold evidence contract usage chain archive review; no paper/live/controlled submit
+v2.86 validation reporting scaffold evidence contract usage chain archive review = v2.76 through v2.85 chain archived
+v2.86 chain archive result = ARCHIVED_CLOSED_PASS_READ_ONLY_NO_SUBMIT
+v2.86 archived validate_evidence_contract_usage around existing v2.59 evidence contract
+v2.86 archived build_read_only_evidence_contract_usage_result returning EvidenceContractResult only
+v2.86 archived static evidence manifest input only
+v2.86 archived EvidenceContractResult output only
+v2.86 archived fail-closed behavior
+v2.86 archived no broker calls, no training calls, no model loading, no data fetching, no file writes, no artifact creation, no metric computation, no report generation, no plot generation, no dashboard generation, no model promotion, no order submission, no controlled submit, and no hybrid unblock
+v2.86 confirmed source code was not modified in v2.86
+v2.86 confirmed test code was not modified in v2.86
+v2.86 confirmed evidence contract usage was not implemented in v2.86
+v2.86 confirmed evidence contract itself was not modified in v2.86
+v2.86 confirmed no PPO training was performed
+v2.86 confirmed no command file was executed
+v2.86 confirmed no training command was released for execution
+v2.86 confirmed no data fetching occurred
+v2.86 confirmed no dataset generation occurred
+v2.86 confirmed no model artifacts were created
+v2.86 confirmed no quarantine training outputs were created
+v2.86 did not compute new validation metrics
+v2.86 did not generate reports, plots, or dashboards
+v2.86 did not authorize model promotion
+v2.86 did not authorize paper orders
+v2.86 did not authorize live orders
+v2.86 did not authorize controlled submit
+v2.86 did not unblock PPO + RF
+v2.86 did not unblock PPO + XGBoost
+v2.87 next checkpoint = validation reporting scaffold evidence contract usage archived chain review; no paper/live/controlled submit
 ```
 
 ---
