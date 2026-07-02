@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.92 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Final Closure Closeout Review
-latest_completed_tag = v2.92-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-archived-chain-final-closure-closeout-review
-latest_completed_commit = pending v2.92 sealed checkpoint
-active_milestone = v2.93 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Review
-next_checkpoint = v2.93 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Review
+latest_completed_milestone = v2.93 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Review
+latest_completed_tag = v2.93-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-archived-chain-terminal-review
+latest_completed_commit = pending v2.93 sealed checkpoint
+active_milestone = v2.94 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Closeout Review
+next_checkpoint = v2.94 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Closeout Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1784,7 +1784,34 @@ v2.92 did not authorize live orders
 v2.92 did not authorize controlled submit
 v2.92 did not unblock PPO + RF
 v2.92 did not unblock PPO + XGBoost
-v2.93 next checkpoint = validation reporting scaffold evidence contract usage archived chain terminal review; no paper/live/controlled submit
+v2.93 validation reporting scaffold evidence contract usage archived chain terminal review = v2.76 through v2.92 archived chain terminally reviewed
+v2.93 archived chain terminal result = TERMINAL_REVIEWED_CLOSED_FINAL_CLOSED_FINALIZED_CLOSED_REVIEWED_ARCHIVED_PASS_READ_ONLY_NO_SUBMIT
+v2.93 terminal archived validate_evidence_contract_usage around existing v2.59 evidence contract
+v2.93 terminal archived build_read_only_evidence_contract_usage_result returning EvidenceContractResult only
+v2.93 terminal archived static evidence manifest input only
+v2.93 terminal archived EvidenceContractResult output only
+v2.93 terminal archived fail-closed behavior
+v2.93 terminal archived no broker calls, no training calls, no model loading, no data fetching, no file writes, no artifact creation, no metric computation, no report generation, no plot generation, no dashboard generation, no model promotion, no order submission, no controlled submit, and no hybrid unblock
+v2.93 confirmed source code was not modified in v2.93
+v2.93 confirmed test code was not modified in v2.93
+v2.93 confirmed evidence contract usage was not implemented in v2.93
+v2.93 confirmed evidence contract itself was not modified in v2.93
+v2.93 confirmed no PPO training was performed
+v2.93 confirmed no command file was executed
+v2.93 confirmed no training command was released for execution
+v2.93 confirmed no data fetching occurred
+v2.93 confirmed no dataset generation occurred
+v2.93 confirmed no model artifacts were created
+v2.93 confirmed no quarantine training outputs were created
+v2.93 did not compute new validation metrics
+v2.93 did not generate reports, plots, or dashboards
+v2.93 did not authorize model promotion
+v2.93 did not authorize paper orders
+v2.93 did not authorize live orders
+v2.93 did not authorize controlled submit
+v2.93 did not unblock PPO + RF
+v2.93 did not unblock PPO + XGBoost
+v2.94 next checkpoint = validation reporting scaffold evidence contract usage archived chain terminal closeout review; no paper/live/controlled submit
 ```
 
 ---
