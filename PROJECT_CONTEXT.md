@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.98 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Closeout Review
-latest_completed_tag = v2.98-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-archived-chain-terminal-final-closure-closeout-review
-latest_completed_commit = pending v2.98 sealed checkpoint
-active_milestone = v2.99 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Review
-next_checkpoint = v2.99 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Review
+latest_completed_milestone = v2.99 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Review
+latest_completed_tag = v2.99-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-archived-chain-terminal-final-closure-finalization-review
+latest_completed_commit = pending v2.99 sealed checkpoint
+active_milestone = v3.00 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Closeout Review
+next_checkpoint = v3.00 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Closeout Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1946,7 +1946,34 @@ v2.98 did not authorize live orders
 v2.98 did not authorize controlled submit
 v2.98 did not unblock PPO + RF
 v2.98 did not unblock PPO + XGBoost
-v2.99 next checkpoint = validation reporting scaffold evidence contract usage archived chain terminal final closure finalization review; no paper/live/controlled submit
+v2.99 validation reporting scaffold evidence contract usage archived chain terminal final closure finalization review = v2.76 through v2.98 archived chain terminal final closure finalized
+v2.99 archived chain terminal final closure finalization result = FINALIZED_CLOSED_FINAL_CLOSED_FINALIZED_CLOSED_TERMINAL_REVIEWED_CLOSED_FINAL_CLOSED_FINALIZED_CLOSED_REVIEWED_ARCHIVED_PASS_READ_ONLY_NO_SUBMIT
+v2.99 terminal final closure finalization archived validate_evidence_contract_usage around existing v2.59 evidence contract
+v2.99 terminal final closure finalization archived build_read_only_evidence_contract_usage_result returning EvidenceContractResult only
+v2.99 terminal final closure finalization archived static evidence manifest input only
+v2.99 terminal final closure finalization archived EvidenceContractResult output only
+v2.99 terminal final closure finalization archived fail-closed behavior
+v2.99 terminal final closure finalization archived no broker calls, no training calls, no model loading, no data fetching, no file writes, no artifact creation, no metric computation, no report generation, no plot generation, no dashboard generation, no model promotion, no order submission, no controlled submit, and no hybrid unblock
+v2.99 confirmed source code was not modified in v2.99
+v2.99 confirmed test code was not modified in v2.99
+v2.99 confirmed evidence contract usage was not implemented in v2.99
+v2.99 confirmed evidence contract itself was not modified in v2.99
+v2.99 confirmed no PPO training was performed
+v2.99 confirmed no command file was executed
+v2.99 confirmed no training command was released for execution
+v2.99 confirmed no data fetching occurred
+v2.99 confirmed no dataset generation occurred
+v2.99 confirmed no model artifacts were created
+v2.99 confirmed no quarantine training outputs were created
+v2.99 did not compute new validation metrics
+v2.99 did not generate reports, plots, or dashboards
+v2.99 did not authorize model promotion
+v2.99 did not authorize paper orders
+v2.99 did not authorize live orders
+v2.99 did not authorize controlled submit
+v2.99 did not unblock PPO + RF
+v2.99 did not unblock PPO + XGBoost
+v3.00 next checkpoint = validation reporting scaffold evidence contract usage archived chain terminal final closure finalization closeout review; no paper/live/controlled submit
 ```
 
 ---
