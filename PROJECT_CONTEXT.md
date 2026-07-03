@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v2.99 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Review
-latest_completed_tag = v2.99-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-archived-chain-terminal-final-closure-finalization-review
-latest_completed_commit = pending v2.99 sealed checkpoint
-active_milestone = v3.00 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Closeout Review
-next_checkpoint = v3.00 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Closeout Review
+latest_completed_milestone = v3.00 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Closeout Review
+latest_completed_tag = v3.00-ppo-v2-validation-reporting-scaffold-evidence-contract-usage-archived-chain-terminal-final-closure-finalization-closeout-review
+latest_completed_commit = pending v3.00 sealed checkpoint
+active_milestone = v3.01 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Final Review
+next_checkpoint = v3.01 PPO v2 Validation Reporting Scaffold Evidence Contract Usage Archived Chain Terminal Final Closure Finalization Final Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -1973,7 +1973,34 @@ v2.99 did not authorize live orders
 v2.99 did not authorize controlled submit
 v2.99 did not unblock PPO + RF
 v2.99 did not unblock PPO + XGBoost
-v3.00 next checkpoint = validation reporting scaffold evidence contract usage archived chain terminal final closure finalization closeout review; no paper/live/controlled submit
+v3.00 validation reporting scaffold evidence contract usage archived chain terminal final closure finalization closeout review = v2.76 through v2.99 archived chain terminal final closure finalization closed out
+v3.00 archived chain terminal final closure finalization closeout result = CLOSED_FINALIZED_CLOSED_FINAL_CLOSED_FINALIZED_CLOSED_TERMINAL_REVIEWED_CLOSED_FINAL_CLOSED_FINALIZED_CLOSED_REVIEWED_ARCHIVED_PASS_READ_ONLY_NO_SUBMIT
+v3.00 terminal final closure finalization closeout archived validate_evidence_contract_usage around existing v2.59 evidence contract
+v3.00 terminal final closure finalization closeout archived build_read_only_evidence_contract_usage_result returning EvidenceContractResult only
+v3.00 terminal final closure finalization closeout archived static evidence manifest input only
+v3.00 terminal final closure finalization closeout archived EvidenceContractResult output only
+v3.00 terminal final closure finalization closeout archived fail-closed behavior
+v3.00 terminal final closure finalization closeout archived no broker calls, no training calls, no model loading, no data fetching, no file writes, no artifact creation, no metric computation, no report generation, no plot generation, no dashboard generation, no model promotion, no order submission, no controlled submit, and no hybrid unblock
+v3.00 confirmed source code was not modified in v3.00
+v3.00 confirmed test code was not modified in v3.00
+v3.00 confirmed evidence contract usage was not implemented in v3.00
+v3.00 confirmed evidence contract itself was not modified in v3.00
+v3.00 confirmed no PPO training was performed
+v3.00 confirmed no command file was executed
+v3.00 confirmed no training command was released for execution
+v3.00 confirmed no data fetching occurred
+v3.00 confirmed no dataset generation occurred
+v3.00 confirmed no model artifacts were created
+v3.00 confirmed no quarantine training outputs were created
+v3.00 did not compute new validation metrics
+v3.00 did not generate reports, plots, or dashboards
+v3.00 did not authorize model promotion
+v3.00 did not authorize paper orders
+v3.00 did not authorize live orders
+v3.00 did not authorize controlled submit
+v3.00 did not unblock PPO + RF
+v3.00 did not unblock PPO + XGBoost
+v3.01 next checkpoint = validation reporting scaffold evidence contract usage archived chain terminal final closure finalization final review; no paper/live/controlled submit
 ```
 
 ---
