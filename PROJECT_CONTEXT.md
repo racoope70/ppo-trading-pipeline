@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v3.03 PPO v2 Archived Chain Transition Review
-latest_completed_tag = v3.03-ppo-v2-archived-chain-transition-review
-latest_completed_commit = pending v3.03 sealed checkpoint
-active_milestone = v3.04 PPO v2 Evidence Gap Review
-next_checkpoint = v3.04 PPO v2 Evidence Gap Review
+latest_completed_milestone = v3.04 PPO v2 Evidence Gap Review
+latest_completed_tag = v3.04-ppo-v2-evidence-gap-review
+latest_completed_commit = pending v3.04 sealed checkpoint
+active_milestone = v3.05 PPO v2 No-Submit Training Package Readiness Review
+next_checkpoint = v3.05 PPO v2 No-Submit Training Package Readiness Review
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -2076,7 +2076,45 @@ v3.03 did not authorize live orders
 v3.03 did not authorize controlled submit
 v3.03 did not unblock PPO + RF
 v3.03 did not unblock PPO + XGBoost
-v3.04 next checkpoint = PPO v2 evidence gap review; no paper/live/controlled submit
+v3.04 PPO v2 evidence gap review = completed
+v3.04 current workstream = PPO v2 validation readiness
+v3.04 primary gap = PPO v2 executable validation evidence not yet generated
+v3.04 training readiness = NOT_READY
+v3.04 required next checkpoint = PPO v2 no-submit training package readiness review
+v3.04 evidence gap: reviewed training command needed
+v3.04 evidence gap: validated static data input contract needed
+v3.04 evidence gap: frozen feature set confirmation needed
+v3.04 evidence gap: reproducible training config confirmation needed
+v3.04 evidence gap: runtime environment and dependency confirmation needed
+v3.04 evidence gap: seed policy confirmation needed
+v3.04 evidence gap: quarantine-only output paths needed
+v3.04 evidence gap: training log and run summary requirements needed
+v3.04 evidence gap: evidence manifest and hash requirements needed
+v3.04 evidence gap: fail-closed execution failure policy needed
+v3.04 evidence gap: validation metric requirements and pass/fail thresholds needed
+v3.04 evidence gap: broker boundary must remain blocked
+v3.04 evidence gap: model promotion must remain not authorized
+v3.04 evidence gap: PPO + RF and PPO + XGBoost must remain blocked until PPO-only evidence exists
+v3.04 confirmed source code was not modified in v3.04
+v3.04 confirmed test code was not modified in v3.04
+v3.04 confirmed evidence contract usage was not implemented in v3.04
+v3.04 confirmed evidence contract itself was not modified in v3.04
+v3.04 confirmed no PPO training was performed
+v3.04 confirmed no command file was executed
+v3.04 confirmed no training command was released for execution
+v3.04 confirmed no data fetching occurred
+v3.04 confirmed no dataset generation occurred
+v3.04 confirmed no model artifacts were created
+v3.04 confirmed no quarantine training outputs were created
+v3.04 did not compute new validation metrics
+v3.04 did not generate reports, plots, or dashboards
+v3.04 did not authorize model promotion
+v3.04 did not authorize paper orders
+v3.04 did not authorize live orders
+v3.04 did not authorize controlled submit
+v3.04 did not unblock PPO + RF
+v3.04 did not unblock PPO + XGBoost
+v3.05 next checkpoint = PPO v2 no-submit training package readiness review; no paper/live/controlled submit
 ```
 
 ---
