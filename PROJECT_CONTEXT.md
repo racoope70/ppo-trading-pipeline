@@ -11,11 +11,11 @@ Before advancing, proposing, or implementing any milestone, review `docs/workflo
 ## Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v3.04 PPO v2 Evidence Gap Review
-latest_completed_tag = v3.04-ppo-v2-evidence-gap-review
-latest_completed_commit = pending v3.04 sealed checkpoint
-active_milestone = v3.05 PPO v2 No-Submit Training Package Readiness Review
-next_checkpoint = v3.05 PPO v2 No-Submit Training Package Readiness Review
+latest_completed_milestone = v3.05 PPO v2 No-Submit Training Package Readiness Review
+latest_completed_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
+latest_completed_commit = pending v3.05 sealed checkpoint
+active_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+next_checkpoint = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
 legacy_ppo_classification = INFRASTRUCTURE_FIXTURE_ONLY
 infrastructure_baseline_decision = PASS
 offline_model_quality_decision = FAIL
@@ -2114,7 +2114,30 @@ v3.04 did not authorize live orders
 v3.04 did not authorize controlled submit
 v3.04 did not unblock PPO + RF
 v3.04 did not unblock PPO + XGBoost
-v3.05 next checkpoint = PPO v2 no-submit training package readiness review; no paper/live/controlled submit
+v3.05 PPO v2 no-submit training package readiness review = completed
+v3.05 training package status = READY_FOR_INDEPENDENT_FULL_SYSTEM_PRE_RETRAINING_AUDIT
+v3.05 training execution status = NOT_AUTHORIZED
+v3.05 required next checkpoint = PPO v2 independent full-system pre-retraining audit
+v3.05 confirmed source code was not modified in v3.05
+v3.05 confirmed test code was not modified in v3.05
+v3.05 confirmed evidence contract usage was not implemented in v3.05
+v3.05 confirmed evidence contract itself was not modified in v3.05
+v3.05 confirmed no PPO training was performed
+v3.05 confirmed no command file was executed
+v3.05 confirmed no training command was released for execution
+v3.05 confirmed no data fetching occurred
+v3.05 confirmed no dataset generation occurred
+v3.05 confirmed no model artifacts were created
+v3.05 confirmed no quarantine training outputs were created
+v3.05 did not compute new validation metrics
+v3.05 did not generate reports, plots, or dashboards
+v3.05 did not authorize model promotion
+v3.05 did not authorize paper orders
+v3.05 did not authorize live orders
+v3.05 did not authorize controlled submit
+v3.05 did not unblock PPO + RF
+v3.05 did not unblock PPO + XGBoost
+v3.06 next checkpoint = PPO v2 independent full-system pre-retraining audit; no paper/live/controlled submit
 ```
 
 ---
