@@ -4,7 +4,110 @@
 
 `PROJECT_CONTEXT.md` controls the current project state, active milestone, latest checkpoint, authorization boundaries, blocked actions, and PPO v2 roadmap.
 
-This file does not authorize work. `PROJECT_CONTEXT.md` remains the controlling source of truth.
+This file is a navigation map only. It does not authorize work, execution, data fetching, model promotion, paper orders, live orders, controlled submit, PPO + Random Forest, or PPO + XGBoost.
+
+Current controlling state:
+
+```txt
+latest_completed_milestone = v3.05 PPO v2 No-Submit Training Package Readiness Review
+latest_completed_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
+latest_completed_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
+active_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+next_checkpoint = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+NO_SUBMIT = DEFAULT
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+ppo_rf_deployment_decision = BLOCKED
+ppo_xgboost_deployment_decision = BLOCKED
+ppo_v2_training_execution = NOT_AUTHORIZED
+```
+
+Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting historical files.
+
+---
+
+## Current Active Review Path
+
+### v3.06 — PPO v2 Independent Full-System Pre-Retraining Audit
+
+**Use when reviewing**
+
+* current readiness before any PPO v2 no-submit retraining execution
+* whether v3.05 package readiness was sufficient for independent audit
+* whether source, tests, documentation, historical summaries, no-submit boundaries, and artifact policies align
+* whether stale v1.x/v2.x active-state references remain in current-state docs
+* whether broker/order/submit/hybrid gates remain blocked
+* whether generated artifacts or quarantine outputs were unintentionally created
+* whether v3.07 may be considered later
+
+**Review first**
+
+```txt
+PROJECT_CONTEXT.md
+docs/reviews/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
+docs/runs/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
+docs/reviews/v3.04_ppo_v2_evidence_gap_review.md
+docs/runs/v3.04_ppo_v2_evidence_gap_review.md
+docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
+```
+
+**Also review for audit coverage**
+
+```txt
+docs/workflows/milestone_review_reference_map.md
+docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
+docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
+docs/designs/v1.66_ppo_v2_retraining_design.md
+docs/decisions/v1.67_ppo_v2_retraining_authorization_review.md
+docs/audits/v1.71_ppo_v2_scaffold_safety_audit_and_execution_boundary_review.md
+docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
+docs/reviews/v2.59_ppo_v2_validation_reporting_scaffold_evidence_contract_implementation_checkpoint.md
+docs/reviews/v2.79_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint.md
+docs/reviews/v2.83_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit.md
+```
+
+**v3.06 boundary**
+
+```txt
+training_execution = NOT_AUTHORIZED
+command_execution = NOT_AUTHORIZED
+data_fetching = NOT_AUTHORIZED
+dataset_generation = NOT_AUTHORIZED
+model_artifact_creation = NOT_AUTHORIZED
+quarantine_training_outputs = NOT_AUTHORIZED
+metric_computation_from_new_outputs = NOT_AUTHORIZED
+report_generation_from_new_outputs = NOT_AUTHORIZED
+model_promotion = NOT_AUTHORIZED
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+ppo_rf = BLOCKED
+ppo_xgboost = BLOCKED
+NO_SUBMIT = DEFAULT
+```
+
+**Then move to**
+
+v3.07 only if v3.06 independently passes and explicitly authorizes a one-time no-submit PPO v2 training execution. Otherwise remain in audit/remediation.
+
+---
+
+## Near-Term PPO v2 Roadmap
+
+```txt
+v3.02 = final administrative closeout of archived evidence-contract usage chain
+v3.03 = archived-chain transition review; workstream moved to PPO v2 validation readiness
+v3.04 = evidence gap review; PPO v2 executable validation evidence not yet generated
+v3.05 = no-submit training package readiness review; ready for independent audit only
+v3.06 = independent full-system pre-retraining audit; active checkpoint
+v3.07 = one-time no-submit PPO v2 training execution; not active and not authorized
+v3.08 = post-run audit of generated PPO v2 evidence; future only
+v3.09 = validation report generation from real evidence; future only
+v3.10 = PPO v2 model evidence decision; future only
+```
+
+v3.07 is not active. A future v3.07 must remain one-time, no-submit, explicitly authorized, and quarantined. It must not imply paper orders, live orders, controlled submit, model promotion, PPO + RF, or PPO + XGBoost.
 
 ---
 
@@ -15,10 +118,10 @@ This file does not authorize work. `PROJECT_CONTEXT.md` remains the controlling 
 **Use when reviewing**
 
 * legacy PPO status
-* legacy PPO promotion questions
-* model-quality audit history
+* why the legacy PPO is not trading-ready
+* model-quality audit findings
 * promotion standards
-* why the project moved from legacy PPO to PPO v2
+* why the project moved to PPO v2
 
 **Review first**
 
@@ -28,11 +131,20 @@ docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
 docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
 ```
 
-Review v1.60-v1.62 artifact and scope docs if deeper audit context is needed.
+**Summary**
 
-**Then move to**
-
-v1.66-v1.72 if the task involves PPO v2 design, retraining governance, or data-contract planning.
+```txt
+legacy_ppo_final_classification = INFRASTRUCTURE_FIXTURE_ONLY
+infrastructure_baseline_decision = PASS
+offline_model_quality_decision = FAIL
+trading_edge_decision = FAIL_FOR_TRADING_EDGE
+controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+ppo_rf_deployment_decision = BLOCKED
+ppo_xgboost_deployment_decision = BLOCKED
+legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
+```
 
 ---
 
@@ -56,15 +168,9 @@ docs/audits/v1.71_ppo_v2_scaffold_safety_audit_and_execution_boundary_review.md
 docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
 ```
 
-Review v1.68-v1.70 implementation planning/scaffold docs if the task involves scaffold behavior.
-
-**Then move to**
-
-v1.73-v1.74 if the task involves validating the PPO v2 data contract.
-
 ---
 
-### v1.73-v1.74 — PPO v2 Data-Contract Validation Layer
+### v1.73-v1.83 — Data Contract, Data Preparation, and Training Input Handoff
 
 **Use when reviewing**
 
@@ -73,254 +179,80 @@ v1.73-v1.74 if the task involves validating the PPO v2 data contract.
 * split-boundary validation
 * leakage checks
 * holdout / embargo enforcement
-* non-executing validation utilities
+* data-preparation interface
+* training-input handoff planning
 
 **Review first**
 
 ```txt
 docs/runs/v1.73_ppo_v2_data_contract_validation_tests.md
 docs/reviews/v1.74_ppo_v2_data_contract_validation_review_next_implementation_boundary.md
-docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
-```
-
-**Then move to**
-
-v1.75-v1.77 if the task involves the PPO v2 data-preparation interface.
-
----
-
-### v1.75-v1.77 — PPO v2 Data-Preparation Interface
-
-**Use when reviewing**
-
-* data-preparation interface design
-* in-memory PPO v2 data structures
-* train / eval / holdout preparation boundaries
-* interface scaffold and tests
-
-**Review first**
-
-```txt
 docs/plans/v1.75_ppo_v2_controlled_data_preparation_interface_boundary_plan.md
 docs/runs/v1.76_ppo_v2_controlled_data_preparation_interface_scaffold_and_tests.md
 docs/reviews/v1.77_ppo_v2_data_preparation_interface_scaffold_review_next_boundary_decision.md
-```
-
-**Then move to**
-
-v1.78-v1.80 if the task involves connecting data-contract validation outputs to data-preparation interface inputs.
-
----
-
-### v1.78-v1.80 — PPO v2 Data-Preparation Integration
-
-**Use when reviewing**
-
-* data-contract to data-preparation integration
-* in-memory integration scaffold
-* integration tests
-* data-preparation integration boundary review
-
-**Review first**
-
-```txt
 docs/plans/v1.78_ppo_v2_data_preparation_interface_integration_boundary_plan.md
 docs/runs/v1.79_ppo_v2_data_preparation_interface_integration_scaffold_and_tests.md
 docs/reviews/v1.80_ppo_v2_data_preparation_integration_scaffold_review_next_boundary_decision.md
 ```
 
-**Then move to**
-
-v1.81-v1.83 if the task involves PPO v2 training-input handoff.
-
 ---
 
-### v1.81-v1.83 — PPO v2 Training Input Handoff
-
-**Use when reviewing**
-
-* training-input handoff planning
-* prepared-data handoff boundaries
-* future training-input interface design
-* handoff scaffold and review
-
-**Review first**
-
-```txt
-PROJECT_CONTEXT.md
-docs/reviews/v1.80_ppo_v2_data_preparation_integration_scaffold_review_next_boundary_decision.md
-```
-
-Review these when created:
-
-```txt
-docs/plans/v1.81_ppo_v2_training_input_handoff_boundary_plan.md
-docs/runs/v1.81_ppo_v2_training_input_handoff_boundary_plan.md
-docs/runs/v1.82_ppo_v2_training_input_handoff_interface_scaffold_and_tests.md
-docs/reviews/v1.83_ppo_v2_training_input_handoff_review_next_boundary_decision.md
-```
-
-**Then move to**
-
-v1.84-v1.86 if the task involves PPO v2 training configuration.
-
----
-
-### v1.84-v1.86 — PPO v2 Training Configuration
+### v1.84-v2.38 — Training Configuration, Controlled Execution Scaffolds, and No-Run Chain
 
 **Use when reviewing**
 
 * PPO v2 training configuration
 * hyperparameter governance
 * artifact isolation design
-* validation configuration
-* execution-readiness boundaries
+* controlled execution wrappers
+* one-time no-submit controlled execution package planning
+* why prior controlled execution checkpoints closed with no training run
 
 **Review first**
 
 ```txt
 PROJECT_CONTEXT.md
 docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
-docs/designs/v1.66_ppo_v2_retraining_design.md
 docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
-```
-
-Review these when created:
-
-```txt
 docs/plans/v1.84_ppo_v2_training_configuration_boundary_plan.md
 docs/runs/v1.85_ppo_v2_training_configuration_scaffold_and_tests.md
 docs/reviews/v1.86_ppo_v2_training_configuration_review_execution_readiness_boundary.md
-```
-
-**Then move to**
-
-v1.87-v1.90 if the task involves controlled PPO v2 training execution authorization planning, dry-run readiness, or non-executing scaffold review.
-
----
-
-### v1.87-v1.90 - Controlled Training Execution Dry-Run and Scaffold Readiness
-
-**Use when reviewing**
-
-* controlled training execution authorization planning
-* dry-run scaffold readiness
-* non-executing scaffold behavior
-* whether training execution remains blocked
-* whether artifact creation, promotion, broker integration, submit, and hybrid paths remain disabled
-
-**Review first**
-
-```txt
-PROJECT_CONTEXT.md
-docs/plans/v1.87_ppo_v2_controlled_training_execution_authorization_plan.md
-docs/plans/v1.88_ppo_v2_controlled_training_execution_scaffold_dry_run_plan.md
-docs/runs/v1.89_ppo_v2_controlled_training_execution_dry_run_scaffold_and_tests.md
-docs/reviews/v1.90_ppo_v2_controlled_training_execution_dry_run_review_next_boundary_decision.md
-```
-
-**Then move to**
-
-v1.91-v1.94 if the task involves controlled training execution implementation scaffolding or authorization planning.
-
----
-
-### v1.91-v1.94 - Controlled Training Execution Implementation and Authorization Planning
-
-**Use when reviewing**
-
-* controlled execution implementation scaffold
-* execution boundary decisions
-* future training execution authorization planning
-* preconditions before any one-time controlled execution checkpoint can be considered
-* quarantine, audit-package, model-quality, and hybrid-gate restrictions
-
-**Review first**
-
-```txt
-PROJECT_CONTEXT.md
-docs/plans/v1.91_ppo_v2_controlled_training_execution_implementation_plan.md
-docs/runs/v1.92_ppo_v2_controlled_training_execution_implementation_scaffold_and_tests.md
-docs/reviews/v1.93_ppo_v2_controlled_training_execution_scaffold_review_execution_boundary_decision.md
-docs/plans/v1.94_ppo_v2_controlled_training_execution_authorization_plan.md
-```
-
-**Then move to**
-
-v1.95-v1.97 if the task involves authorization review, checkpoint design planning, or design review.
-
----
-
-### v1.95-v1.97 - Controlled Training Execution Checkpoint Design Review
-
-**Use when reviewing**
-
-* controlled training execution authorization review
-* controlled execution checkpoint design requirements
-* single-command specification requirements
-* runtime capture, quarantine paths, artifact inventory, checksums, and fail-closed behavior
-* whether the project may move to one-time controlled execution checkpoint planning
-
-**Review first**
-
-```txt
-PROJECT_CONTEXT.md
 docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
 docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
 docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
+docs/reviews/v2.35_ppo_v2_one_time_no_submit_controlled_training_execution_checkpoint.md
+docs/reviews/v2.36_ppo_v2_one_time_no_submit_controlled_training_execution_post_run_audit_checkpoint.md
+docs/reviews/v2.37_ppo_v2_one_time_controlled_training_execution_chain_closeout_review.md
+docs/reviews/v2.38_ppo_v2_controlled_training_execution_chain_archive_review.md
 ```
 
-**Then move to**
-
-v1.98+ if the task involves planning a one-time controlled PPO v2 training execution checkpoint.
-
----
-
-### v1.98+ - One-Time Controlled Training Execution Checkpoint Planning
-
-**Use when reviewing**
-
-* one-time controlled PPO v2 training execution checkpoint planning
-* whether a future checkpoint may define an execution command
-* source-of-truth, runtime capture, quarantine, artifact inventory, checksum, and post-training audit requirements
-* preventing planning from being mistaken for permission to train
-
-**Review first**
+**Summary**
 
 ```txt
-PROJECT_CONTEXT.md
-docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
-docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
-docs/plans/v1.94_ppo_v2_controlled_training_execution_authorization_plan.md
-docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
-docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
-docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
+ppo_v2_infrastructure_scaffold = CREATED_AND_TESTED
+ppo_v2_training_execution = NOT_PERFORMED
+ppo_v2_data_fetching = NOT_PERFORMED
+ppo_v2_dataset_generation = NOT_PERFORMED
+ppo_v2_model_artifact_creation = NOT_PERFORMED
+ppo_v2_quarantine_training_outputs = NOT_CREATED
+controlled_submit = BLOCKED
+hybrid_models = BLOCKED
 ```
 
-**Then move to**
-
-Stop unless the task is explicitly a v1.98 planning checkpoint. v1.98 planning does not automatically authorize PPO training. Actual PPO training execution remains blocked unless a later sealed checkpoint explicitly authorizes one-time controlled execution.
-
-NO-SUBMIT remains default. Paper orders, live orders, controlled submit, PPO + Random Forest, and PPO + XGBoost remain blocked.
-
-v1.96 and v1.97 are historical design-plan and design-review checkpoints only. Keep those entries as historical evidence; do not treat them as the current evidence-contract usage state.
-
-**Then move to**
-
-v2.39-v3.02 if the task involves validation reporting, evidence contracts, evidence-contract usage, audit presentation, or grouped archive navigation.
+v1.96 and v1.97 are historical design-plan and design-review checkpoints only. Do not treat them as the active state.
 
 ---
 
-### v2.39-v3.02 - Validation Reporting and Evidence-Contract Usage Archive
+### v2.39-v3.03 — Validation Reporting, Evidence Contract, and Archived-Chain Transition
 
 **Use when reviewing**
 
 * validation-reporting scaffold history
 * evidence contract implementation and usage
-* the read-only evidence-contract usage adapter
+* read-only evidence-contract usage adapter
 * post-implementation audit result
-* audit/publishing navigation for repetitive archived-chain milestone files
-* whether the evidence-contract usage chain authorized training, artifacts, reports, submit, or hybrid work
+* grouped presentation for repetitive archived-chain milestone files
+* whether the evidence-contract chain authorized training, artifacts, reports, submit, or hybrid work
 
 **Review first**
 
@@ -331,12 +263,16 @@ docs/reviews/v2.59_ppo_v2_validation_reporting_scaffold_evidence_contract_implem
 docs/reviews/v2.79_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint.md
 docs/reviews/v2.83_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit.md
 docs/reviews/v2.86_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_chain_archive_review.md
-docs/reviews/v3.01_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_final_review.md
+docs/reviews/v3.02_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_final_administrative_closeout_review.md
+docs/reviews/v3.03_ppo_v2_archived_chain_transition_review.md
 ```
 
 **Public summary**
 
-Evidence Contract Usage Chain: v2.76-v3.02, result `PASS_READ_ONLY_NO_SUBMIT`. Detailed milestone files are preserved under `docs/runs` and `docs/reviews`; use `docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md` as the grouped presentation layer.
+```txt
+Evidence Contract Usage Chain: v2.76-v3.02, result PASS_READ_ONLY_NO_SUBMIT.
+v3.03 transitioned the project out of archived-chain closeout and into PPO v2 validation readiness.
+```
 
 **Historical chain guide**
 
@@ -349,18 +285,47 @@ v2.83        audit completed with PASS_READ_ONLY_NO_SUBMIT
 v2.84        audit review accepted
 v2.85-v2.86  chain closed and archived
 v2.87-v3.01  administrative archived-chain final/terminal closeout sequence
-v3.02        intended final administrative closeout, where referenced
+v3.02        final administrative closeout
+v3.03        transition review; archived chain remained closed
 ```
-
-v2.79 implemented `validate_evidence_contract_usage` and `build_read_only_evidence_contract_usage_result`.
 
 The adapter wraps the existing v2.59 evidence contract, uses static evidence manifest input only, returns `EvidenceContractResult` only, fails closed, and remains read-only and no-submit.
 
 No checkpoint in this chain authorized PPO training, data fetching, dataset generation, model artifact creation, quarantine output creation, metric computation, report/plot/dashboard generation, model promotion, paper orders, live orders, controlled submit, PPO + RF unblock, or PPO + XGBoost unblock.
 
+---
+
+### v3.04-v3.05 — Evidence Gap and No-Submit Training Package Readiness
+
+**Use when reviewing**
+
+* evidence gaps before PPO v2 training
+* whether the no-submit package is ready for independent audit
+* static input, feature, config, runtime, seed, output, logging, manifest, hash, and failure-handling requirements
+* confirmation that package readiness is not execution authorization
+
+**Review first**
+
+```txt
+PROJECT_CONTEXT.md
+docs/reviews/v3.04_ppo_v2_evidence_gap_review.md
+docs/runs/v3.04_ppo_v2_evidence_gap_review.md
+docs/reviews/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
+docs/runs/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
+```
+
+**Summary**
+
+```txt
+v3.04 primary_gap = PPO_V2_EXECUTABLE_VALIDATION_EVIDENCE_NOT_YET_GENERATED
+v3.04 training_readiness = NOT_READY
+v3.05 training_package_status = READY_FOR_INDEPENDENT_FULL_SYSTEM_PRE_RETRAINING_AUDIT
+v3.05 training_execution_status = NOT_AUTHORIZED
+```
+
 **Then move to**
 
-Future transition, evidence-gap, readiness, and audit phases. Do not create additional terminal/final/closeout loops for this archived chain unless a separate audit requires a new historical appendix.
+v3.06 independent full-system pre-retraining audit.
 
 ---
 
@@ -414,109 +379,19 @@ docs/workflows/paper_trading_reporting_artifact_retention_policy.md
 docs/workflows/ppo_paper_trading_observation_protocol.md
 ```
 
-**Relevant milestone ranges**
-
-```txt
-v1.10-v1.22
-v1.23-v1.33
-v1.34-v1.44
-v1.45-v1.59
-```
-
----
-
-### Legacy PPO Promotion
-
-**Review first**
-
-```txt
-docs/runs/v1.63_ppo_baseline_model_quality_audit_report.md
-docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
-docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
-```
-
-**Relevant milestone range**
-
-```txt
-v1.60-v1.65
-```
-
----
-
-### PPO v2 Training Execution
+### Evidence Contract / Validation Reporting
 
 **Review first**
 
 ```txt
 PROJECT_CONTEXT.md
-docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
-docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
-docs/plans/v1.94_ppo_v2_controlled_training_execution_authorization_plan.md
-docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
-docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
-docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
+docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
+docs/reviews/v2.59_ppo_v2_validation_reporting_scaffold_evidence_contract_implementation_checkpoint.md
+docs/reviews/v2.79_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint.md
+docs/reviews/v2.83_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit.md
 ```
 
-**Relevant milestone ranges**
-
-```txt
-v1.60—v1.65  legacy PPO audit and governance reset
-v1.66—v1.86  PPO v2 design, data-contract, validation, handoff, and training-configuration controls
-v1.87—v1.97  controlled execution authorization, scaffold, checkpoint design, and design-review controls
-v1.98+       one-time controlled training execution checkpoint planning
-```
-
-v1.98 planning does not automatically authorize PPO training.
-
-Actual PPO training execution remains blocked unless a later sealed checkpoint explicitly authorizes one-time controlled execution.
-
-NO-SUBMIT remains default.
-
-Paper orders, live orders, controlled submit, PPO + RF, and PPO + XGBoost remain blocked.
-
----
-
-### PPO + Random Forest / PPO + XGBoost
-
-**Review first**
-
-```txt
-PROJECT_CONTEXT.md
-docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
-docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
-docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
-docs/reviews/v1.95_ppo_v2_controlled_training_execution_authorization_review.md
-docs/plans/v1.96_ppo_v2_controlled_training_execution_checkpoint_design_plan.md
-docs/reviews/v1.97_ppo_v2_controlled_training_execution_checkpoint_design_review.md
-future PPO-only baseline performance package
-future PPO + Random Forest readiness review
-future PPO + XGBoost comparison review
-```
-
-**Relevant milestone ranges**
-
-```txt
-v1.60-v1.65  legacy PPO audit and governance reset
-v1.66-v1.86  PPO v2 design, data-contract, validation, handoff, and training-configuration controls
-v1.87-v1.97  controlled execution authorization, scaffold, checkpoint design, and design-review controls
-v1.98+       one-time controlled training execution checkpoint planning
-future standalone PPO v2 validation and baseline performance package
-future hybrid-gate readiness documents
-```
-
-v1.98 planning does not automatically authorize PPO training.
-
-Actual PPO training execution remains blocked unless a later sealed checkpoint explicitly authorizes one-time controlled execution.
-
-NO-SUBMIT remains default.
-
-Paper orders, live orders, controlled submit, PPO + RF, and PPO + XGBoost remain blocked.
-
-Do not unblock hybrid work from the legacy PPO or from v1.98 planning. Hybrid work requires a validated standalone PPO v2 baseline and a separate sealed hybrid authorization first.
-
----
-
-### Feature Importance / Interpretability
+### Hybrid Gate or Feature Importance Requests
 
 **Review first**
 
@@ -524,10 +399,20 @@ Do not unblock hybrid work from the legacy PPO or from v1.98 planning. Hybrid wo
 PROJECT_CONTEXT.md
 docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
 docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
-future PPO-only baseline performance package
-future PPO + RF / PPO + XGBoost validation documents
 ```
 
-**Key caution**
+Hybrid gate work remains blocked until PPO-only evidence exists. Feature importance and model interpretability are later research phases, not proof of trading edge or deployment readiness.
 
-Feature importance can explain model behavior after validation, but it must not be used to prove profitability, generalization, promotion readiness, or deployment readiness.
+---
+
+## Global Guardrail
+
+```txt
+NO_SUBMIT = DEFAULT
+training_execution = NOT_AUTHORIZED unless a later sealed checkpoint explicitly authorizes one-time no-submit execution
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+ppo_rf = BLOCKED
+ppo_xgboost = BLOCKED
+```
