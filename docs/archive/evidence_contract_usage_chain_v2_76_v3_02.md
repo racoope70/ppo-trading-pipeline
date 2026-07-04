@@ -1,0 +1,163 @@
+# Evidence Contract Usage Chain Archive: v2.76-v3.02
+
+Date: 2026-07-03
+Status: Archived summary
+Scope: Documentation navigation and public-facing audit presentation only
+
+## Summary
+
+The PPO v2 validation reporting scaffold evidence-contract usage chain is preserved as historical audit evidence under `docs/runs/` and `docs/reviews/`.
+
+For public-facing documentation and audit navigation, use this grouped summary instead of repeating the long archived-chain terminal/final/closeout/finalization milestone names.
+
+Long milestone names are retained in their original run and review files as historical audit records. They should not be used as the primary presentation layer for the current repository state.
+
+## Result
+
+```txt
+chain_range = v2.76-v3.02
+implementation_checkpoint = v2.79
+post_implementation_audit_result = PASS_READ_ONLY_NO_SUBMIT
+closed_archived_result = ARCHIVED_CLOSED_PASS_READ_ONLY_NO_SUBMIT
+public_summary = Evidence Contract Usage Chain: v2.76-v3.02, result PASS_READ_ONLY_NO_SUBMIT
+```
+
+## Chain Timeline
+
+| Milestone range | Public summary |
+|---|---|
+| v2.76-v2.78 | Authorization and implementation approval path for read-only evidence-contract usage. |
+| v2.79 | Read-only evidence-contract usage adapter implementation checkpoint. |
+| v2.80 | Implementation review. |
+| v2.81-v2.82 | Post-implementation audit planning and review. |
+| v2.83 | Post-implementation audit completed with `PASS_READ_ONLY_NO_SUBMIT`. |
+| v2.84 | Audit review accepted. |
+| v2.85-v2.86 | Chain closed and archived. |
+| v2.87-v3.01 | Administrative archived-chain final/terminal closeout sequence. |
+| v3.02 | Intended final administrative closeout, where referenced by v3.01 navigation. |
+
+## Preserved Source-of-Truth Facts
+
+The evidence-contract usage adapter was implemented at v2.79.
+
+v2.79 implemented:
+
+```txt
+validate_evidence_contract_usage
+build_read_only_evidence_contract_usage_result
+```
+
+The adapter wraps the existing v2.59 evidence contract.
+
+The adapter uses static evidence manifest input only.
+
+The adapter returns `EvidenceContractResult` only.
+
+The adapter fails closed.
+
+The adapter remains read-only and no-submit.
+
+v2.83 post-implementation audit result was `PASS_READ_ONLY_NO_SUBMIT`.
+
+v2.85-v2.86 closed and archived the chain.
+
+v2.87-v3.01 are administrative archived-chain terminal/final/closeout/finalization reviews.
+
+## Boundaries Preserved
+
+No checkpoint in this chain authorized or performed:
+
+```txt
+PPO training
+data fetching
+dataset generation
+model artifact creation
+quarantine output creation
+metric computation
+report generation
+plot generation
+dashboard generation
+model promotion
+paper orders
+live orders
+controlled submit
+hybrid unblock
+```
+
+PPO + Random Forest remains blocked.
+
+PPO + XGBoost remains blocked.
+
+Paper, live, and controlled submit remain blocked.
+
+## Navigation
+
+Use this summary for audit/publishing navigation:
+
+```txt
+docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
+```
+
+Detailed historical records remain in:
+
+```txt
+docs/runs/v2.76_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_authorization_plan.md
+docs/runs/v2.77_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_authorization_plan_review.md
+docs/runs/v2.78_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_authorization_decision.md
+docs/runs/v2.79_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint.md
+docs/runs/v2.80_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint_review.md
+docs/runs/v2.81_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit_plan.md
+docs/runs/v2.82_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit_plan_review.md
+docs/runs/v2.83_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit.md
+docs/runs/v2.84_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit_review.md
+docs/runs/v2.85_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_chain_closeout_review.md
+docs/runs/v2.86_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_chain_archive_review.md
+docs/runs/v2.87_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_review.md
+docs/runs/v2.88_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_closeout_review.md
+docs/runs/v2.89_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_finalization_review.md
+docs/runs/v2.90_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_finalization_closeout_review.md
+docs/runs/v2.91_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_final_closure_review.md
+docs/runs/v2.92_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_final_closure_closeout_review.md
+docs/runs/v2.93_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_review.md
+docs/runs/v2.94_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_closeout_review.md
+docs/runs/v2.95_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_finalization_review.md
+docs/runs/v2.96_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_finalization_closeout_review.md
+docs/runs/v2.97_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_review.md
+docs/runs/v2.98_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_closeout_review.md
+docs/runs/v2.99_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_review.md
+docs/runs/v3.00_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_closeout_review.md
+docs/runs/v3.01_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_final_review.md
+
+docs/reviews/v2.76_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_authorization_plan.md
+docs/reviews/v2.77_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_authorization_plan_review.md
+docs/reviews/v2.78_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_authorization_decision.md
+docs/reviews/v2.79_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint.md
+docs/reviews/v2.80_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint_review.md
+docs/reviews/v2.81_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit_plan.md
+docs/reviews/v2.82_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit_plan_review.md
+docs/reviews/v2.83_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit.md
+docs/reviews/v2.84_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit_review.md
+docs/reviews/v2.85_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_chain_closeout_review.md
+docs/reviews/v2.86_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_chain_archive_review.md
+docs/reviews/v2.87_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_review.md
+docs/reviews/v2.88_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_closeout_review.md
+docs/reviews/v2.89_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_finalization_review.md
+docs/reviews/v2.90_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_finalization_closeout_review.md
+docs/reviews/v2.91_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_final_closure_review.md
+docs/reviews/v2.92_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_final_closure_closeout_review.md
+docs/reviews/v2.93_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_review.md
+docs/reviews/v2.94_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_closeout_review.md
+docs/reviews/v2.95_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_finalization_review.md
+docs/reviews/v2.96_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_finalization_closeout_review.md
+docs/reviews/v2.97_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_review.md
+docs/reviews/v2.98_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_closeout_review.md
+docs/reviews/v2.99_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_review.md
+docs/reviews/v3.00_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_closeout_review.md
+docs/reviews/v3.01_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_final_review.md
+```
+
+## Future Navigation
+
+Future audit navigation should move toward transition, evidence-gap, readiness, and audit phases.
+
+Do not create additional terminal/final/closeout loops for this archived chain unless a separate audit requires a new historical appendix.

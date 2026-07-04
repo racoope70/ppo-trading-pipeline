@@ -303,6 +303,65 @@ Stop unless the task is explicitly a v1.98 planning checkpoint. v1.98 planning d
 
 NO-SUBMIT remains default. Paper orders, live orders, controlled submit, PPO + Random Forest, and PPO + XGBoost remain blocked.
 
+v1.96 and v1.97 are historical design-plan and design-review checkpoints only. Keep those entries as historical evidence; do not treat them as the current evidence-contract usage state.
+
+**Then move to**
+
+v2.39-v3.02 if the task involves validation reporting, evidence contracts, evidence-contract usage, audit presentation, or grouped archive navigation.
+
+---
+
+### v2.39-v3.02 - Validation Reporting and Evidence-Contract Usage Archive
+
+**Use when reviewing**
+
+* validation-reporting scaffold history
+* evidence contract implementation and usage
+* the read-only evidence-contract usage adapter
+* post-implementation audit result
+* audit/publishing navigation for repetitive archived-chain milestone files
+* whether the evidence-contract usage chain authorized training, artifacts, reports, submit, or hybrid work
+
+**Review first**
+
+```txt
+PROJECT_CONTEXT.md
+docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
+docs/reviews/v2.59_ppo_v2_validation_reporting_scaffold_evidence_contract_implementation_checkpoint.md
+docs/reviews/v2.79_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_implementation_checkpoint.md
+docs/reviews/v2.83_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit.md
+docs/reviews/v2.86_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_chain_archive_review.md
+docs/reviews/v3.01_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_archived_chain_terminal_final_closure_finalization_final_review.md
+```
+
+**Public summary**
+
+Evidence Contract Usage Chain: v2.76-v3.02, result `PASS_READ_ONLY_NO_SUBMIT`. Detailed milestone files are preserved under `docs/runs` and `docs/reviews`; use `docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md` as the grouped presentation layer.
+
+**Historical chain guide**
+
+```txt
+v2.76-v2.78  authorization and implementation approval path
+v2.79        read-only usage adapter implementation
+v2.80        implementation review
+v2.81-v2.82  post-implementation audit planning and review
+v2.83        audit completed with PASS_READ_ONLY_NO_SUBMIT
+v2.84        audit review accepted
+v2.85-v2.86  chain closed and archived
+v2.87-v3.01  administrative archived-chain final/terminal closeout sequence
+v3.02        intended final administrative closeout, where referenced
+```
+
+v2.79 implemented `validate_evidence_contract_usage` and `build_read_only_evidence_contract_usage_result`.
+
+The adapter wraps the existing v2.59 evidence contract, uses static evidence manifest input only, returns `EvidenceContractResult` only, fails closed, and remains read-only and no-submit.
+
+No checkpoint in this chain authorized PPO training, data fetching, dataset generation, model artifact creation, quarantine output creation, metric computation, report/plot/dashboard generation, model promotion, paper orders, live orders, controlled submit, PPO + RF unblock, or PPO + XGBoost unblock.
+
+**Then move to**
+
+Future transition, evidence-gap, readiness, and audit phases. Do not create additional terminal/final/closeout loops for this archived chain unless a separate audit requires a new historical appendix.
+
 ---
 
 ## Older Paper-Trading / Safety History: v0.3-v1.59

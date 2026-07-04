@@ -14,6 +14,16 @@ This map identifies the relevant audit, standard, design, plan, run, and review 
 
 It does not authorize work. `PROJECT_CONTEXT.md` remains the controlling source of truth.
 
+## Archive Summaries
+
+Use archive summaries for public-facing audit navigation when a historical chain has many repetitive milestone files.
+
+```text
+docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
+```
+
+Evidence Contract Usage Chain: v2.76-v3.02, result `PASS_READ_ONLY_NO_SUBMIT`. Detailed milestone files remain preserved under `docs/runs` and `docs/reviews`.
+
 ## Paper-Trading Safety and Reporting
 
 ### Decision and Candidate Policies
