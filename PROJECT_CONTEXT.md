@@ -55,6 +55,10 @@ source/test/docs align with current state
 stale v1.x active milestone language is removed from current-state sections
 no generated artifacts or quarantine outputs were unintentionally created
 pre-training evidence requirements are complete and reviewable
+paper-trading runbook details are preserved in workflow documentation
+candidate stability Level 0/1/2 policy is preserved in workflow documentation
+critical module inventory is preserved for onboarding and audit review
+future controlled-submit hardening candidates are preserved for audit/backlog review
 ```
 
 v3.06 may produce audit documentation. It must not train PPO, fetch market data, generate datasets, create model artifacts, compute validation metrics, generate reports, promote models, submit paper/live orders, authorize controlled submit, or unblock hybrid models.
@@ -181,8 +185,6 @@ The legacy PPO system remains useful as an infrastructure fixture and audit base
 
 This phase created and reviewed PPO v2 design, data contracts, data-preparation interfaces, training configuration scaffolds, controlled execution wrappers, package preparation, and no-submit execution checkpoint documentation.
 
-Result:
-
 ```txt
 ppo_v2_infrastructure_scaffold = CREATED_AND_TESTED
 ppo_v2_training_execution = NOT_PERFORMED
@@ -199,8 +201,6 @@ The v2.35-v2.38 chain closed as `CLOSED_NO_RUN`: no PPO v2 training command was 
 ### Validation Reporting and Evidence Contract: v2.39-v3.03
 
 This phase created a non-executing validation reporting scaffold, implemented the evidence contract, implemented read-only evidence-contract usage, audited that usage, archived the chain, and transitioned out of the repetitive closeout sequence.
-
-Key technical checkpoints:
 
 ```txt
 v2.45 = validation reporting scaffold source/tests created
@@ -222,18 +222,11 @@ The archived evidence-contract usage chain did not authorize training, data fetc
 
 ### Evidence Gap and Training Package Readiness: v3.04-v3.05
 
-v3.04 identified the primary gap:
-
 ```txt
-primary_gap = PPO_V2_EXECUTABLE_VALIDATION_EVIDENCE_NOT_YET_GENERATED
-training_readiness = NOT_READY
-```
-
-v3.05 concluded the no-submit training package is ready for independent audit, not execution.
-
-```txt
-training_package_status = READY_FOR_INDEPENDENT_FULL_SYSTEM_PRE_RETRAINING_AUDIT
-training_execution_status = NOT_AUTHORIZED
+v3.04 primary_gap = PPO_V2_EXECUTABLE_VALIDATION_EVIDENCE_NOT_YET_GENERATED
+v3.04 training_readiness = NOT_READY
+v3.05 training_package_status = READY_FOR_INDEPENDENT_FULL_SYSTEM_PRE_RETRAINING_AUDIT
+v3.05 training_execution_status = NOT_AUTHORIZED
 ```
 
 ---
@@ -388,38 +381,63 @@ These columns may be used for labeling, evaluation, grouping, auditing, and repo
 
 ---
 
-## 11. Core Architecture
+## 11. Core Architecture and Critical Module Inventory
 
 The intended architecture remains staged so model output is never treated as immediate trade approval.
 
 ```txt
 Market Data Layer
-    ↓
 Feature Engineering Layer
-    ↓
 Safe Feature Manifest
-    ↓
 PPO Training Layer
-    ↓
 Validation + Candidate Selection
-    ↓
 Paper-Trading Dry Run
-    ↓
 Dry-Run Evaluation
-    ↓
 Execution Plan
-    ↓
 Risk Controls
-    ↓
 Pre-Trade Checklist
-    ↓
 Supervised Paper-Order Runner
-    ↓
 Broker Verification
-    ↓
 Audit + Monitoring
-    ↓
 Decision Documentation
+```
+
+Module map for onboarding and audit review:
+
+```txt
+Data Layer:
+  src/data/alpaca_historical_data.py
+  src/data/alpaca_training_dataset.py
+
+Feature Engineering:
+  src/features.py
+  src/feature_manifest.py
+
+Training and Validation:
+  src/train.py
+  src/training_splits.py
+  src/vecnormalize_utils.py
+  src/env.py
+
+Alpaca Adapter Layer:
+  src/adapters/alpaca.py
+
+Paper-Trading Deployment Layer:
+  src/paper_trading/paper_trade_dry_run.py
+  src/paper_trading/evaluate_dry_run.py
+  src/paper_trading/build_execution_plan.py
+  src/paper_trading/risk_controls.py
+  src/paper_trading/filter_execution_plan.py
+  src/paper_trading/paper_trade_loop.py
+  src/paper_trading/pre_trade_checklist.py
+  src/paper_trading/logging_utils.py
+
+Paper-Trading Reporting Layer:
+  src/paper_trading/classify_decision_state.py
+  src/paper_trading/pipeline_decision_state_hook.py
+  src/paper_trading/build_run_summary_with_decision_state.py
+  src/paper_trading/build_decision_dashboard_with_state.py
+  src/paper_trading/reporting_chain_smoke_test.py
 ```
 
 Current planned retraining data source:
@@ -441,7 +459,90 @@ XOM
 
 ---
 
-## 12. Paper-Trading and Submit Constraints
+## 12. Paper-Trading Operational Runbook Preservation
+
+Normal paper-trading monitoring remains no-submit by default. The detailed no-submit monitoring workflow should remain in `docs/workflows/paper_trading_operational_reporting_runbook.md`, not repeated as the main source-of-truth narrative.
+
+Expected no-submit pass conditions:
+
+```txt
+Evaluation result = PASS
+Risk result = PASS
+Checklist result = PASS
+predict_ok_count = expected universe size
+error_count = 0
+orders_submitted = 0
+submit_orders = False
+broker_open_orders_zero = PASS
+broker_snapshot_errors_empty = PASS
+```
+
+Hard stop conditions:
+
+```txt
+dry-run evaluation fails
+risk controls fail
+pre-trade checklist fails
+broker open orders are unexpected
+execution plan is stale
+market data is unavailable
+candidate changed unexpectedly
+orders_required > 1 and no single-order filter was used
+manual approval is missing
+```
+
+This runbook preservation does not authorize paper orders, live orders, controlled submit, or PPO v2 retraining.
+
+---
+
+## 13. Candidate Stability Policy
+
+Candidate stability details should remain in `docs/workflows/signal_persistence_candidate_stability_policy.md`, but the core source-of-truth policy is:
+
+```txt
+A candidate must be revalidated on a fresh future run before any submit decision.
+Do not submit from a prior checkpoint's execution plan.
+Do not assume a prior candidate remains valid.
+```
+
+Candidate definition:
+
+```txt
+should_order = True
+side in {buy, sell}
+orders_required >= 1
+```
+
+Changed candidate conditions:
+
+```txt
+symbol changes
+side changes
+candidate disappears
+orders_required changes from 1 to multiple
+candidate becomes below_min_notional
+risk fails
+checklist fails
+plan becomes stale
+```
+
+Candidate stability levels:
+
+```txt
+Level 0 = one-time candidate; review only
+Level 1 = revalidated candidate; eligible for controlled review
+Level 2 = submit-eligible candidate; requires full safety stack and manual approval
+```
+
+Default action when uncertain:
+
+```txt
+NO-SUBMIT
+```
+
+---
+
+## 14. Paper-Trading and Submit Constraints
 
 Current default posture:
 
@@ -470,9 +571,20 @@ post-submit broker verification planned
 
 Controlled submit commands are intentionally omitted from this context file. Never submit from an old checkpoint plan, stale candidate, changed candidate, or unfiltered multi-order plan.
 
+Future controlled-submit hardening candidates to preserve for backlog or v3.06 audit review:
+
+```txt
+make submit mode fail closed if broker account/positions/open-order reads fail
+add runner-level max_orders_to_submit=1 default
+add post-submit order-status reconciliation by order id
+keep PROJECT_CONTEXT.md aligned with latest paper-trading policy
+```
+
+These are hardening candidates only. They do not authorize submit, broker execution, or model promotion.
+
 ---
 
-## 13. Artifact and Generated Data Policy
+## 15. Artifact and Generated Data Policy
 
 Generated data and model artifacts must remain excluded from version control unless a later checkpoint explicitly documents otherwise.
 
@@ -511,7 +623,7 @@ Validated historical model artifacts must not be overwritten.
 
 ---
 
-## 14. Testing and CI Standards
+## 16. Testing and CI Standards
 
 Primary local test command:
 
@@ -535,7 +647,49 @@ Passing tests supports code/control stability only. It does not establish tradin
 
 ---
 
-## 15. Publication and Portfolio Framing
+## 17. Future Phase: Statistical Backtest Evidence / Model Comparison Package
+
+After PPO-only, PPO + Random Forest Gate, and PPO + XGBoost Gate have completed their respective validation packages, compare candidate models using a standardized statistical evidence layer.
+
+This layer should include:
+
+```txt
+raw Sharpe
+annualized Sharpe
+Sortino
+Probabilistic Sharpe Ratio
+Deflated Sharpe Ratio
+max drawdown
+Calmar ratio
+turnover
+average holding period
+frequency of bets
+long ratio
+correlation to underlying
+implementation shortfall / slippage sensitivity
+attribution by ticker and regime
+paper-trading stability metrics
+```
+
+For RF/XGBoost gate models, also include:
+
+```txt
+accuracy
+precision
+recall
+F1
+confusion matrix
+false positive / false negative review
+probability calibration where applicable
+```
+
+These metrics are for post-validation comparison and promotion review only. They must not be used for repeated tuning against the holdout set, as a shortcut around PPO-only evidence, or as standalone proof of trading edge.
+
+This phase is not active implementation scope. It does not authorize PPO v2 training, model promotion, paper orders, live orders, controlled submit, PPO + RF deployment, or PPO + XGBoost deployment.
+
+---
+
+## 18. Publication and Portfolio Framing
 
 The project should be presented as:
 
@@ -561,6 +715,8 @@ blocked paper/live/controlled submit
 blocked hybrid gates until PPO-only evidence exists
 audit archive and milestone reference navigation
 pre-retraining independent audit gate
+preserved operational runbook and candidate-stability policy
+future statistical/model-comparison package defined as post-validation only
 ```
 
 Remaining before model-performance claims:
@@ -571,11 +727,12 @@ post-run audit of generated evidence
 validation reporting from real evidence
 PPO-only model evidence decision
 hybrid comparison only after PPO-only evidence passes
+standardized statistical evidence package after validated model packages exist
 ```
 
 ---
 
-## 16. Maintenance Requirements
+## 19. Maintenance Requirements
 
 Update this document when:
 
@@ -596,7 +753,7 @@ When a historical chain becomes long or repetitive, keep detailed records in `do
 
 ---
 
-## 17. Current Bottom Line
+## 20. Current Bottom Line
 
 ```txt
 v3.05 is sealed.
@@ -605,4 +762,6 @@ PPO v2 training is not authorized.
 No paper/live/controlled submit is authorized.
 PPO + RF and PPO + XGBoost remain blocked.
 The project is ready for an independent full-system pre-retraining audit, not training execution.
+Operational runbook, candidate-stability, module-inventory, and hardening-candidate details are preserved in summary form.
+The future statistical/model-comparison package is defined as post-validation scope only.
 ```
