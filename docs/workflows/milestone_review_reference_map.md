@@ -11,8 +11,8 @@ Current controlling state:
 ```txt
 latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
 latest_completed_decision = FAIL
-active_milestone = v3.06 Audit Remediation Planning
-next_checkpoint = v3.06 Audit Remediation Plan
+active_milestone = v3.06 Remediation Review / Post-Remediation Audit
+next_checkpoint = v3.06 Independent Remediation Review / Post-Remediation Audit
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
@@ -29,19 +29,19 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 
 ## Current Active Review Path
 
-### v3.06 — Audit Remediation Planning
+### v3.06 — Remediation Review / Post-Remediation Audit
 
 **Use when reviewing**
 
 * the v3.06 independent audit `FAIL` decision
-* remediation planning for blocking findings B1-B5
+* remediation implementation closeout for blocking findings B1-B5
 * paper-trading workflow authorization conflicts
 * README training/data-command ambiguity
 * PPO v2 quarantine/log ignore-policy gaps
 * missing-bar coverage implementation/testing gaps
 * tracked package-preparation artifact policy ambiguity
 * H1 future no-submit command-boundary cleanup
-* whether v3.07 remains blocked
+* whether v3.07 remains blocked after remediation implementation closeout
 
 **Review first**
 
@@ -50,6 +50,7 @@ PROJECT_CONTEXT.md
 docs/audits/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
 docs/runs/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
 docs/workflows/milestone_review_reference_map.md
+docs/runs/v3.06_remediation_completion_record.md
 ```
 
 **Then review remediation target files as needed**
@@ -72,6 +73,21 @@ src/ppo_v2_one_time_controlled_execution_package.py
 src/ppo_v2_controlled_training_package_preparation.py
 src/ppo_v2_controlled_training_execution_wrapper.py
 ```
+
+**v3.06 remediation implementation closeout**
+
+```txt
+v3_06_remediation_implementation_record = COMPLETED
+v3_06_remediation_completion_record = docs/runs/v3.06_remediation_completion_record.md
+v3_06_remediation_completion_tag = v3.06-remediation-completion-record
+v3_06_remediation_completion_commit = b2e1c3ab106986b3e6814b1c1d1aa02b5117c28c
+v3_06_independent_remediation_review = REQUIRED
+v3_06_post_remediation_audit = REQUIRED
+v3.07_status = BLOCKED
+ppo_v2_training_execution = NOT_AUTHORIZED
+```
+
+The completion record is an implementation closeout record only. It is not an independent audit, not a post-remediation audit, not a v3.07 execution plan, and not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
 
 **M/L cleanup note**
 
@@ -131,7 +147,7 @@ NO_SUBMIT = DEFAULT
 
 **Then move to**
 
-A v3.06 remediation review only after blocking findings are remediated. v3.07 may only be reconsidered if remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training execution. Otherwise remain in audit/remediation.
+An independent v3.06 remediation review / post-remediation audit of the completed remediation implementation record. v3.07 may only be reconsidered if that review passes and a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training execution. Otherwise remain in audit/remediation review.
 
 ---
 
@@ -143,9 +159,9 @@ v3.03 = archived-chain transition review; workstream moved to PPO v2 validation 
 v3.04 = evidence gap review; PPO v2 executable validation evidence not yet generated
 v3.05 = no-submit training package readiness review; ready for independent audit only
 v3.06 = independent full-system pre-retraining audit completed, FAIL
-v3.06 remediation planning = active
-v3.06 remediation implementation = pending
-v3.06 remediation review = required
+v3.06 remediation implementation closeout = completed
+v3.06 remediation completion record = completed and tagged
+v3.06 independent remediation review / post-remediation audit = required
 v3.07 = BLOCKED until remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training
 v3.08 = post-run audit of generated PPO v2 evidence; future only and only after v3.07 is authorized/completed
 v3.09 = validation report generation from real evidence; future only

@@ -17,10 +17,10 @@ latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining
 latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
 latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
 latest_successful_sealed_readiness_commit_short = c9f2c71
-active_milestone = v3.06 Audit Remediation Planning
-next_checkpoint = v3.06 Audit Remediation Plan
+active_milestone = v3.06 Remediation Review / Post-Remediation Audit
+next_checkpoint = v3.06 Independent Remediation Review / Post-Remediation Audit
 current_workstream = PPO_V2_VALIDATION_READINESS
-current_phase = remediation planning after v3.06 audit FAIL decision
+current_phase = remediation implementation closeout completed; independent remediation review required
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
@@ -33,10 +33,16 @@ legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
 ppo_v2_training_execution = NOT_AUTHORIZED
 ppo_v2_training_outputs = NOT_CREATED
 ppo_v2_executable_validation_evidence = NOT_YET_GENERATED
-latest_test_evidence = 531 passed, 2 warnings
+v3_06_remediation_implementation_record = COMPLETED
+v3_06_remediation_completion_record = docs/runs/v3.06_remediation_completion_record.md
+v3_06_remediation_completion_tag = v3.06-remediation-completion-record
+v3_06_remediation_completion_commit = b2e1c3ab106986b3e6814b1c1d1aa02b5117c28c
+v3_06_independent_remediation_review = REQUIRED
+v3_06_post_remediation_audit = REQUIRED
+latest_ci_evidence = Tests #317 green on v3.06 completion-record follow-up commit b2e1c3a
 ```
 
-The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision. It has **not** executed PPO v2 training. v3.07 remains blocked until the v3.06 blocking findings are remediated and reviewed.
+The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision. It has **not** executed PPO v2 training. The v3.06 remediation implementation closeout record is now completed and tagged, but it is not an independent audit and does not authorize v3.07. v3.07 remains blocked pending an independent v3.06 remediation review / post-remediation audit.
 
 ## v3.06 Audit Result
 
@@ -47,8 +53,8 @@ latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining
 latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
 latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
 latest_successful_sealed_readiness_commit_short = c9f2c71
-active_milestone = v3.06 Audit Remediation Planning
-next_checkpoint = v3.06 Audit Remediation Plan
+active_milestone = v3.06 Remediation Review / Post-Remediation Audit
+next_checkpoint = v3.06 Independent Remediation Review / Post-Remediation Audit
 v3.07_status = BLOCKED
 ppo_v2_training_execution = NOT_AUTHORIZED
 paper_order_authorization = NOT_AUTHORIZED
@@ -80,9 +86,19 @@ This is important because `PROJECT_CONTEXT.md` is the controlling source of trut
 
 ## 2. Active Milestone: v3.06 Audit Remediation Planning
 
-v3.06 remediation planning must address the blocking audit findings before v3.07 can be reconsidered.
+v3.06 remediation implementation closeout has been completed for the blocking audit findings and cleanup items.
 
-The remediation plan should cover:
+This closeout is documented in:
+
+```txt
+docs/runs/v3.06_remediation_completion_record.md
+tag = v3.06-remediation-completion-record
+commit = b2e1c3ab106986b3e6814b1c1d1aa02b5117c28c
+```
+
+The closeout record is not an independent audit and does not authorize v3.07. The next required checkpoint is an independent v3.06 remediation review / post-remediation audit.
+
+The completed remediation implementation covered:
 
 ```txt
 B1 paper-trading workflow authorization conflicts
@@ -92,9 +108,10 @@ B4 missing-bar coverage requirement not implemented/tested
 B5 tracked package-preparation artifact policy ambiguity
 H1 future no-submit command-boundary cleanup
 non-blocking cleanup backlog items
+B4 corrective follow-up observed-session missing-bar scope correction
 ```
 
-v3.06 remediation planning may produce documentation and later remediation commits. It must not train PPO, fetch market data, generate datasets, create model artifacts, compute validation metrics from new PPO v2 outputs, generate reports from new PPO v2 outputs, promote models, submit paper/live orders, authorize controlled submit, authorize v3.07, or unblock hybrid models.
+v3.06 remediation review / post-remediation audit may inspect the remediation commits and completion record. It must not train PPO, fetch market data, generate datasets, create model artifacts, compute validation metrics from new PPO v2 outputs, generate reports from new PPO v2 outputs, promote models, submit paper/live orders, authorize controlled submit, authorize v3.07, or unblock hybrid models unless a later sealed checkpoint explicitly changes the authorization state.
 
 ---
 
@@ -192,8 +209,8 @@ v3.04 = evidence gap review; confirmed PPO v2 lacks executable validation eviden
 v3.05 = no-submit training package readiness review; ready for independent audit only
 v3.06 = independent full-system pre-retraining audit completed, FAIL
 v3.06 remediation planning = active
-v3.06 remediation implementation = pending
-v3.06 remediation review = required
+v3.06 remediation implementation closeout = completed
+v3.06 independent remediation review / post-remediation audit = required
 v3.07 = BLOCKED until remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training
 v3.08 = post-run audit of generated PPO v2 evidence, only after v3.07 is authorized and completed
 v3.09 = validation report generation from real evidence, only after post-run audit
