@@ -9,11 +9,11 @@ This file is a navigation map only. It does not authorize work, execution, data 
 Current controlling state:
 
 ```txt
-latest_completed_milestone = v3.05 PPO v2 No-Submit Training Package Readiness Review
-latest_completed_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
-latest_completed_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
-active_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
-next_checkpoint = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+latest_completed_decision = FAIL
+active_milestone = v3.06 Audit Remediation Planning
+next_checkpoint = v3.06 Audit Remediation Plan
+v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
 live_order_authorization = NOT_AUTHORIZED
@@ -29,33 +29,58 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 
 ## Current Active Review Path
 
-### v3.06 — PPO v2 Independent Full-System Pre-Retraining Audit
+### v3.06 — Audit Remediation Planning
 
 **Use when reviewing**
 
-* current readiness before any PPO v2 no-submit retraining execution
-* whether v3.05 package readiness was sufficient for independent audit
-* whether source, tests, documentation, historical summaries, no-submit boundaries, and artifact policies align
-* whether stale v1.x/v2.x active-state references remain in current-state docs
-* whether broker/order/submit/hybrid gates remain blocked
-* whether generated artifacts or quarantine outputs were unintentionally created
-* whether v3.07 may be considered later
+* the v3.06 independent audit `FAIL` decision
+* remediation planning for blocking findings B1-B5
+* paper-trading workflow authorization conflicts
+* README training/data-command ambiguity
+* PPO v2 quarantine/log ignore-policy gaps
+* missing-bar coverage implementation/testing gaps
+* tracked package-preparation artifact policy ambiguity
+* H1 future no-submit command-boundary cleanup
+* whether v3.07 remains blocked
 
 **Review first**
 
 ```txt
 PROJECT_CONTEXT.md
+docs/audits/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
+docs/runs/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
+docs/workflows/milestone_review_reference_map.md
+```
+
+**Then review remediation target files as needed**
+
+```txt
+README.md
+.gitignore
+docs/workflows/paper_trading_session_policy.md
+docs/workflows/signal_persistence_candidate_stability_policy.md
+docs/workflows/submit_mode_preflight.md
+docs/workflows/stale_plan_prevention.md
+docs/workflows/single_order_submit_guard.md
+docs/workflows/paper_trading_operational_reporting_runbook.md
+docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
+src/ppo_v2_data_contract.py
+tests/test_ppo_v2_data_contract.py
+artifacts/ppo_v2/package_preparation/
+docs/runs/v2.16_ppo_v2_controlled_training_execution_package_preparation_checkpoint.md
+src/ppo_v2_one_time_controlled_execution_package.py
+src/ppo_v2_controlled_training_package_preparation.py
+src/ppo_v2_controlled_training_execution_wrapper.py
+```
+
+**Historical context for remediation**
+
+```txt
 docs/reviews/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
 docs/runs/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
 docs/reviews/v3.04_ppo_v2_evidence_gap_review.md
 docs/runs/v3.04_ppo_v2_evidence_gap_review.md
 docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
-```
-
-**Also review for audit coverage**
-
-```txt
-docs/workflows/milestone_review_reference_map.md
 docs/standards/v1.64_ppo_promotion_standard_acceptance_criteria.md
 docs/decisions/v1.65_legacy_ppo_final_audit_decision.md
 docs/designs/v1.66_ppo_v2_retraining_design.md
@@ -67,7 +92,7 @@ docs/reviews/v2.79_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_
 docs/reviews/v2.83_ppo_v2_validation_reporting_scaffold_evidence_contract_usage_post_implementation_audit.md
 ```
 
-**v3.06 boundary**
+**v3.06 remediation boundary**
 
 ```txt
 training_execution = NOT_AUTHORIZED
@@ -84,12 +109,13 @@ live_orders = NOT_AUTHORIZED
 controlled_submit = BLOCKED
 ppo_rf = BLOCKED
 ppo_xgboost = BLOCKED
+v3.07 = BLOCKED
 NO_SUBMIT = DEFAULT
 ```
 
 **Then move to**
 
-v3.07 only if v3.06 independently passes and explicitly authorizes a one-time no-submit PPO v2 training execution. Otherwise remain in audit/remediation.
+A v3.06 remediation review only after blocking findings are remediated. v3.07 may only be reconsidered if remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training execution. Otherwise remain in audit/remediation.
 
 ---
 
@@ -100,9 +126,12 @@ v3.02 = final administrative closeout of archived evidence-contract usage chain
 v3.03 = archived-chain transition review; workstream moved to PPO v2 validation readiness
 v3.04 = evidence gap review; PPO v2 executable validation evidence not yet generated
 v3.05 = no-submit training package readiness review; ready for independent audit only
-v3.06 = independent full-system pre-retraining audit; active checkpoint
-v3.07 = one-time no-submit PPO v2 training execution; not active and not authorized
-v3.08 = post-run audit of generated PPO v2 evidence; future only
+v3.06 = independent full-system pre-retraining audit completed, FAIL
+v3.06 remediation planning = active
+v3.06 remediation implementation = pending
+v3.06 remediation review = required
+v3.07 = BLOCKED until remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training
+v3.08 = post-run audit of generated PPO v2 evidence; future only and only after v3.07 is authorized/completed
 v3.09 = validation report generation from real evidence; future only
 v3.10 = PPO v2 model evidence decision; future only
 ```
@@ -295,14 +324,15 @@ No checkpoint in this chain authorized PPO training, data fetching, dataset gene
 
 ---
 
-### v3.04-v3.05 — Evidence Gap and No-Submit Training Package Readiness
+### v3.04-v3.06 — Evidence Gap, Training Package Readiness, and Independent Audit
 
 **Use when reviewing**
 
 * evidence gaps before PPO v2 training
-* whether the no-submit package is ready for independent audit
-* static input, feature, config, runtime, seed, output, logging, manifest, hash, and failure-handling requirements
-* confirmation that package readiness is not execution authorization
+* whether the no-submit package was ready for independent audit
+* why v3.06 failed
+* remediation requirements before v3.07 can be reconsidered
+* confirmation that package readiness and audit documentation are not execution authorization
 
 **Review first**
 
@@ -312,6 +342,8 @@ docs/reviews/v3.04_ppo_v2_evidence_gap_review.md
 docs/runs/v3.04_ppo_v2_evidence_gap_review.md
 docs/reviews/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
 docs/runs/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
+docs/audits/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
+docs/runs/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
 ```
 
 **Summary**
@@ -321,11 +353,13 @@ v3.04 primary_gap = PPO_V2_EXECUTABLE_VALIDATION_EVIDENCE_NOT_YET_GENERATED
 v3.04 training_readiness = NOT_READY
 v3.05 training_package_status = READY_FOR_INDEPENDENT_FULL_SYSTEM_PRE_RETRAINING_AUDIT
 v3.05 training_execution_status = NOT_AUTHORIZED
+v3.06 audit_decision = FAIL
+v3.06 remediation_status = REQUIRED_BEFORE_v3.07
 ```
 
 **Then move to**
 
-v3.06 independent full-system pre-retraining audit.
+v3.06 audit remediation planning, implementation, and review. Do not move to v3.07 unless remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training execution.
 
 ---
 
@@ -415,4 +449,5 @@ live_orders = NOT_AUTHORIZED
 controlled_submit = BLOCKED
 ppo_rf = BLOCKED
 ppo_xgboost = BLOCKED
+v3.07 = BLOCKED until v3.06 remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training
 ```
