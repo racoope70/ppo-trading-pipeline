@@ -36,10 +36,10 @@ ppo_v2_executable_validation_evidence = NOT_YET_GENERATED
 v3_06_remediation_implementation_record = COMPLETED
 v3_06_remediation_completion_record = docs/runs/v3.06_remediation_completion_record.md
 v3_06_remediation_completion_tag = v3.06-remediation-completion-record
-v3_06_remediation_completion_commit = b2e1c3ab106986b3e6814b1c1d1aa02b5117c28c
+v3_06_remediation_completion_commit = 115629c5edcb6d294c846f57a01de8c063878c5b
 v3_06_independent_remediation_review = REQUIRED
 v3_06_post_remediation_audit = REQUIRED
-latest_ci_evidence = Tests #317 green on v3.06 completion-record follow-up commit b2e1c3a
+latest_ci_evidence = Tests #317 green on v3.06 completion-record follow-up commit 115629c
 ```
 
 The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision. It has **not** executed PPO v2 training. The v3.06 remediation implementation closeout record is now completed and tagged, but it is not an independent audit and does not authorize v3.07. v3.07 remains blocked pending an independent v3.06 remediation review / post-remediation audit.
@@ -93,7 +93,7 @@ This closeout is documented in:
 ```txt
 docs/runs/v3.06_remediation_completion_record.md
 tag = v3.06-remediation-completion-record
-commit = b2e1c3ab106986b3e6814b1c1d1aa02b5117c28c
+commit = 115629c5edcb6d294c846f57a01de8c063878c5b
 ```
 
 The closeout record is not an independent audit and does not authorize v3.07. The next required checkpoint is an independent v3.06 remediation review / post-remediation audit.

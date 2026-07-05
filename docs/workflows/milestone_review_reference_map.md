@@ -80,7 +80,7 @@ src/ppo_v2_controlled_training_execution_wrapper.py
 v3_06_remediation_implementation_record = COMPLETED
 v3_06_remediation_completion_record = docs/runs/v3.06_remediation_completion_record.md
 v3_06_remediation_completion_tag = v3.06-remediation-completion-record
-v3_06_remediation_completion_commit = b2e1c3ab106986b3e6814b1c1d1aa02b5117c28c
+v3_06_remediation_completion_commit = 115629c5edcb6d294c846f57a01de8c063878c5b
 v3_06_independent_remediation_review = REQUIRED
 v3_06_post_remediation_audit = REQUIRED
 v3.07_status = BLOCKED
