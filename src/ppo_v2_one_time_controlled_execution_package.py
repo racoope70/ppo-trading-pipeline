@@ -19,6 +19,14 @@ OUTPUT_CLASSIFICATION = "QUARANTINED_TRAINING_OUTPUT_ONLY"
 REQUIRED_MODE = "controlled-training"
 REQUIRED_NO_SUBMIT_FLAG = "--no-submit"
 REQUIRED_QUARANTINE_PREFIX = "artifacts/ppo_v2/quarantine"
+CANONICAL_H1_COMMAND_MODULE = "src.ppo_v2_controlled_training_execution"
+CANONICAL_H1_COMMAND_BOUNDARY_STATUS = "FUTURE_ONLY_NO_SUBMIT_REVIEW_BOUNDARY_NOT_AUTHORIZATION"
+HISTORICAL_H1_COMMAND_SPELLINGS = (
+    "ppo_v2_future_execution_entrypoint",
+    "ppo_v2_controlled_training_execution",
+    "src.ppo_v2_controlled_training_execution_wrapper",
+    "python -m ppo_v2_controlled_training_execution",
+)
 
 
 REQUIRED_PACKAGE_ITEMS = (
@@ -110,7 +118,7 @@ class PPOV2OneTimeExecutionPackageRequest:
     command: tuple[str, ...] = (
         "python",
         "-m",
-        "ppo_v2_future_execution_entrypoint",
+        CANONICAL_H1_COMMAND_MODULE,
         "--mode",
         "controlled-training",
         "--run-id",
@@ -252,6 +260,9 @@ def _build_manifest(request: PPOV2OneTimeExecutionPackageRequest) -> dict[str, A
         "package_status": PACKAGE_STATUS,
         "run_id": request.run_id,
         "command": list(request.command),
+        "canonical_command_module": CANONICAL_H1_COMMAND_MODULE,
+        "command_boundary_status": CANONICAL_H1_COMMAND_BOUNDARY_STATUS,
+        "historical_placeholder_command_spellings": list(HISTORICAL_H1_COMMAND_SPELLINGS),
         "config_path": request.config_path,
         "quarantine_root": request.quarantine_root,
         "output_paths": output_paths,

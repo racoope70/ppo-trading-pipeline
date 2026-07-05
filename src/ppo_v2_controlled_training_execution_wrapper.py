@@ -62,12 +62,23 @@ REQUIRED_GUARDRAILS: tuple[str, ...] = (
     "classify_outputs_as_quarantined_training_output_only",
 )
 
+CANONICAL_H1_COMMAND_NAME = "ppo-v2-controlled-training-execution"
+CANONICAL_H1_COMMAND_MODULE = "src.ppo_v2_controlled_training_execution"
+CANONICAL_H1_COMMAND_MODE = "controlled-training"
+CANONICAL_H1_COMMAND_BOUNDARY_STATUS = "FUTURE_ONLY_NO_SUBMIT_REVIEW_BOUNDARY_NOT_AUTHORIZATION"
+HISTORICAL_H1_COMMAND_SPELLINGS = (
+    "ppo_v2_future_execution_entrypoint",
+    "ppo_v2_controlled_training_execution",
+    "src.ppo_v2_controlled_training_execution_wrapper",
+    "python -m ppo_v2_controlled_training_execution",
+)
+
 
 @dataclass(frozen=True)
 class PPOV2ControlledExecutionWrapperRequest:
     """Request for building a non-executing controlled execution wrapper manifest."""
 
-    command_name: str = "ppo-v2-controlled-training-execution"
+    command_name: str = CANONICAL_H1_COMMAND_NAME
     execution_mode: str = "scaffold_only"
     run_identifier: str = "ppo_v2_one_time_controlled_training_execution"
     ticker_universe: tuple[str, ...] = ("AAPL", "AMD", "MRK", "PFE", "UNH", "XOM")
@@ -101,11 +112,15 @@ class PPOV2ControlledExecutionWrapperRequest:
         default_factory=lambda: (
             "python",
             "-m",
-            "src.ppo_v2_controlled_training_execution_wrapper",
+            CANONICAL_H1_COMMAND_MODULE,
             "--mode",
-            "scaffold-only",
+            CANONICAL_H1_COMMAND_MODE,
             "--run-id",
             "ppo_v2_one_time_controlled_training_execution",
+            "--config",
+            "artifacts/ppo_v2/package_preparation/ppo_v2_one_time_controlled_training_execution/config/controlled_training_config.yaml",
+            "--quarantine-root",
+            "artifacts/ppo_v2/quarantine/ppo_v2_one_time_controlled_training_execution",
             "--no-submit",
         )
     )
@@ -172,6 +187,10 @@ def build_ppo_v2_controlled_execution_wrapper(
             "command_name": request.command_name,
             "execution_mode": request.execution_mode,
             "command_tokens": request.command_tokens,
+            "canonical_command_module": CANONICAL_H1_COMMAND_MODULE,
+            "canonical_command_mode": CANONICAL_H1_COMMAND_MODE,
+            "command_boundary_status": CANONICAL_H1_COMMAND_BOUNDARY_STATUS,
+            "historical_placeholder_command_spellings": list(HISTORICAL_H1_COMMAND_SPELLINGS),
         },
         "run_identifier": request.run_identifier,
         "ticker_universe": request.ticker_universe,
@@ -282,8 +301,8 @@ def _validate_command_tokens(request: PPOV2ControlledExecutionWrapperRequest) ->
         errors.append("command_tokens must include --no-submit")
     if "--mode" not in request.command_tokens:
         errors.append("command_tokens must include --mode")
-    if "scaffold-only" not in request.command_tokens:
-        errors.append("command_tokens must use scaffold-only mode")
+    if CANONICAL_H1_COMMAND_MODE not in request.command_tokens:
+        errors.append("command_tokens must use controlled-training mode")
 
     for token in PROHIBITED_COMMAND_TOKENS:
         if token in command_text:

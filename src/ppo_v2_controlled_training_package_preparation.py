@@ -21,6 +21,14 @@ REQUIRED_NO_SUBMIT_FLAG = "--no-submit"
 REQUIRED_MODE = "controlled-training"
 REQUIRED_PREPARATION_PREFIX = "artifacts/ppo_v2/package_preparation"
 REQUIRED_QUARANTINE_PREFIX = "artifacts/ppo_v2/quarantine"
+CANONICAL_H1_COMMAND_MODULE = "src.ppo_v2_controlled_training_execution"
+CANONICAL_H1_COMMAND_BOUNDARY_STATUS = "FUTURE_ONLY_NO_SUBMIT_REVIEW_BOUNDARY_NOT_AUTHORIZATION"
+HISTORICAL_H1_COMMAND_SPELLINGS = (
+    "ppo_v2_future_execution_entrypoint",
+    "ppo_v2_controlled_training_execution",
+    "src.ppo_v2_controlled_training_execution_wrapper",
+    "python -m ppo_v2_controlled_training_execution",
+)
 
 REQUIRED_PREPARATION_DIRECTORIES = (
     "config",
@@ -99,7 +107,7 @@ class PPOV2PreparationScaffoldRequest:
     command: tuple[str, ...] = (
         "python",
         "-m",
-        "ppo_v2_controlled_training_execution",
+        CANONICAL_H1_COMMAND_MODULE,
         "--mode",
         "controlled-training",
         "--run-id",
@@ -250,6 +258,9 @@ def _build_manifest(request: PPOV2PreparationScaffoldRequest) -> dict[str, Any]:
         "preparation_root": request.preparation_root,
         "quarantine_root": request.quarantine_root,
         "command": list(request.command),
+        "canonical_command_module": CANONICAL_H1_COMMAND_MODULE,
+        "command_boundary_status": CANONICAL_H1_COMMAND_BOUNDARY_STATUS,
+        "historical_placeholder_command_spellings": list(HISTORICAL_H1_COMMAND_SPELLINGS),
         "preparation_directories": list(request.preparation_directories),
         "preparation_files": list(request.preparation_files),
         "preparation_paths": preparation_paths,

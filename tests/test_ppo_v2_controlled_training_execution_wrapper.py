@@ -28,6 +28,10 @@ def test_default_wrapper_manifest_passes_and_is_non_executing():
     assert manifest["no_submit_default"] is True
     assert manifest["output_classification"] == "QUARANTINED_TRAINING_OUTPUT_ONLY"
     assert "--no-submit" in manifest["command_specification"]["command_tokens"]
+    assert "src.ppo_v2_controlled_training_execution" in manifest["command_specification"]["command_tokens"]
+    assert "controlled-training" in manifest["command_specification"]["command_tokens"]
+    assert manifest["command_specification"]["canonical_command_module"] == "src.ppo_v2_controlled_training_execution"
+    assert manifest["command_specification"]["command_boundary_status"] == "FUTURE_ONLY_NO_SUBMIT_REVIEW_BOUNDARY_NOT_AUTHORIZATION"
     assert manifest["command_specification"]["execution_mode"] == "scaffold_only"
 
 
@@ -116,9 +120,9 @@ def test_wrapper_rejects_missing_no_submit():
         command_tokens=(
             "python",
             "-m",
-            "src.ppo_v2_controlled_training_execution_wrapper",
+            "src.ppo_v2_controlled_training_execution",
             "--mode",
-            "scaffold-only",
+            "controlled-training",
         )
     )
 
@@ -134,7 +138,7 @@ def test_wrapper_rejects_non_scaffold_mode():
         command_tokens=(
             "python",
             "-m",
-            "src.ppo_v2_controlled_training_execution_wrapper",
+            "src.ppo_v2_controlled_training_execution",
             "--mode",
             "execute",
             "--no-submit",
@@ -145,7 +149,7 @@ def test_wrapper_rejects_non_scaffold_mode():
 
     assert result.boundary_decision == "REJECT"
     assert result.wrapper_manifest is None
-    assert "command_tokens must use scaffold-only mode" in result.errors
+    assert "command_tokens must use controlled-training mode" in result.errors
 
 
 def test_wrapper_rejects_prohibited_command_tokens():
@@ -155,7 +159,7 @@ def test_wrapper_rejects_prohibited_command_tokens():
             "-m",
             "src.train",
             "--mode",
-            "scaffold-only",
+            "controlled-training",
             "--no-submit",
             "--submit-orders",
         )

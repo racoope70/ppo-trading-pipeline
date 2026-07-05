@@ -14,8 +14,8 @@
 # ppo_rf = BLOCKED
 # ppo_xgboost = BLOCKED
 #
-# Historical / future-only command-boundary specimen:
-python -m ppo_v2_controlled_training_execution \
+# Historical / future-only canonical command-boundary specimen:
+python -m src.ppo_v2_controlled_training_execution \
   --mode controlled-training \
   --run-id v2_16_controlled_package_preparation_checkpoint \
   --config artifacts/ppo_v2/package_preparation/v2_16_controlled_package_preparation_checkpoint/config/controlled_training_config.yaml \

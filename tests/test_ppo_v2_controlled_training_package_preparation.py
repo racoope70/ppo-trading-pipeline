@@ -25,6 +25,8 @@ def test_default_preparation_scaffold_passes_and_is_non_executing():
     assert manifest["filesystem_writes_performed"] is False
     assert manifest["controlled_submit_authorized"] is False
     assert manifest["no_submit_default"] is True
+    assert manifest["canonical_command_module"] == "src.ppo_v2_controlled_training_execution"
+    assert manifest["command_boundary_status"] == "FUTURE_ONLY_NO_SUBMIT_REVIEW_BOUNDARY_NOT_AUTHORIZATION"
 
 
 def test_preparation_paths_stay_under_package_preparation_root():
@@ -49,7 +51,7 @@ def test_missing_no_submit_fails_closed():
         command=(
             "python",
             "-m",
-            "ppo_v2_controlled_training_execution",
+            "src.ppo_v2_controlled_training_execution",
             "--mode",
             "controlled-training",
             "--run-id",
@@ -72,7 +74,7 @@ def test_missing_mode_fails_closed():
         command=(
             "python",
             "-m",
-            "ppo_v2_controlled_training_execution",
+            "src.ppo_v2_controlled_training_execution",
             "--run-id",
             "run_001",
             "--config",
@@ -205,7 +207,7 @@ def test_command_with_live_fragment_fails_closed():
         command=(
             "python",
             "-m",
-            "ppo_v2_controlled_training_execution",
+            "src.ppo_v2_controlled_training_execution",
             "--mode",
             "controlled-training",
             "--run-id",
@@ -230,7 +232,7 @@ def test_command_with_submit_fragment_outside_no_submit_fails_closed():
         command=(
             "python",
             "-m",
-            "ppo_v2_controlled_training_execution",
+            "src.ppo_v2_controlled_training_execution",
             "--mode",
             "controlled-training",
             "--run-id",
