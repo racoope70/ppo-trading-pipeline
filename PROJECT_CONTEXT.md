@@ -139,7 +139,18 @@ retrain the legacy PPO model
 
 Passing unit tests proves infrastructure, control, reporting, and documentation stability. It does **not** prove trading profitability, generalization, deployment readiness, or a trading edge.
 
+## Future Hardening / Post-Remediation Backlog
+
+### Future Hardening — Alpaca-Aligned Exchange Calendar Coverage
+
+Current B4 remediation uses observed symbol/date session missing-bar coverage. This prevents false missing-bar failures across overnight, weekend, and cross-date gaps while preserving detection of missing bars inside observed intraday sessions.
+
+Before production-grade PPO v2 retraining expansion, paper-trading expansion, or controlled-submit consideration, add a reviewed Alpaca-aligned exchange-calendar coverage check. The future check should compare observed bars against expected Alpaca/market-session bars, including regular trading sessions, holidays, early closes, and any explicitly authorized extended-hours assumptions.
+
+This is a future hardening item only. It does not authorize v3.07 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
+
 ---
+
 
 ## 4. Latest Completed Milestone: v3.06 Audit
 
