@@ -20,7 +20,7 @@ latest_successful_sealed_readiness_commit_short = c9f2c71
 active_milestone = v3.06 Remediation Review / Post-Remediation Audit
 next_checkpoint = v3.06 Independent Remediation Review / Post-Remediation Audit
 current_workstream = PPO_V2_VALIDATION_READINESS
-current_phase = remediation implementation closeout completed; independent remediation review required
+current_phase = remediation implementation closeout and failed-audit cleanup completed; independent remediation review rerun required
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
@@ -39,7 +39,9 @@ v3_06_remediation_completion_tag = v3.06-remediation-completion-record
 v3_06_remediation_completion_commit = 115629c5edcb6d294c846f57a01de8c063878c5b
 v3_06_independent_remediation_review = REQUIRED
 v3_06_post_remediation_audit = REQUIRED
-latest_ci_evidence = Tests #317 green on v3.06 completion-record follow-up commit 115629c
+v3_06_remediation_review_follow_up_evidence = docs/runs/v3.06_remediation_review_follow_up_evidence.md
+v3_06_remediation_review_follow_up_commit = d00d8fff076c70385fc5a6303b18493be267a199
+latest_ci_evidence = Tests #322 green on v3.06 failed-audit cleanup commit d00d8ff
 ```
 
 The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision. It has **not** executed PPO v2 training. The v3.06 remediation implementation closeout record is now completed and tagged, but it is not an independent audit and does not authorize v3.07. v3.07 remains blocked pending an independent v3.06 remediation review / post-remediation audit.
@@ -84,7 +86,7 @@ This is important because `PROJECT_CONTEXT.md` is the controlling source of trut
 
 ---
 
-## 2. Active Milestone: v3.06 Audit Remediation Planning
+## 2. Active Milestone: v3.06 Remediation Review / Post-Remediation Audit
 
 v3.06 remediation implementation closeout has been completed for the blocking audit findings and cleanup items.
 
@@ -94,9 +96,11 @@ This closeout is documented in:
 docs/runs/v3.06_remediation_completion_record.md
 tag = v3.06-remediation-completion-record
 commit = 115629c5edcb6d294c846f57a01de8c063878c5b
+failed_audit_cleanup_evidence = docs/runs/v3.06_remediation_review_follow_up_evidence.md
+failed_audit_cleanup_commit = d00d8fff076c70385fc5a6303b18493be267a199
 ```
 
-The closeout record is not an independent audit and does not authorize v3.07. The next required checkpoint is an independent v3.06 remediation review / post-remediation audit.
+The closeout record is not an independent audit and does not authorize v3.07. A failed-audit cleanup follow-up has also been completed and documented in `docs/runs/v3.06_remediation_review_follow_up_evidence.md`. The next required checkpoint remains an independent v3.06 remediation review / post-remediation audit rerun.
 
 The completed remediation implementation covered:
 
@@ -109,6 +113,7 @@ B5 tracked package-preparation artifact policy ambiguity
 H1 future no-submit command-boundary cleanup
 non-blocking cleanup backlog items
 B4 corrective follow-up observed-session missing-bar scope correction
+failed-audit cleanup for M1 stale test-count, README current-stage drift, and exact command-level evidence
 ```
 
 v3.06 remediation review / post-remediation audit may inspect the remediation commits and completion record. It must not train PPO, fetch market data, generate datasets, create model artifacts, compute validation metrics from new PPO v2 outputs, generate reports from new PPO v2 outputs, promote models, submit paper/live orders, authorize controlled submit, authorize v3.07, or unblock hybrid models unless a later sealed checkpoint explicitly changes the authorization state.

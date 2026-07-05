@@ -51,6 +51,7 @@ docs/audits/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
 docs/runs/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
 docs/workflows/milestone_review_reference_map.md
 docs/runs/v3.06_remediation_completion_record.md
+docs/runs/v3.06_remediation_review_follow_up_evidence.md
 ```
 
 **Then review remediation target files as needed**
@@ -83,11 +84,13 @@ v3_06_remediation_completion_tag = v3.06-remediation-completion-record
 v3_06_remediation_completion_commit = 115629c5edcb6d294c846f57a01de8c063878c5b
 v3_06_independent_remediation_review = REQUIRED
 v3_06_post_remediation_audit = REQUIRED
+v3_06_remediation_review_follow_up_evidence = docs/runs/v3.06_remediation_review_follow_up_evidence.md
+v3_06_remediation_review_follow_up_commit = d00d8fff076c70385fc5a6303b18493be267a199
 v3.07_status = BLOCKED
 ppo_v2_training_execution = NOT_AUTHORIZED
 ```
 
-The completion record is an implementation closeout record only. It is not an independent audit, not a post-remediation audit, not a v3.07 execution plan, and not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
+The completion record is an implementation closeout record only. The failed-audit cleanup evidence record documents the follow-up cleanup for M1 stale test-count, README current-stage drift, and exact command-level evidence. These records are not an independent audit, not a post-remediation audit PASS, not a v3.07 execution plan, and not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
 
 **M/L cleanup note**
 
@@ -161,7 +164,7 @@ v3.05 = no-submit training package readiness review; ready for independent audit
 v3.06 = independent full-system pre-retraining audit completed, FAIL
 v3.06 remediation implementation closeout = completed
 v3.06 remediation completion record = completed and tagged
-v3.06 independent remediation review / post-remediation audit = required
+v3.06 independent remediation review / post-remediation audit rerun = required after failed-audit cleanup evidence
 v3.07 = BLOCKED until remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training
 v3.08 = post-run audit of generated PPO v2 evidence; future only and only after v3.07 is authorized/completed
 v3.09 = validation report generation from real evidence; future only
