@@ -11,14 +11,16 @@ Before modifying training logic, validation methodology, deployment workflows, a
 ## 1. Current Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v3.05 PPO v2 No-Submit Training Package Readiness Review
-latest_completed_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
-latest_completed_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
-latest_completed_commit_short = c9f2c71
-active_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
-next_checkpoint = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+latest_completed_decision = FAIL
+latest_sealed_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
+latest_sealed_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
+latest_sealed_commit_short = c9f2c71
+active_milestone = v3.06 Audit Remediation Planning
+next_checkpoint = v3.06 Audit Remediation Plan
 current_workstream = PPO_V2_VALIDATION_READINESS
-current_phase = independent full-system audit before any PPO v2 retraining execution
+current_phase = remediation planning after v3.06 audit FAIL decision
+v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
 live_order_authorization = NOT_AUTHORIZED
@@ -33,7 +35,7 @@ ppo_v2_executable_validation_evidence = NOT_YET_GENERATED
 latest_test_evidence = 531 passed, 2 warnings
 ```
 
-The repository has completed readiness documentation for the PPO v2 no-submit training package. It has **not** executed PPO v2 training. The next milestone is a full independent system audit before any one-time no-submit training execution can be considered.
+The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision. It has **not** executed PPO v2 training. v3.07 remains blocked until the v3.06 blocking findings are remediated and reviewed.
 
 ## v3.06 Audit Result
 
@@ -71,31 +73,23 @@ This is important because `PROJECT_CONTEXT.md` is the controlling source of trut
 
 ---
 
-## 2. Active Milestone: v3.06 Independent Full-System Pre-Retraining Audit
+## 2. Active Milestone: v3.06 Audit Remediation Planning
 
-v3.06 must act as an independent audit gate.
+v3.06 remediation planning must address the blocking audit findings before v3.07 can be reconsidered.
 
-The v3.06 audit should verify:
+The remediation plan should cover:
 
 ```txt
-PROJECT_CONTEXT.md is current and non-redundant
-milestone reference map is consistent
-historical chain summaries are correctly grouped
-training package boundaries are documented
-no-submit defaults remain enforced
-broker/order/submit paths remain blocked
-PPO + RF and PPO + XGBoost remain blocked
-source/test/docs align with current state
-stale v1.x active milestone language is removed from current-state sections
-no generated artifacts or quarantine outputs were unintentionally created
-pre-training evidence requirements are complete and reviewable
-paper-trading runbook details are preserved in workflow documentation
-candidate stability Level 0/1/2 policy is preserved in workflow documentation
-critical module inventory is preserved for onboarding and audit review
-future controlled-submit hardening candidates are preserved for audit/backlog review
+B1 paper-trading workflow authorization conflicts
+B2 README training/data-command ambiguity
+B3 PPO v2 quarantine/log ignore-policy gap
+B4 missing-bar coverage requirement not implemented/tested
+B5 tracked package-preparation artifact policy ambiguity
+H1 future no-submit command-boundary cleanup
+non-blocking cleanup backlog items
 ```
 
-v3.06 may produce audit documentation. It must not train PPO, fetch market data, generate datasets, create model artifacts, compute validation metrics, generate reports, promote models, submit paper/live orders, authorize controlled submit, or unblock hybrid models.
+v3.06 remediation planning may produce documentation and later remediation commits. It must not train PPO, fetch market data, generate datasets, create model artifacts, compute validation metrics from new PPO v2 outputs, generate reports from new PPO v2 outputs, promote models, submit paper/live orders, authorize controlled submit, authorize v3.07, or unblock hybrid models.
 
 ---
 
@@ -125,25 +119,24 @@ Passing unit tests proves infrastructure, control, reporting, and documentation 
 
 ---
 
-## 4. Latest Completed Milestone: v3.05
+## 4. Latest Completed Milestone: v3.06 Audit
 
-v3.05 completed the no-submit training package readiness review.
+v3.06 completed the independent full-system pre-retraining audit and returned a `FAIL` decision.
 
 ```txt
-v3_05_decision = PPO_V2_NO_SUBMIT_TRAINING_PACKAGE_READINESS_REVIEW_COMPLETED
-training_package_status = READY_FOR_INDEPENDENT_FULL_SYSTEM_PRE_RETRAINING_AUDIT
+v3_06_decision = FAIL
+v3_07_status = BLOCKED
 training_execution_status = NOT_AUTHORIZED
-next_required_checkpoint = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
-source_code_modified_in_v3_05 = NO
-test_code_modified_in_v3_05 = NO
+next_required_checkpoint = v3.06 Audit Remediation Plan
+source_code_modified_in_v3_06_audit = NO
 training_execution = NOT_PERFORMED
 command_execution = NOT_PERFORMED
 data_fetching = NOT_PERFORMED
 dataset_generation = NOT_PERFORMED
 model_artifact_creation = NOT_PERFORMED
 quarantine_training_outputs = NOT_CREATED
-metric_computation = NOT_PERFORMED
-report_generation = NOT_PERFORMED
+metric_computation_from_new_outputs = NOT_PERFORMED
+report_generation_from_new_outputs = NOT_PERFORMED
 model_promotion = NOT_AUTHORIZED
 paper_orders = NOT_AUTHORIZED
 live_orders = NOT_AUTHORIZED
@@ -153,24 +146,30 @@ ppo_xgboost = BLOCKED
 NO_SUBMIT = DEFAULT
 ```
 
-Validation evidence for v3.05:
+Blocking findings from v3.06:
 
 ```txt
-targeted_reporting_scaffold_tests = 37 passed
-targeted_preparation_scaffold_tests = 18 passed
-targeted_package_tests = 15 passed
-existing_wrapper_tests = 13 passed
-full_test_suite = 531 passed, 2 warnings
-precise_executable_call_scan = no unsafe output
-artifact_changes = none
-quarantine_training_outputs = none
+B1 = paper-trading workflow authorization conflicts
+B2 = README training/data-command ambiguity
+B3 = PPO v2 quarantine/log ignore-policy gap
+B4 = missing-bar coverage requirement not implemented/tested
+B5 = tracked package-preparation artifact policy ambiguity
 ```
 
-Primary v3.05 documents:
+Primary v3.06 documents:
 
 ```txt
-docs/reviews/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
-docs/runs/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
+docs/audits/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
+docs/runs/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
+```
+
+Most recent sealed successful readiness milestone:
+
+```txt
+v3.05 = PPO v2 No-Submit Training Package Readiness Review
+v3.05_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
+v3.05_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
+v3.05_test_evidence = 531 passed, 2 warnings
 ```
 
 ---
@@ -182,14 +181,17 @@ v3.02 = final administrative closeout of archived evidence-contract usage chain
 v3.03 = archived-chain transition review; active workstream moved to PPO v2 validation readiness
 v3.04 = evidence gap review; confirmed PPO v2 lacks executable validation evidence
 v3.05 = no-submit training package readiness review; ready for independent audit only
-v3.06 = independent full-system pre-retraining audit
-v3.07 = one-time no-submit PPO v2 training execution, only if v3.06 passes and explicitly authorizes execution
-v3.08 = post-run audit of generated PPO v2 evidence
-v3.09 = validation report generation from real evidence
-v3.10 = PPO v2 model evidence decision
+v3.06 = independent full-system pre-retraining audit completed, FAIL
+v3.06 remediation planning = active
+v3.06 remediation implementation = pending
+v3.06 remediation review = required
+v3.07 = BLOCKED until remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training
+v3.08 = post-run audit of generated PPO v2 evidence, only after v3.07 is authorized and completed
+v3.09 = validation report generation from real evidence, only after post-run audit
+v3.10 = PPO v2 model evidence decision, only after validation reporting
 ```
 
-v3.07 is not active. It can only be considered after v3.06 completes cleanly and explicitly authorizes a one-time no-submit PPO v2 training execution.
+v3.07 is not active. It can only be reconsidered after v3.06 remediation passes and a later review explicitly authorizes a one-time no-submit PPO v2 training execution.
 
 ---
 
@@ -254,13 +256,15 @@ docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
 
 The archived evidence-contract usage chain did not authorize training, data fetching, dataset generation, model artifact creation, quarantine output creation, metric computation, report generation, model promotion, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
 
-### Evidence Gap and Training Package Readiness: v3.04-v3.05
+### Evidence Gap and Training Package Readiness: v3.04-v3.06
 
 ```txt
 v3.04 primary_gap = PPO_V2_EXECUTABLE_VALIDATION_EVIDENCE_NOT_YET_GENERATED
 v3.04 training_readiness = NOT_READY
 v3.05 training_package_status = READY_FOR_INDEPENDENT_FULL_SYSTEM_PRE_RETRAINING_AUDIT
 v3.05 training_execution_status = NOT_AUTHORIZED
+v3.06 audit_decision = FAIL
+v3.06 remediation_status = REQUIRED_BEFORE_v3.07
 ```
 
 ---
@@ -311,12 +315,13 @@ The evidence contract protects future validation reporting. It does not itself p
 
 ## 8. PPO v2 Evidence Needed Before Training Execution
 
-Before any one-time no-submit PPO v2 training execution can be considered, the audit must confirm:
+Before any one-time no-submit PPO v2 training execution can be considered, remediation and later review must confirm:
 
 ```txt
+v3.06 blocking findings remediated
 reviewed training command
 reviewed no-submit execution wrapper or command boundary
-validated static data input contract
+validated static data input contract, including missing-bar coverage/reporting
 frozen feature set
 reproducible training config
 runtime environment and dependency confirmation
@@ -332,7 +337,7 @@ explicit no paper/live orders
 explicit no controlled submit
 explicit no model promotion
 PPO + RF / PPO + XGBoost remain blocked
-independent full-system audit before execution
+independent remediation review before execution
 ```
 
 ---
@@ -357,7 +362,14 @@ Evidence-contract usage archive summary:
 docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md
 ```
 
-Current v3.05 docs:
+Current v3.06 docs:
+
+```txt
+docs/audits/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
+docs/runs/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
+```
+
+Most recent sealed successful readiness docs:
 
 ```txt
 docs/reviews/v3.05_ppo_v2_no_submit_training_package_readiness_review.md
@@ -748,7 +760,8 @@ no-submit default
 blocked paper/live/controlled submit
 blocked hybrid gates until PPO-only evidence exists
 audit archive and milestone reference navigation
-pre-retraining independent audit gate
+v3.06 audit failure recorded before v3.07
+v3.06 remediation planning active
 preserved operational runbook and candidate-stability policy
 future statistical/model-comparison package defined as post-validation only
 ```
@@ -756,7 +769,8 @@ future statistical/model-comparison package defined as post-validation only
 Remaining before model-performance claims:
 
 ```txt
-one-time no-submit PPO v2 training execution
+v3.06 blocking findings remediated and reviewed
+one-time no-submit PPO v2 training execution, only if later authorized
 post-run audit of generated evidence
 validation reporting from real evidence
 PPO-only model evidence decision
@@ -790,12 +804,14 @@ When a historical chain becomes long or repetitive, keep detailed records in `do
 ## 20. Current Bottom Line
 
 ```txt
-v3.05 is sealed.
-v3.06 is active.
+v3.06 audit completed with decision FAIL.
+v3.06 audit remediation planning is active.
+v3.07 is blocked.
 PPO v2 training is not authorized.
 No paper/live/controlled submit is authorized.
 PPO + RF and PPO + XGBoost remain blocked.
-The project is ready for an independent full-system pre-retraining audit, not training execution.
+The project is not ready for one-time no-submit PPO v2 training execution.
+Blocking audit findings B1-B5 must be remediated and reviewed before v3.07 can be reconsidered.
 Operational runbook, candidate-stability, module-inventory, and hardening-candidate details are preserved in summary form.
 The future statistical/model-comparison package is defined as post-validation scope only.
 ```
