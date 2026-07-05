@@ -9,10 +9,10 @@ This file is a navigation map only. It does not authorize work, execution, data 
 Current controlling state:
 
 ```txt
-latest_completed_milestone = v3.06 Remediation Review / Post-Remediation Audit Rerun
-latest_completed_decision = PASS
-active_milestone = v3.07 Consideration / Authorization Review
-next_checkpoint = separate v3.07 consideration / authorization review
+latest_completed_milestone = v3.07 No-Submit PPO v2 Training Authorization Review
+latest_completed_decision = FAIL
+active_milestone = v3.07 Sealed No-Submit Training Execution Package Preparation
+next_checkpoint = v3.07 sealed no-submit training execution package preparation
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
@@ -54,6 +54,8 @@ docs/runs/v3.06_remediation_completion_record.md
 docs/runs/v3.06_remediation_review_follow_up_evidence.md
 docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md
 docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md
+docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
+docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
 ```
 
 **Then review remediation target files as needed**
@@ -86,13 +88,17 @@ v3_06_remediation_completion_tag = v3.06-remediation-completion-record
 v3_06_remediation_completion_commit = 115629c5edcb6d294c846f57a01de8c063878c5b
 v3_06_independent_remediation_review = PASS
 v3_06_post_remediation_audit = PASS
+v3_07_authorization_review = FAIL
+v3_07_authorization_review_audit_record = docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
+v3_07_authorization_review_run_record = docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
+v3_07_authorization_review_commit = 703cfd9
 v3_06_remediation_review_follow_up_evidence = docs/runs/v3.06_remediation_review_follow_up_evidence.md
 v3_06_remediation_review_follow_up_commit = d00d8fff076c70385fc5a6303b18493be267a199
 v3.07_status = BLOCKED
 ppo_v2_training_execution = NOT_AUTHORIZED
 ```
 
-The completion record is an implementation closeout record only. The failed-audit cleanup evidence record documents the follow-up cleanup for M1 stale test-count, README current-stage drift, and exact command-level evidence. The passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`. This PASS means only that v3.06 remediation is accepted and the repository is eligible for separate v3.07 consideration. It is not a v3.07 execution plan and not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
+The completion record is an implementation closeout record only. The failed-audit cleanup evidence record documents the follow-up cleanup for M1 stale test-count, README current-stage drift, and exact command-level evidence. The passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`. The failed v3.07 authorization review is documented in `docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md` and `docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md`. The v3.07 review failed because the current command/package boundary remains preparation-only, future-only, non-executing, and not a sealed v3.07 training execution package. It is not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, quarantine output creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
 
 **M/L cleanup note**
 
@@ -152,7 +158,7 @@ NO_SUBMIT = DEFAULT
 
 **Then move to**
 
-A separate v3.07 consideration / authorization review. The v3.06 post-remediation audit rerun has passed, but v3.07 may only proceed if a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training execution. Until then, remain blocked for training, data fetching, dataset generation, model artifacts, paper/live orders, controlled submit, and hybrid models.
+Prepare a v3.07-specific sealed no-submit training execution package for later review. The failed v3.07 authorization review must not be treated as authorization to run training. Until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training, remain blocked for training, data fetching, dataset generation, model artifacts, quarantine outputs, paper/live orders, controlled submit, and hybrid models.
 
 ---
 
@@ -167,7 +173,9 @@ v3.06 = independent full-system pre-retraining audit completed, FAIL
 v3.06 remediation implementation closeout = completed
 v3.06 remediation completion record = completed and tagged
 v3.06 independent remediation review / post-remediation audit rerun = PASS
-v3.07 = BLOCKED until remediation passes and a later review explicitly authorizes one-time no-submit PPO v2 training
+v3.07 authorization review = FAIL — do not authorize training
+v3.07 sealed no-submit training execution package preparation = next required checkpoint
+v3.07 = BLOCKED until a later review explicitly authorizes one-time no-submit PPO v2 training
 v3.08 = post-run audit of generated PPO v2 evidence; future only and only after v3.07 is authorized/completed
 v3.09 = validation report generation from real evidence; future only
 v3.10 = PPO v2 model evidence decision; future only

@@ -11,16 +11,16 @@ Before modifying training logic, validation methodology, deployment workflows, a
 ## 1. Current Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v3.06 Remediation Review / Post-Remediation Audit Rerun
-latest_completed_decision = PASS
+latest_completed_milestone = v3.07 No-Submit PPO v2 Training Authorization Review
+latest_completed_decision = FAIL
 latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
 latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
 latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
 latest_successful_sealed_readiness_commit_short = c9f2c71
-active_milestone = v3.07 Consideration / Authorization Review
-next_checkpoint = separate v3.07 consideration / authorization review
+active_milestone = v3.07 Sealed No-Submit Training Execution Package Preparation
+next_checkpoint = v3.07 sealed no-submit training execution package preparation
 current_workstream = PPO_V2_VALIDATION_READINESS
-current_phase = v3.06 remediation accepted; eligible for separate v3.07 consideration only
+current_phase = v3.07 authorization review failed; prepare sealed no-submit execution package only
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
@@ -44,10 +44,14 @@ v3_06_remediation_review_follow_up_commit = d00d8fff076c70385fc5a6303b18493be267
 v3_06_post_remediation_pass_audit_record = docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md
 v3_06_post_remediation_pass_run_record = docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md
 v3_06_post_remediation_pass_commit = 62cc3b2
+v3_07_authorization_review = FAIL
+v3_07_authorization_review_audit_record = docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
+v3_07_authorization_review_run_record = docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
+v3_07_authorization_review_commit = 703cfd9
 latest_ci_evidence = Tests #322 green on v3.06 failed-audit cleanup commit d00d8ff
 ```
 
-The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision, then completed remediation and a post-remediation audit rerun with a `PASS` decision. It has **not** executed PPO v2 training. The v3.06 remediation PASS means only that the repository is eligible for separate v3.07 consideration. v3.07 remains blocked until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training.
+The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision, then completed remediation and a post-remediation audit rerun with a `PASS` decision. A separate v3.07 No-Submit PPO v2 Training Authorization Review was then completed with a `FAIL` decision. It has **not** executed PPO v2 training. v3.07 remains blocked because the reviewed command/package boundary is still preparation-only, future-only, non-executing, and not a sealed v3.07 execution package.
 
 ## v3.06 Audit Result
 
@@ -89,9 +93,9 @@ This is important because `PROJECT_CONTEXT.md` is the controlling source of trut
 
 ---
 
-## 2. Active Milestone: v3.06 Remediation Review / Post-Remediation Audit
+## 2. Active Milestone: v3.07 Sealed No-Submit Training Execution Package Preparation
 
-v3.06 remediation implementation closeout has been completed, and the independent post-remediation audit rerun accepted the remediation.
+v3.06 remediation implementation closeout has been completed and accepted, but the separate v3.07 authorization review failed. The next workstream is package preparation only: create a sealed v3.07 no-submit training execution package for later review.
 
 This closeout is documented in:
 
@@ -103,7 +107,7 @@ failed_audit_cleanup_evidence = docs/runs/v3.06_remediation_review_follow_up_evi
 failed_audit_cleanup_commit = d00d8fff076c70385fc5a6303b18493be267a199
 ```
 
-The closeout record is not itself authorization for v3.07. The failed-audit cleanup follow-up is documented in `docs/runs/v3.06_remediation_review_follow_up_evidence.md`, and the passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`. The next required checkpoint is a separate v3.07 consideration / authorization review.
+The closeout record and v3.06 remediation PASS are not authorization for v3.07 execution. The failed-audit cleanup follow-up is documented in `docs/runs/v3.06_remediation_review_follow_up_evidence.md`, the passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`, and the failed v3.07 authorization review is documented in `docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md` and `docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md`. The next required checkpoint is preparation of a sealed v3.07 no-submit training execution package for later review.
 
 The completed remediation implementation covered:
 
