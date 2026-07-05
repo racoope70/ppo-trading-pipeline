@@ -1,10 +1,10 @@
 # PPO Walk-Forward Trading Pipeline
 
-This repository contains a modular VS Code implementation of a PPO-based trading research and deployment-preparation pipeline.
+This repository contains a modular VS Code implementation of a governed PPO-based trading research and validation-readiness pipeline.
 
-The project converts an earlier Google Colab research workflow into a local Python codebase with structured modules for data preparation, feature engineering, walk-forward PPO training, prediction, diagnostics, and downstream execution adapters.
+The project converts an earlier Google Colab research workflow into a local Python codebase with structured modules for data preparation, feature engineering, walk-forward PPO training, prediction, diagnostics, and downstream execution adapters. Under the current v3.06 state, those modules are not automatically authorized for training, data generation, artifact creation, paper orders, live orders, or controlled submit.
 
-The goal of this repository is to serve as a production-oriented implementation layer between exploratory research and live/paper trading deployment.
+The current goal of this repository is to preserve a governed implementation layer for research, auditability, validation readiness, and future review. It is not currently an authorized live/paper trading deployment or PPO v2 training execution repository.
 
 This project is for research and educational purposes only. It is not financial advice and does not guarantee profitable trading results.
 
@@ -12,13 +12,27 @@ This project is for research and educational purposes only. It is not financial 
 
 ## Current Governance Status
 
-Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) before making training, retraining, paper-trading, or deployment recommendations.
+Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) before making training, retraining, paper-trading, or deployment recommendations. `PROJECT_CONTEXT.md` is the controlling source of truth.
+
+Current state:
+
+```text
+active_milestone = v3.06 Audit Remediation Planning
+v3.07_status = BLOCKED
+NO_SUBMIT = DEFAULT
+ppo_v2_training_execution = NOT_AUTHORIZED
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+ppo_rf = BLOCKED
+ppo_xgboost = BLOCKED
+```
 
 Legacy PPO is an infrastructure fixture only, not a promoted trading model.
 
-Controlled submit, paper orders, live orders, PPO + Random Forest, and PPO + XGBoost remain blocked unless a later checkpoint explicitly authorizes them.
+PPO v2 training, training command execution, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + Random Forest, and PPO + XGBoost remain blocked unless a later sealed checkpoint explicitly authorizes them.
 
-Passing tests prove infrastructure, control, and reporting stability. They do not prove trading profitability.
+Passing tests prove infrastructure, control, and reporting stability. They do not prove trading profitability, model promotion, deployment readiness, or trading edge.
 
 ---
 
@@ -35,18 +49,20 @@ Evidence Contract Usage Chain: v2.76-v3.02, result `PASS_READ_ONLY_NO_SUBMIT`. D
 
 This repository is currently a production-oriented implementation in progress.
 
-Completed core components:
+Historical / infrastructure components present in the codebase:
 
 - Local project paths and configuration
-- Data download and preparation
-- Feature engineering
+- Data download and preparation modules
+- Feature engineering modules
 - Custom continuous-position PPO environment
-- PPO walk-forward training
-- Model artifact saving
-- Latest-signal prediction
+- PPO walk-forward training modules
+- Model artifact path and metadata helpers
+- Latest-signal prediction modules
 - Diagnostics
 - QuantConnect signal export adapter
 - Alpaca paper-trading API utility adapter
+
+Presence of these components does not mean they are currently authorized for PPO v2 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, model promotion, or hybrid deployment.
 
 In progress:
 
@@ -65,18 +81,20 @@ This repo is intended to make the trading pipeline easier to run, test, debug, a
 The earlier Colab workflow was useful for experimentation. This VS Code version is designed for:
 
 - Modular Python development
-- Reproducible training and prediction runs
+- Governed validation-readiness review
 - Cleaner artifact management
 - Safer environment-variable handling
-- QuantConnect signal export
-- Alpaca paper-trading integration
+- QuantConnect signal export scaffolding
+- Alpaca paper-trading integration scaffolding
 - Future publication or portfolio presentation
+
+Reproducible training, prediction runs that create new outputs, data fetching, dataset generation, and model artifact creation require explicit authorization from a later sealed checkpoint before they may be treated as current workflow steps.
 
 ---
 
 ## Core Workflow
 
-The main workflow is:
+Historical / general architecture:
 
 ```text
 Data download
@@ -87,6 +105,8 @@ Data download
   -> Diagnostics
   -> QuantConnect / Alpaca integration
 ```
+
+Current v3.06 interpretation: the architecture above is not current authorization to fetch data, generate datasets, train PPO v2, create model artifacts, produce new validation reports from PPO v2 outputs, promote models, submit paper/live orders, use controlled submit, or deploy PPO + RF / PPO + XGBoost.
 
 ---
 
@@ -210,49 +230,34 @@ START_FLAT=0
 
 ## Usage
 
-### 1. Prepare data
+### Current v3.06 usage boundary
 
-```bash
-python -m src.prepare_data
+Current authorized work is limited to governed review, documentation remediation, source inspection, and explicitly no-submit/read-only checks that do not fetch new market data, generate datasets, create model artifacts, create quarantine outputs, generate validation reports from new PPO v2 outputs, promote models, or submit orders.
+
+### Currently blocked commands
+
+The following commands are retained as legacy/general historical examples only. They are not current PPO v2 authorization:
+
+```text
+python -m src.prepare_data  # BLOCKED: data fetching / dataset generation not authorized
+python -m src.train         # BLOCKED: PPO v2 training / model artifact creation not authorized
 ```
 
-### 2. Train PPO models
+Do not run these commands unless a later sealed checkpoint explicitly authorizes them.
 
-```bash
-python -m src.train
-```
+### Future-only / separately reviewed commands
 
-### 3. Generate latest prediction
+Prediction, diagnostics, QuantConnect export, and Alpaca adapter commands may create outputs, inspect broker state, or depend on generated artifacts. Treat them as future-only or separately reviewed unless the current milestone explicitly authorizes the exact command and mode.
 
-```bash
+```text
 python -m src.predict
-```
-
-### 4. Run diagnostics
-
-```bash
 python -m src.diagnostics
-```
-
-### 5. Export QuantConnect signals
-
-```bash
 python -m src.adapters.quantconnect --symbols GE,UNH
-```
-
-To publish the signal file to GitHub Gist:
-
-```bash
 python -m src.adapters.quantconnect --symbols GE,UNH --publish-gist
-```
-
-### 6. Test Alpaca paper connection
-
-```bash
 python -m src.adapters.alpaca
 ```
 
-This command only tests connection, positions, and latest price access. It does not place trades.
+No command in this README authorizes paper orders, live orders, controlled submit, model promotion, PPO + RF, PPO + XGBoost, or v3.07.
 
 ---
 
