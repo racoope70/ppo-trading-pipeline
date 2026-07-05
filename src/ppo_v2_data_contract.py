@@ -12,7 +12,7 @@ v1.73 safety boundary:
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 
 import pandas as pd
@@ -46,6 +46,9 @@ OHLCV_COLUMNS: tuple[str, ...] = (
     "Volume",
 )
 
+RAW_BAR_FREQUENCY = pd.Timedelta(hours=1)
+MISSING_BAR_MEASUREMENT_METHOD = "per_symbol_1h_timestamp_range"
+
 FORBIDDEN_HOLDOUT_USES: tuple[str, ...] = (
     "feature_selection",
     "hyperparameter_tuning",
@@ -58,6 +61,17 @@ FORBIDDEN_HOLDOUT_USES: tuple[str, ...] = (
     "scaler_fitting",
     "manual_iteration",
 )
+
+
+@dataclass(frozen=True)
+class PPOV2MissingBarCoverageReport:
+    """Measured missing-bar coverage for the static raw-data contract."""
+
+    expected_symbol_bar_count: int
+    observed_symbol_bar_count: int
+    missing_bar_count: int
+    missing_bars_by_symbol: Mapping[str, tuple[pd.Timestamp, ...]]
+    measurement_method: str = MISSING_BAR_MEASUREMENT_METHOD
 
 
 @dataclass(frozen=True)
@@ -146,7 +160,26 @@ def validate_raw_data_contract(
     if not _is_sorted_by_symbol_then_datetime(data, parsed_datetime):
         errors.append("rows must be sorted by Symbol ascending and Datetime ascending")
 
+    missing_bar_report = _measure_missing_bar_coverage(data, parsed_datetime)
+    if missing_bar_report.missing_bar_count:
+        errors.append(_format_missing_bar_coverage_error(missing_bar_report))
+
     return errors
+
+
+def measure_missing_bar_coverage(data: pd.DataFrame) -> PPOV2MissingBarCoverageReport:
+    """Measure missing Symbol-Datetime bars without fetching external data."""
+
+    if "Datetime" not in data.columns or "Symbol" not in data.columns or data.empty:
+        return PPOV2MissingBarCoverageReport(
+            expected_symbol_bar_count=0,
+            observed_symbol_bar_count=0,
+            missing_bar_count=0,
+            missing_bars_by_symbol={},
+        )
+
+    parsed_datetime = pd.to_datetime(data["Datetime"], errors="coerce", format="mixed")
+    return _measure_missing_bar_coverage(data, parsed_datetime)
 
 
 def validate_observation_columns(
@@ -161,8 +194,7 @@ def validate_observation_columns(
 
     if forbidden_present:
         return [
-            "forbidden PPO observation columns present: "
-            + ", ".join(forbidden_present)
+            f"forbidden PPO observation columns present: {', '.join(forbidden_present)}"
         ]
 
     return []
@@ -214,6 +246,99 @@ def validate_preprocessing_fit_split(preprocessing_fit_split: str) -> list[str]:
         return ["preprocessing must be fit on train_df only"]
 
     return []
+
+
+def _measure_missing_bar_coverage(
+    data: pd.DataFrame,
+    parsed_datetime: pd.Series,
+) -> PPOV2MissingBarCoverageReport:
+    coverage_frame = pd.DataFrame(
+        {
+            "Symbol": data["Symbol"],
+            "Datetime": parsed_datetime,
+        }
+    ).dropna(subset=["Symbol", "Datetime"])
+
+    if coverage_frame.empty:
+        return PPOV2MissingBarCoverageReport(
+            expected_symbol_bar_count=0,
+            observed_symbol_bar_count=0,
+            missing_bar_count=0,
+            missing_bars_by_symbol={},
+        )
+
+    coverage_frame = coverage_frame.assign(
+        Symbol=coverage_frame["Symbol"].astype(str),
+        Datetime=pd.to_datetime(coverage_frame["Datetime"], errors="coerce"),
+    ).dropna(subset=["Datetime"])
+
+    missing_bars_by_symbol: dict[str, tuple[pd.Timestamp, ...]] = {}
+    expected_symbol_bar_count = 0
+    observed_symbol_bar_count = 0
+
+    for symbol in sorted(coverage_frame["Symbol"].drop_duplicates()):
+        symbol_timestamps = tuple(
+            sorted(
+                pd.Timestamp(timestamp)
+                for timestamp in coverage_frame.loc[
+                    coverage_frame["Symbol"] == symbol,
+                    "Datetime",
+                ].drop_duplicates()
+            )
+        )
+
+        if not symbol_timestamps:
+            continue
+
+        observed_timestamp_set = set(symbol_timestamps)
+        expected_timestamps = tuple(
+            pd.date_range(
+                start=symbol_timestamps[0],
+                end=symbol_timestamps[-1],
+                freq=RAW_BAR_FREQUENCY,
+            )
+        )
+        expected_timestamp_set = set(pd.Timestamp(timestamp) for timestamp in expected_timestamps)
+
+        observed_symbol_bar_count += len(observed_timestamp_set)
+        expected_symbol_bar_count += len(expected_timestamp_set)
+
+        missing_timestamps = tuple(sorted(expected_timestamp_set.difference(observed_timestamp_set)))
+        if missing_timestamps:
+            missing_bars_by_symbol[symbol] = missing_timestamps
+
+    missing_bar_count = sum(len(timestamps) for timestamps in missing_bars_by_symbol.values())
+
+    return PPOV2MissingBarCoverageReport(
+        expected_symbol_bar_count=expected_symbol_bar_count,
+        observed_symbol_bar_count=observed_symbol_bar_count,
+        missing_bar_count=missing_bar_count,
+        missing_bars_by_symbol=missing_bars_by_symbol,
+    )
+
+def _format_missing_bar_coverage_error(
+    report: PPOV2MissingBarCoverageReport,
+) -> str:
+    affected_symbols = ", ".join(report.missing_bars_by_symbol)
+    examples: list[str] = []
+
+    for symbol, timestamps in report.missing_bars_by_symbol.items():
+        for timestamp in timestamps:
+            examples.append(f"{symbol}@{pd.Timestamp(timestamp).isoformat()}")
+            if len(examples) == 3:
+                break
+        if len(examples) == 3:
+            break
+
+    return (
+        "missing 1-hour bars measured and reported: "
+        f"missing_bar_count={report.missing_bar_count}; "
+        f"expected_symbol_bar_count={report.expected_symbol_bar_count}; "
+        f"observed_symbol_bar_count={report.observed_symbol_bar_count}; "
+        f"measurement_method={report.measurement_method}; "
+        f"symbols={affected_symbols}; "
+        "examples=" + ", ".join(examples)
+    )
 
 
 def _is_sorted_by_symbol_then_datetime(

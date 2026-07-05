@@ -5,6 +5,7 @@ from src.ppo_v2_data_contract import (
     FORBIDDEN_HOLDOUT_USES,
     REQUIRED_RAW_COLUMNS,
     PPOV2SplitBoundarySpec,
+    measure_missing_bar_coverage,
     validate_holdout_usage,
     validate_observation_columns,
     validate_preprocessing_fit_split,
@@ -162,6 +163,77 @@ def test_raw_data_contract_rejects_unsorted_rows():
     errors = validate_raw_data_contract(data)
 
     assert "rows must be sorted by Symbol ascending and Datetime ascending" in errors
+
+
+def test_missing_bar_coverage_report_measures_symbol_datetime_gap():
+    data = _valid_raw_data()
+    missing_timestamp = pd.Timestamp("2024-01-02 10:30:00")
+    data = data[
+        ~((data["Symbol"] == "AAPL") & (data["Datetime"] == missing_timestamp))
+    ].reset_index(drop=True)
+
+    report = measure_missing_bar_coverage(data)
+
+    assert report.measurement_method == "per_symbol_1h_timestamp_range"
+    assert report.expected_symbol_bar_count == 6
+    assert report.observed_symbol_bar_count == 5
+    assert report.missing_bar_count == 1
+    assert report.missing_bars_by_symbol == {"AAPL": (missing_timestamp,)}
+
+
+def test_raw_data_contract_reports_missing_symbol_datetime_bar():
+    data = _valid_raw_data()
+    missing_timestamp = pd.Timestamp("2024-01-02 10:30:00")
+    data = data[
+        ~((data["Symbol"] == "AAPL") & (data["Datetime"] == missing_timestamp))
+    ].reset_index(drop=True)
+
+    errors = validate_raw_data_contract(data)
+
+    assert any("missing 1-hour bars measured and reported" in error for error in errors)
+    assert any("missing_bar_count=1" in error for error in errors)
+    assert any("expected_symbol_bar_count=6" in error for error in errors)
+    assert any("observed_symbol_bar_count=5" in error for error in errors)
+    assert any("symbols=AAPL" in error for error in errors)
+    assert any("AAPL@2024-01-02T10:30:00" in error for error in errors)
+
+
+def test_raw_data_contract_reports_all_symbol_missing_hour_inside_range():
+    rows = []
+    timestamps = [
+        pd.Timestamp("2024-01-02 09:30:00"),
+        pd.Timestamp("2024-01-02 11:30:00"),
+    ]
+
+    for symbol in ["AAPL", "AMD"]:
+        for index, timestamp in enumerate(timestamps):
+            rows.append(
+                {
+                    "Datetime": timestamp,
+                    "Symbol": symbol,
+                    "Open": 100.0 + index,
+                    "High": 102.0 + index,
+                    "Low": 99.0 + index,
+                    "Close": 101.0 + index,
+                    "Volume": 1_000 + index,
+                }
+            )
+
+    data = pd.DataFrame(rows)
+
+    report = measure_missing_bar_coverage(data)
+    errors = validate_raw_data_contract(data)
+
+    assert report.expected_symbol_bar_count == 6
+    assert report.observed_symbol_bar_count == 4
+    assert report.missing_bar_count == 2
+    assert report.missing_bars_by_symbol == {
+        "AAPL": (pd.Timestamp("2024-01-02 10:30:00"),),
+        "AMD": (pd.Timestamp("2024-01-02 10:30:00"),),
+    }
+    assert any("missing_bar_count=2" in error for error in errors)
+    assert any("expected_symbol_bar_count=6" in error for error in errors)
+    assert any("observed_symbol_bar_count=4" in error for error in errors)
 
 
 def test_observation_columns_allow_safe_feature_columns():
