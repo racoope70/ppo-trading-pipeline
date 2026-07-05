@@ -35,6 +35,40 @@ latest_test_evidence = 531 passed, 2 warnings
 
 The repository has completed readiness documentation for the PPO v2 no-submit training package. It has **not** executed PPO v2 training. The next milestone is a full independent system audit before any one-time no-submit training execution can be considered.
 
+## v3.06 Audit Result
+
+```txt
+latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+latest_completed_decision = FAIL
+active_milestone = v3.06 Audit Remediation Planning
+next_checkpoint = v3.06 Audit Remediation Plan
+v3.07_status = BLOCKED
+ppo_v2_training_execution = NOT_AUTHORIZED
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+ppo_rf = BLOCKED
+ppo_xgboost = BLOCKED
+```
+
+The v3.06 independent full-system pre-retraining audit completed with a `FAIL` decision.
+
+The repository is not ready for v3.07 consideration until blocking audit findings are remediated and reviewed.
+
+Blocking findings:
+
+```txt
+B1 = paper-trading workflow authorization conflicts
+B2 = README training/data-command ambiguity
+B3 = PPO v2 quarantine/log ignore-policy gap
+B4 = missing-bar coverage requirement not implemented/tested
+B5 = tracked package-preparation artifact policy ambiguity
+```
+
+The v3.06 audit does not authorize PPO v2 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + RF, PPO + XGBoost, or legacy PPO retraining.
+
+This is important because `PROJECT_CONTEXT.md` is the controlling source of truth. The reference map controls supporting navigation only; it does not override current state, authorization boundaries, blocked actions, or the PPO v2 roadmap.
+
 ---
 
 ## 2. Active Milestone: v3.06 Independent Full-System Pre-Retraining Audit
