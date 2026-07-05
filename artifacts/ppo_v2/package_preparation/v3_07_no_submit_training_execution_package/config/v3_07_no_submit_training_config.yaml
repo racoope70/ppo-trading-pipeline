@@ -1,0 +1,140 @@
+package_id: v3_07_no_submit_training_execution_package
+classification: STATIC_PACKAGE_PREPARATION_ONLY
+review_status: PREPARED_FOR_FUTURE_INDEPENDENT_V3_07_AUTHORIZATION_REVIEW
+
+authorization:
+  v3_07_status: BLOCKED
+  training_execution_authorized: false
+  command_execution_authorized: false
+  data_fetching_authorized: false
+  dataset_generation_authorized: false
+  model_artifact_creation_authorized: false
+  quarantine_output_creation_authorized: false
+  model_promotion_authorized: false
+  paper_orders_authorized: false
+  live_orders_authorized: false
+  controlled_submit_authorized: false
+  ppo_rf_authorized: false
+  ppo_xgboost_authorized: false
+  trading_edge_claims_authorized: false
+  profitability_claims_authorized: false
+  no_submit_default: true
+
+boundary:
+  static_package_preparation_only: true
+  proves_command_can_train: false
+  resolves_source_code_execution_dependency: false
+  b3_scope: "package-documentation-boundary-only"
+  b5_scope: "future-preflight-requirements-only"
+  later_independent_v3_07_authorization_review_required: true
+  later_sealed_checkpoint_required_for_one_time_no_submit_training: true
+
+intended_run:
+  run_id: "v3_07_no_submit_ppo_v2_training_execution_001"
+  run_type: "one_time_no_submit_ppo_v2_training"
+  execution_entrypoint: "src.ppo_v2_controlled_training_execution"
+  exact_command_file: "artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/commands/one_time_no_submit_training_command.txt"
+  config_path: "artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/config/v3_07_no_submit_training_config.yaml"
+  package_root: "artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package"
+
+io_boundary:
+  local_input_dataset: "data/processed/ppo_v2/v3_07_no_submit_training_input.parquet"
+  quarantine_root: "artifacts/ppo_v2/quarantine/v3_07_no_submit_ppo_v2_training_execution_001"
+  log_root: "artifacts/ppo_v2/logs/v3_07_no_submit_ppo_v2_training_execution_001"
+  stdout_path: "artifacts/ppo_v2/logs/v3_07_no_submit_ppo_v2_training_execution_001/stdout.txt"
+  stderr_path: "artifacts/ppo_v2/logs/v3_07_no_submit_ppo_v2_training_execution_001/stderr.txt"
+  artifact_inventory_path: "artifacts/ppo_v2/quarantine/v3_07_no_submit_ppo_v2_training_execution_001/manifests/artifact_inventory.json"
+  checksum_manifest_path: "artifacts/ppo_v2/quarantine/v3_07_no_submit_ppo_v2_training_execution_001/manifests/checksums.sha256"
+
+universe:
+  - "AAPL"
+  - "AMD"
+  - "MRK"
+  - "PFE"
+  - "UNH"
+  - "XOM"
+
+data_source:
+  provider: "Alpaca historical bars"
+  bar_interval: "1h"
+  hours_policy: "regular_session_only_unless_future_review_explicitly_authorizes_otherwise"
+  source_mode: "pre_existing_local_input_only"
+  fetching_authorized: false
+
+temporal_split:
+  timezone: "UTC"
+  train_start: "2023-01-03T14:30:00Z"
+  train_end: "2024-06-14T20:00:00Z"
+  train_eval_embargo_start: "2024-06-17T13:30:00Z"
+  train_eval_embargo_end: "2024-06-21T20:00:00Z"
+  eval_start: "2024-06-24T13:30:00Z"
+  eval_end: "2024-12-13T21:00:00Z"
+  eval_holdout_embargo_start: "2024-12-16T14:30:00Z"
+  eval_holdout_embargo_end: "2024-12-20T21:00:00Z"
+  holdout_start: "2024-12-23T14:30:00Z"
+  holdout_end: "2025-06-30T20:00:00Z"
+  holdout_policy: "final_validation_only"
+
+features:
+  - "Open"
+  - "High"
+  - "Low"
+  - "Close"
+  - "Volume"
+  - "return_1h"
+  - "log_return_1h"
+  - "sma_10"
+  - "sma_20"
+  - "sma_50"
+  - "ema_12"
+  - "ema_26"
+  - "rsi_14"
+  - "macd"
+  - "macd_signal"
+  - "macd_hist"
+  - "atr_14"
+  - "realized_volatility_20"
+  - "volume_zscore_20"
+  - "close_to_sma20"
+  - "close_to_sma50"
+  - "hour_sin"
+  - "hour_cos"
+  - "day_of_week_sin"
+  - "day_of_week_cos"
+
+seed_policy:
+  python_random_seed: 70
+  numpy_seed: 70
+  torch_seed: 70
+  stable_baselines_seed: 70
+  environment_seed: 70
+  deterministic_policy_required_when_supported: true
+
+training_parameters:
+  algorithm: "PPO"
+  policy: "MlpPolicy"
+  timesteps: 1500000
+  window_size: 365
+  step_size: 60
+  train_fraction: 0.80
+  min_train_rows: 60
+  min_eval_rows: 60
+  no_submit: true
+
+required_future_preflight:
+  data_contract_validation_required: true
+  missing_bar_coverage_validation_required: true
+  split_boundary_validation_required: true
+  embargo_validation_required: true
+  training_input_handoff_validation_required: true
+  source_code_execution_dependency_review_required: true
+  command_argument_compatibility_review_required: true
+  dependency_snapshot_required: true
+  runtime_snapshot_required: true
+
+post_run_governance:
+  v3_08_post_run_audit_required: true
+  metrics_report_generation_before_v3_08_authorized: false
+  model_promotion_before_v3_08_authorized: false
+  deployment_before_v3_08_authorized: false
+  paper_or_live_orders_before_v3_08_authorized: false

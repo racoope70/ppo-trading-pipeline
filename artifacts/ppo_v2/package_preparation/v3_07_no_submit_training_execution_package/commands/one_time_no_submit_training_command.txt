@@ -1,0 +1,68 @@
+# v3.07 Intended One-Time No-Submit PPO v2 Training Command
+
+```text
+classification = STATIC_PACKAGE_PREPARATION_ONLY
+review_status = PREPARED_FOR_FUTURE_INDEPENDENT_V3_07_AUTHORIZATION_REVIEW
+execution_authorized = false
+training_authorized = false
+do_not_run = true
+v3.07_status = BLOCKED
+ppo_v2_training_execution = NOT_AUTHORIZED
+data_fetching = NOT_AUTHORIZED
+dataset_generation = NOT_AUTHORIZED
+model_artifact_creation = NOT_AUTHORIZED
+quarantine_output_creation = NOT_AUTHORIZED
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+ppo_rf = BLOCKED
+ppo_xgboost = BLOCKED
+```
+
+This file defines the intended command boundary for a future independent v3.07 authorization review.
+
+It is not authorization to run PPO v2 training.
+
+```bash
+../.venv/bin/python -m src.ppo_v2_controlled_training_execution \
+  --mode controlled-training \
+  --run-id v3_07_no_submit_ppo_v2_training_execution_001 \
+  --config artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/config/v3_07_no_submit_training_config.yaml \
+  --quarantine-root artifacts/ppo_v2/quarantine/v3_07_no_submit_ppo_v2_training_execution_001 \
+  --log-root artifacts/ppo_v2/logs/v3_07_no_submit_ppo_v2_training_execution_001 \
+  --stdout-path artifacts/ppo_v2/logs/v3_07_no_submit_ppo_v2_training_execution_001/stdout.txt \
+  --stderr-path artifacts/ppo_v2/logs/v3_07_no_submit_ppo_v2_training_execution_001/stderr.txt \
+  --artifact-inventory-path artifacts/ppo_v2/quarantine/v3_07_no_submit_ppo_v2_training_execution_001/manifests/artifact_inventory.json \
+  --checksum-manifest-path artifacts/ppo_v2/quarantine/v3_07_no_submit_ppo_v2_training_execution_001/manifests/checksums.sha256 \
+  --no-submit
+```
+
+## Non-Authorization / Source-Code Dependency Boundary
+
+This package is static package preparation only.
+
+This package does not authorize v3.07 execution.
+
+This package does not authorize PPO v2 training.
+
+This package does not itself prove the command can train.
+
+This package does not itself resolve the source-code execution dependency.
+
+If `src/ppo_v2_controlled_training_execution.py` remains non-executing or does not accept the sealed v3.07 command arguments, the next v3.07 authorization review must fail or require a separate reviewed source-code implementation checkpoint.
+
+B3 is addressed only at the package-documentation boundary, not at the executable source-code boundary.
+
+B5 is addressed only by defining future preflight requirements, not by proving execution readiness.
+
+A later independent v3.07 authorization review must still decide whether this package is sufficient.
+
+Only a later sealed checkpoint can authorize one-time no-submit PPO v2 training.
+
+
+## Required Future Review Notes
+
+- This command is exact and bounded for package-review purposes only.
+- It must not be run unless a later sealed v3.07 authorization checkpoint explicitly authorizes it.
+- No source code was changed by this package-preparation task.
+- No data fetching, dataset generation, model artifact creation, quarantine output creation, paper/live order submission, controlled submit, PPO + RF, or PPO + XGBoost is authorized.
