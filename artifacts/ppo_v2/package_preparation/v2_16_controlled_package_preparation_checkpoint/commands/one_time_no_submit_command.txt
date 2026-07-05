@@ -1,3 +1,20 @@
+# v2.16 package-preparation artifact only.
+# DO NOT RUN under the current v3.06 state.
+# This file is tracked static governance / preparation package evidence, not execution authorization.
+# It is not evidence that PPO v2 training ran, data was fetched, datasets were generated,
+# model artifacts were created, or quarantine training outputs were created.
+#
+# Current boundary preserved by PROJECT_CONTEXT.md:
+# v3.07_status = BLOCKED
+# NO_SUBMIT = DEFAULT
+# ppo_v2_training_execution = NOT_AUTHORIZED
+# paper_orders = NOT_AUTHORIZED
+# live_orders = NOT_AUTHORIZED
+# controlled_submit = BLOCKED
+# ppo_rf = BLOCKED
+# ppo_xgboost = BLOCKED
+#
+# Historical / future-only command-boundary specimen:
 python -m ppo_v2_controlled_training_execution \
   --mode controlled-training \
   --run-id v2_16_controlled_package_preparation_checkpoint \
