@@ -73,6 +73,22 @@ src/ppo_v2_controlled_training_package_preparation.py
 src/ppo_v2_controlled_training_execution_wrapper.py
 ```
 
+**M/L cleanup note**
+
+```txt
+v2_79_pending_evidence_references = SUPERSEDED_BY_v2_83_POST_IMPLEMENTATION_AUDIT
+latest_historical_evidence_contract_usage_test_count = 531 passed, 2 warnings
+broker_read_fail_closed_hardening = CONTROLLED_SUBMIT_BACKLOG_ONLY
+non_authorization_language_policy = USE_PROJECT_CONTEXT_AND_GLOBAL_GUARDRAIL_AS_CURRENT_STATE
+```
+
+Use v2.83 when quoting the evidence-contract usage adapter's audited test evidence. Do not copy stale v2.79 pending evidence into active readiness summaries.
+
+Broker-read fail-closed hardening remains a controlled-submit backlog item only. It does not authorize broker calls, broker reads, paper orders, live orders, or controlled submit.
+
+To reduce drift risk, use `PROJECT_CONTEXT.md` plus this map's Global Guardrail for current authorization state instead of duplicating long non-authorization blocks from archived milestone files.
+
+
 **Historical context for remediation**
 
 ```txt
@@ -307,10 +323,10 @@ v3.03 transitioned the project out of archived-chain closeout and into PPO v2 va
 
 ```txt
 v2.76-v2.78  authorization and implementation approval path
-v2.79        read-only usage adapter implementation
+v2.79        read-only usage adapter implementation; pending evidence references superseded by v2.83
 v2.80        implementation review
 v2.81-v2.82  post-implementation audit planning and review
-v2.83        audit completed with PASS_READ_ONLY_NO_SUBMIT
+v2.83        audit completed with PASS_READ_ONLY_NO_SUBMIT and 531 passed, 2 warnings
 v2.84        audit review accepted
 v2.85-v2.86  chain closed and archived
 v2.87-v3.01  administrative archived-chain final/terminal closeout sequence

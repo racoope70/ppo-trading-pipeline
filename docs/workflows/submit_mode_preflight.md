@@ -89,6 +89,14 @@ Both would be required for a future separately authorized controlled-submit chec
 
 Do not submit from any run directory under the current v3.06 state.
 
+## Backlog Note: Broker-Read Fail-Closed Hardening
+
+Broker-read fail-closed hardening remains a future controlled-submit backlog item only.
+
+This note does not authorize broker API calls, broker account reads, paper orders, live orders, or controlled submit.
+
+If a later sealed checkpoint ever reconsiders controlled submit, broker-read failures should fail closed before order planning or submission can continue.
+
 Historical / future-only reference: if a later sealed checkpoint ever authorizes controlled submit, named filtered directories are safer than `latest`, such as:
 
 ```text
