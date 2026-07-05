@@ -5,6 +5,21 @@ Status: Active runbook
 Scope: PPO-only Alpaca supervised paper-trading reporting  
 Mode: No-submit reporting workflow  
 
+## Current Authorization Boundary
+
+Current source-of-truth authorization:
+
+```text
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+NO_SUBMIT = DEFAULT
+```
+
+This runbook is reporting-only and no-submit only.
+
+Any references to future controlled submit, broker verification after submit, or submit checkpoints are historical / future-only separation notes. They are not active operating instructions and do not authorize paper orders, live orders, controlled submit, model promotion, or v3.07.
+
 ## Purpose
 
 This runbook defines the standard operating procedure for running the paper-trading reporting chain after a paper-trading dry run has completed.
@@ -31,7 +46,7 @@ NO_SUBMIT
 ```
 
 A dashboard, report, summary, or passing smoke test is not trade approval.
-A controlled submit still requires a separate controlled-submit checkpoint.
+Controlled submit is currently blocked and would require a later sealed checkpoint before it could be reconsidered.
 
 ## Required Starting Point
 
@@ -264,7 +279,7 @@ It only reads and writes local reporting artifacts.
 
 ## Controlled Submit Separation
 
-A future controlled submit still requires all of the following:
+Historical / future-only note: controlled submit is currently blocked. If a later sealed checkpoint ever reopens controlled-submit consideration, it would require all of the following:
 
 ```text
 fresh dry run
@@ -279,7 +294,7 @@ broker verification after submit
 documentation
 ```
 
-The reporting chain is not a submit checkpoint.
+The reporting chain is not a submit checkpoint. It does not authorize controlled submit.
 
 ## Standard Validation Before Commit
 
@@ -320,4 +335,4 @@ The correct default is always:
 NO_SUBMIT
 ```
 
-unless a separate controlled-submit checkpoint explicitly authorizes otherwise.
+Controlled submit remains blocked unless a later sealed checkpoint explicitly changes the authorization state.

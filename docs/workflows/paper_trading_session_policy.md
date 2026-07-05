@@ -1,13 +1,30 @@
 # Paper-Trading Session Policy / Operational Runbook
 
 Version: v1.16  
-Status: Active operational policy  
+Status: Active no-submit operational policy  
 Scope: Alpaca PPO paper-trading deployment  
-Mode: Supervised paper trading only  
+Mode: Supervised no-submit monitoring only  
+
+## Current Authorization Boundary
+
+Current source-of-truth authorization:
+
+```text
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+NO_SUBMIT = DEFAULT
+```
+
+This workflow is retained as an active no-submit monitoring policy.
+
+Any historical sections describing controlled one-order paper submit tests, single-order filtered submit tests, post-submit monitoring, residual-position monitoring, or `--submit-orders` examples are superseded by the current authorization boundary.
+
+They are preserved only as historical safety context and future-only reference material. They are not active operating instructions and do not authorize paper orders, live orders, controlled submit, or model promotion.
 
 ## Purpose
 
-This runbook defines the operating rules for supervised Alpaca paper-trading sessions using the redeployed Alpaca-trained PPO system.
+This runbook defines the operating rules for supervised no-submit Alpaca paper-trading monitoring sessions using the redeployed Alpaca-trained PPO system.
 
 The goal is not to maximize trading activity. The goal is to ensure every paper-trading cycle is:
 
@@ -16,7 +33,7 @@ fresh
 reviewed
 risk-controlled
 auditable
-manually approved before any submit
+no-submit by default
 never unattended
 ```
 
@@ -34,13 +51,17 @@ v1.15 Post-single-order residual monitoring
 
 ## Current Operating Status
 
-The system is approved for supervised Alpaca paper-trading checks only.
+The system is approved for supervised Alpaca no-submit monitoring checks only.
 
 The system is not approved for unattended trading.
 
 The system is not approved for automatic multi-order submission.
 
 The system is not approved for real-money trading.
+
+The system is not approved for paper-order submission.
+
+The system is not approved for controlled submit.
 
 ## Core Operating Principle
 
@@ -95,6 +116,8 @@ broker_snapshot_errors_empty = PASS
 
 ## Submit Eligibility Rules
 
+Historical / future-only note: this section is retained only to document the prior safety conditions that would have been required before any submit-era review. Under the current source-of-truth state, paper orders are not authorized and controlled submit is blocked. This section is not active submit authorization.
+
 A paper order may only be considered if all conditions below are true:
 
 ```text
@@ -145,7 +168,7 @@ Document as a clean no-submit monitoring cycle if this is part of a milestone.
 
 ### Case 2: orders_required = 1
 
-A controlled submit may be considered only after review.
+Historical / future-only note: under the current v3.06 authorization boundary, controlled submit is blocked and may not be considered or executed.
 
 Action:
 
@@ -170,6 +193,8 @@ Otherwise skip submit and document the cycle as no-submit.
 ```
 
 ## Single-Order Filter Procedure
+
+Historical / future-only note: filtering an execution plan to one order is allowed only as no-submit review context. It does not authorize submitting the filtered order. Any `--submit-orders` example in this section is superseded and preserved only as historical safety context.
 
 Use this only after a fresh full no-submit chain has passed.
 
@@ -210,9 +235,9 @@ python -m src.paper_trading.pre_trade_checklist \
   --allow-open-positions
 ```
 
-Only after the filtered checklist passes may a controlled submit be considered.
+Under the current authorization boundary, a passing filtered checklist does not authorize controlled submit.
 
-Submit only against the filtered directory:
+Historical / superseded submit example only. Do not run this under the current v3.06 state:
 
 ```bash
 python -m src.paper_trading.paper_trade_loop \
@@ -223,6 +248,8 @@ python -m src.paper_trading.paper_trade_loop \
 Never use `--submit-orders` against `latest` when the original plan has more than one eligible order.
 
 ## Broker Verification After Any Submit
+
+Historical / future-only note: this section is retained to document prior post-submit safety expectations. It is not active authorization to submit orders. Current state remains `paper_orders = NOT_AUTHORIZED`, `live_orders = NOT_AUTHORIZED`, and `controlled_submit = BLOCKED`.
 
 Immediately after any submit, run a broker-state check:
 
@@ -291,6 +318,8 @@ no unexpected positions
 
 ## Post-Submit Checklist Interpretation
 
+Historical / future-only note: this section describes prior post-submit interpretation only. It is superseded by the current no-submit authorization boundary and must not be read as active submit permission.
+
 After a real submit, the checklist may report `FAIL` because no-submit checks are expected to fail.
 
 Expected post-submit failures:
@@ -315,6 +344,8 @@ broker_snapshot_errors_empty = PASS
 If broker checks fail, stop immediately.
 
 ## Residual Position Policy
+
+Historical / monitoring-only note: this section is retained only for interpreting residual positions from prior historical paper-order activity or future separately authorized checkpoints. It does not authorize residual cleanup trades.
 
 Tiny residual positions can occur after fractional paper orders.
 
@@ -371,9 +402,9 @@ do not run full-day unattended sessions
 For short monitored sessions:
 
 ```text
-1 to 3 supervised cycles maximum
+1 to 3 supervised no-submit cycles maximum
 manual review after each cycle
-broker verification after any submit
+broker verification only as no-submit broker-state review
 stop after unexpected behavior
 ```
 
@@ -468,15 +499,14 @@ Approved:
 
 ```text
 supervised no-submit cycles
-controlled one-order paper submit tests
-single-order filtered submit tests
-post-submit monitoring
-residual position monitoring
 ```
 
 Not approved:
 
 ```text
+paper orders
+live orders
+controlled submit
 unattended trading
 real-money trading
 automatic multi-order submission

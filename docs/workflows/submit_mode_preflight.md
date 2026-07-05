@@ -1,13 +1,28 @@
 # v1.19 Submit-Mode Preflight / Explicit Run-Dir Confirmation
 
-Status: Active safety control
-Scope: Alpaca PPO paper-trading submit mode
+Status: Historical / future-only safety control
+Scope: Alpaca PPO paper-trading submit-mode safety reference
+
+## Current Authorization Boundary
+
+Current source-of-truth authorization:
+
+```text
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+NO_SUBMIT = DEFAULT
+```
+
+This document is not an active submit-mode runbook. It is retained only as historical / future-only safety context for explicit run-directory confirmation.
+
+Do not run `--submit-orders` from this document unless a later sealed checkpoint explicitly authorizes controlled submit.
 
 ## Purpose
 
-Prevent accidental `--submit-orders` use against the wrong run directory.
+Document the historical safety control intended to prevent accidental `--submit-orders` use against the wrong run directory.
 
-This checkpoint adds an explicit run-directory confirmation requirement before submit mode can run.
+This checkpoint added an explicit run-directory confirmation requirement for historical controlled-submit testing. Current v3.06 state blocks controlled submit.
 
 ## Rule
 
@@ -19,9 +34,9 @@ Submit mode requires:
 
 The normalized confirmation value must match the normalized run directory.
 
-## Correct Submit Pattern
+## Historical / Future-Only Submit Pattern
 
-Example for a filtered single-order directory:
+Historical example for a filtered single-order directory. Do not run under the current v3.06 state:
 
 ```bash
 python -m src.paper_trading.paper_trade_loop \
@@ -32,6 +47,8 @@ python -m src.paper_trading.paper_trade_loop \
 ```
 
 ## Blocked Submit Patterns
+
+These remain blocked examples. The current state also blocks the otherwise “correct” submit pattern above.
 
 Missing confirmation:
 
@@ -66,13 +83,13 @@ v1.19 prevents wrong-directory submission with:
 --confirm-run-dir <exact run dir>
 ```
 
-Both are required for controlled submit mode.
+Both would be required for a future separately authorized controlled-submit checkpoint. Controlled submit is currently blocked.
 
 ## Operating Policy
 
-Do not submit from latest unless the runbook explicitly allows it and the plan has exactly one reviewed order.
+Do not submit from any run directory under the current v3.06 state.
 
-Prefer submitting from a named filtered directory such as:
+Historical / future-only reference: if a later sealed checkpoint ever authorizes controlled submit, named filtered directories are safer than `latest`, such as:
 
 ```text
 reports/paper_trading_dry_runs/v_next_single_order_<SYMBOL>_<SIDE>

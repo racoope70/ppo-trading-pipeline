@@ -1,13 +1,28 @@
 # Signal Persistence / Candidate Stability Policy
 
 Version: v1.29  
-Status: Active policy  
+Status: Active no-submit policy  
 Scope: PPO-only Alpaca supervised paper trading  
 Mode: Policy / operational control  
 
+## Current Authorization Boundary
+
+Current source-of-truth authorization:
+
+```text
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+NO_SUBMIT = DEFAULT
+```
+
+This policy is active only for no-submit candidate review, signal persistence analysis, and audit documentation.
+
+Any language about controlled submit, submit eligibility, or `--submit-orders` is historical / future-only safety context. It is not active authorization to submit paper orders, live orders, or controlled-submit orders.
+
 ## Purpose
 
-This policy defines when a model-generated paper-trading candidate is stable enough to be considered for a future controlled submit.
+This policy defines how to classify model-generated paper-trading candidates during no-submit review.
 
 A candidate appearing once is not automatically trade approval.
 
@@ -66,7 +81,7 @@ plan becomes stale
 
 ## Stability Requirements
 
-Before a candidate can be considered for controlled submit, it should satisfy:
+Historical / future-only note: before any later checkpoint could even review controlled submit, a candidate would have needed to satisfy:
 
 ```text
 fresh dry run completed
@@ -103,11 +118,13 @@ A candidate appears again on a later fresh run with the same symbol and side.
 Decision:
 
 ```text
-eligible for controlled submit review
+eligible for continued no-submit review
 still not automatic approval
 ```
 
 ### Level 2: Submit-Eligible Candidate
+
+Historical / future-only note: this level is superseded under the current v3.06 authorization boundary. No candidate is submit-eligible while paper orders are not authorized and controlled submit is blocked.
 
 A candidate may be considered submit-eligible only after:
 
@@ -124,7 +141,8 @@ broker verification plan exists
 Decision:
 
 ```text
-eligible for separate controlled submit checkpoint
+historical / future-only: would require a separate controlled-submit checkpoint
+current v3.06 decision: NO_SUBMIT
 ```
 
 ## No-Submit Conditions
@@ -175,9 +193,9 @@ The new AMD buy was a different candidate.
 A changed signal must be documented and re-reviewed, not submitted automatically.
 ```
 
-## Required Submit Pattern
+## Historical / Future-Only Submit Pattern
 
-Even if a candidate is stable, a controlled submit must still use:
+This example is retained only as historical safety context for a future separately authorized checkpoint. Do not run this command under the current v3.06 state:
 
 ```bash
 python -m src.paper_trading.paper_trade_loop \
@@ -216,7 +234,7 @@ Approved:
 reviewing one-time candidates
 documenting changed signals
 requiring fresh revalidation
-using single-order filtered directories
+using single-order filtered directories for no-submit review only
 requiring max-plan-age checks
 requiring explicit run-dir confirmation
 ```
@@ -224,6 +242,9 @@ requiring explicit run-dir confirmation
 Not approved:
 
 ```text
+paper orders
+live orders
+controlled submit
 submitting stale candidates
 submitting changed candidates
 submitting from prior checkpoint plans

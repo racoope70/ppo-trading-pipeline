@@ -1,13 +1,26 @@
 # v1.18 Stale-Plan Prevention / Max-Plan-Age Enforcement
 
-Status: Active safety control
+Status: Active no-submit safety control
 Scope: Alpaca PPO paper-trading execution plans
+
+## Current Authorization Boundary
+
+Current source-of-truth authorization:
+
+```text
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+NO_SUBMIT = DEFAULT
+```
+
+This document remains active for no-submit stale-plan prevention. Any submit-mode example is historical / future-only safety context and does not authorize paper orders or controlled submit.
 
 ## Purpose
 
-Prevent stale execution plans from being submitted after the latest market bar becomes too old.
+Prevent stale execution plans from being used after the latest market bar becomes too old.
 
-This protects against accidentally submitting an execution plan from an earlier hour, prior day, weekend, or failed workflow.
+This protects against accidentally relying on an execution plan from an earlier hour, prior day, weekend, or failed workflow.
 
 ## Control
 
@@ -65,7 +78,7 @@ python -m src.paper_trading.pre_trade_checklist \
   --max-plan-age-minutes 90
 ```
 
-Submit mode requires:
+Historical / future-only submit-mode reference. Do not run under the current v3.06 state:
 
 ```bash
 python -m src.paper_trading.paper_trade_loop \
@@ -87,7 +100,7 @@ latest_bar_time is unparseable
 
 ## Operational Impact
 
-A stale plan should stop the chain before submit.
+A stale plan should stop the chain before any downstream review.
 
 The correct response is:
 

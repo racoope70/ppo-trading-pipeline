@@ -1,14 +1,29 @@
 # v1.13 Single-Order Submit Guard / Execution Filter
 
 Date: 2026-06-02  
-Status: Implementation checkpoint  
-Scope: Paper-trading execution safety  
+Status: Historical / future-only implementation checkpoint  
+Scope: Paper-trading execution safety reference  
+
+## Current Authorization Boundary
+
+Current source-of-truth authorization:
+
+```text
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+NO_SUBMIT = DEFAULT
+```
+
+This document is retained as historical safety context for filtering multi-order execution plans. It is not active authorization for paper orders or controlled submit.
+
+Filtering a plan to one order may be used only for no-submit review unless a later sealed checkpoint explicitly authorizes controlled submit.
 
 ## Purpose
 
-Add a guard that allows a reviewed multi-order execution plan to be filtered down to one explicitly selected order before any possible submit.
+Document the guard that allows a reviewed multi-order execution plan to be filtered down to one explicitly selected order for no-submit review and historical safety context.
 
-This is needed because v1.12 produced safe multi-order plans, but the guarded paper-order runner submits every row where `should_order=True` when `--submit-orders` is used.
+This was needed because v1.12 produced safe multi-order plans, but the guarded paper-order runner submits every row where `should_order=True` when `--submit-orders` is used. Under the current v3.06 state, `--submit-orders` is not authorized.
 
 ## Main Module
 
@@ -18,9 +33,9 @@ src/paper_trading/filter_execution_plan.py
 
 ## Safety Rule
 
-Never submit directly from a multi-order plan during controlled testing.
+Never submit directly from a multi-order plan.
 
-For controlled testing:
+For historical controlled testing, the safety sequence was:
 
 ```text
 fresh dry run
@@ -32,7 +47,7 @@ filter to one selected order
 rerun risk controls on filtered plan
 run no-submit paper loop on filtered plan
 pre-trade checklist passes
-only then consider submit-orders on filtered run directory
+only then consider submit-orders on filtered run directory if a later sealed checkpoint explicitly authorizes controlled submit
 ```
 
 ## Example: Filter One AMD Buy From Latest Plan
@@ -66,7 +81,7 @@ python -m src.paper_trading.pre_trade_checklist \
   --allow-open-positions
 ```
 
-Only if the filtered checklist passes should a controlled submit be considered:
+Historical / future-only submit example. A passing filtered checklist does not authorize submit under the current v3.06 state:
 
 ```bash
 python -m src.paper_trading.paper_trade_loop \
@@ -91,4 +106,4 @@ The selected order must be explicit.
 
 Do not use this as an automatic order selector.
 
-Do not submit filtered plans unless the filtered risk controls and checklist pass.
+Do not submit filtered plans under the current v3.06 state.
