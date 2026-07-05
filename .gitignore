@@ -81,3 +81,14 @@ data/raw/*
 data/processed/*
 data/alpaca_historical/*
 data/alpaca_training/*
+
+# PPO v2 governed quarantine/log outputs
+# Generated PPO v2 no-submit/quarantine outputs are local-only and must not be committed.
+# This does not authorize PPO v2 training, data fetching, dataset generation, model artifact creation, or submit.
+# Directory exceptions allow optional .gitkeep placeholders while keeping generated files ignored.
+!artifacts/ppo_v2/quarantine/
+artifacts/ppo_v2/quarantine/*
+!artifacts/ppo_v2/quarantine/.gitkeep
+!artifacts/ppo_v2/logs/
+artifacts/ppo_v2/logs/*
+!artifacts/ppo_v2/logs/.gitkeep
