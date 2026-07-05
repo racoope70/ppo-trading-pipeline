@@ -13,9 +13,10 @@ Before modifying training logic, validation methodology, deployment workflows, a
 ```txt
 latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
 latest_completed_decision = FAIL
-latest_sealed_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
-latest_sealed_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
-latest_sealed_commit_short = c9f2c71
+latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
+latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
+latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
+latest_successful_sealed_readiness_commit_short = c9f2c71
 active_milestone = v3.06 Audit Remediation Planning
 next_checkpoint = v3.06 Audit Remediation Plan
 current_workstream = PPO_V2_VALIDATION_READINESS
@@ -42,6 +43,10 @@ The repository completed the v3.06 independent full-system pre-retraining audit 
 ```txt
 latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
 latest_completed_decision = FAIL
+latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
+latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
+latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
+latest_successful_sealed_readiness_commit_short = c9f2c71
 active_milestone = v3.06 Audit Remediation Planning
 next_checkpoint = v3.06 Audit Remediation Plan
 v3.07_status = BLOCKED
@@ -124,6 +129,9 @@ Passing unit tests proves infrastructure, control, reporting, and documentation 
 v3.06 completed the independent full-system pre-retraining audit and returned a `FAIL` decision.
 
 ```txt
+latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
+latest_completed_decision = FAIL
+latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
 v3_06_decision = FAIL
 v3_07_status = BLOCKED
 training_execution_status = NOT_AUTHORIZED
@@ -167,8 +175,9 @@ Most recent sealed successful readiness milestone:
 
 ```txt
 v3.05 = PPO v2 No-Submit Training Package Readiness Review
-v3.05_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
-v3.05_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
+latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
+latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
+latest_successful_sealed_readiness_commit_short = c9f2c71
 v3.05_test_evidence = 531 passed, 2 warnings
 ```
 
