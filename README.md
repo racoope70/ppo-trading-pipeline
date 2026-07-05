@@ -14,10 +14,12 @@ This project is for research and educational purposes only. It is not financial 
 
 Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) before making training, retraining, paper-trading, or deployment recommendations. `PROJECT_CONTEXT.md` is the controlling source of truth.
 
-Current state:
+Current state is controlled by `PROJECT_CONTEXT.md`. The README intentionally defers current milestone and checkpoint labels to `PROJECT_CONTEXT.md` to avoid current-stage drift. Durable blocked authorization boundaries remain:
 
 ```text
-active_milestone = v3.06 Audit Remediation Planning
+current_state_source = PROJECT_CONTEXT.md
+active_milestone = see PROJECT_CONTEXT.md
+next_checkpoint = see PROJECT_CONTEXT.md
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 ppo_v2_training_execution = NOT_AUTHORIZED

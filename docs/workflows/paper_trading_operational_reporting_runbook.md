@@ -309,11 +309,13 @@ python -m pytest tests/test_classify_decision_state.py
 python -m pytest
 ```
 
-Expected current result:
+Historical / superseded evidence note:
 
 ```text
-227 passed, 2 warnings
+Earlier reporting-runbook validation referenced: 227 passed, 2 warnings
 ```
+
+This embedded count is historical/superseded and must not be used as current readiness evidence. Current evidence must come from `PROJECT_CONTEXT.md` and the latest explicit evidence/run record, including `docs/runs/v3.06_remediation_review_follow_up_evidence.md` for this failed-audit cleanup.
 
 ## Operational Interpretation
 
