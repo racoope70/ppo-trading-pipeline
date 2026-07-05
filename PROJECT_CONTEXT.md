@@ -11,16 +11,16 @@ Before modifying training logic, validation methodology, deployment workflows, a
 ## 1. Current Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
-latest_completed_decision = FAIL
+latest_completed_milestone = v3.06 Remediation Review / Post-Remediation Audit Rerun
+latest_completed_decision = PASS
 latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
 latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
 latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
 latest_successful_sealed_readiness_commit_short = c9f2c71
-active_milestone = v3.06 Remediation Review / Post-Remediation Audit
-next_checkpoint = v3.06 Independent Remediation Review / Post-Remediation Audit
+active_milestone = v3.07 Consideration / Authorization Review
+next_checkpoint = separate v3.07 consideration / authorization review
 current_workstream = PPO_V2_VALIDATION_READINESS
-current_phase = remediation implementation closeout and failed-audit cleanup completed; independent remediation review rerun required
+current_phase = v3.06 remediation accepted; eligible for separate v3.07 consideration only
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 paper_order_authorization = NOT_AUTHORIZED
@@ -37,26 +37,29 @@ v3_06_remediation_implementation_record = COMPLETED
 v3_06_remediation_completion_record = docs/runs/v3.06_remediation_completion_record.md
 v3_06_remediation_completion_tag = v3.06-remediation-completion-record
 v3_06_remediation_completion_commit = 115629c5edcb6d294c846f57a01de8c063878c5b
-v3_06_independent_remediation_review = REQUIRED
-v3_06_post_remediation_audit = REQUIRED
+v3_06_independent_remediation_review = PASS
+v3_06_post_remediation_audit = PASS
 v3_06_remediation_review_follow_up_evidence = docs/runs/v3.06_remediation_review_follow_up_evidence.md
 v3_06_remediation_review_follow_up_commit = d00d8fff076c70385fc5a6303b18493be267a199
+v3_06_post_remediation_pass_audit_record = docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md
+v3_06_post_remediation_pass_run_record = docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md
+v3_06_post_remediation_pass_commit = 62cc3b2
 latest_ci_evidence = Tests #322 green on v3.06 failed-audit cleanup commit d00d8ff
 ```
 
-The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision. It has **not** executed PPO v2 training. The v3.06 remediation implementation closeout record is now completed and tagged, but it is not an independent audit and does not authorize v3.07. v3.07 remains blocked pending an independent v3.06 remediation review / post-remediation audit.
+The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision, then completed remediation and a post-remediation audit rerun with a `PASS` decision. It has **not** executed PPO v2 training. The v3.06 remediation PASS means only that the repository is eligible for separate v3.07 consideration. v3.07 remains blocked until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training.
 
 ## v3.06 Audit Result
 
 ```txt
-latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
-latest_completed_decision = FAIL
+latest_completed_milestone = v3.06 Remediation Review / Post-Remediation Audit Rerun
+latest_completed_decision = PASS
 latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
 latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
 latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
 latest_successful_sealed_readiness_commit_short = c9f2c71
-active_milestone = v3.06 Remediation Review / Post-Remediation Audit
-next_checkpoint = v3.06 Independent Remediation Review / Post-Remediation Audit
+active_milestone = v3.07 Consideration / Authorization Review
+next_checkpoint = separate v3.07 consideration / authorization review
 v3.07_status = BLOCKED
 ppo_v2_training_execution = NOT_AUTHORIZED
 paper_order_authorization = NOT_AUTHORIZED
@@ -88,7 +91,7 @@ This is important because `PROJECT_CONTEXT.md` is the controlling source of trut
 
 ## 2. Active Milestone: v3.06 Remediation Review / Post-Remediation Audit
 
-v3.06 remediation implementation closeout has been completed for the blocking audit findings and cleanup items.
+v3.06 remediation implementation closeout has been completed, and the independent post-remediation audit rerun accepted the remediation.
 
 This closeout is documented in:
 
@@ -100,7 +103,7 @@ failed_audit_cleanup_evidence = docs/runs/v3.06_remediation_review_follow_up_evi
 failed_audit_cleanup_commit = d00d8fff076c70385fc5a6303b18493be267a199
 ```
 
-The closeout record is not an independent audit and does not authorize v3.07. A failed-audit cleanup follow-up has also been completed and documented in `docs/runs/v3.06_remediation_review_follow_up_evidence.md`. The next required checkpoint remains an independent v3.06 remediation review / post-remediation audit rerun.
+The closeout record is not itself authorization for v3.07. The failed-audit cleanup follow-up is documented in `docs/runs/v3.06_remediation_review_follow_up_evidence.md`, and the passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`. The next required checkpoint is a separate v3.07 consideration / authorization review.
 
 The completed remediation implementation covered:
 
@@ -162,8 +165,8 @@ This is a future hardening item only. It does not authorize v3.07 training, data
 v3.06 completed the independent full-system pre-retraining audit and returned a `FAIL` decision.
 
 ```txt
-latest_completed_milestone = v3.06 PPO v2 Independent Full-System Pre-Retraining Audit
-latest_completed_decision = FAIL
+latest_completed_milestone = v3.06 Remediation Review / Post-Remediation Audit Rerun
+latest_completed_decision = PASS
 latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
 v3_06_decision = FAIL
 v3_07_status = BLOCKED
