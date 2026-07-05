@@ -47,7 +47,7 @@ OHLCV_COLUMNS: tuple[str, ...] = (
 )
 
 RAW_BAR_FREQUENCY = pd.Timedelta(hours=1)
-MISSING_BAR_MEASUREMENT_METHOD = "per_symbol_1h_timestamp_range"
+MISSING_BAR_MEASUREMENT_METHOD = "per_symbol_observed_date_session_1h_range"
 
 FORBIDDEN_HOLDOUT_USES: tuple[str, ...] = (
     "feature_selection",
@@ -168,7 +168,13 @@ def validate_raw_data_contract(
 
 
 def measure_missing_bar_coverage(data: pd.DataFrame) -> PPOV2MissingBarCoverageReport:
-    """Measure missing Symbol-Datetime bars without fetching external data."""
+    """Measure missing bars within observed symbol/date sessions only.
+
+    The measurement is intentionally scoped to each symbol's observed intraday
+    date/session range. It does not infer overnight, weekend, cross-date, or
+    full market open-to-close coverage unless a separate session calendar or
+    reviewed coverage manifest defines those expected bounds.
+    """
 
     if "Datetime" not in data.columns or "Symbol" not in data.columns or data.empty:
         return PPOV2MissingBarCoverageReport(
@@ -276,36 +282,48 @@ def _measure_missing_bar_coverage(
     expected_symbol_bar_count = 0
     observed_symbol_bar_count = 0
 
+    coverage_frame = coverage_frame.assign(
+        _ObservedDate=coverage_frame["Datetime"].dt.date,
+    )
+
     for symbol in sorted(coverage_frame["Symbol"].drop_duplicates()):
-        symbol_timestamps = tuple(
-            sorted(
-                pd.Timestamp(timestamp)
-                for timestamp in coverage_frame.loc[
-                    coverage_frame["Symbol"] == symbol,
-                    "Datetime",
-                ].drop_duplicates()
+        symbol_frame = coverage_frame.loc[coverage_frame["Symbol"] == symbol]
+
+        for observed_date in sorted(symbol_frame["_ObservedDate"].drop_duplicates()):
+            session_timestamps = tuple(
+                sorted(
+                    pd.Timestamp(timestamp)
+                    for timestamp in symbol_frame.loc[
+                        symbol_frame["_ObservedDate"] == observed_date,
+                        "Datetime",
+                    ].drop_duplicates()
+                )
             )
-        )
 
-        if not symbol_timestamps:
-            continue
+            if not session_timestamps:
+                continue
 
-        observed_timestamp_set = set(symbol_timestamps)
-        expected_timestamps = tuple(
-            pd.date_range(
-                start=symbol_timestamps[0],
-                end=symbol_timestamps[-1],
-                freq=RAW_BAR_FREQUENCY,
+            observed_timestamp_set = set(session_timestamps)
+            expected_timestamps = tuple(
+                pd.date_range(
+                    start=session_timestamps[0],
+                    end=session_timestamps[-1],
+                    freq=RAW_BAR_FREQUENCY,
+                )
             )
-        )
-        expected_timestamp_set = set(pd.Timestamp(timestamp) for timestamp in expected_timestamps)
+            expected_timestamp_set = set(
+                pd.Timestamp(timestamp) for timestamp in expected_timestamps
+            )
 
-        observed_symbol_bar_count += len(observed_timestamp_set)
-        expected_symbol_bar_count += len(expected_timestamp_set)
+            observed_symbol_bar_count += len(observed_timestamp_set)
+            expected_symbol_bar_count += len(expected_timestamp_set)
 
-        missing_timestamps = tuple(sorted(expected_timestamp_set.difference(observed_timestamp_set)))
-        if missing_timestamps:
-            missing_bars_by_symbol[symbol] = missing_timestamps
+            missing_timestamps = tuple(
+                sorted(expected_timestamp_set.difference(observed_timestamp_set))
+            )
+            if missing_timestamps:
+                existing = missing_bars_by_symbol.get(symbol, ())
+                missing_bars_by_symbol[symbol] = existing + missing_timestamps
 
     missing_bar_count = sum(len(timestamps) for timestamps in missing_bars_by_symbol.values())
 

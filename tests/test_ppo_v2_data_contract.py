@@ -174,7 +174,7 @@ def test_missing_bar_coverage_report_measures_symbol_datetime_gap():
 
     report = measure_missing_bar_coverage(data)
 
-    assert report.measurement_method == "per_symbol_1h_timestamp_range"
+    assert report.measurement_method == "per_symbol_observed_date_session_1h_range"
     assert report.expected_symbol_bar_count == 6
     assert report.observed_symbol_bar_count == 5
     assert report.missing_bar_count == 1
@@ -234,6 +234,41 @@ def test_raw_data_contract_reports_all_symbol_missing_hour_inside_range():
     assert any("missing_bar_count=2" in error for error in errors)
     assert any("expected_symbol_bar_count=6" in error for error in errors)
     assert any("observed_symbol_bar_count=4" in error for error in errors)
+
+
+def test_missing_bar_coverage_does_not_invent_cross_date_or_overnight_bars():
+    rows = []
+    timestamps = [
+        pd.Timestamp("2024-01-02 09:30:00"),
+        pd.Timestamp("2024-01-03 09:30:00"),
+        pd.Timestamp("2024-01-05 09:30:00"),
+    ]
+
+    for symbol in ["AAPL", "AMD"]:
+        for index, timestamp in enumerate(timestamps):
+            rows.append(
+                {
+                    "Datetime": timestamp,
+                    "Symbol": symbol,
+                    "Open": 100.0 + index,
+                    "High": 102.0 + index,
+                    "Low": 99.0 + index,
+                    "Close": 101.0 + index,
+                    "Volume": 1_000 + index,
+                }
+            )
+
+    data = pd.DataFrame(rows)
+
+    report = measure_missing_bar_coverage(data)
+    errors = validate_raw_data_contract(data)
+
+    assert report.measurement_method == "per_symbol_observed_date_session_1h_range"
+    assert report.expected_symbol_bar_count == 6
+    assert report.observed_symbol_bar_count == 6
+    assert report.missing_bar_count == 0
+    assert report.missing_bars_by_symbol == {}
+    assert not any("missing 1-hour bars measured and reported" in error for error in errors)
 
 
 def test_observation_columns_allow_safe_feature_columns():
