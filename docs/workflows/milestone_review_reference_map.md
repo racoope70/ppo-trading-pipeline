@@ -9,10 +9,10 @@ This file is a navigation map only. It does not authorize work, execution, data 
 Current controlling state:
 
 ```txt
-latest_completed_milestone = v3.07 Independent Package Authorization Review
-latest_completed_decision = FAIL
-active_milestone = v3.07 Source-Code Execution Compatibility Checkpoint
-next_checkpoint = v3.07 source-code execution compatibility checkpoint
+latest_completed_milestone = v3.07 Source-Code Execution Compatibility Checkpoint
+latest_completed_decision = SOURCE_CODE_EXECUTION_COMPATIBILITY_REMEDIATION_IMPLEMENTED_FOR_REVIEW
+active_milestone = v3.07 Independent Source-Code Compatibility Review
+next_checkpoint = independent v3.07 source-code compatibility review
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 training_command_execution = NOT_AUTHORIZED
@@ -37,40 +37,44 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 
 ## Current Active Review Path
 
-### v3.07 — Source-Code Execution Compatibility Checkpoint
+### v3.07 — Independent Source-Code Compatibility Review
 
 **Use when reviewing**
 
-* failed v3.07 independent package authorization review
-* source-code execution compatibility for the selected sealed command
-* command-argument compatibility for the v3.07 sealed command
-* whether `src/ppo_v2_controlled_training_execution.py` remains non-executing
-* whether the selected entrypoint can connect to a reviewed executable no-submit PPO v2 training path
-* whether preflight requirements remain future-only or have passing evidence
-* whether the sealed local input dataset is proven available and validated
-* whether v3.07 remains blocked after package authorization failure
+
+* source-code execution compatibility remediation completed for review
+* independent review of the sealed v3.07 command target compatibility layer
+* fail-closed CLI compatibility validation for `src.ppo_v2_controlled_training_execution`
+* whether sealed arguments are accepted and validated without execution
+* whether the selected sealed command path remains `src.ppo_v2_controlled_training_execution`
+* whether the command was kept away from `src.train.py`
+* whether v3.07 remains blocked after source-code compatibility remediation
+* whether PPO v2 training and training command execution remain not authorized
+* whether preflight, sealed dataset validation, model artifacts, quarantine outputs, paper/live orders, controlled submit, and PPO + RF/XGBoost remain blocked
+
 
 **Review first**
 
 ```txt
 PROJECT_CONTEXT.md
 docs/workflows/milestone_review_reference_map.md
+docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md
 docs/audits/v3.07_independent_package_authorization_review.md
 docs/runs/v3.07_independent_package_authorization_review.md
 docs/runs/v3.07_no_submit_training_execution_package_preparation.md
 artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/
+src/ppo_v2_controlled_training_execution.py
+tests/test_ppo_v2_controlled_training_execution.py
 docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
 docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
-docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md
-docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md
 ```
 
 **Then review remediation target files as needed**
 
 ```txt
 src/ppo_v2_controlled_training_execution.py
-src/ppo_v2_controlled_training_execution_wrapper.py
-src/train.py
+tests/test_ppo_v2_controlled_training_execution.py
+docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md
 artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/commands/one_time_no_submit_training_command.txt
 artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/config/v3_07_no_submit_training_config.yaml
 artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/manifests/preflight_validation_manifest.md
@@ -93,7 +97,12 @@ v3_07_independent_package_authorization_review = FAIL
 v3_07_independent_package_authorization_review_audit_record = docs/audits/v3.07_independent_package_authorization_review.md
 v3_07_independent_package_authorization_review_run_record = docs/runs/v3.07_independent_package_authorization_review.md
 v3_07_independent_package_authorization_review_commit = 4b32e4d35ba4e55a47555eab15e7e851c23649b3
-v3_07_source_code_execution_compatibility_checkpoint = REQUIRED
+v3_07_source_code_execution_compatibility_checkpoint = COMPLETED_FOR_REVIEW
+v3_07_source_code_execution_compatibility_remediation = COMPLETED_FOR_REVIEW
+v3_07_source_code_execution_compatibility_record = docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md
+source_code_compatibility_commit = b17fc83
+source_code_compatibility_ci = Tests #332 green
+v3_07_independent_source_code_compatibility_review = NEXT_REQUIRED_CHECKPOINT
 v3.07_status = BLOCKED
 ppo_v2_training_execution = NOT_AUTHORIZED
 training_command_execution = NOT_AUTHORIZED
@@ -110,7 +119,7 @@ ppo_rf = BLOCKED
 ppo_xgboost = BLOCKED
 ```
 
-The v3.06 remediation review / post-remediation audit passed, making the repository eligible for separate v3.07 consideration but not authorizing v3.07 execution. The initial v3.07 authorization review failed. A materially more complete v3.07 static no-submit package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review also failed. It found that the selected command still points to a non-executing scaffold, the sealed command arguments are not implemented by the target module, preflight evidence has not passed, the package itself says B3/B5 are not fully resolved, the package remains static preparation only / do-not-run, and the sealed local input dataset is not proven available or validated. The next checkpoint is a v3.07 source-code execution compatibility checkpoint. This is not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, quarantine output creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
+The v3.06 remediation review / post-remediation audit passed, making the repository eligible for separate v3.07 consideration but not authorizing v3.07 execution. The initial v3.07 authorization review failed. A materially more complete v3.07 static no-submit package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review also failed. The source-code execution compatibility checkpoint was then completed for independent review at `docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md` on commit `b17fc83`. The implementation added fail-closed CLI compatibility validation for the sealed v3.07 command target. The selected sealed command path remains `src.ppo_v2_controlled_training_execution`; the command was not pointed to `src.train.py`. The compatibility layer validates the sealed arguments, but it does not authorize v3.07 execution, PPO v2 training, training command execution, data fetching, dataset generation, model artifact creation, quarantine output creation, paper/live orders, controlled submit, PPO + RF, or PPO + XGBoost. The next checkpoint is an independent v3.07 source-code compatibility review.
 
 **M/L cleanup note**
 
@@ -170,7 +179,7 @@ NO_SUBMIT = DEFAULT
 
 **Then move to**
 
-Move to a v3.07 Source-Code Execution Compatibility Checkpoint. This checkpoint may review whether the selected sealed command can connect to a reviewed executable no-submit PPO v2 training entrypoint and whether the sealed CLI arguments are accepted. It must not run training, fetch data, generate datasets, create model artifacts, create quarantine outputs, submit paper/live orders, authorize controlled submit, authorize PPO + RF/XGBoost, or mark v3.07 as authorized.
+Move to an independent v3.07 Source-Code Compatibility Review. This review may inspect whether the source-code compatibility remediation safely accepts and validates the sealed v3.07 command arguments without execution. It must not run training, fetch data, generate datasets, create model artifacts, create quarantine outputs, submit paper/live orders, authorize controlled submit, authorize PPO + RF/XGBoost, or mark v3.07 as authorized.
 
 ---
 
@@ -188,14 +197,15 @@ v3.06 independent remediation review / post-remediation audit rerun = PASS
 v3.07 initial authorization review = FAIL — do not authorize training
 v3.07 sealed no-submit training execution package preparation = completed as static package-preparation only
 v3.07 independent package authorization review = FAIL — do not authorize training
-v3.07 source-code execution compatibility checkpoint = next required checkpoint
+v3.07 source-code execution compatibility checkpoint = completed for independent review
+v3.07 independent source-code compatibility review = next required checkpoint
 v3.07 execution = BLOCKED until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training
 v3.08 = post-run audit of generated PPO v2 evidence; future only and only after v3.07 is authorized/completed
 v3.09 = validation report generation from real evidence; future only
 v3.10 = PPO v2 model evidence decision; future only
 ```
 
-v3.07 execution is not active. The v3.07 package-preparation record exists, but the independent package authorization review failed. The next checkpoint is source-code execution compatibility review only. Any future authorization must remain one-time, no-submit, explicitly authorized, and quarantined. It must not imply paper orders, live orders, controlled submit, model promotion, PPO + RF, or PPO + XGBoost.
+v3.07 execution is not active. The v3.07 package-preparation record exists, the independent package authorization review failed, and the source-code execution compatibility checkpoint has now been completed for independent review. The next checkpoint is an independent source-code compatibility review only. Any future authorization must remain one-time, no-submit, explicitly authorized, and quarantined. It must not imply paper orders, live orders, controlled submit, model promotion, PPO + RF, or PPO + XGBoost.
 
 ---
 
