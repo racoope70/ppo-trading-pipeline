@@ -12,8 +12,12 @@ promote models, or submit orders.
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+import argparse
+import sys
+
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from src.ppo_v2_controlled_training_execution_dry_run import (
@@ -403,10 +407,409 @@ def _is_not_positive_int(value: object) -> bool:
     return not isinstance(value, int) or isinstance(value, bool) or value <= 0
 
 
+V3_07_SEALED_RUN_ID = "v3_07_no_submit_ppo_v2_training_execution_001"
+V3_07_SEALED_MODE = "controlled-training"
+V3_07_SEALED_CONFIG_PATH = (
+    "artifacts/ppo_v2/package_preparation/"
+    "v3_07_no_submit_training_execution_package/config/"
+    "v3_07_no_submit_training_config.yaml"
+)
+V3_07_SEALED_QUARANTINE_ROOT = (
+    "artifacts/ppo_v2/quarantine/"
+    "v3_07_no_submit_ppo_v2_training_execution_001"
+)
+V3_07_SEALED_LOG_ROOT = (
+    "artifacts/ppo_v2/logs/"
+    "v3_07_no_submit_ppo_v2_training_execution_001"
+)
+V3_07_SEALED_STDOUT_PATH = (
+    "artifacts/ppo_v2/logs/"
+    "v3_07_no_submit_ppo_v2_training_execution_001/stdout.txt"
+)
+V3_07_SEALED_STDERR_PATH = (
+    "artifacts/ppo_v2/logs/"
+    "v3_07_no_submit_ppo_v2_training_execution_001/stderr.txt"
+)
+V3_07_SEALED_ARTIFACT_INVENTORY_PATH = (
+    "artifacts/ppo_v2/quarantine/"
+    "v3_07_no_submit_ppo_v2_training_execution_001/"
+    "manifests/artifact_inventory.json"
+)
+V3_07_SEALED_CHECKSUM_MANIFEST_PATH = (
+    "artifacts/ppo_v2/quarantine/"
+    "v3_07_no_submit_ppo_v2_training_execution_001/"
+    "manifests/checksums.sha256"
+)
+V3_07_APPROVED_QUARANTINE_ROOT = "artifacts/ppo_v2/quarantine"
+V3_07_APPROVED_LOG_ROOT = "artifacts/ppo_v2/logs"
+
+V3_07_SEALED_CLI_ARGUMENTS: tuple[str, ...] = (
+    "--mode",
+    V3_07_SEALED_MODE,
+    "--run-id",
+    V3_07_SEALED_RUN_ID,
+    "--config",
+    V3_07_SEALED_CONFIG_PATH,
+    "--quarantine-root",
+    V3_07_SEALED_QUARANTINE_ROOT,
+    "--log-root",
+    V3_07_SEALED_LOG_ROOT,
+    "--stdout-path",
+    V3_07_SEALED_STDOUT_PATH,
+    "--stderr-path",
+    V3_07_SEALED_STDERR_PATH,
+    "--artifact-inventory-path",
+    V3_07_SEALED_ARTIFACT_INVENTORY_PATH,
+    "--checksum-manifest-path",
+    V3_07_SEALED_CHECKSUM_MANIFEST_PATH,
+    "--no-submit",
+)
+
+V3_07_BLOCKED_CLI_FLAGS: tuple[str, ...] = (
+    "--submit-orders",
+    "--paper-order",
+    "--paper-orders",
+    "--live",
+    "--live-order",
+    "--live-orders",
+    "--controlled-submit",
+    "--enable-controlled-submit",
+    "--model-promotion",
+    "--promote-model",
+    "--ppo-rf",
+    "--ppo-random-forest",
+    "--ppo-xgboost",
+    "--xgboost",
+)
+
+
+@dataclass(frozen=True)
+class PPOV2NoSubmitCLICompatibilityResult:
+    """Result from the v3.07 sealed CLI compatibility check.
+
+    This is a source-code compatibility boundary only. It accepts and validates
+    the sealed v3.07 no-submit arguments without performing execution.
+    """
+
+    compatibility_manifest: Mapping[str, Any] | None
+    compatibility_errors: tuple[str, ...]
+    compatibility_metadata: Mapping[str, Any]
+    boundary_decision: str
+
+
+def build_v3_07_no_submit_argument_parser() -> argparse.ArgumentParser:
+    """Build the fail-closed parser for the sealed v3.07 no-submit arguments."""
+
+    parser = argparse.ArgumentParser(
+        prog="python -m src.ppo_v2_controlled_training_execution",
+        add_help=False,
+        allow_abbrev=False,
+        exit_on_error=False,
+        description="Validate sealed v3.07 no-submit PPO v2 CLI compatibility.",
+    )
+    parser.add_argument("--mode")
+    parser.add_argument("--run-id", dest="run_id")
+    parser.add_argument("--config")
+    parser.add_argument("--quarantine-root", dest="quarantine_root")
+    parser.add_argument("--log-root", dest="log_root")
+    parser.add_argument("--stdout-path", dest="stdout_path")
+    parser.add_argument("--stderr-path", dest="stderr_path")
+    parser.add_argument("--artifact-inventory-path", dest="artifact_inventory_path")
+    parser.add_argument("--checksum-manifest-path", dest="checksum_manifest_path")
+    parser.add_argument("--no-submit", action="store_true", default=False)
+    return parser
+
+
+def build_v3_07_no_submit_cli_compatibility(
+    argv: Sequence[str] | None = None,
+) -> PPOV2NoSubmitCLICompatibilityResult:
+    """Validate the sealed v3.07 CLI arguments without executing training."""
+
+    raw_args = tuple(str(arg) for arg in (argv or ()))
+    parser = build_v3_07_no_submit_argument_parser()
+
+    try:
+        namespace, unknown_args = parser.parse_known_args(list(raw_args))
+    except argparse.ArgumentError as exc:
+        return _reject_v3_07_cli(raw_args, (f"sealed CLI arguments are invalid: {exc}",))
+    except SystemExit as exc:
+        return _reject_v3_07_cli(
+            raw_args,
+            (f"sealed CLI arguments are invalid: parser exited with code {exc.code}",),
+        )
+
+    errors: list[str] = []
+
+    blocked_flags = _collect_v3_07_blocked_flags(raw_args)
+    if blocked_flags:
+        errors.append(
+            "blocked order/hybrid/promotion flags are not authorized: "
+            + ", ".join(blocked_flags)
+        )
+
+    if unknown_args:
+        errors.append(
+            "unsupported sealed compatibility arguments: "
+            + ", ".join(str(arg) for arg in unknown_args)
+        )
+
+    if namespace.no_submit is not True:
+        errors.append("--no-submit is required")
+
+    _validate_exact_v3_07_value(errors, "mode", namespace.mode, V3_07_SEALED_MODE)
+    _validate_exact_v3_07_value(
+        errors,
+        "run id",
+        namespace.run_id,
+        V3_07_SEALED_RUN_ID,
+    )
+    _validate_exact_v3_07_value(
+        errors,
+        "config path",
+        namespace.config,
+        V3_07_SEALED_CONFIG_PATH,
+    )
+    _validate_exact_v3_07_value(
+        errors,
+        "quarantine root",
+        namespace.quarantine_root,
+        V3_07_SEALED_QUARANTINE_ROOT,
+    )
+    _validate_exact_v3_07_value(
+        errors,
+        "log root",
+        namespace.log_root,
+        V3_07_SEALED_LOG_ROOT,
+    )
+    _validate_exact_v3_07_value(
+        errors,
+        "stdout path",
+        namespace.stdout_path,
+        V3_07_SEALED_STDOUT_PATH,
+    )
+    _validate_exact_v3_07_value(
+        errors,
+        "stderr path",
+        namespace.stderr_path,
+        V3_07_SEALED_STDERR_PATH,
+    )
+    _validate_exact_v3_07_value(
+        errors,
+        "artifact inventory path",
+        namespace.artifact_inventory_path,
+        V3_07_SEALED_ARTIFACT_INVENTORY_PATH,
+    )
+    _validate_exact_v3_07_value(
+        errors,
+        "checksum manifest path",
+        namespace.checksum_manifest_path,
+        V3_07_SEALED_CHECKSUM_MANIFEST_PATH,
+    )
+
+    path_fields = (
+        ("config path", namespace.config, None),
+        ("quarantine root", namespace.quarantine_root, V3_07_APPROVED_QUARANTINE_ROOT),
+        ("log root", namespace.log_root, V3_07_APPROVED_LOG_ROOT),
+        ("stdout path", namespace.stdout_path, V3_07_SEALED_LOG_ROOT),
+        ("stderr path", namespace.stderr_path, V3_07_SEALED_LOG_ROOT),
+        (
+            "artifact inventory path",
+            namespace.artifact_inventory_path,
+            V3_07_SEALED_QUARANTINE_ROOT,
+        ),
+        (
+            "checksum manifest path",
+            namespace.checksum_manifest_path,
+            V3_07_SEALED_QUARANTINE_ROOT,
+        ),
+    )
+
+    for field_name, value, approved_root in path_fields:
+        _validate_relative_v3_07_path(errors, field_name, value)
+        if approved_root is not None:
+            _validate_v3_07_path_under_root(errors, field_name, value, approved_root)
+
+    if namespace.config == V3_07_SEALED_CONFIG_PATH and not Path(namespace.config).is_file():
+        errors.append("sealed config path must exist in repository")
+
+    if errors:
+        return _reject_v3_07_cli(raw_args, tuple(errors))
+
+    manifest = {
+        "schema_version": "v3.07-source-code-execution-compatibility",
+        "compatibility_scope": "sealed_cli_argument_validation_only",
+        "selected_entrypoint": "src.ppo_v2_controlled_training_execution",
+        "sealed_command_arguments_accepted": True,
+        "source_code_execution_compatibility_check_passed": True,
+        "execution_performed": False,
+        "training_performed": False,
+        "training_authorized": False,
+        "training_command_execution_authorized": False,
+        "ppo_v2_training_execution_authorized": False,
+        "v3_07_execution_authorized": False,
+        "preflight_executed": False,
+        "preflight_passed": False,
+        "execution_ready_proven": False,
+        "data_fetching_authorized": False,
+        "dataset_generation_authorized": False,
+        "dataset_write_authorized": False,
+        "model_artifact_creation_authorized": False,
+        "quarantine_output_creation_authorized": False,
+        "model_promotion_authorized": False,
+        "paper_order_authorized": False,
+        "live_order_authorized": False,
+        "controlled_submit_authorized": False,
+        "ppo_rf_unblocked": False,
+        "ppo_xgboost_unblocked": False,
+        "creates_model_artifacts": False,
+        "creates_quarantine_outputs": False,
+        "writes_stdout_path": False,
+        "writes_stderr_path": False,
+        "writes_artifact_inventory_path": False,
+        "writes_checksum_manifest_path": False,
+        "no_submit_required": True,
+        "no_submit_present": True,
+        "run_id": namespace.run_id,
+        "config_path": namespace.config,
+        "quarantine_root": namespace.quarantine_root,
+        "log_root": namespace.log_root,
+        "stdout_path": namespace.stdout_path,
+        "stderr_path": namespace.stderr_path,
+        "artifact_inventory_path": namespace.artifact_inventory_path,
+        "checksum_manifest_path": namespace.checksum_manifest_path,
+        "next_required_review": "independent v3.07 source-code compatibility review",
+    }
+
+    return PPOV2NoSubmitCLICompatibilityResult(
+        compatibility_manifest=manifest,
+        compatibility_errors=(),
+        compatibility_metadata=_build_v3_07_cli_metadata(raw_args),
+        boundary_decision=PASS_DECISION,
+    )
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """CLI entry point for v3.07 sealed argument compatibility only."""
+
+    result = build_v3_07_no_submit_cli_compatibility(
+        sys.argv[1:] if argv is None else argv
+    )
+    return 0 if result.boundary_decision == PASS_DECISION else 2
+
+
+def _reject_v3_07_cli(
+    raw_args: tuple[str, ...],
+    errors: tuple[str, ...],
+) -> PPOV2NoSubmitCLICompatibilityResult:
+    return PPOV2NoSubmitCLICompatibilityResult(
+        compatibility_manifest=None,
+        compatibility_errors=errors,
+        compatibility_metadata=_build_v3_07_cli_metadata(raw_args),
+        boundary_decision=REJECTED_FAIL_CLOSED_DECISION,
+    )
+
+
+def _build_v3_07_cli_metadata(raw_args: tuple[str, ...]) -> Mapping[str, Any]:
+    return {
+        "checkpoint": "v3.07_source_code_execution_compatibility",
+        "scope": "sealed_cli_argument_validation_only",
+        "argument_count": len(raw_args),
+        "execution_performed": False,
+        "training_performed": False,
+        "training_authorized": False,
+        "training_command_execution_authorized": False,
+        "ppo_v2_training_execution_authorized": False,
+        "data_fetching_authorized": False,
+        "dataset_generation_authorized": False,
+        "model_artifact_creation_authorized": False,
+        "quarantine_output_creation_authorized": False,
+        "model_promotion_authorized": False,
+        "paper_order_authorized": False,
+        "live_order_authorized": False,
+        "controlled_submit_authorized": False,
+        "ppo_rf_unblocked": False,
+        "ppo_xgboost_unblocked": False,
+        "no_submit_default": True,
+    }
+
+
+def _validate_exact_v3_07_value(
+    errors: list[str],
+    field_name: str,
+    value: object,
+    expected_value: str,
+) -> None:
+    if _is_blank_string(value):
+        errors.append(f"{field_name} must be provided")
+        return
+
+    if str(value) != expected_value:
+        errors.append(f"{field_name} must match sealed v3.07 {field_name}")
+
+
+def _validate_relative_v3_07_path(
+    errors: list[str],
+    field_name: str,
+    value: object,
+) -> None:
+    if _is_blank_string(value):
+        return
+
+    path = PurePosixPath(str(value))
+    if path.is_absolute():
+        errors.append(f"{field_name} must remain relative")
+
+    if ".." in path.parts:
+        errors.append(f"{field_name} must not contain path traversal")
+
+
+def _validate_v3_07_path_under_root(
+    errors: list[str],
+    field_name: str,
+    value: object,
+    approved_root: str,
+) -> None:
+    if _is_blank_string(value):
+        return
+
+    path_parts = PurePosixPath(str(value)).parts
+    root_parts = PurePosixPath(approved_root).parts
+
+    if path_parts[: len(root_parts)] != root_parts:
+        errors.append(f"{field_name} must remain under {approved_root}")
+
+
+def _collect_v3_07_blocked_flags(raw_args: tuple[str, ...]) -> tuple[str, ...]:
+    blocked: list[str] = []
+
+    for arg in raw_args:
+        for flag in V3_07_BLOCKED_CLI_FLAGS:
+            if arg == flag or arg.startswith(flag + "="):
+                blocked.append(flag)
+
+    return tuple(dict.fromkeys(blocked))
+
 __all__ = [
     "ALLOWED_CONTROLLED_EXECUTION_SCAFFOLD_MODES",
+    "V3_07_SEALED_CLI_ARGUMENTS",
+    "V3_07_SEALED_RUN_ID",
+    "V3_07_SEALED_CONFIG_PATH",
+    "V3_07_SEALED_QUARANTINE_ROOT",
+    "V3_07_SEALED_LOG_ROOT",
+    "V3_07_SEALED_STDOUT_PATH",
+    "V3_07_SEALED_STDERR_PATH",
+    "V3_07_SEALED_ARTIFACT_INVENTORY_PATH",
+    "V3_07_SEALED_CHECKSUM_MANIFEST_PATH",
     "REQUIRED_HISTORICAL_VALIDATION_PROTECTIONS",
     "PPOV2ControlledTrainingExecutionRequest",
     "PPOV2ControlledTrainingExecutionResult",
+    "PPOV2NoSubmitCLICompatibilityResult",
     "build_ppo_v2_controlled_training_execution",
+    "build_v3_07_no_submit_argument_parser",
+    "build_v3_07_no_submit_cli_compatibility",
+    "main",
 ]
+
+
+if __name__ == "__main__":
+    sys.exit(main())

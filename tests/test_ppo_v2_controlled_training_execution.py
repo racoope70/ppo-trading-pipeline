@@ -6,9 +6,19 @@ import pandas as pd
 import pytest
 
 from src.ppo_v2_controlled_training_execution import (
+    V3_07_SEALED_CLI_ARGUMENTS,
+    V3_07_SEALED_CONFIG_PATH,
+    V3_07_SEALED_QUARANTINE_ROOT,
+    V3_07_SEALED_LOG_ROOT,
+    V3_07_SEALED_STDOUT_PATH,
+    V3_07_SEALED_STDERR_PATH,
+    V3_07_SEALED_ARTIFACT_INVENTORY_PATH,
+    V3_07_SEALED_CHECKSUM_MANIFEST_PATH,
     REQUIRED_HISTORICAL_VALIDATION_PROTECTIONS,
     PPOV2ControlledTrainingExecutionRequest,
     build_ppo_v2_controlled_training_execution,
+    build_v3_07_no_submit_cli_compatibility,
+    main as ppo_v2_execution_main,
 )
 from src.ppo_v2_controlled_training_execution_dry_run import (
     PPOV2ControlledTrainingExecutionDryRunRequest,
@@ -447,3 +457,203 @@ def test_controlled_training_execution_source_boundary_scan_has_no_execution_hoo
     ]
 
     assert matches == []
+
+
+def _sealed_cli_args():
+    return list(V3_07_SEALED_CLI_ARGUMENTS)
+
+
+def _replace_cli_value(args, flag, value):
+    updated = list(args)
+    index = updated.index(flag)
+    updated[index + 1] = value
+    return updated
+
+
+def test_v3_07_sealed_cli_arguments_are_accepted_without_execution():
+    result = build_v3_07_no_submit_cli_compatibility(_sealed_cli_args())
+
+    assert result.boundary_decision == "PASS"
+    assert result.compatibility_errors == ()
+    assert result.compatibility_manifest is not None
+    assert result.compatibility_manifest["sealed_command_arguments_accepted"] is True
+    assert result.compatibility_manifest["source_code_execution_compatibility_check_passed"] is True
+    assert result.compatibility_manifest["execution_performed"] is False
+    assert result.compatibility_manifest["training_performed"] is False
+    assert result.compatibility_manifest["training_authorized"] is False
+    assert result.compatibility_manifest["training_command_execution_authorized"] is False
+    assert result.compatibility_manifest["ppo_v2_training_execution_authorized"] is False
+    assert result.compatibility_manifest["v3_07_execution_authorized"] is False
+    assert result.compatibility_manifest["preflight_executed"] is False
+    assert result.compatibility_manifest["preflight_passed"] is False
+    assert result.compatibility_manifest["execution_ready_proven"] is False
+    assert result.compatibility_manifest["data_fetching_authorized"] is False
+    assert result.compatibility_manifest["dataset_generation_authorized"] is False
+    assert result.compatibility_manifest["model_artifact_creation_authorized"] is False
+    assert result.compatibility_manifest["quarantine_output_creation_authorized"] is False
+    assert result.compatibility_manifest["paper_order_authorized"] is False
+    assert result.compatibility_manifest["live_order_authorized"] is False
+    assert result.compatibility_manifest["controlled_submit_authorized"] is False
+    assert result.compatibility_manifest["ppo_rf_unblocked"] is False
+    assert result.compatibility_manifest["ppo_xgboost_unblocked"] is False
+
+
+def test_v3_07_cli_entrypoint_accepts_sealed_arguments_without_running_training():
+    assert ppo_v2_execution_main(_sealed_cli_args()) == 0
+
+
+def test_v3_07_cli_missing_no_submit_fails_closed():
+    args = [arg for arg in _sealed_cli_args() if arg != "--no-submit"]
+
+    result = build_v3_07_no_submit_cli_compatibility(args)
+
+    _assert_failed_with_cli(result, "--no-submit is required")
+
+
+def test_v3_07_cli_wrong_run_id_fails_closed():
+    args = _replace_cli_value(_sealed_cli_args(), "--run-id", "wrong_run_id")
+
+    result = build_v3_07_no_submit_cli_compatibility(args)
+
+    _assert_failed_with_cli(result, "run id must match sealed v3.07 run id")
+
+
+def test_v3_07_cli_wrong_config_path_fails_closed():
+    args = _replace_cli_value(_sealed_cli_args(), "--config", "config/wrong.yaml")
+
+    result = build_v3_07_no_submit_cli_compatibility(args)
+
+    _assert_failed_with_cli(result, "config path must match sealed v3.07 config path")
+
+
+@pytest.mark.parametrize(
+    ("flag", "unsafe_value", "expected_error"),
+    [
+        (
+            "--quarantine-root",
+            "/tmp/ppo_v2/quarantine/run",
+            "quarantine root must remain relative",
+        ),
+        (
+            "--quarantine-root",
+            "../artifacts/ppo_v2/quarantine/run",
+            "quarantine root must not contain path traversal",
+        ),
+        (
+            "--log-root",
+            "/tmp/ppo_v2/logs/run",
+            "log root must remain relative",
+        ),
+        (
+            "--log-root",
+            "../artifacts/ppo_v2/logs/run",
+            "log root must not contain path traversal",
+        ),
+    ],
+)
+def test_v3_07_cli_unsafe_quarantine_or_log_paths_fail_closed(
+    flag,
+    unsafe_value,
+    expected_error,
+):
+    args = _replace_cli_value(_sealed_cli_args(), flag, unsafe_value)
+
+    result = build_v3_07_no_submit_cli_compatibility(args)
+
+    _assert_failed_with_cli(result, expected_error)
+
+
+@pytest.mark.parametrize(
+    "flag",
+    [
+        "--paper-orders",
+        "--live-orders",
+        "--controlled-submit",
+        "--model-promotion",
+        "--ppo-rf",
+        "--ppo-xgboost",
+    ],
+)
+def test_v3_07_cli_blocked_order_hybrid_promotion_flags_fail_closed(flag):
+    result = build_v3_07_no_submit_cli_compatibility([*_sealed_cli_args(), flag])
+
+    assert result.boundary_decision == "REJECTED_FAIL_CLOSED"
+    assert result.compatibility_manifest is None
+    assert any(flag in error and "not authorized" in error for error in result.compatibility_errors)
+
+
+def test_v3_07_cli_compatibility_mode_does_not_train():
+    result = build_v3_07_no_submit_cli_compatibility(_sealed_cli_args())
+
+    assert result.boundary_decision == "PASS"
+    assert result.compatibility_manifest["execution_performed"] is False
+    assert result.compatibility_manifest["training_performed"] is False
+    assert result.compatibility_manifest["training_authorized"] is False
+    assert result.compatibility_manifest["training_command_execution_authorized"] is False
+
+
+def test_v3_07_cli_compatibility_mode_does_not_create_artifacts_or_quarantine_outputs():
+    result = build_v3_07_no_submit_cli_compatibility(_sealed_cli_args())
+
+    assert result.boundary_decision == "PASS"
+    assert result.compatibility_manifest["model_artifact_creation_authorized"] is False
+    assert result.compatibility_manifest["quarantine_output_creation_authorized"] is False
+    assert result.compatibility_manifest["creates_model_artifacts"] is False
+    assert result.compatibility_manifest["creates_quarantine_outputs"] is False
+    assert result.compatibility_manifest["writes_stdout_path"] is False
+    assert result.compatibility_manifest["writes_stderr_path"] is False
+    assert result.compatibility_manifest["writes_artifact_inventory_path"] is False
+    assert result.compatibility_manifest["writes_checksum_manifest_path"] is False
+    assert result.compatibility_manifest["stdout_path"] == V3_07_SEALED_STDOUT_PATH
+    assert result.compatibility_manifest["stderr_path"] == V3_07_SEALED_STDERR_PATH
+    assert (
+        result.compatibility_manifest["artifact_inventory_path"]
+        == V3_07_SEALED_ARTIFACT_INVENTORY_PATH
+    )
+    assert (
+        result.compatibility_manifest["checksum_manifest_path"]
+        == V3_07_SEALED_CHECKSUM_MANIFEST_PATH
+    )
+
+
+def test_v3_07_cli_compatibility_manifest_preserves_sealed_paths():
+    result = build_v3_07_no_submit_cli_compatibility(_sealed_cli_args())
+
+    assert result.boundary_decision == "PASS"
+    assert result.compatibility_manifest["config_path"] == V3_07_SEALED_CONFIG_PATH
+    assert result.compatibility_manifest["quarantine_root"] == V3_07_SEALED_QUARANTINE_ROOT
+    assert result.compatibility_manifest["log_root"] == V3_07_SEALED_LOG_ROOT
+
+
+def test_v3_07_cli_compatibility_source_has_no_training_or_file_output_hooks():
+    source = Path("src/ppo_v2_controlled_training_execution.py").read_text(
+        encoding="utf-8"
+    )
+    forbidden_patterns = [
+        r"\.learn\(",
+        r"\.fit\(",
+        r"\.save\(",
+        r"open\(",
+        r"\.write\(",
+        r"write_text",
+        r"mkdir",
+        r"joblib\.dump",
+        r"torch\.save",
+        r"pickle\.dump",
+        r"\.to_csv",
+        r"\.to_parquet",
+    ]
+
+    matches = [
+        pattern
+        for pattern in forbidden_patterns
+        if re.search(pattern, source)
+    ]
+
+    assert matches == []
+
+
+def _assert_failed_with_cli(result, expected_error):
+    assert result.boundary_decision == "REJECTED_FAIL_CLOSED"
+    assert result.compatibility_manifest is None
+    assert expected_error in result.compatibility_errors
