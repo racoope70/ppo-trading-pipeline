@@ -9,17 +9,25 @@ This file is a navigation map only. It does not authorize work, execution, data 
 Current controlling state:
 
 ```txt
-latest_completed_milestone = v3.07 Sealed No-Submit Training Execution Package Preparation
-latest_completed_decision = PACKAGE_PREPARATION_ONLY_NOT_AUTHORIZATION
-active_milestone = v3.07 Independent Package Authorization Review
-next_checkpoint = independent v3.07 package authorization review
+latest_completed_milestone = v3.07 Independent Package Authorization Review
+latest_completed_decision = FAIL
+active_milestone = v3.07 Source-Code Execution Compatibility Checkpoint
+next_checkpoint = v3.07 source-code execution compatibility checkpoint
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
+training_command_execution = NOT_AUTHORIZED
+data_fetching = NOT_AUTHORIZED
+dataset_generation = NOT_AUTHORIZED
+model_artifact_creation = NOT_AUTHORIZED
+quarantine_output_creation = NOT_AUTHORIZED
 paper_order_authorization = NOT_AUTHORIZED
 live_order_authorization = NOT_AUTHORIZED
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
 controlled_submit = BLOCKED
 ppo_rf_deployment_decision = BLOCKED
 ppo_xgboost_deployment_decision = BLOCKED
+legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
 ppo_v2_training_execution = NOT_AUTHORIZED
 ```
 
@@ -29,82 +37,80 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 
 ## Current Active Review Path
 
-### v3.06 — Remediation Review / Post-Remediation Audit
+### v3.07 — Source-Code Execution Compatibility Checkpoint
 
 **Use when reviewing**
 
-* the v3.06 independent audit `FAIL` decision
-* remediation implementation closeout for blocking findings B1-B5
-* paper-trading workflow authorization conflicts
-* README training/data-command ambiguity
-* PPO v2 quarantine/log ignore-policy gaps
-* missing-bar coverage implementation/testing gaps
-* tracked package-preparation artifact policy ambiguity
-* H1 future no-submit command-boundary cleanup
-* whether v3.07 remains blocked after remediation implementation closeout
+* failed v3.07 independent package authorization review
+* source-code execution compatibility for the selected sealed command
+* command-argument compatibility for the v3.07 sealed command
+* whether `src/ppo_v2_controlled_training_execution.py` remains non-executing
+* whether the selected entrypoint can connect to a reviewed executable no-submit PPO v2 training path
+* whether preflight requirements remain future-only or have passing evidence
+* whether the sealed local input dataset is proven available and validated
+* whether v3.07 remains blocked after package authorization failure
 
 **Review first**
 
 ```txt
 PROJECT_CONTEXT.md
-docs/audits/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
-docs/runs/v3.06_ppo_v2_independent_full_system_pre_retraining_audit.md
 docs/workflows/milestone_review_reference_map.md
-docs/runs/v3.06_remediation_completion_record.md
-docs/runs/v3.06_remediation_review_follow_up_evidence.md
-docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md
-docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md
-docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
-docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
+docs/audits/v3.07_independent_package_authorization_review.md
+docs/runs/v3.07_independent_package_authorization_review.md
 docs/runs/v3.07_no_submit_training_execution_package_preparation.md
 artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/
+docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
+docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
+docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md
+docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md
 ```
 
 **Then review remediation target files as needed**
 
 ```txt
-README.md
-.gitignore
-docs/workflows/paper_trading_session_policy.md
-docs/workflows/signal_persistence_candidate_stability_policy.md
-docs/workflows/submit_mode_preflight.md
-docs/workflows/stale_plan_prevention.md
-docs/workflows/single_order_submit_guard.md
-docs/workflows/paper_trading_operational_reporting_runbook.md
-docs/specifications/v1.72_ppo_v2_controlled_retraining_data_contract_and_split_specification.md
-src/ppo_v2_data_contract.py
-tests/test_ppo_v2_data_contract.py
-artifacts/ppo_v2/package_preparation/
-docs/runs/v2.16_ppo_v2_controlled_training_execution_package_preparation_checkpoint.md
-src/ppo_v2_one_time_controlled_execution_package.py
-src/ppo_v2_controlled_training_package_preparation.py
+src/ppo_v2_controlled_training_execution.py
 src/ppo_v2_controlled_training_execution_wrapper.py
+src/train.py
+artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/commands/one_time_no_submit_training_command.txt
+artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/config/v3_07_no_submit_training_config.yaml
+artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/manifests/preflight_validation_manifest.md
+artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/manifests/non_authorization_boundary_manifest.md
 ```
 
 **v3.06 remediation implementation closeout**
 
 ```txt
 v3_06_remediation_implementation_record = COMPLETED
-v3_06_remediation_completion_record = docs/runs/v3.06_remediation_completion_record.md
-v3_06_remediation_completion_tag = v3.06-remediation-completion-record
-v3_06_remediation_completion_commit = 115629c5edcb6d294c846f57a01de8c063878c5b
 v3_06_independent_remediation_review = PASS
 v3_06_post_remediation_audit = PASS
-v3_07_authorization_review = FAIL
-v3_07_authorization_review_audit_record = docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
-v3_07_authorization_review_run_record = docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
-v3_07_authorization_review_commit = 703cfd9
+v3_07_initial_authorization_review = FAIL
+v3_07_initial_authorization_review_audit_record = docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md
+v3_07_initial_authorization_review_run_record = docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md
 v3_07_package_preparation_record = docs/runs/v3.07_no_submit_training_execution_package_preparation.md
 v3_07_package_preparation_root = artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/
 v3_07_package_preparation_commit = ebc38047dd4c0ad1642a9d7feb5e330b5a243c33
-v3_07_package_preparation_ci = Tests #328 green on commit ebc3804
-v3_06_remediation_review_follow_up_evidence = docs/runs/v3.06_remediation_review_follow_up_evidence.md
-v3_06_remediation_review_follow_up_commit = d00d8fff076c70385fc5a6303b18493be267a199
+v3_07_independent_package_authorization_review = FAIL
+v3_07_independent_package_authorization_review_audit_record = docs/audits/v3.07_independent_package_authorization_review.md
+v3_07_independent_package_authorization_review_run_record = docs/runs/v3.07_independent_package_authorization_review.md
+v3_07_independent_package_authorization_review_commit = 4b32e4d35ba4e55a47555eab15e7e851c23649b3
+v3_07_source_code_execution_compatibility_checkpoint = REQUIRED
 v3.07_status = BLOCKED
 ppo_v2_training_execution = NOT_AUTHORIZED
+training_command_execution = NOT_AUTHORIZED
+data_fetching = NOT_AUTHORIZED
+dataset_generation = NOT_AUTHORIZED
+model_artifact_creation = NOT_AUTHORIZED
+quarantine_output_creation = NOT_AUTHORIZED
+paper_order_authorization = NOT_AUTHORIZED
+live_order_authorization = NOT_AUTHORIZED
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+controlled_submit = BLOCKED
+ppo_rf = BLOCKED
+ppo_xgboost = BLOCKED
 ```
 
-The completion record is an implementation closeout record only. The failed-audit cleanup evidence record documents the follow-up cleanup for M1 stale test-count, README current-stage drift, and exact command-level evidence. The passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`. The failed v3.07 authorization review is documented in `docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md` and `docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md`. The v3.07 package-preparation record now exists at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md` with package root `artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/`. The package-preparation record is not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, quarantine output creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost. The next checkpoint is an independent v3.07 package authorization review.
+The v3.06 remediation review / post-remediation audit passed, making the repository eligible for separate v3.07 consideration but not authorizing v3.07 execution. The initial v3.07 authorization review failed. A materially more complete v3.07 static no-submit package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review also failed. It found that the selected command still points to a non-executing scaffold, the sealed command arguments are not implemented by the target module, preflight evidence has not passed, the package itself says B3/B5 are not fully resolved, the package remains static preparation only / do-not-run, and the sealed local input dataset is not proven available or validated. The next checkpoint is a v3.07 source-code execution compatibility checkpoint. This is not authorization for PPO v2 training, data fetching, dataset generation, model artifact creation, quarantine output creation, paper orders, live orders, controlled submit, PPO + RF, or PPO + XGBoost.
 
 **M/L cleanup note**
 
@@ -164,7 +170,7 @@ NO_SUBMIT = DEFAULT
 
 **Then move to**
 
-Move to an independent v3.07 package authorization review of the completed package-preparation record. The package-preparation record must not be treated as authorization to run training. Until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training, remain blocked for training, data fetching, dataset generation, model artifacts, quarantine outputs, paper/live orders, controlled submit, and hybrid models.
+Move to a v3.07 Source-Code Execution Compatibility Checkpoint. This checkpoint may review whether the selected sealed command can connect to a reviewed executable no-submit PPO v2 training entrypoint and whether the sealed CLI arguments are accepted. It must not run training, fetch data, generate datasets, create model artifacts, create quarantine outputs, submit paper/live orders, authorize controlled submit, authorize PPO + RF/XGBoost, or mark v3.07 as authorized.
 
 ---
 
@@ -179,16 +185,17 @@ v3.06 = independent full-system pre-retraining audit completed, FAIL
 v3.06 remediation implementation closeout = completed
 v3.06 remediation completion record = completed and tagged
 v3.06 independent remediation review / post-remediation audit rerun = PASS
-v3.07 authorization review = FAIL — do not authorize training
-v3.07 sealed no-submit training execution package preparation = completed
-v3.07 independent package authorization review = next required checkpoint
+v3.07 initial authorization review = FAIL — do not authorize training
+v3.07 sealed no-submit training execution package preparation = completed as static package-preparation only
+v3.07 independent package authorization review = FAIL — do not authorize training
+v3.07 source-code execution compatibility checkpoint = next required checkpoint
 v3.07 execution = BLOCKED until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training
 v3.08 = post-run audit of generated PPO v2 evidence; future only and only after v3.07 is authorized/completed
 v3.09 = validation report generation from real evidence; future only
 v3.10 = PPO v2 model evidence decision; future only
 ```
 
-v3.07 execution is not active. The completed v3.07 package-preparation record may be reviewed by an independent v3.07 package authorization review. Any future authorization must remain one-time, no-submit, explicitly authorized, and quarantined. It must not imply paper orders, live orders, controlled submit, model promotion, PPO + RF, or PPO + XGBoost.
+v3.07 execution is not active. The v3.07 package-preparation record exists, but the independent package authorization review failed. The next checkpoint is source-code execution compatibility review only. Any future authorization must remain one-time, no-submit, explicitly authorized, and quarantined. It must not imply paper orders, live orders, controlled submit, model promotion, PPO + RF, or PPO + XGBoost.
 
 ---
 
