@@ -78,22 +78,26 @@ The repository completed the v3.06 independent full-system pre-retraining audit 
 
 ## v3.06 Audit Result
 
+The following block is a historical snapshot from the v3.06 PASS checkpoint. It is preserved for audit traceability only and does not override the current source-of-truth summary in Section 1.
+
 ```txt
-latest_completed_milestone = v3.06 Remediation Review / Post-Remediation Audit Rerun
-latest_completed_decision = PASS
-latest_completed_audit_tag = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
-latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
-latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
-latest_successful_sealed_readiness_commit_short = c9f2c71
-active_milestone = v3.07 Consideration / Authorization Review
-next_checkpoint = separate v3.07 consideration / authorization review
-v3.07_status = BLOCKED
-ppo_v2_training_execution = NOT_AUTHORIZED
-paper_order_authorization = NOT_AUTHORIZED
-live_order_authorization = NOT_AUTHORIZED
-controlled_submit = BLOCKED
-ppo_rf = BLOCKED
-ppo_xgboost = BLOCKED
+historical_snapshot = v3.06 Remediation Review / Post-Remediation Audit Rerun
+historical_snapshot_scope = preserved audit state at v3.06 PASS
+latest_completed_milestone_at_snapshot = v3.06 Remediation Review / Post-Remediation Audit Rerun
+latest_completed_decision_at_snapshot = PASS
+latest_completed_audit_tag_at_snapshot = v3.06-ppo-v2-independent-full-system-pre-retraining-audit-fail
+latest_successful_sealed_readiness_tag_at_snapshot = v3.05-ppo-v2-no-submit-training-package-readiness-review
+latest_successful_sealed_readiness_commit_at_snapshot = c9f2c71292a82ee5d528ab179a17792dbff4f477
+latest_successful_sealed_readiness_commit_short_at_snapshot = c9f2c71
+active_milestone_at_snapshot = v3.07 Consideration / Authorization Review
+next_checkpoint_at_snapshot = separate v3.07 consideration / authorization review
+v3.07_status_at_snapshot = BLOCKED
+ppo_v2_training_execution_at_snapshot = NOT_AUTHORIZED
+paper_order_authorization_at_snapshot = NOT_AUTHORIZED
+live_order_authorization_at_snapshot = NOT_AUTHORIZED
+controlled_submit_at_snapshot = BLOCKED
+ppo_rf_at_snapshot = BLOCKED
+ppo_xgboost_at_snapshot = BLOCKED
 ```
 
 The v3.06 independent full-system pre-retraining audit completed with a `FAIL` decision.
