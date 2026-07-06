@@ -11,18 +11,18 @@ Before modifying training logic, validation methodology, deployment workflows, a
 ## 1. Current Source-of-Truth Summary
 
 ```txt
-latest_completed_milestone = v3.07 Independent Source-Code Compatibility Review
-latest_completed_decision = PASS_SOURCE_CODE_COMPATIBILITY_ONLY
+latest_completed_milestone = v3.07 Sealed Preflight Readiness Scaffold Review
+latest_completed_decision = PASS_SCAFFOLD_ONLY
 latest_completed_audit_tag = NOT_TAGGED
-latest_completed_audit_record = docs/audits/v3.07_independent_source_code_compatibility_review.md
-latest_completed_run_record = docs/runs/v3.07_independent_source_code_compatibility_review.md
+latest_completed_audit_record = docs/audits/v3.07_sealed_preflight_readiness_scaffold_review.md
+latest_completed_run_record = docs/runs/v3.07_sealed_preflight_readiness_scaffold_review.md
 latest_successful_sealed_readiness_tag = v3.05-ppo-v2-no-submit-training-package-readiness-review
 latest_successful_sealed_readiness_commit = c9f2c71292a82ee5d528ab179a17792dbff4f477
 latest_successful_sealed_readiness_commit_short = c9f2c71
-active_milestone = v3.07 Sealed Authorization / Preflight Readiness Review
-next_checkpoint = sealed v3.07 authorization/preflight readiness review required before any execution can be considered
+active_milestone = v3.07 Sealed Preflight Evidence Remediation Review
+next_checkpoint = sealed preflight evidence remediation review before any validation-only preflight can be considered
 current_workstream = PPO_V2_VALIDATION_READINESS
-current_phase = v3.07 source-code compatibility review passed; sealed authorization/preflight readiness review required before any execution can be considered
+current_phase = scaffold reviewed and accepted for scaffold-only safety; R1-R6 evidence remains absent
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 training_command_execution = NOT_AUTHORIZED
@@ -81,11 +81,25 @@ v3_07_independent_source_code_compatibility_review_audit_record = docs/audits/v3
 v3_07_independent_source_code_compatibility_review_run_record = docs/runs/v3.07_independent_source_code_compatibility_review.md
 v3_07_independent_source_code_compatibility_review_commit = 3e71623
 v3_07_independent_source_code_compatibility_review_ci = Tests #335 green
-v3_07_authorization_preflight_readiness_review = NEXT_REQUIRED_CHECKPOINT
-latest_ci_evidence = Tests #335 green on source-code compatibility review pass commit 3e71623
+v3_07_authorization_preflight_readiness_review = FAIL_READINESS
+v3_07_sealed_preflight_evidence_remediation_plan = RECORDED
+v3_07_sealed_preflight_evidence_remediation_plan_commit = 1b3a7fc
+preflight_evidence_remediation_plan_commit = 1b3a7fc
+v3_07_sealed_preflight_readiness_scaffold = IMPLEMENTED_FOR_REVIEW
+v3_07_sealed_preflight_readiness_scaffold_commit = bc3bf9c
+preflight_readiness_scaffold_commit = bc3bf9c
+v3_07_sealed_preflight_readiness_scaffold_review = PASS_SCAFFOLD_ONLY
+v3_07_sealed_preflight_readiness_scaffold_review_audit_record = docs/audits/v3.07_sealed_preflight_readiness_scaffold_review.md
+v3_07_sealed_preflight_readiness_scaffold_review_run_record = docs/runs/v3.07_sealed_preflight_readiness_scaffold_review.md
+v3_07_sealed_preflight_readiness_scaffold_review_commit = 59167c0
+preflight_scaffold_review_commit = 59167c0
+v3_07_preflight_blocker_typo_fix_commit = f7e8cbc
+preflight_blocker_typo_fix_commit = f7e8cbc
+v3_07_sealed_preflight_evidence_remediation_review = NEXT_REQUIRED_CHECKPOINT
+latest_ci_evidence = Tests #341 green on preflight blocker typo fix commit f7e8cbc
 ```
 
-The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision, then completed remediation and a post-remediation audit rerun with a `PASS` decision. A separate v3.07 No-Submit PPO v2 Training Authorization Review was completed with a `FAIL` decision. A corrective v3.07 static package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review then failed. The v3.07 source-code execution compatibility checkpoint was completed for independent review, and the independent v3.07 source-code compatibility review then passed for source-code compatibility only. This narrow PASS accepts the source-code/CLI compatibility remediation for the sealed command target and resolves the command-target/CLI argument compatibility blocker. It does not authorize v3.07 execution, does not authorize PPO v2 training, does not authorize training command execution, does not prove preflight passed, does not prove sealed dataset availability or validation, does not authorize data fetching, does not authorize dataset generation, does not authorize model artifact creation, does not authorize quarantine output creation, does not authorize paper/live orders, does not authorize controlled submit, and does not authorize PPO + RF or PPO + XGBoost. v3.07 remains blocked. The next checkpoint is a sealed v3.07 authorization/preflight readiness review required before any execution can be considered. Only a later sealed checkpoint may authorize one-time no-submit PPO v2 training.
+The repository completed the v3.06 independent full-system pre-retraining audit with a `FAIL` decision, then completed remediation and a post-remediation audit rerun with a `PASS` decision. A separate v3.07 No-Submit PPO v2 Training Authorization Review was completed with a `FAIL` decision. A corrective v3.07 static package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review then failed. The v3.07 source-code execution compatibility checkpoint was completed for independent review, and the independent v3.07 source-code compatibility review then passed for source-code compatibility only. The sealed authorization/preflight readiness review then failed because R1-R6 evidence was absent. A documentation-only remediation plan was recorded, a validation-only preflight readiness scaffold was implemented, and an independent scaffold review passed with `PASS_SCAFFOLD_ONLY`. The non-blocking R1 preflight blocker constant typo was fixed afterward. The scaffold pass is not a readiness pass: R1-R6 evidence remains absent, preflight has not executed, the sealed dataset has not been read or validated, v3.07 remains blocked, and PPO v2 training and training command execution remain not authorized. The next checkpoint is `v3.07 Sealed Preflight Evidence Remediation Review`. Only after that review may the repository consider whether to proceed to an explicitly authorized validation-only preflight. Even validation-only preflight must not authorize PPO v2 training or execute the sealed training command.
 
 ## v3.06 Audit Result
 
@@ -131,9 +145,9 @@ This is important because `PROJECT_CONTEXT.md` is the controlling source of trut
 
 ---
 
-## 2. Active Milestone: v3.07 Sealed Authorization / Preflight Readiness Review
+## 2. Active Milestone: v3.07 Sealed Preflight Evidence Remediation Review
 
-v3.06 remediation implementation closeout has been completed and accepted, the initial v3.07 authorization review failed, the v3.07 static package-preparation record was completed, the independent v3.07 package authorization review failed, the v3.07 source-code execution compatibility checkpoint was completed for independent review, and the independent v3.07 source-code compatibility review passed for source-code compatibility only. The next workstream is a sealed v3.07 Authorization / Preflight Readiness Review. This review is not training. It must determine whether all remaining sealed authorization/preflight readiness requirements exist and pass before any one-time no-submit PPO v2 training could be considered by a later sealed authorization checkpoint.
+v3.06 remediation implementation closeout has been completed and accepted, the initial v3.07 authorization review failed, the v3.07 static package-preparation record was completed, the independent v3.07 package authorization review failed, the v3.07 source-code execution compatibility checkpoint was completed for independent review, and the independent v3.07 source-code compatibility review passed for source-code compatibility only. The sealed v3.07 authorization/preflight readiness review then failed because R1-R6 evidence was absent. The repository recorded a documentation-only sealed preflight evidence remediation plan, implemented a validation-only preflight readiness scaffold, and recorded an independent scaffold review with `PASS_SCAFFOLD_ONLY`. The scaffold pass means only that the Phase 2 scaffold safely implements a validation-only, fail-closed structure for future R1-R6 evidence review. It does not mean readiness passed, preflight executed, preflight passed, the sealed dataset was read or validated, v3.07 was authorized, PPO v2 training was authorized, or training command execution was authorized.
 
 This closeout is documented in:
 
@@ -145,7 +159,7 @@ failed_audit_cleanup_evidence = docs/runs/v3.06_remediation_review_follow_up_evi
 failed_audit_cleanup_commit = d00d8fff076c70385fc5a6303b18493be267a199
 ```
 
-The closeout record and v3.06 remediation PASS are not authorization for v3.07 execution. The failed-audit cleanup follow-up is documented in `docs/runs/v3.06_remediation_review_follow_up_evidence.md`, the passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`, the initial failed v3.07 authorization review is documented in `docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md` and `docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md`, the v3.07 package-preparation record is documented in `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`, the failed independent package authorization review is documented in `docs/audits/v3.07_independent_package_authorization_review.md` and `docs/runs/v3.07_independent_package_authorization_review.md`, the source-code execution compatibility checkpoint is documented in `docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md`, and the narrow source-code compatibility review PASS is documented in `docs/audits/v3.07_independent_source_code_compatibility_review.md` and `docs/runs/v3.07_independent_source_code_compatibility_review.md`. The next required checkpoint is the sealed v3.07 authorization/preflight readiness review required before any execution can be considered.
+The closeout record and v3.06 remediation PASS are not authorization for v3.07 execution. The failed-audit cleanup follow-up is documented in `docs/runs/v3.06_remediation_review_follow_up_evidence.md`, the passing post-remediation audit rerun is documented in `docs/audits/v3.06_remediation_review_post_remediation_audit_pass.md` and `docs/runs/v3.06_remediation_review_post_remediation_audit_pass.md`, the initial failed v3.07 authorization review is documented in `docs/audits/v3.07_no_submit_ppo_v2_training_authorization_review.md` and `docs/runs/v3.07_no_submit_ppo_v2_training_authorization_review.md`, the v3.07 package-preparation record is documented in `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`, the failed independent package authorization review is documented in `docs/audits/v3.07_independent_package_authorization_review.md` and `docs/runs/v3.07_independent_package_authorization_review.md`, the source-code execution compatibility checkpoint is documented in `docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md`, the narrow source-code compatibility review PASS is documented in `docs/audits/v3.07_independent_source_code_compatibility_review.md` and `docs/runs/v3.07_independent_source_code_compatibility_review.md`, and the scaffold-only review PASS is documented in `docs/audits/v3.07_sealed_preflight_readiness_scaffold_review.md` and `docs/runs/v3.07_sealed_preflight_readiness_scaffold_review.md`. The next required checkpoint is `v3.07 Sealed Preflight Evidence Remediation Review` before any validation-only preflight can be considered.
 
 The independent package authorization review found that the v3.07 package is materially more complete than the prior failed package, but authorization still failed because:
 
@@ -162,7 +176,11 @@ The next checkpoint may inspect source-code execution compatibility and command-
 
 The source-code execution compatibility checkpoint addressed the source-code compatibility portion of the failed package review by adding fail-closed CLI compatibility validation for the sealed v3.07 command target. The selected sealed command path remains `src.ppo_v2_controlled_training_execution`; it was not revised to `src.train.py`. The compatibility layer validates the sealed `--mode`, `--run-id`, `--config`, `--quarantine-root`, `--log-root`, `--stdout-path`, `--stderr-path`, `--artifact-inventory-path`, `--checksum-manifest-path`, and `--no-submit` arguments. This compatibility checkpoint does not claim preflight passed, does not prove the sealed dataset exists or is validated, does not authorize training command execution, and does not authorize creation of model artifacts or quarantine outputs.
 
-The independent source-code compatibility review accepted the source-code/CLI compatibility remediation for this narrow checkpoint only. It resolved the command-target/CLI argument compatibility blocker for the sealed command target. It did not authorize v3.07 execution, did not authorize PPO v2 training, did not authorize training command execution, did not prove preflight passed, did not prove sealed dataset availability or validation, did not prove execution readiness, did not authorize model artifact creation, and did not authorize quarantine output creation. The broader authorization/preflight readiness blockers remain open for the next sealed review.
+The independent source-code compatibility review accepted the source-code/CLI compatibility remediation for this narrow checkpoint only. It resolved the command-target/CLI argument compatibility blocker for the sealed command target. It did not authorize v3.07 execution, did not authorize PPO v2 training, did not authorize training command execution, did not prove preflight passed, did not prove sealed dataset availability or validation, did not prove execution readiness, did not authorize model artifact creation, and did not authorize quarantine output creation.
+
+The sealed authorization/preflight readiness review found that R1-R6 evidence remained absent. The documentation-only remediation plan was recorded in commit `1b3a7fc`, the validation-only preflight readiness scaffold was implemented in commit `bc3bf9c`, the independent scaffold review passed with `PASS_SCAFFOLD_ONLY` in commit `59167c0`, and the non-blocking R1 preflight blocker constant typo was fixed in commit `f7e8cbc` with Tests #341 green. The scaffold review pass does not authorize readiness, preflight execution, sealed dataset reads, sealed dataset validation, v3.07 execution, PPO v2 training, training command execution, data fetching, dataset generation, model artifact creation, quarantine output creation, stdout/stderr/log/checksum/inventory writes, paper/live orders, controlled submit, PPO + RF, or PPO + XGBoost.
+
+The broader R1-R6 readiness blockers remain open for the next sealed preflight evidence remediation review.
 
 The completed remediation implementation covered:
 
@@ -294,14 +312,19 @@ v3.07 sealed no-submit training execution package preparation = completed as sta
 v3.07 independent package authorization review = FAIL
 v3.07 source-code execution compatibility checkpoint = completed for independent review
 v3.07 independent source-code compatibility review = PASS_SOURCE_CODE_COMPATIBILITY_ONLY
-v3.07 sealed authorization/preflight readiness review = next required checkpoint before any execution can be considered
+v3.07 sealed authorization/preflight readiness review = FAIL_READINESS
+v3.07 sealed preflight evidence remediation plan = recorded
+v3.07 sealed preflight readiness scaffold = implemented
+v3.07 sealed preflight readiness scaffold review = PASS_SCAFFOLD_ONLY
+v3.07 sealed preflight evidence remediation review = next required checkpoint
+v3.07 validation-only preflight = NOT_AUTHORIZED
 v3.07 execution = BLOCKED until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training
 v3.08 = post-run audit of generated PPO v2 evidence, only after v3.07 is authorized and completed
 v3.09 = validation report generation from real evidence, only after post-run audit
 v3.10 = PPO v2 model evidence decision, only after validation reporting
 ```
 
-v3.07 execution is not active. The v3.07 package-preparation record exists, the independent package authorization review failed, the source-code execution compatibility checkpoint was completed for independent review, and the independent source-code compatibility review passed for source-code compatibility only. The next checkpoint is a sealed v3.07 authorization/preflight readiness review required before any execution can be considered. PPO v2 training remains blocked unless a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training.
+v3.07 execution is not active. The v3.07 package-preparation record exists, the independent package authorization review failed, the source-code execution compatibility checkpoint was completed for independent review, the independent source-code compatibility review passed for source-code compatibility only, the sealed authorization/preflight readiness review failed, the sealed preflight evidence remediation plan was recorded, the validation-only preflight readiness scaffold was implemented, and the independent scaffold review passed for scaffold-only safety. The scaffold pass is not a readiness pass. R1-R6 evidence remains absent, preflight has not executed, the sealed dataset has not been read or validated, and the next checkpoint is `v3.07 Sealed Preflight Evidence Remediation Review`. PPO v2 training and training command execution remain blocked unless a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training.
 
 ---
 
