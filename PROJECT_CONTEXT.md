@@ -172,7 +172,7 @@ B5 = package remains static preparation only / do-not-run
 B6 = sealed local input dataset is not proven available or validated
 ```
 
-The next checkpoint may inspect source-code execution compatibility and command-argument compatibility. It must not run training, fetch data, generate datasets, create model artifacts, create quarantine outputs, submit paper/live orders, authorize controlled submit, authorize PPO + RF/XGBoost, or mark v3.07 as authorized.
+The next checkpoint is `v3.07 Sealed Preflight Evidence Remediation Review` before any validation-only preflight can be considered. It must not run preflight, read the sealed dataset, execute the sealed training command, run training, fetch data, generate datasets, create model artifacts, create quarantine outputs, write stdout/stderr/log/checksum/inventory files, submit paper/live orders, authorize controlled submit, authorize PPO + RF/XGBoost, authorize PPO v2 training, or mark v3.07 as authorized.
 
 The source-code execution compatibility checkpoint addressed the source-code compatibility portion of the failed package review by adding fail-closed CLI compatibility validation for the sealed v3.07 command target. The selected sealed command path remains `src.ppo_v2_controlled_training_execution`; it was not revised to `src.train.py`. The compatibility layer validates the sealed `--mode`, `--run-id`, `--config`, `--quarantine-root`, `--log-root`, `--stdout-path`, `--stderr-path`, `--artifact-inventory-path`, `--checksum-manifest-path`, and `--no-submit` arguments. This compatibility checkpoint does not claim preflight passed, does not prove the sealed dataset exists or is validated, does not authorize training command execution, and does not authorize creation of model artifacts or quarantine outputs.
 
@@ -938,13 +938,15 @@ When a historical chain becomes long or repetitive, keep detailed records in `do
 
 ```txt
 v3.06 audit completed with decision FAIL.
-v3.06 audit remediation planning is active.
+v3.06 remediation and post-remediation audit rerun completed with decision PASS.
+v3.07 sealed preflight readiness scaffold review completed with decision PASS_SCAFFOLD_ONLY.
+v3.07 Sealed Preflight Evidence Remediation Review is the next required checkpoint.
 v3.07 is blocked.
 PPO v2 training is not authorized.
 No paper/live/controlled submit is authorized.
 PPO + RF and PPO + XGBoost remain blocked.
 The project is not ready for one-time no-submit PPO v2 training execution.
-Blocking audit findings B1-B5 must be remediated and reviewed before v3.07 can be reconsidered.
+R1-R6 readiness evidence remains absent; preflight has not executed and the sealed dataset has not been read or validated.
 Operational runbook, candidate-stability, module-inventory, and hardening-candidate details are preserved in summary form.
 The future statistical/model-comparison package is defined as post-validation scope only.
 ```
