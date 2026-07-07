@@ -1,0 +1,13 @@
+{
+  "files": [
+    "artifacts/ppo_v2/preflight_validation/v3_07_validation_only_preflight/r1_preflight_result.json",
+    "artifacts/ppo_v2/preflight_validation/v3_07_validation_only_preflight/r2_sealed_dataset_identity.json",
+    "artifacts/ppo_v2/preflight_validation/v3_07_validation_only_preflight/r3_data_contract_coverage.json",
+    "artifacts/ppo_v2/preflight_validation/v3_07_validation_only_preflight/r4_temporal_split_embargo_holdout.json",
+    "artifacts/ppo_v2/preflight_validation/v3_07_validation_only_preflight/r5_training_input_handoff.json",
+    "artifacts/ppo_v2/preflight_validation/v3_07_validation_only_preflight/r6_runtime_dependency_git_state.json"
+  ],
+  "model_artifact_files_created": [],
+  "quarantine_model_output_files_created": [],
+  "scope": "validation_only_preflight_r1_r6"
+}

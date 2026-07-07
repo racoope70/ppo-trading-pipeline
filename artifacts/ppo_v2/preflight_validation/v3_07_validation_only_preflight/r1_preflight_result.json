@@ -1,0 +1,39 @@
+{
+  "command": [
+    "--run-id",
+    "v3_07_validation_only_preflight_r1_r6_001",
+    "--config",
+    "artifacts/ppo_v2/package_preparation/v3_07_no_submit_training_execution_package/config/v3_07_no_submit_training_config.yaml",
+    "--output-root",
+    "artifacts/ppo_v2/preflight_validation/v3_07_validation_only_preflight",
+    "--validation-only",
+    "--no-submit"
+  ],
+  "controlled_submit_authorized": false,
+  "data_fetching_performed": false,
+  "dataset_generation_performed": false,
+  "errors": [],
+  "live_orders_submitted": false,
+  "model_artifact_creation_performed": false,
+  "model_fitting_performed": false,
+  "model_learn_called": false,
+  "overall_preflight_result": "PARTIAL_FAIL",
+  "paper_orders_submitted": false,
+  "ppo_rf_unblocked": false,
+  "ppo_xgboost_unblocked": false,
+  "profitability_claims_made": false,
+  "quarantine_model_output_creation_performed": false,
+  "r2_to_r6_statuses": {
+    "R2": "FAIL",
+    "R3": "FAIL",
+    "R4": "FAIL",
+    "R5": "FAIL",
+    "R6": "PASS"
+  },
+  "sealed_training_command_executed": false,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-07T16:36:19.042666+00:00",
+  "trading_edge_claims_made": false,
+  "training_performed": false,
+  "validation_only_preflight_completed": true
+}
