@@ -9,12 +9,15 @@ This file is a navigation map only. It does not authorize work, execution, data 
 Current controlling state:
 
 ```txt
-latest_completed_milestone = v3.07 Sealed Preflight Readiness Scaffold Review
-latest_completed_decision = PASS_SCAFFOLD_ONLY
-active_milestone = v3.07 Sealed Preflight Evidence Remediation Review
-next_checkpoint = sealed preflight evidence remediation review before any validation-only preflight can be considered
+latest_completed_milestone = v3.07 Sealed Preflight Evidence Remediation Review
+latest_completed_decision = PASS_EVIDENCE_REMEDIATION_REVIEW_ONLY
+active_milestone = v3.07 Explicit Validation-Only Preflight Authorization Checkpoint
+next_checkpoint = explicit validation-only preflight authorization checkpoint before any validation-only preflight may run
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
+preflight_execution = NOT_AUTHORIZED
+sealed_dataset_read = NOT_AUTHORIZED
+sealed_training_command_execution = NOT_AUTHORIZED
 training_command_execution = NOT_AUTHORIZED
 preflight_readiness = NOT_PASSED
 sealed_dataset_validation = NOT_PROVEN
@@ -22,6 +25,7 @@ data_fetching = NOT_AUTHORIZED
 dataset_generation = NOT_AUTHORIZED
 model_artifact_creation = NOT_AUTHORIZED
 quarantine_output_creation = NOT_AUTHORIZED
+stdout_stderr_log_checksum_inventory_writes = NOT_AUTHORIZED
 paper_order_authorization = NOT_AUTHORIZED
 live_order_authorization = NOT_AUTHORIZED
 paper_orders = NOT_AUTHORIZED
@@ -41,7 +45,7 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 
 ## Current Active Review Path
 
-### v3.07 — Sealed Preflight Evidence Remediation Review
+### v3.07 — Explicit Validation-Only Preflight Authorization Checkpoint
 
 **Use when reviewing**
 
@@ -51,6 +55,8 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 * sealed preflight evidence remediation plan
 * validation-only preflight readiness scaffold
 * scaffold-only independent review PASS
+* evidence remediation governance review PASS
+* whether validation-only preflight may be explicitly authorized to produce R1-R6 evidence
 * whether preflight evidence exists and has passed
 * whether sealed local dataset availability and validation are proven
 * whether data-contract, missing-bar coverage, split, embargo, holdout, and handoff checks are recorded
@@ -73,6 +79,8 @@ docs/runs/v3.07_sealed_preflight_evidence_remediation_plan.md
 docs/runs/v3.07_sealed_preflight_readiness_scaffold_record.md
 docs/audits/v3.07_sealed_preflight_readiness_scaffold_review.md
 docs/runs/v3.07_sealed_preflight_readiness_scaffold_review.md
+docs/audits/v3.07_sealed_preflight_evidence_remediation_review.md
+docs/runs/v3.07_sealed_preflight_evidence_remediation_review.md
 docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md
 docs/audits/v3.07_independent_package_authorization_review.md
 docs/runs/v3.07_independent_package_authorization_review.md
@@ -135,17 +143,30 @@ v3_07_sealed_preflight_readiness_scaffold_review_commit = 59167c0
 preflight_scaffold_review_commit = 59167c0
 v3_07_preflight_blocker_typo_fix_commit = f7e8cbc
 preflight_blocker_typo_fix_commit = f7e8cbc
-v3_07_sealed_preflight_evidence_remediation_review = NEXT_REQUIRED_CHECKPOINT
-latest_ci_evidence = Tests #341 green on preflight blocker typo fix commit f7e8cbc
+v3_07_sealed_preflight_evidence_remediation_review = PASS_EVIDENCE_REMEDIATION_REVIEW_ONLY
+v3_07_sealed_preflight_evidence_remediation_review_audit_record = docs/audits/v3.07_sealed_preflight_evidence_remediation_review.md
+v3_07_sealed_preflight_evidence_remediation_review_run_record = docs/runs/v3.07_sealed_preflight_evidence_remediation_review.md
+v3_07_sealed_preflight_evidence_remediation_review_commit = b8273a9
+v3_07_sealed_preflight_evidence_remediation_review_ci = Tests #343 green
+v3_07_explicit_validation_only_preflight_authorization_checkpoint = NEXT_REQUIRED_CHECKPOINT
+v3_07_validation_only_preflight = NOT_AUTHORIZED
+v3_07_preflight_execution = NOT_AUTHORIZED
+v3_07_sealed_dataset_read = NOT_AUTHORIZED
+v3_07_sealed_training_command_execution = NOT_AUTHORIZED
+latest_ci_evidence = Tests #343 green on evidence remediation review pass commit b8273a9
 preflight_readiness = NOT_PASSED
 sealed_dataset_validation = NOT_PROVEN
 v3.07_status = BLOCKED
+preflight_execution = NOT_AUTHORIZED
+sealed_dataset_read = NOT_AUTHORIZED
+sealed_training_command_execution = NOT_AUTHORIZED
 ppo_v2_training_execution = NOT_AUTHORIZED
 training_command_execution = NOT_AUTHORIZED
 data_fetching = NOT_AUTHORIZED
 dataset_generation = NOT_AUTHORIZED
 model_artifact_creation = NOT_AUTHORIZED
 quarantine_output_creation = NOT_AUTHORIZED
+stdout_stderr_log_checksum_inventory_writes = NOT_AUTHORIZED
 paper_order_authorization = NOT_AUTHORIZED
 live_order_authorization = NOT_AUTHORIZED
 paper_orders = NOT_AUTHORIZED
@@ -155,7 +176,7 @@ ppo_rf = BLOCKED
 ppo_xgboost = BLOCKED
 ```
 
-The v3.06 remediation review / post-remediation audit passed, making the repository eligible for separate v3.07 consideration but not authorizing v3.07 execution. The initial v3.07 authorization review failed. A materially more complete v3.07 static no-submit package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review also failed. The source-code execution compatibility checkpoint was then completed for independent review, and the independent source-code compatibility review passed for source-code compatibility only. That narrow PASS resolved the command-target/CLI argument compatibility blocker for the sealed command target. The sealed authorization/preflight readiness review then failed because R1-R6 evidence was absent. A documentation-only remediation plan was recorded, a validation-only preflight readiness scaffold was implemented, and an independent scaffold review passed with `PASS_SCAFFOLD_ONLY`. The non-blocking R1 preflight blocker constant typo was fixed afterward. The scaffold pass is not a readiness pass: R1-R6 evidence remains absent, preflight has not executed, the sealed dataset has not been read or validated, v3.07 remains blocked, and PPO v2 training and training command execution remain not authorized. The next checkpoint is `v3.07 Sealed Preflight Evidence Remediation Review`. Only after that review may the repository consider whether to proceed to an explicitly authorized validation-only preflight. Even validation-only preflight must not authorize PPO v2 training or execute the sealed training command.
+The v3.06 remediation review / post-remediation audit passed, making the repository eligible for separate v3.07 consideration but not authorizing v3.07 execution. The initial v3.07 authorization review failed. A materially more complete v3.07 static no-submit package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review also failed. The source-code execution compatibility checkpoint was then completed for independent review, and the independent source-code compatibility review passed for source-code compatibility only. That narrow PASS resolved the command-target/CLI argument compatibility blocker for the sealed command target. The sealed authorization/preflight readiness review then failed because R1-R6 evidence was absent. A documentation-only remediation plan was recorded, a validation-only preflight readiness scaffold was implemented, an independent scaffold review passed with `PASS_SCAFFOLD_ONLY`, the non-blocking R1 preflight blocker constant typo was fixed, and the evidence remediation review passed with `PASS_EVIDENCE_REMEDIATION_REVIEW_ONLY`. The evidence remediation pass accepts governance alignment only. Validation-only preflight is still not authorized, preflight has not executed, the sealed dataset has not been read or validated, R1-R6 evidence remains absent, v3.07 remains blocked, and PPO v2 training and training command execution remain not authorized. The next checkpoint is `v3.07 Explicit Validation-Only Preflight Authorization Checkpoint`. That checkpoint must decide whether a validation-only preflight may be run to produce R1-R6 evidence, and it must still not authorize PPO v2 training or sealed training command execution.
 
 **M/L cleanup note**
 
@@ -215,7 +236,7 @@ NO_SUBMIT = DEFAULT
 
 **Then move to**
 
-Move to `v3.07 Sealed Preflight Evidence Remediation Review` before any validation-only preflight can be considered. This review may inspect whether the remediation plan and scaffold are sufficient to support a later explicitly authorized validation-only preflight. It must not run preflight, read the sealed dataset, execute the sealed training command, run training, fetch data, generate datasets, create model artifacts, create quarantine outputs, write stdout/stderr/log/checksum/inventory files, submit paper/live orders, authorize controlled submit, authorize PPO + RF/XGBoost, authorize PPO v2 training, or mark v3.07 as authorized.
+Move to `v3.07 Explicit Validation-Only Preflight Authorization Checkpoint` before any validation-only preflight may run. This checkpoint must decide whether a validation-only preflight may be run to produce R1-R6 evidence. It must preserve no-submit/no-order/no-promotion/no-hybrid boundaries and must not authorize PPO v2 training, sealed training command execution, v3.07 execution, data fetching, dataset generation, model artifacts, quarantine outputs, paper/live orders, controlled submit, PPO + RF, or PPO + XGBoost.
 
 ---
 
@@ -239,8 +260,11 @@ v3.07 sealed authorization/preflight readiness review = FAIL_READINESS
 v3.07 sealed preflight evidence remediation plan = recorded
 v3.07 sealed preflight readiness scaffold = implemented
 v3.07 sealed preflight readiness scaffold review = PASS_SCAFFOLD_ONLY
-v3.07 sealed preflight evidence remediation review = next required checkpoint
+v3.07 sealed preflight evidence remediation review = PASS_EVIDENCE_REMEDIATION_REVIEW_ONLY
+v3.07 explicit validation-only preflight authorization checkpoint = next required checkpoint
 v3.07 validation-only preflight = NOT_AUTHORIZED
+v3.07 preflight execution = NOT_AUTHORIZED
+v3.07 sealed dataset read = NOT_AUTHORIZED
 v3.07 execution = BLOCKED until a later sealed checkpoint explicitly authorizes one-time no-submit PPO v2 training
 PPO v2 training = NOT_AUTHORIZED
 v3.08 = post-run audit of generated PPO v2 evidence; future only and only after v3.07 is authorized/completed
@@ -248,7 +272,7 @@ v3.09 = validation report generation from real evidence; future only
 v3.10 = PPO v2 model evidence decision; future only
 ```
 
-v3.07 execution is not active. The v3.07 package-preparation record exists, the independent package authorization review failed, the source-code execution compatibility checkpoint was completed for independent review, the independent source-code compatibility review passed for source-code compatibility only, the sealed authorization/preflight readiness review failed, the sealed preflight evidence remediation plan was recorded, the validation-only preflight readiness scaffold was implemented, and the independent scaffold review passed for scaffold-only safety. The scaffold pass is not a readiness pass. R1-R6 evidence remains absent, preflight has not executed, the sealed dataset has not been read or validated, and the next checkpoint is `v3.07 Sealed Preflight Evidence Remediation Review`. Any future authorization must remain one-time, no-submit, explicitly authorized, and quarantined. It must not imply paper orders, live orders, controlled submit, model promotion, PPO + RF, or PPO + XGBoost.
+v3.07 execution is not active. The v3.07 package-preparation record exists, the independent package authorization review failed, the source-code execution compatibility checkpoint was completed for independent review, the independent source-code compatibility review passed for source-code compatibility only, the sealed authorization/preflight readiness review failed, the sealed preflight evidence remediation plan was recorded, the validation-only preflight readiness scaffold was implemented, the independent scaffold review passed for scaffold-only safety, and the evidence remediation governance review passed. The evidence remediation pass accepts governance alignment only. Validation-only preflight is still not authorized, preflight has not executed, the sealed dataset has not been read or validated, R1-R6 evidence remains absent, and the next checkpoint is `v3.07 Explicit Validation-Only Preflight Authorization Checkpoint`. Any future authorization must remain one-time, no-submit, explicitly authorized, and quarantined. It must not imply paper orders, live orders, controlled submit, model promotion, PPO + RF, or PPO + XGBoost.
 
 ---
 
