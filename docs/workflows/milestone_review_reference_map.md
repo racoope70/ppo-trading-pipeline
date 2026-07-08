@@ -9,15 +9,15 @@ This file is a navigation map only. It does not authorize work, execution, data 
 Current controlling state:
 
 ```txt
-latest_completed_milestone = v3.07 Validation-Only Preflight Evidence Review / R1-R6 Evidence Review
-latest_completed_decision = PASS_FAIL_CLOSED_EVIDENCE_REVIEW_ONLY
+latest_completed_milestone = v3.07 Sealed Dataset Local Placement Evidence Review
+latest_completed_decision = PASS_DOCUMENTED_LOCAL_PLACEMENT_REQUIREMENT_ONLY
 latest_completed_audit_tag = NOT_TAGGED
-latest_completed_audit_record = docs/audits/v3.07_validation_only_preflight_evidence_review_r1_r6.md
-latest_completed_run_record = docs/runs/v3.07_validation_only_preflight_evidence_review_r1_r6.md
-active_milestone = v3.07 Sealed Dataset Availability / Path / Local Placement Remediation
-next_checkpoint = sealed dataset availability/path/local placement remediation before validation-only preflight rerun
+latest_completed_audit_record = docs/audits/v3.07_sealed_dataset_local_placement_evidence_review.md
+latest_completed_run_record = docs/runs/v3.07_sealed_dataset_local_placement_evidence_review.md
+active_milestone = v3.07 Explicit Validation-Only Preflight Rerun Authorization Checkpoint
+next_checkpoint = explicit authorization checkpoint before validation-only preflight rerun
 current_workstream = PPO_V2_VALIDATION_READINESS
-current_phase = fail-closed R1-R6 evidence accepted; sealed dataset availability/path/local placement remediation required before rerunning validation-only preflight
+current_phase = sealed dataset local placement requirement documented and reviewed; validation-only preflight rerun requires explicit later authorization
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 validation_only_preflight = AUTHORIZED_FOR_R1_R6_EVIDENCE_ONLY
@@ -26,6 +26,7 @@ sealed_dataset_read = AUTHORIZED_FOR_VALIDATION_ONLY_INSPECTION_IF_NEEDED
 validation_evidence_record_creation = AUTHORIZED_FOR_R1_R6_ONLY
 runtime_dependency_git_state_capture = AUTHORIZED_FOR_VALIDATION_EVIDENCE_ONLY
 checksum_inventory_capture = AUTHORIZED_FOR_VALIDATION_EVIDENCE_ONLY
+validation_only_preflight_rerun = NOT_AUTHORIZED
 sealed_training_command_execution = NOT_AUTHORIZED
 ppo_v2_training_execution = NOT_AUTHORIZED
 training_command_execution = NOT_AUTHORIZED
@@ -40,7 +41,10 @@ R4 = FAIL_DEPENDS_ON_R2
 R5 = FAIL_DEPENDS_ON_R2
 R6 = PASS
 data_fetching = NOT_AUTHORIZED
+data_downloading = NOT_AUTHORIZED
 dataset_generation = NOT_AUTHORIZED
+dataset_backfill = NOT_AUTHORIZED
+dataset_mutation_or_rewrite = NOT_AUTHORIZED
 model_artifact_creation = NOT_AUTHORIZED
 quarantine_model_output_creation = NOT_AUTHORIZED
 paper_order_authorization = NOT_AUTHORIZED
@@ -56,6 +60,7 @@ model_promotion = NOT_AUTHORIZED
 production_deployment = NOT_AUTHORIZED
 trading_edge_claims = NOT_AUTHORIZED
 profitability_claims = NOT_AUTHORIZED
+deployment_readiness_claims = NOT_AUTHORIZED
 legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
 ```
 
@@ -65,7 +70,7 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 
 ## Current Active Review Path
 
-### v3.07 — Sealed Dataset Availability / Path / Local Placement Remediation
+### v3.07 — Explicit Validation-Only Preflight Rerun Authorization Checkpoint
 
 **Use when reviewing**
 
@@ -82,8 +87,12 @@ Always read `PROJECT_CONTEXT.md` first. Then use this map to identify supporting
 * R1/R6 PASS
 * R2 failed because sealed local dataset was not found
 * R3/R4/R5 failed because dependent on R2
-* sealed dataset availability/path/local placement remediation
-* future validation-only preflight rerun only after sealed dataset availability/path/local placement remediation
+* sealed dataset local placement remediation documented the missing local placement requirement
+* sealed dataset local placement evidence review passed with `PASS_DOCUMENTED_LOCAL_PLACEMENT_REQUIREMENT_ONLY`
+* expected sealed dataset remains missing at `data/processed/ppo_v2/v3_07_no_submit_training_input.parquet`
+* validation-only preflight rerun authorization checkpoint is the next active milestone
+* validation-only preflight rerun remains `NOT_AUTHORIZED` until explicit checkpoint
+* future checkpoint may only consider validation-only preflight rerun, not training
 * whether sealed local dataset availability and validation are proven
 * whether data-contract, missing-bar coverage, split, embargo, holdout, and handoff checks are recorded
 * whether runtime/dependency and git-state evidence exists
@@ -111,6 +120,9 @@ docs/audits/v3.07_explicit_validation_only_preflight_authorization_checkpoint.md
 docs/runs/v3.07_explicit_validation_only_preflight_authorization_checkpoint.md
 docs/audits/v3.07_validation_only_preflight_evidence_review_r1_r6.md
 docs/runs/v3.07_validation_only_preflight_evidence_review_r1_r6.md
+docs/runs/v3.07_sealed_dataset_availability_path_local_placement_remediation.md
+docs/audits/v3.07_sealed_dataset_local_placement_evidence_review.md
+docs/runs/v3.07_sealed_dataset_local_placement_evidence_review.md
 docs/runs/v3.07_source_code_execution_compatibility_checkpoint.md
 docs/audits/v3.07_independent_package_authorization_review.md
 docs/runs/v3.07_independent_package_authorization_review.md
@@ -200,17 +212,29 @@ v3_07_R3 = FAIL_DEPENDS_ON_R2
 v3_07_R4 = FAIL_DEPENDS_ON_R2
 v3_07_R5 = FAIL_DEPENDS_ON_R2
 v3_07_R6 = PASS
-v3_07_sealed_dataset_availability_path_local_placement_remediation = NEXT_ACTIVE_MILESTONE
-v3_07_validation_only_preflight_rerun = FUTURE_ONLY_AFTER_SEALED_DATASET_AVAILABILITY_PATH_LOCAL_PLACEMENT_REMEDIATION
+v3_07_sealed_dataset_local_placement_remediation = DOCUMENTED_MISSING_LOCAL_PLACEMENT_REQUIREMENT
+v3_07_sealed_dataset_local_placement_remediation_record = docs/runs/v3.07_sealed_dataset_availability_path_local_placement_remediation.md
+v3_07_sealed_dataset_local_placement_remediation_commit = 5604ae5
+v3_07_sealed_dataset_local_placement_evidence_review = PASS_DOCUMENTED_LOCAL_PLACEMENT_REQUIREMENT_ONLY
+v3_07_sealed_dataset_local_placement_evidence_review_audit_record = docs/audits/v3.07_sealed_dataset_local_placement_evidence_review.md
+v3_07_sealed_dataset_local_placement_evidence_review_run_record = docs/runs/v3.07_sealed_dataset_local_placement_evidence_review.md
+v3_07_sealed_dataset_local_placement_evidence_review_commit = ca555c5
+v3_07_expected_sealed_dataset_path = data/processed/ppo_v2/v3_07_no_submit_training_input.parquet
+v3_07_sealed_dataset_local_placement_requirement = DOCUMENTED_AND_REVIEWED
+v3_07_validation_only_preflight_rerun = NOT_AUTHORIZED_UNTIL_EXPLICIT_CHECKPOINT
+v3_07_next_required_checkpoint = EXPLICIT_VALIDATION_ONLY_PREFLIGHT_RERUN_AUTHORIZATION_CHECKPOINT
 v3.07 validation-only preflight evidence review = PASS_FAIL_CLOSED_EVIDENCE_REVIEW_ONLY
 v3.07 accepted preflight result = PARTIAL_FAIL
-v3.07 sealed dataset availability/path/local placement remediation = next active milestone
-v3.07 validation-only preflight rerun = future only after sealed dataset availability/path/local placement remediation
+v3.07 sealed dataset local placement remediation = DOCUMENTED_MISSING_LOCAL_PLACEMENT_REQUIREMENT
+v3.07 sealed dataset local placement evidence review = PASS_DOCUMENTED_LOCAL_PLACEMENT_REQUIREMENT_ONLY
+v3.07 validation-only preflight rerun authorization checkpoint = next active milestone
+v3.07 validation-only preflight rerun = NOT_AUTHORIZED until explicit checkpoint
 v3.07 PPO v2 training = NOT_AUTHORIZED
 sealed training command execution = NOT_AUTHORIZED
 preflight_readiness = NOT_PASSED
 sealed_dataset_validation = NOT_PROVEN
 v3.07_status = BLOCKED
+validation_only_preflight_rerun = NOT_AUTHORIZED
 validation_only_preflight = AUTHORIZED_FOR_R1_R6_EVIDENCE_ONLY
 preflight_execution = AUTHORIZED_FOR_VALIDATION_ONLY_R1_R6_EVIDENCE
 sealed_dataset_read = AUTHORIZED_FOR_VALIDATION_ONLY_INSPECTION_IF_NEEDED
@@ -220,7 +244,10 @@ training_command_execution = NOT_AUTHORIZED
 model_learn = NOT_AUTHORIZED
 model_fitting = NOT_AUTHORIZED
 data_fetching = NOT_AUTHORIZED
+data_downloading = NOT_AUTHORIZED
 dataset_generation = NOT_AUTHORIZED
+dataset_backfill = NOT_AUTHORIZED
+dataset_mutation_or_rewrite = NOT_AUTHORIZED
 model_artifact_creation = NOT_AUTHORIZED
 quarantine_model_output_creation = NOT_AUTHORIZED
 paper_order_authorization = NOT_AUTHORIZED
@@ -234,10 +261,11 @@ model_promotion = NOT_AUTHORIZED
 production_deployment = NOT_AUTHORIZED
 trading_edge_claims = NOT_AUTHORIZED
 profitability_claims = NOT_AUTHORIZED
-latest_ci_evidence = Tests #348 green on fail-closed preflight evidence review commit a5a5d58
+deployment_readiness_claims = NOT_AUTHORIZED
+latest_ci_evidence = Tests green on sealed dataset local placement evidence review commit ca555c5
 ```
 
-The v3.06 remediation review / post-remediation audit passed, making the repository eligible for separate v3.07 consideration but not authorizing v3.07 execution. The initial v3.07 authorization review failed. A materially more complete v3.07 static no-submit package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review also failed. The source-code execution compatibility checkpoint was then completed for independent review, and the independent source-code compatibility review passed for source-code compatibility only. That narrow PASS resolved the command-target/CLI argument compatibility blocker for the sealed command target. The sealed authorization/preflight readiness review then failed because R1-R6 evidence was absent. A documentation-only remediation plan was recorded, a validation-only preflight readiness scaffold was implemented, an independent scaffold review passed with `PASS_SCAFFOLD_ONLY`, the non-blocking R1 preflight blocker constant typo was fixed, the evidence remediation review passed with `PASS_EVIDENCE_REMEDIATION_REVIEW_ONLY`, the explicit validation-only preflight authorization checkpoint passed with `PASS_VALIDATION_ONLY_PREFLIGHT_AUTHORIZATION`, validation-only preflight produced PARTIAL_FAIL R1-R6 evidence, and the fail-closed evidence review passed with `PASS_FAIL_CLOSED_EVIDENCE_REVIEW_ONLY`. The PARTIAL_FAIL result is accepted as valid evidence, not readiness. R1 and R6 passed, R2 failed because the sealed local dataset was not found, and R3/R4/R5 failed because they depend on R2. Preflight readiness remains `NOT_PASSED`, sealed dataset validation remains `NOT_PROVEN`, PPO v2 training remains `NOT_AUTHORIZED`, and sealed training command execution remains `NOT_AUTHORIZED`. The next active remediation is sealed dataset availability/path/local placement only. Do not authorize data fetching, dataset generation, or training.
+The v3.06 remediation review / post-remediation audit passed, making the repository eligible for separate v3.07 consideration but not authorizing v3.07 execution. The initial v3.07 authorization review failed. A materially more complete v3.07 static no-submit package-preparation record was then created at `docs/runs/v3.07_no_submit_training_execution_package_preparation.md`. The independent v3.07 package authorization review also failed. The source-code execution compatibility checkpoint was then completed for independent review, and the independent source-code compatibility review passed for source-code compatibility only. That narrow PASS resolved the command-target/CLI argument compatibility blocker for the sealed command target. The sealed authorization/preflight readiness review then failed because R1-R6 evidence was absent. A documentation-only remediation plan was recorded, a validation-only preflight readiness scaffold was implemented, an independent scaffold review passed with `PASS_SCAFFOLD_ONLY`, the non-blocking R1 preflight blocker constant typo was fixed, the evidence remediation review passed with `PASS_EVIDENCE_REMEDIATION_REVIEW_ONLY`, the explicit validation-only preflight authorization checkpoint passed with `PASS_VALIDATION_ONLY_PREFLIGHT_AUTHORIZATION`, validation-only preflight produced PARTIAL_FAIL R1-R6 evidence, and the fail-closed evidence review passed with `PASS_FAIL_CLOSED_EVIDENCE_REVIEW_ONLY`. The sealed dataset local placement remediation documented the missing local placement requirement, and the sealed dataset local placement evidence review passed with `PASS_DOCUMENTED_LOCAL_PLACEMENT_REQUIREMENT_ONLY`. The expected sealed dataset remains missing at `data/processed/ppo_v2/v3_07_no_submit_training_input.parquet`. This is documentation-only evidence, not readiness. Preflight readiness remains `NOT_PASSED`, sealed dataset validation remains `NOT_PROVEN`, validation-only preflight rerun remains `NOT_AUTHORIZED`, PPO v2 training remains `NOT_AUTHORIZED`, and sealed training command execution remains `NOT_AUTHORIZED`. The next active milestone is the explicit validation-only preflight rerun authorization checkpoint. That future checkpoint may only consider validation-only preflight rerun, not training. Do not authorize data fetching, data downloading, dataset generation, dataset backfill, dataset mutation or rewrite, model artifacts, quarantine model outputs, paper/live orders, controlled submit, PPO + Random Forest, PPO + XGBoost, model promotion, deployment-readiness claims, trading-edge claims, profitability claims, or training.
 
 **M/L cleanup note**
 
@@ -297,7 +325,7 @@ NO_SUBMIT = DEFAULT
 
 **Then move to**
 
-Move only to `v3.07 Sealed Dataset Availability / Path / Local Placement Remediation`. The fail-closed PARTIAL_FAIL evidence review passed and accepted the result as valid evidence, not readiness. R1 and R6 passed, R2 failed because the sealed local dataset was not found, and R3/R4/R5 failed because they depend on R2. Validation-only preflight rerun is future-only after sealed dataset availability/path/local placement remediation. Do not authorize PPO v2 training, sealed training command execution, v3.07 training execution, data fetching, dataset generation, model artifacts, quarantine model outputs, paper/live orders, controlled submit, PPO + RF, PPO + XGBoost, model promotion, production deployment, trading-edge claims, or profitability claims.
+Move only to v3.07 Explicit Validation-Only Preflight Rerun Authorization Checkpoint. The sealed dataset local placement requirement has been documented and reviewed. Validation-only preflight rerun remains NOT_AUTHORIZED until an explicit checkpoint approves it. This does not authorize PPO v2 training, sealed training command execution, data fetching, dataset generation, model artifacts, paper/live orders, controlled submit, PPO + RF, PPO + XGBoost, model promotion, deployment, trading-edge claims, or profitability claims.
 
 ---
 
@@ -327,8 +355,10 @@ v3.07 validation-only preflight = AUTHORIZED_FOR_R1_R6_EVIDENCE_ONLY
 v3.07 validation-only preflight execution = COMPLETED_WITH_PARTIAL_FAIL
 v3.07 Validation-Only Preflight Evidence Review / R1-R6 Evidence Review = PASS_FAIL_CLOSED_EVIDENCE_REVIEW_ONLY
 v3.07 accepted preflight result = PARTIAL_FAIL
-v3.07 sealed dataset availability/path/local placement remediation = next active milestone
-v3.07 validation-only preflight rerun = future only after sealed dataset availability/path/local placement remediation
+v3.07 sealed dataset local placement remediation = DOCUMENTED_MISSING_LOCAL_PLACEMENT_REQUIREMENT
+v3.07 sealed dataset local placement evidence review = PASS_DOCUMENTED_LOCAL_PLACEMENT_REQUIREMENT_ONLY
+v3.07 validation-only preflight rerun authorization checkpoint = next active milestone
+v3.07 validation-only preflight rerun = NOT_AUTHORIZED until explicit checkpoint
 v3.07 preflight execution = AUTHORIZED_FOR_VALIDATION_ONLY_R1_R6_EVIDENCE
 v3.07 sealed dataset read = AUTHORIZED_FOR_VALIDATION_ONLY_INSPECTION_IF_NEEDED
 v3.07 execution = BLOCKED for PPO v2 training
@@ -339,7 +369,7 @@ v3.09 = validation report generation from real evidence; future only
 v3.10 = PPO v2 model evidence decision; future only
 ```
 
-v3.07 execution is not active for PPO v2 training. The v3.07 package-preparation record exists, the independent package authorization review failed, the source-code execution compatibility checkpoint was completed for independent review, the independent source-code compatibility review passed for source-code compatibility only, the sealed authorization/preflight readiness review failed, the sealed preflight evidence remediation plan was recorded, the validation-only preflight readiness scaffold was implemented, the independent scaffold review passed for scaffold-only safety, the evidence remediation governance review passed, the explicit validation-only preflight authorization checkpoint passed, validation-only preflight produced PARTIAL_FAIL evidence, and the fail-closed evidence review passed. The PARTIAL_FAIL result is accepted as valid evidence, not readiness. R1 and R6 passed, R2 failed because the sealed local dataset was not found, and R3/R4/R5 failed because they depend on R2. Preflight readiness remains `NOT_PASSED`, sealed dataset validation remains `NOT_PROVEN`, and the next active remediation is sealed dataset availability/path/local placement only. PPO v2 training, sealed training command execution, paper/live orders, controlled submit, model promotion, PPO + RF, and PPO + XGBoost remain blocked.
+v3.07 execution is not active for PPO v2 training. The sealed dataset local placement requirement has been documented and reviewed. The expected sealed dataset remains missing at `data/processed/ppo_v2/v3_07_no_submit_training_input.parquet`. This is documentation-only evidence, not readiness. Preflight readiness remains `NOT_PASSED`, sealed dataset validation remains `NOT_PROVEN`, and validation-only preflight rerun remains `NOT_AUTHORIZED` until an explicit checkpoint.
 
 ---
 
