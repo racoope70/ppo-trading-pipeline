@@ -31,6 +31,7 @@ PARTIAL_FAIL_RESULT = "PARTIAL_FAIL"
 REJECTED_FAIL_CLOSED_RESULT = "REJECTED_FAIL_CLOSED"
 
 V3_07_VALIDATION_RUN_ID = "v3_07_validation_only_preflight_r1_r6_001"
+AUTHORIZED_VALIDATION_ONLY_COMMAND_RUN_ID = V3_07_VALIDATION_RUN_ID
 V3_07_CONFIG_PATH = (
     "artifacts/ppo_v2/package_preparation/"
     "v3_07_no_submit_training_execution_package/config/"
@@ -60,6 +61,8 @@ EVIDENCE_FILE_NAMES: Mapping[str, str] = {
     "R5": "r5_training_input_handoff.json",
     "R6": "r6_runtime_dependency_git_state.json",
 }
+
+REQUEST_VALIDATION_REJECTION_FILE_NAME = "request_validation_rejection.json"
 
 BLOCKED_CLI_FLAGS: tuple[str, ...] = (
     "--train",
@@ -141,7 +144,11 @@ def execute_validation_only_preflight(
 
     request_errors = _validate_request(request)
     if request_errors:
-        return _reject(request_errors)
+        safe_request = (
+            request if isinstance(request, ValidationOnlyPreflightRequest) else None
+        )
+        command = safe_request.command if safe_request is not None else ()
+        return _reject(request_errors, request=safe_request, command=command)
 
     timestamp = _utc_timestamp()
     command = request.command or _default_command(request)
@@ -774,17 +781,112 @@ def _overall_result(evidence: Mapping[str, Any]) -> str:
     return FAIL_RESULT
 
 
-def _reject(errors: Sequence[str]) -> ValidationOnlyPreflightResult:
+def _build_request_validation_rejection_evidence(
+    errors: Sequence[str],
+    request: ValidationOnlyPreflightRequest | None,
+    command: tuple[str, ...],
+) -> Mapping[str, Any]:
+    attempted_run_id = request.run_id if request is not None else None
+    invalid_run_id = (
+        attempted_run_id is not None and attempted_run_id != V3_07_VALIDATION_RUN_ID
+    )
+
+    return {
+        "status": REJECTED_FAIL_CLOSED_RESULT,
+        "request_validation_rejected": True,
+        "R1_R6_preflight_executed": False,
+        "r1_r6_preflight_executed": False,
+        "r1_r6_evidence_generated": False,
+        "full_preflight_result": False,
+        "validation_only_preflight_completed": False,
+        "invalid_run_id": invalid_run_id,
+        "attempted_run_id": attempted_run_id,
+        "required_run_id": V3_07_VALIDATION_RUN_ID,
+        "source_constant": "V3_07_VALIDATION_RUN_ID",
+        "command": command,
+        "timestamp_utc": _utc_timestamp(),
+        "training_performed": False,
+        "sealed_training_command_executed": False,
+        "model_learn_called": False,
+        "model_fitting_performed": False,
+        "data_fetching_performed": False,
+        "dataset_generation_performed": False,
+        "model_artifact_creation_performed": False,
+        "quarantine_model_output_creation_performed": False,
+        "paper_orders_submitted": False,
+        "live_orders_submitted": False,
+        "controlled_submit_authorized": False,
+        "ppo_rf_unblocked": False,
+        "ppo_xgboost_unblocked": False,
+        "errors": tuple(errors),
+    }
+
+
+def _safe_rejection_output_root(
+    request: ValidationOnlyPreflightRequest | None,
+) -> tuple[Path | None, tuple[str, ...]]:
+    if request is None:
+        return None, ("request validation rejection output not written: request unavailable",)
+
+    output_root_errors = _validate_output_root(request.output_root)
+    if output_root_errors:
+        return None, tuple(
+            f"request validation rejection output not written: {error}"
+            for error in output_root_errors
+        )
+
+    return Path(request.output_root), ()
+
+
+def _write_request_validation_rejection(
+    output_root: Path,
+    evidence: Mapping[str, Any],
+) -> tuple[tuple[Path, ...], tuple[str, ...]]:
+    try:
+        output_root.mkdir(parents=True, exist_ok=True)
+        path = output_root / REQUEST_VALIDATION_REJECTION_FILE_NAME
+        _write_json(path, evidence)
+        return (path,), ()
+    except Exception as exc:  # pragma: no cover - exact filesystem errors vary
+        return (), (f"request validation rejection write failed: {exc}",)
+
+
+def _reject(
+    errors: Sequence[str],
+    request: ValidationOnlyPreflightRequest | None = None,
+    command: tuple[str, ...] = (),
+) -> ValidationOnlyPreflightResult:
+    evidence = _build_request_validation_rejection_evidence(errors, request, command)
+    output_root, output_root_errors = _safe_rejection_output_root(request)
+
+    created_files: tuple[Path, ...] = ()
+    write_errors: tuple[str, ...] = output_root_errors
+    if output_root is not None:
+        created_files, write_errors = _write_request_validation_rejection(
+            output_root, evidence
+        )
+
     return ValidationOnlyPreflightResult(
         result=REJECTED_FAIL_CLOSED_RESULT,
-        evidence={},
-        errors=tuple(errors),
-        created_files=(),
+        evidence=evidence,
+        errors=tuple(errors) + tuple(write_errors),
+        created_files=tuple(str(path) for path in created_files),
         metadata={
-            "scope": "validation_only_preflight_r1_r6",
+            "scope": "request_validation_rejection",
+            "request_validation_rejected": True,
+            "R1_R6_preflight_executed": False,
+            "r1_r6_preflight_executed": False,
             "execution_performed": False,
             "training_performed": False,
             "sealed_training_command_executed": False,
+            "model_learn_called": False,
+            "model_fitting_performed": False,
+            "data_fetching_performed": False,
+            "dataset_generation_performed": False,
+            "model_artifact_creation_performed": False,
+            "quarantine_model_output_creation_performed": False,
+            "paper_orders_submitted": False,
+            "live_orders_submitted": False,
         },
     )
 

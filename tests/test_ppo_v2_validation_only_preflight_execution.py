@@ -126,7 +126,7 @@ def test_request_requires_validation_only_and_no_submit(tmp_path, monkeypatch):
     assert result.result == preflight.REJECTED_FAIL_CLOSED_RESULT
     assert "--validation-only is required" in result.errors
     assert "--no-submit is required" in result.errors
-    assert result.created_files == ()
+    _assert_request_validation_rejection_created(result, tmp_path)
 
 
 @pytest.mark.parametrize(
@@ -164,7 +164,7 @@ def test_authorization_flags_fail_closed(tmp_path, monkeypatch, blocked_field):
 
     assert result.result == preflight.REJECTED_FAIL_CLOSED_RESULT
     assert f"{blocked_field} must remain false" in result.errors
-    assert result.created_files == ()
+    _assert_request_validation_rejection_created(result, tmp_path)
 
 
 @pytest.mark.parametrize(
@@ -354,3 +354,118 @@ def test_source_does_not_use_model_artifact_or_quarantine_output_paths():
     assert "artifacts/ppo_v2/quarantine" not in source
     assert ".zip" not in source
     assert ".pkl" not in source
+
+def test_authorized_validation_only_command_run_id_matches_source_required_run_id():
+    import src.ppo_v2_validation_only_preflight_execution as preflight
+
+    assert (
+        preflight.AUTHORIZED_VALIDATION_ONLY_COMMAND_RUN_ID
+        == preflight.V3_07_VALIDATION_RUN_ID
+    )
+    assert (
+        preflight.V3_07_VALIDATION_RUN_ID
+        == "v3_07_validation_only_preflight_r1_r6_001"
+    )
+
+
+def test_invalid_run_id_writes_fail_closed_rejection_output(tmp_path, monkeypatch):
+    import json
+
+    import src.ppo_v2_validation_only_preflight_execution as preflight
+
+    monkeypatch.chdir(tmp_path)
+    output_root = "artifacts/ppo_v2/preflight_validation/reject_invalid_run_id"
+    request = preflight.ValidationOnlyPreflightRequest(
+        run_id="v3_07_validation_only_preflight_rerun_001",
+        config_path=preflight.V3_07_CONFIG_PATH,
+        output_root=output_root,
+        validation_only=True,
+        no_submit=True,
+        command=(
+            "--run-id",
+            "v3_07_validation_only_preflight_rerun_001",
+            "--config",
+            preflight.V3_07_CONFIG_PATH,
+            "--output-root",
+            output_root,
+            "--validation-only",
+            "--no-submit",
+        ),
+    )
+
+    result = preflight.execute_validation_only_preflight(request)
+
+    assert result.result == preflight.REJECTED_FAIL_CLOSED_RESULT
+    assert result.metadata["request_validation_rejected"] is True
+    assert result.metadata["R1_R6_preflight_executed"] is False
+    assert result.metadata["r1_r6_preflight_executed"] is False
+    assert result.metadata["training_performed"] is False
+    assert result.metadata["sealed_training_command_executed"] is False
+    assert result.metadata["model_artifact_creation_performed"] is False
+    assert result.metadata["paper_orders_submitted"] is False
+    assert result.metadata["live_orders_submitted"] is False
+
+    rejection_path = (
+        tmp_path
+        / output_root
+        / preflight.REQUEST_VALIDATION_REJECTION_FILE_NAME
+    )
+    assert rejection_path.is_file()
+
+    payload = json.loads(rejection_path.read_text(encoding="utf-8"))
+    assert payload["status"] == preflight.REJECTED_FAIL_CLOSED_RESULT
+    assert payload["status"] not in {
+        preflight.PASS_RESULT,
+        preflight.PARTIAL_FAIL_RESULT,
+    }
+    assert payload["request_validation_rejected"] is True
+    assert payload["invalid_run_id"] is True
+    assert payload["attempted_run_id"] == "v3_07_validation_only_preflight_rerun_001"
+    assert payload["required_run_id"] == preflight.V3_07_VALIDATION_RUN_ID
+    assert payload["R1_R6_preflight_executed"] is False
+    assert payload["r1_r6_evidence_generated"] is False
+    assert payload["full_preflight_result"] is False
+    assert payload["training_performed"] is False
+    assert payload["sealed_training_command_executed"] is False
+    assert payload["model_artifact_creation_performed"] is False
+    assert payload["paper_orders_submitted"] is False
+    assert payload["live_orders_submitted"] is False
+
+    for file_name in preflight.EVIDENCE_FILE_NAMES.values():
+        assert not (tmp_path / output_root / file_name).exists()
+
+def _assert_request_validation_rejection_created(result, tmp_path):
+    import json
+
+    assert len(result.created_files) == 1
+
+    rejection_path = tmp_path / result.created_files[0]
+    assert rejection_path.is_file()
+    assert rejection_path.name == preflight.REQUEST_VALIDATION_REJECTION_FILE_NAME
+
+    payload = json.loads(rejection_path.read_text(encoding="utf-8"))
+
+    assert payload["status"] == preflight.REJECTED_FAIL_CLOSED_RESULT
+    assert payload["status"] not in {
+        preflight.PASS_RESULT,
+        preflight.PARTIAL_FAIL_RESULT,
+    }
+    assert payload["request_validation_rejected"] is True
+    assert payload["R1_R6_preflight_executed"] is False
+    assert payload["r1_r6_preflight_executed"] is False
+    assert payload["r1_r6_evidence_generated"] is False
+    assert payload["full_preflight_result"] is False
+
+    assert payload["training_performed"] is False
+    assert payload["sealed_training_command_executed"] is False
+    assert payload["model_learn_called"] is False
+    assert payload["model_fitting_performed"] is False
+    assert payload["data_fetching_performed"] is False
+    assert payload["dataset_generation_performed"] is False
+    assert payload["model_artifact_creation_performed"] is False
+    assert payload["quarantine_model_output_creation_performed"] is False
+    assert payload["paper_orders_submitted"] is False
+    assert payload["live_orders_submitted"] is False
+
+    for file_name in preflight.EVIDENCE_FILE_NAMES.values():
+        assert not (rejection_path.parent / file_name).exists()
