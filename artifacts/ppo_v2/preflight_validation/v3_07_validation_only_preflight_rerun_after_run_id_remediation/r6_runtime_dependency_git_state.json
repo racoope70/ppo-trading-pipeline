@@ -1,0 +1,22 @@
+{
+  "credentials_captured": false,
+  "errors": [],
+  "executable": "/Users/richardcooper/Desktop/Day Trading/Deployable Code Setup - VS Code/quantitative-trading-system-main/.venv/bin/python",
+  "git_state": {
+    "branch": "main",
+    "commit": "1ee3c5467d45148f0cad409c55b66066461c59cb",
+    "status_short": "",
+    "working_tree_clean": true
+  },
+  "packages": {
+    "PyYAML": "6.0.3",
+    "numpy": "1.26.4",
+    "pandas": "3.0.2",
+    "pyarrow": "24.0.0",
+    "pytest": "9.0.3"
+  },
+  "platform": "macOS-13.7.8-x86_64-i386-64bit",
+  "python_version": "3.12.2 (v3.12.2:6abddd9f6a, Feb  6 2024, 17:02:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "secrets_captured": false,
+  "status": "PASS"
+}
