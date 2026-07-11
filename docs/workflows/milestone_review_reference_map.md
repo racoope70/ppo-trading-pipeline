@@ -175,3 +175,129 @@ deployment_readiness_claims = NOT_AUTHORIZED
 legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
 
 Any contradiction between archived records and this guardrail is resolved in favor of PROJECT_CONTEXT.md.
+
+<!-- V3.08_LATEST_REFERENCE_MAP_ALIGNMENT_START -->
+# v3.08 Latest Reference Map Alignment
+
+## Latest Required Records
+
+```text
+v3.07 closeout record = docs/runs/v3.07_run_id_fail_closed_remediation_and_validation_rerun_closeout.md
+v3.07 closeout_commit = 137be6f
+v3.07 closeout_ci = Tests #373 green
+
+v3.08 diagnostics authorization = docs/runs/v3.08_sealed_dataset_recovery_source_of_truth_reconciliation_authorization.md
+v3.08 diagnostics_authorization_commit = ba9f63a
+v3.08 diagnostics_authorization_ci = Tests #374 green
+
+v3.08 diagnostics inspection = docs/runs/v3.08_diagnostics_only_sealed_dataset_source_of_truth_inspection.md
+v3.08 diagnostics_inspection_commit = 9c0b371
+v3.08 diagnostics_inspection_ci = Tests #375 green
+
+v3.08 recovery strategy plan = docs/runs/v3.08_sealed_dataset_recovery_strategy_authorization_plan.md
+v3.08 recovery_strategy_commit = f7277aa
+v3.08 recovery_strategy_ci = Tests #376 green
+
+v3.08 trusted external artifact source authorization = docs/runs/v3.08_trusted_external_artifact_source_inspection_authorization.md
+v3.08 trusted_external_artifact_source_authorization_commit = b500913
+v3.08 trusted_external_artifact_source_authorization_ci = Tests #377 green
+```
+
+## Current Blocker
+
+```text
+remaining_blocker = missing sealed dataset
+missing_dataset_path = data/processed/ppo_v2/v3_07_no_submit_training_input.parquet
+source_of_truth_issue_category = DATASET_PATH_APPEARS_GITIGNORED_OR_EXCLUDED
+preflight_readiness = NOT_PASSED
+sealed_dataset_validation = NOT_PROVEN
+training = NOT_AUTHORIZED
+```
+
+## Immediate Next Checkpoint
+
+```text
+next_checkpoint = v3.08 Repository Artifact Lineage / Model-Section Source Inspection
+```
+
+Inspect repository-controlled lineage only:
+
+```text
+racoope70/ppo-trading-pipeline
+racoope70/quant-trading-model-validation, if available locally or through GitHub
+```
+
+Target lineage:
+
+```text
+data/processed/ppo_v2/v3_07_no_submit_training_input.parquet
+```
+
+Search targets:
+
+```text
+configs
+package-prep records
+artifact manifests
+checksum/inventory files
+model-section docs
+generation scripts
+feature configs
+ticker universe records
+date range records
+split/embargo/holdout rules
+prior validation/training records
+```
+
+Do not use this map as authorization to inspect broad local folders, restore/copy data, validate the sealed dataset, rerun validation-only preflight, run training, create model artifacts, or submit orders.
+
+## Guardrails
+
+```text
+command_contract_guardrail = REQUIRED
+execution_head_freshness_guardrail = REQUIRED
+independent_audit_policy = REQUIRED_FOR_GATE_OR_PERMISSION_STATE_CHANGES
+```
+
+Command-contract guardrail:
+
+```text
+Verify that any command/run_id/path/config/output/evidence path in the checkpoint matches source code, config, command manifest, artifact manifest, or source-of-truth record.
+Do not accept manually invented values.
+If run_id is involved, confirm authorized_command_run_id == source_required_run_id.
+```
+
+Execution-head freshness guardrail:
+
+```bash
+git fetch origin
+git status --short
+git rev-parse HEAD
+git rev-parse origin/main
+git merge-base --is-ancestor <latest_required_authorization_or_review_commit> HEAD
+```
+
+Execution may proceed only if:
+
+```text
+execution_head_includes_required_review_commit = TRUE
+```
+
+Independent audit required for:
+
+```text
+NOT_AUTHORIZED -> AUTHORIZED
+BLOCKED -> UNBLOCKED
+NOT_PASSED -> PASSED
+NOT_PROVEN -> PROVEN
+NOT_READY -> READY
+validation-only preflight rerun
+sealed dataset recovery/regeneration
+sealed dataset validation
+PPO v2 training
+model artifact creation
+paper/live orders
+model promotion
+deployment/readiness/edge/profitability claims
+```
+<!-- V3.08_LATEST_REFERENCE_MAP_ALIGNMENT_END -->

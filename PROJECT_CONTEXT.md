@@ -156,3 +156,185 @@ Use the archive when detailed v3.07 chronology is needed. Use this file for curr
 current_bottom_line = validation-only preflight rerun requires explicit later authorization
 
 The project remains blocked for PPO v2 training and sealed training command execution. The explicit validation-only preflight rerun authorization checkpoint is the active milestone, but the rerun itself remains `NOT_AUTHORIZED` until a later checkpoint explicitly authorizes it.
+
+<!-- V3.08_CURRENT_PROJECT_CONTEXT_ALIGNMENT_START -->
+# v3.08 Current Project Context / Roadmap Alignment
+
+## Current Confirmed State
+
+```text
+v3.07 closeout_commit = 137be6f
+v3.07 closeout_ci = Tests #373 green
+v3.07 run-id/fail-closed remediation = COMPLETE
+v3.07 validation-only rerun = CONSUMED
+v3.07 validation-only rerun result = PARTIAL_FAIL
+R1 = PASS
+R2 = FAIL
+R3 = FAIL
+R4 = FAIL
+R5 = FAIL
+R6 = PASS
+remaining_blocker = missing sealed dataset
+missing_dataset_path = data/processed/ppo_v2/v3_07_no_submit_training_input.parquet
+preflight_readiness = NOT_PASSED
+sealed_dataset_validation = NOT_PROVEN
+training = NOT_AUTHORIZED
+```
+
+## v3.08 Recovery / Diagnostics Chain
+
+```text
+diagnostics_authorization_commit = ba9f63a
+diagnostics_authorization_ci = Tests #374 green
+
+diagnostics_inspection_commit = 9c0b371
+diagnostics_inspection_ci = Tests #375 green
+
+recovery_strategy_commit = f7277aa
+recovery_strategy_ci = Tests #376 green
+
+trusted_external_artifact_source_authorization_commit = b500913
+trusted_external_artifact_source_authorization_ci = Tests #377 green
+```
+
+## v3.08 Diagnostics Finding
+
+```text
+source_of_truth_issue_category = DATASET_PATH_APPEARS_GITIGNORED_OR_EXCLUDED
+dataset_exists_locally = FALSE
+dataset_tracked_by_git = FALSE
+dataset_ignored_by_gitignore = TRUE
+v3_07_config_points_to_missing_path = TRUE
+another_copy_exists_under_data_or_artifacts = FALSE
+git_history_shows_dataset_ever_committed_exact_path = FALSE
+```
+
+## Preserved Authorization State
+
+```text
+preflight_readiness = NOT_PASSED
+sealed_dataset_validation = NOT_PROVEN
+
+validation_only_preflight_rerun = NOT_AUTHORIZED
+additional_validation_only_preflight_rerun = NOT_AUTHORIZED
+
+sealed_dataset_recovery = NOT_AUTHORIZED
+sealed_dataset_restore = NOT_AUTHORIZED
+sealed_dataset_copy = NOT_AUTHORIZED
+sealed_dataset_repair = NOT_AUTHORIZED
+sealed_dataset_regeneration = NOT_AUTHORIZED
+sealed_dataset_mutation_or_rewrite = NOT_AUTHORIZED
+sealed_dataset_validation_execution = NOT_AUTHORIZED
+
+ppo_v2_training_execution = NOT_AUTHORIZED
+sealed_training_command_execution = NOT_AUTHORIZED
+training = NOT_AUTHORIZED
+
+model_artifact_creation = NOT_AUTHORIZED
+quarantine_output_creation = NOT_AUTHORIZED
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+model_promotion = NOT_AUTHORIZED
+production_deployment = NOT_AUTHORIZED
+deployment_readiness_claims = NOT_AUTHORIZED
+trading_edge_claims = NOT_AUTHORIZED
+profitability_claims = NOT_AUTHORIZED
+tagging = NOT_AUTHORIZED
+```
+
+## Immediate Next Investigation Direction
+
+```text
+next_checkpoint = v3.08 Repository Artifact Lineage / Model-Section Source Inspection
+```
+
+Purpose:
+
+Inspect repository-controlled files and model-section artifacts across:
+
+```text
+racoope70/ppo-trading-pipeline
+racoope70/quant-trading-model-validation, if available locally or through GitHub
+```
+
+Target lineage:
+
+```text
+data/processed/ppo_v2/v3_07_no_submit_training_input.parquet
+```
+
+The next search target is not random local folders. The target is repository/source-controlled lineage:
+
+```text
+configs
+package-prep records
+artifact manifests
+checksum/inventory files
+model-section docs
+generation scripts
+feature configs
+ticker universe records
+date range records
+split/embargo/holdout rules
+prior validation/training records
+```
+
+Do not proceed with broad local Desktop, Downloads, Google Drive, or CloudStorage artifact inspection unless exact approved locations are later provided in a separate authorized checkpoint.
+
+## Command-Contract Guardrail
+
+Verify that any command/run_id/path/config/output/evidence path in the checkpoint matches source code, config, command manifest, artifact manifest, or source-of-truth record.
+
+Do not accept manually invented values.
+
+If run_id is involved, confirm:
+
+```text
+authorized_command_run_id == source_required_run_id
+```
+
+## Execution-Head Freshness Guardrail
+
+Before any authorized execution:
+
+```bash
+git fetch origin
+git status --short
+git rev-parse HEAD
+git rev-parse origin/main
+git merge-base --is-ancestor <latest_required_authorization_or_review_commit> HEAD
+```
+
+Execution may proceed only if:
+
+```text
+execution_head_includes_required_review_commit = TRUE
+```
+
+## Independent Audit Policy
+
+Independent audit is for gate decisions, permission-state changes, and high-risk execution, not every routine documentation cleanup.
+
+Independent audit is required when changing:
+
+```text
+NOT_AUTHORIZED -> AUTHORIZED
+BLOCKED -> UNBLOCKED
+NOT_PASSED -> PASSED
+NOT_PROVEN -> PROVEN
+NOT_READY -> READY
+```
+
+Independent audit is required when authorizing or executing:
+
+```text
+validation-only preflight rerun
+sealed dataset recovery/regeneration
+sealed dataset validation
+PPO v2 training
+model artifact creation
+paper/live orders
+model promotion
+deployment/readiness/edge/profitability claims
+```
+<!-- V3.08_CURRENT_PROJECT_CONTEXT_ALIGNMENT_END -->
