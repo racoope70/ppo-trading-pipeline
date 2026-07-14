@@ -22,3 +22,4 @@ transformers
 tensorflow==2.16.2
 protobuf==3.20.3
 numba==0.60.0
+exchange-calendars==4.13.2
