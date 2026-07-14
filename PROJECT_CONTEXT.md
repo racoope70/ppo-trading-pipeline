@@ -14,11 +14,11 @@ active_phase = v3.08 Dataset Reconstruction Implementation Planning / Independen
 latest_completed_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Cleanup / Source-of-Truth Remediation
 latest_completed_commit = f0063e1c815ddb729c9330f7325592a79ec42dae
 latest_completed_ci = Tests #411 passed
-current_active_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
-next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
+current_active_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Remediation
+next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review Repeat After Remediation
 ```
 
-The final contract resolution passed independent review after documentation remediation. Implementation planning was then authorized, and the documentation-only implementation plan was created and cleaned. That plan is ready for independent review. No implementation or runtime activity is authorized.
+The final contract resolution passed independent review after documentation remediation. Implementation planning was then authorized, and the documentation-only implementation plan was created and cleaned. Its independent review failed and requires this documentation remediation followed by a repeated independent review. No implementation or runtime activity is authorized.
 
 ## 2. Governing Reconstruction Classification
 
@@ -55,9 +55,9 @@ final_contract_review_record = docs/audits/v3.08_independent_dataset_reconstruct
 implementation_planning_authorization_decision = PASS_IMPLEMENTATION_PLANNING_AUTHORIZATION_ONLY
 implementation_plan_decision = PASS_IMPLEMENTATION_PLAN_FOR_FUTURE_AUTHORIZATION_REVIEW_ONLY
 implementation_plan_file = docs/runs/v3.08_dataset_reconstruction_implementation_plan.md
-implementation_plan_status = CLEANED_AND_READY_FOR_INDEPENDENT_REVIEW
+implementation_plan_status = REMEDIATED_AWAITING_REPEATED_INDEPENDENT_REVIEW
 implementation_readiness = NOT_ESTABLISHED
-next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
+next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review Repeat After Remediation
 ```
 
 The independent plan review may evaluate progression toward a later implementation-authorization checkpoint. It does not itself implement the plan.
@@ -120,10 +120,10 @@ No source, test, dependency, data, validation, training, model, trading, deploym
 ## 8. Forward Roadmap
 
 1. v3.08 Independent Dataset Reconstruction Implementation Plan Review.
-2. If review passes: v3.08 Dataset Reconstruction Implementation Authorization Checkpoint.
-3. Dependency / requirements authorization checkpoint for `exchange-calendars==4.13.2`.
-4. Runtime dependency verification checkpoint.
-5. Source/test implementation checkpoint.
+2. If the repeated review passes: v3.08 Dataset Reconstruction Dependency/Requirements Authorization.
+3. v3.08 Dataset Reconstruction Dependency Installation and XNYS Runtime Verification.
+4. v3.08 Dataset Reconstruction Implementation Authorization.
+5. v3.08 Dataset Reconstruction Source/Test Implementation.
 6. Unit-test and contract-test checkpoint with mocked data only.
 7. Data-fetch authorization checkpoint.
 8. Dataset-generation authorization checkpoint.
@@ -139,6 +139,8 @@ No source, test, dependency, data, validation, training, model, trading, deploym
 18. Paper-trading authorization.
 
 Every step remains contingent on its own explicit authorization and any required independent review. Steps may be split further when risk requires.
+
+Dependency/requirements authorization and completed dependency installation/XNYS runtime verification are prerequisites before implementation authorization can be reconsidered. Implementation authorization remains `NOT_ALLOWED / NOT_AUTHORIZED` until the repeated independent implementation-plan review passes and dependency/runtime verification is completed.
 
 ## 9. Freshness Guardrail
 
@@ -158,8 +160,9 @@ Proceed only when the working tree is clean, `HEAD` equals `origin/main`, and th
 ## 10. Current Bottom Line
 
 ```text
-implementation_plan_status = CLEANED_AND_READY_FOR_INDEPENDENT_REVIEW
-current_active_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
+implementation_plan_status = REMEDIATED_AWAITING_REPEATED_INDEPENDENT_REVIEW
+current_active_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Remediation
+implementation_authorization = NOT_ALLOWED / NOT_AUTHORIZED
 implementation_authorized = NO
 runtime_execution_authorized = NO
 ```
