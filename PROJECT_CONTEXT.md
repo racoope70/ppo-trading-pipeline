@@ -2,34 +2,25 @@
 
 Authoritative source of truth for `racoope70/ppo-trading-pipeline`.
 
-Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_chain_summary.md`.
+Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_chain_summary.md`. The v3.07 validation-only preflight path and missing dataset path are historical context only; they are not the active milestone or current output target.
 
 ---
 
 ## 1. Current Source-of-Truth Summary
 
 ```text
-latest_completed_governance_review = v3.08 Independent Dataset Reconstruction Final Contract Resolution Review
-latest_completed_review_commit = 3fb3974e66ddf279af640c79b10aa79df96db523
-latest_completed_review_decision = FAIL_INDEPENDENT_FINAL_CONTRACT_RESOLUTION_REVIEW_REQUIRES_REMEDIATION
-reviewed_contract_checkpoint = v3.08 Dataset Reconstruction Final Contract Resolution
-reviewed_contract_commit = 71180efd5f5d2fdeae1d1cbb0f45742fc9bab6a2
-reviewed_contract_decision = PASS_SUPERSEDING_DATASET_RECONSTRUCTION_CONTRACT_RESOLUTION_FOR_INDEPENDENT_REVIEW_ONLY
-contract_literal_remediation_commit = c484781c96e00809363d206202827ae0b9ab2b54
-audit_remediation_items_completed = YES
-recorded_audit_decision_superseded = NO
-active_milestone = v3.08 Independent Dataset Reconstruction Final Contract Resolution Review — Repeat After Remediation
-next_checkpoint = v3.08 Independent Dataset Reconstruction Final Contract Resolution Review — Repeat After Remediation
-current_workstream = PPO_V2_DATASET_RECONSTRUCTION_GOVERNANCE
-current_phase = documentation remediation completed; repeated independent review pending
-implementation_planning_authorization = NOT_YET_ALLOWED
+current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
+active_phase = v3.08 Dataset Reconstruction Implementation Planning / Independent Review
+latest_completed_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Cleanup / Source-of-Truth Remediation
+latest_completed_commit = f0063e1c815ddb729c9330f7325592a79ec42dae
+latest_completed_ci = Tests #411 passed
+current_active_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
+next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
 ```
 
-All four remediation findings from the failed independent review have been addressed in the repository documents. This does not change or supersede the recorded `FAIL` decision. A repeated independent review is still required before any later checkpoint may be considered.
+The final contract resolution passed independent review after documentation remediation. Implementation planning was then authorized, and the documentation-only implementation plan was created and cleaned. That plan is ready for independent review. No implementation or runtime activity is authorized.
 
----
-
-## 2. Reconstruction Classification
+## 2. Governing Reconstruction Classification
 
 ```text
 reconstruction_classification = SUPERSEDING_GOVERNED_ALPACA_ALIGNED_RECONSTRUCTION
@@ -40,14 +31,12 @@ historical_equivalence_claim = NOT_PROVEN
 new_dataset_identity_required = TRUE
 ```
 
-The selected path is a new governed Alpaca-aligned reconstruction standard. It is not recovery of the original missing v3.07 dataset.
+The selected path is a new governed Alpaca-aligned reconstruction standard, not recovery of the missing original v3.07 dataset.
 
----
-
-## 3. Dataset Identity and Paths
+## 3. Dataset Identity
 
 ```text
-prospective_output_path = data/processed/ppo_v2/v3_08_superseding_alpaca_aligned_no_submit_training_input.parquet
+output_path = data/processed/ppo_v2/v3_08_superseding_alpaca_aligned_no_submit_training_input.parquet
 old_missing_path = data/processed/ppo_v2/v3_07_no_submit_training_input.parquet
 old_path_usage = HISTORICAL_MISSING_ARTIFACT_REFERENCE_ONLY
 old_path_as_output_target = PROHIBITED
@@ -56,52 +45,42 @@ new_manifest_required = TRUE
 new_checksum_required = TRUE
 ```
 
----
+The v3.07 missing path must not be used as an output target.
 
-## 4. Contract Resolution Status
+## 4. Governing Review and Implementation-Plan State
 
 ```text
-nine_choices_governance_resolved = YES
-conditional_technical_literal_values_resolved = YES
-unresolved_conditional_technical_literals = NONE
-calendar_version_status = GOVERNANCE_SELECTED_DEPENDENCY_PIN_PENDING_FUTURE_INSTALL_AND_RUNTIME_VERIFICATION
-exchange_calendars_status = GOVERNANCE_SELECTED_DEPENDENCY_PIN_PENDING_FUTURE_INSTALL_AND_RUNTIME_VERIFICATION
-calendar_runtime_verified = NO
+final_contract_resolution_review_status = PASSED_INDEPENDENT_REVIEW_AFTER_REMEDIATION
+final_contract_review_record = docs/audits/v3.08_independent_dataset_reconstruction_final_contract_resolution_review_repeat_after_remediation.md
+implementation_planning_authorization_decision = PASS_IMPLEMENTATION_PLANNING_AUTHORIZATION_ONLY
+implementation_plan_decision = PASS_IMPLEMENTATION_PLAN_FOR_FUTURE_AUTHORIZATION_REVIEW_ONLY
+implementation_plan_file = docs/runs/v3.08_dataset_reconstruction_implementation_plan.md
+implementation_plan_status = CLEANED_AND_READY_FOR_INDEPENDENT_REVIEW
 implementation_readiness = NOT_ESTABLISHED
-current_source_contract_conformance = NOT_ESTABLISHED
-current_tests_contract_conformance = NOT_ESTABLISHED
+next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
 ```
 
-The canonical conditional-literal closure and calendar-version fields are present in `docs/runs/v3.08_dataset_reconstruction_contract_resolution.md`. Calendar runtime verification remains a separately governed hard gate.
+The independent plan review may evaluate progression toward a later implementation-authorization checkpoint. It does not itself implement the plan.
 
----
-
-## 5. Active Review Path
+## 5. Calendar and Runtime Status
 
 ```text
-active_milestone = v3.08 Independent Dataset Reconstruction Final Contract Resolution Review — Repeat After Remediation
-allowed_scope = INDEPENDENT_DOCUMENTATION_AND_GOVERNANCE_REVIEW_ONLY
-implementation_planning_authorization = NOT_YET_ALLOWED
+exchange_calendars_installed = NO
+XNYS_local_runtime_verification = NOT_PERFORMED
+calendar_runtime_verified = NO
+calendar_version_status = GOVERNANCE_SELECTED_DEPENDENCY_PIN_PENDING_FUTURE_INSTALL_AND_RUNTIME_VERIFICATION
 ```
 
-The repeated review must evaluate the remediated package. Only a passing repeated independent review may permit consideration of `v3.08 Dataset Reconstruction Implementation Planning Authorization`. That later checkpoint would authorize planning review only unless another explicit decision changed a boundary.
-
----
+The final contract requires `exchange-calendars==4.13.2`, but dependency installation, requirements changes, and runtime verification remain separately governed future gates.
 
 ## 6. Hard Non-Authorization Boundary
 
 ```text
-NO_SUBMIT = DEFAULT
-preflight_readiness = NOT_PASSED
-sealed_dataset_validation = NOT_PROVEN
-validation_only_preflight_rerun = NOT_AUTHORIZED
-additional_validation_only_preflight_rerun = NOT_AUTHORIZED
 code_implementation = NOT_AUTHORIZED
 source_code_changes = NOT_AUTHORIZED
 test_changes = NOT_AUTHORIZED
 dependency_installation = NOT_AUTHORIZED
 requirements_change = NOT_AUTHORIZED
-market_data_access = NOT_AUTHORIZED
 data_fetching = NOT_AUTHORIZED
 data_downloading = NOT_AUTHORIZED
 dataset_generation = NOT_AUTHORIZED
@@ -113,46 +92,20 @@ dataset_regeneration = NOT_AUTHORIZED
 dataset_mutation = NOT_AUTHORIZED
 dataset_rewrite = NOT_AUTHORIZED
 dataset_validation = NOT_AUTHORIZED
+sealed_dataset_validation = NOT_PROVEN
+validation_only_preflight_rerun = NOT_AUTHORIZED
 training = NOT_AUTHORIZED
-ppo_v2_training_execution = NOT_AUTHORIZED
-sealed_training_command_execution = NOT_AUTHORIZED
-training_command_execution = NOT_AUTHORIZED
-model_learn = NOT_AUTHORIZED
 model_fitting = NOT_AUTHORIZED
 model_artifact_creation = NOT_AUTHORIZED
-quarantine_model_output_creation = NOT_AUTHORIZED
-paper_order_authorization = NOT_AUTHORIZED
-live_order_authorization = NOT_AUTHORIZED
 paper_orders = NOT_AUTHORIZED
 live_orders = NOT_AUTHORIZED
-controlled_submit = BLOCKED
-ppo_rf = BLOCKED
-ppo_xgboost = BLOCKED
-model_promotion = NOT_AUTHORIZED
-production_deployment = NOT_AUTHORIZED
 deployment = NOT_AUTHORIZED
 tagging = NOT_AUTHORIZED
-trading_edge_claims = NOT_AUTHORIZED
-profitability_claims = NOT_AUTHORIZED
-deployment_readiness_claims = NOT_AUTHORIZED
-legacy_ppo_retraining_decision = DO_NOT_RETRAIN_LEGACY_MODEL
 ```
 
-These lines control current authorization state. Historical records, audit records, package manifests, and navigation maps do not override them.
+No source, test, dependency, data, validation, training, model, trading, deployment, or tagging authority is implied by the completed documentation checkpoints.
 
----
-
-## 7. Governance Hierarchy and Review Chain
-
-```text
-source_of_truth = PROJECT_CONTEXT.md
-navigation_map = docs/workflows/milestone_review_reference_map.md
-final_contract_record = docs/runs/v3.08_dataset_reconstruction_contract_resolution.md
-independent_review_record = docs/audits/v3.08_independent_dataset_reconstruction_final_contract_resolution_review.md
-historical_chain_archive = docs/archive/v3_07_validation_readiness_chain_summary.md
-```
-
-Required v3.08 chain:
+## 7. Governing Chain
 
 1. `docs/runs/v3.08_dataset_reconstruction_executive_contract_decision.md`
 2. `docs/runs/v3.08_dataset_reconstruction_exchange_calendar_version_selection.md`
@@ -160,36 +113,55 @@ Required v3.08 chain:
 4. `docs/runs/v3.08_dataset_reconstruction_conditional_technical_literal_verification.md`
 5. `docs/runs/v3.08_dataset_reconstruction_contract_resolution.md`
 6. `docs/audits/v3.08_independent_dataset_reconstruction_final_contract_resolution_review.md`
-7. repeated independent review after remediation
+7. `docs/audits/v3.08_independent_dataset_reconstruction_final_contract_resolution_review_repeat_after_remediation.md`
+8. `docs/runs/v3.08_dataset_reconstruction_implementation_planning_authorization.md`
+9. `docs/runs/v3.08_dataset_reconstruction_implementation_plan.md`
 
----
+## 8. Forward Roadmap
 
-## 8. Freshness Guardrail
+1. v3.08 Independent Dataset Reconstruction Implementation Plan Review.
+2. If review passes: v3.08 Dataset Reconstruction Implementation Authorization Checkpoint.
+3. Dependency / requirements authorization checkpoint for `exchange-calendars==4.13.2`.
+4. Runtime dependency verification checkpoint.
+5. Source/test implementation checkpoint.
+6. Unit-test and contract-test checkpoint with mocked data only.
+7. Data-fetch authorization checkpoint.
+8. Dataset-generation authorization checkpoint.
+9. Dataset-generation execution.
+10. Dataset evidence review.
+11. Dataset-validation authorization.
+12. Dataset-validation execution.
+13. Validation-only preflight authorization.
+14. Validation-only preflight execution.
+15. Training authorization.
+16. Training execution.
+17. Artifact/model review.
+18. Paper-trading authorization.
 
-Before the repeated review from a local checkout:
+Every step remains contingent on its own explicit authorization and any required independent review. Steps may be split further when risk requires.
+
+## 9. Freshness Guardrail
+
+Before the current independent plan review from a local checkout:
 
 ```bash
 git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor <latest_documentation_remediation_commit> HEAD
+git merge-base --is-ancestor f0063e1c815ddb729c9330f7325592a79ec42dae HEAD
 echo $?
 ```
 
 Proceed only when the working tree is clean, `HEAD` equals `origin/main`, and the merge-base exit code is `0`.
 
----
-
-## 9. Current Bottom Line
+## 10. Current Bottom Line
 
 ```text
-audit_remediation_items_completed = YES
-repeated_independent_review = PENDING
-recorded_audit_decision = FAIL_INDEPENDENT_FINAL_CONTRACT_RESOLUTION_REVIEW_REQUIRES_REMEDIATION
-recorded_audit_decision_superseded = NO
-next_allowed_checkpoint = v3.08 Independent Dataset Reconstruction Final Contract Resolution Review — Repeat After Remediation
-implementation_planning_authorization = NOT_YET_ALLOWED
+implementation_plan_status = CLEANED_AND_READY_FOR_INDEPENDENT_REVIEW
+current_active_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review
+implementation_authorized = NO
+runtime_execution_authorized = NO
 ```
 
-The documentation discrepancies are corrected. The project remains blocked from implementation and execution. The next action is the repeated independent review, not implementation planning.
+The next action is independent review of the implementation plan, not implementation or execution.
