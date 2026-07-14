@@ -11,14 +11,14 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
 active_phase = v3.08 Dataset Reconstruction Implementation Planning / Independent Review
-latest_completed_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Cleanup / Source-of-Truth Remediation
-latest_completed_commit = f0063e1c815ddb729c9330f7325592a79ec42dae
-latest_completed_ci = Tests #411 passed
-current_active_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Remediation
+latest_completed_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Remediation
+latest_completed_commit = e035cb022c06ce10a4d08d81df345a9da22cdebb
+latest_completed_ci = NOT_RECORDED_IN_SOURCE_OF_TRUTH_FOR_E035CB0
+current_active_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review Repeat After Remediation
 next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review Repeat After Remediation
 ```
 
-The final contract resolution passed independent review after documentation remediation. Implementation planning was then authorized, and the documentation-only implementation plan was created and cleaned. Its independent review failed and requires this documentation remediation followed by a repeated independent review. No implementation or runtime activity is authorized.
+The final contract resolution passed independent review after documentation remediation. Implementation planning was then authorized, and the documentation-only implementation plan was created and cleaned. Its independent review failed, the required documentation remediation is complete, and the repeated independent implementation-plan review is now active. No implementation or runtime activity is authorized.
 
 ## 2. Governing Reconstruction Classification
 
@@ -119,7 +119,7 @@ No source, test, dependency, data, validation, training, model, trading, deploym
 
 ## 8. Forward Roadmap
 
-1. v3.08 Independent Dataset Reconstruction Implementation Plan Review.
+1. v3.08 Independent Dataset Reconstruction Implementation Plan Review Repeat After Remediation.
 2. If the repeated review passes: v3.08 Dataset Reconstruction Dependency/Requirements Authorization.
 3. v3.08 Dataset Reconstruction Dependency Installation and XNYS Runtime Verification.
 4. v3.08 Dataset Reconstruction Implementation Authorization.
@@ -151,7 +151,7 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor f0063e1c815ddb729c9330f7325592a79ec42dae HEAD
+git merge-base --is-ancestor e035cb022c06ce10a4d08d81df345a9da22cdebb HEAD
 echo $?
 ```
 
@@ -161,10 +161,11 @@ Proceed only when the working tree is clean, `HEAD` equals `origin/main`, and th
 
 ```text
 implementation_plan_status = REMEDIATED_AWAITING_REPEATED_INDEPENDENT_REVIEW
-current_active_checkpoint = v3.08 Dataset Reconstruction Implementation Plan Remediation
+current_active_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review Repeat After Remediation
+next_checkpoint = v3.08 Independent Dataset Reconstruction Implementation Plan Review Repeat After Remediation
 implementation_authorization = NOT_ALLOWED / NOT_AUTHORIZED
 implementation_authorized = NO
 runtime_execution_authorized = NO
 ```
 
-The next action is independent review of the implementation plan, not implementation or execution.
+The active next action is the independent implementation-plan review repeat after remediation, not implementation or execution.
