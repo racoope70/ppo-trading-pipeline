@@ -6,11 +6,12 @@ This file preserves future validation, training, final holdout, candidate-select
 
 `PROJECT_CONTEXT.md` remains the current source of truth. `docs/workflows/milestone_review_reference_map.md` remains the broad navigation map. This file is a future reference guide only and does not authorize execution or replace a checkpoint-specific plan, run record, authorization, or independent review.
 
-## Current relationship to v3.08
+## Active-state source of truth
 
-The current active checkpoint is governed by `PROJECT_CONTEXT.md`.
+The current active checkpoint is always governed by `PROJECT_CONTEXT.md`.
+This file should not be treated as the active-state source of truth.
 
-As of the current source of truth, `v3.08 Data-Fetch Authorization` is the active checkpoint. Source/test implementation and mocked unit/contract testing are completed prerequisites. Data fetching, dataset generation, dataset validation, validation-only preflight, training, model-artifact creation, paper trading, live trading, deployment, and tagging remain separately governed.
+Future validation, training, paper trading, universe expansion, and downstream execution remain separately governed and require their own authorization.
 
 ## General stop-and-review rule
 
