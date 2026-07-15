@@ -41,7 +41,12 @@ Passing tests prove infrastructure, control, and reporting stability. They do no
 ## Workflows
 
 - [Six-Ticker Quality Baseline](docs/workflows/six_ticker_quality_baseline.md)
-- [Milestone Review Reference Map](docs/workflows/milestone_review_reference_map.md)
+
+## Governance documents
+
+- [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) — current active checkpoint, source of truth, and authorization boundary.
+- [Milestone Review Reference Map](docs/workflows/milestone_review_reference_map.md) — roadmap navigation and checkpoint reference map.
+- [Future Validation and Training Reference Map](docs/workflows/future_validation_training_reference_map.md) — future validation, training, holdout, candidate-selection, and paper-trading reference guide.
 
 ## Audit Archive
 
