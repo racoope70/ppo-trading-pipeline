@@ -127,6 +127,12 @@ tagging_authorized = NO
 
 Every later milestone remains separately governed.
 
+```text
+future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
+```
+
+For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe-expansion guidance, use the future validation/training reference map. That file is guidance only and does not authorize execution.
+
 ## 9. Alignment checkpoint action confirmations
 
 ```text
