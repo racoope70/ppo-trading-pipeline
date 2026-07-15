@@ -96,6 +96,105 @@ tagging_authorized = NO
 6. `src/ppo_v2_market_calendar.py`
 7. `src/ppo_v2_parquet_writer.py`
 
+## 2v. Numbered Governance Lookup
+
+Use this lookup to select the governance guidance for the requested class of work.
+
+```text
+source/test implementation                      -> 2v.10
+mocked unit and contract testing                -> 2v.20
+data-fetch authorization or execution           -> 2v.30
+dataset-generation authorization/execution      -> 2v.40
+dataset evidence review                         -> 2v.40
+dataset validation or validation-only preflight -> 2v.50
+embargo or VecNormalize hardening               -> 2v.60
+PPO retraining authorization/execution          -> 2v.70
+final holdout or candidate selection            -> 2v.80
+paper trading, deployment, or live discussion   -> 2v.90
+future universe expansion                       -> 2v.100
+```
+
+Read the latest applicable run, audit, review, plan, and authorization records if they exist. Absence of a record means the gate is not complete; do not invent a filename, decision, result, or authorization.
+
+### 2v.00 Current source-of-truth entry point
+
+- **When to use:** Before every task or checkpoint.
+- **Read first:** `PROJECT_CONTEXT.md`, this milestone map, and the latest applicable authorization and review records.
+- **Stop condition / gate:** Stop if freshness fails, the requested work is outside the active checkpoint, or a required record is absent.
+- **Still prohibited unless separately authorized:** Any activity outside the exact authorization recorded in `PROJECT_CONTEXT.md`.
+
+### 2v.10 Implementation and source/test checkpoints
+
+- **When to use:** Planning, authorizing, implementing, or reviewing source/test changes.
+- **Read first:** Current contract, implementation plan, implementation authorization, latest independent plan review, and applicable source/test evidence.
+- **Stop condition / gate:** Stop unless the exact source/test scope and allowed files are authorized.
+- **Still prohibited unless separately authorized:** Data access, dataset generation, validation, preflight, training, artifacts, orders, deployment, and tagging.
+
+### 2v.20 Mocked unit and contract testing
+
+- **When to use:** Testing governed behavior without live network access or output-producing execution.
+- **Read first:** Source/test implementation evidence, implementation authorization, current contract and plan, and the latest mocked-testing record.
+- **Stop condition / gate:** Stop unless tests are mocked, fail-closed, isolated from live APIs, and non-output-producing.
+- **Still prohibited unless separately authorized:** Live clients, market-data access, dataset creation, validation, training, artifacts, orders, deployment, and tagging.
+
+### 2v.30 Data-fetch authorization and market-data access
+
+- **When to use:** Data-fetch authorization or execution, Alpaca historical access, credentials, pagination, or request-literal review.
+- **Read first:** `PROJECT_CONTEXT.md`, mocked-testing evidence, implementation authorization, contract resolution, latest independent review, and applicable fetch authorization or execution records.
+- **Stop condition / gate:** Stop unless separate authorization exists for the exact source, universe, timeframe, feed, adjustment, credentials, request, and output boundary.
+- **Still prohibited unless separately authorized:** Dataset generation, validation, preflight, training, artifacts, orders, deployment, and tagging.
+
+### 2v.40 Dataset generation and dataset evidence
+
+- **When to use:** Dataset-generation authorization or execution, or review of manifests, checksums, provenance, schema, gaps, and run evidence.
+- **Read first:** Data-fetch authorization and execution evidence, dataset contract, generation plan and authorization, run evidence, and latest independent dataset-evidence review.
+- **Stop condition / gate:** Stop unless fetch and generation authority both exist; do not accept output unless its identity and evidence agree.
+- **Still prohibited unless separately authorized:** Treating the dataset as validated, preflight, training, model artifacts, orders, deployment, and tagging.
+
+### 2v.50 Dataset validation and validation-only preflight
+
+- **When to use:** Dataset-validation or validation-only preflight authorization, execution, or review.
+- **Read first:** Accepted dataset evidence, validation authorization and plan, exact dataset identity and checksum, validation results, preflight authorization, and split/feature controls.
+- **Stop condition / gate:** Stop unless the exact validation or preflight action is separately authorized; preflight must not fit a model or consume the final holdout.
+- **Still prohibited unless separately authorized:** PPO fitting, candidate promotion, model artifacts, paper orders, live orders, deployment, and tagging.
+
+### 2v.60 Embargo and VecNormalize hardening
+
+- **When to use:** Temporal leakage, train/evaluation separation, normalization-state handling, or pre-training validation design.
+- **Read first:** The matching section of `docs/workflows/future_validation_training_reference_map.md`, `docs/workflows/ppo_validation_hardening.md`, split and lookback rules, and accepted preflight evidence.
+- **Stop condition / gate:** Stop unless embargo rules are fixed and VecNormalize statistics are training-only and locked during evaluation and holdout.
+- **Still prohibited unless separately authorized:** Holdout tuning, feature or parameter changes based on holdout, and training execution.
+
+### 2v.70 PPO retraining authorization and execution
+
+- **When to use:** PPO retraining planning, authorization, execution, configuration, artifact boundaries, or training audit.
+- **Read first:** Accepted validation and preflight evidence, 2v.60 controls, training authorization, `docs/workflows/alpaca_ppo_retraining_validation_plan.md`, and the frozen training configuration.
+- **Stop condition / gate:** Stop unless the dataset checksum, code commit, configuration, seeds, artifact paths, evaluation rules, and candidate-ranking rule are frozen and authorized.
+- **Still prohibited unless separately authorized:** Holdout inspection during training, paper orders, live orders, deployment, universe expansion, and tagging.
+
+### 2v.80 Final holdout and candidate selection
+
+- **When to use:** Untouched holdout evaluation, candidate eligibility, ranking, promotion, or artifact review.
+- **Read first:** Training execution and artifact review, `docs/workflows/alpaca_ppo_final_holdout_validation.md`, `docs/workflows/alpaca_ppo_candidate_selection_redeployment.md`, and frozen candidate and threshold records.
+- **Stop condition / gate:** Stop if holdout data influenced features, parameters, thresholds, universe, or ranking rules; selection rules must predate holdout inspection.
+- **Still prohibited unless separately authorized:** Repeated holdout tuning, paper orders, live orders, deployment, universe expansion, and tagging.
+
+### 2v.90 Paper trading and deployment boundaries
+
+- **When to use:** Dry-run inference, broker-connected checks, paper authorization, deployment readiness, or live-order discussion.
+- **Read first:** Final-holdout acceptance, candidate-selection evidence, artifact review, `docs/workflows/alpaca_paper_trading_integration.md`, risk controls, execution plan, pre-trade checklist, and explicit authorization records.
+- **Stop condition / gate:** Stop unless the exact candidate and artifacts are identified, paper-only and no-submit controls are proven, and the requested order or deployment mode is explicitly authorized.
+- **Still prohibited unless separately authorized:** Implicit or unattended orders, live orders, production deployment, universe expansion, and tagging.
+
+### 2v.100 Future universe expansion research
+
+- **When to use:** Research beyond the governed six-symbol baseline.
+- **Read first:** `PROJECT_CONTEXT.md`, `docs/workflows/six_ticker_quality_baseline.md`, accepted baseline validation, holdout, and paper evidence, plus a new expansion plan, contract, review, and authorization.
+- **Stop condition / gate:** Stop unless expansion is isolated as a new research checkpoint with a separate universe contract and untouched evaluation design.
+- **Still prohibited unless separately authorized:** Changing the current baseline contract, reusing its holdout, mixing expansion evidence into baseline acceptance, orders, deployment, and tagging.
+
+This numbered lookup is a navigation aid only. It does not authorize source changes, test changes, requirements changes, dependency installation, data fetching, Alpaca API calls, dataset generation, validation, preflight, training, model artifacts, paper orders, live orders, deployment, or tagging.
+
 ## 7. Completed governance chain
 
 1. Dependency/requirements authorization.
