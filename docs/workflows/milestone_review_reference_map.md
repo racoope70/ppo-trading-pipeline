@@ -1,8 +1,6 @@
 # Milestone Review Reference Map
 
-Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstruction workstream. `PROJECT_CONTEXT.md` remains the authoritative source of truth.
-
-Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_chain_summary.md`. The missing v3.07 dataset remains historical context only.
+Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstruction workstream. `PROJECT_CONTEXT.md` remains authoritative.
 
 ---
 
@@ -10,16 +8,16 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Dataset Reconstruction Source/Test Implementation
-latest_completed_checkpoint = v3.08 Dataset Reconstruction Implementation Authorization
-latest_completed_commit = abcef2b0f6a6f64a9701fbe53f545dc41cdc55c6
-latest_completed_decision = PASS_DATASET_RECONSTRUCTION_IMPLEMENTATION_AUTHORIZATION_FOR_SOURCE_TEST_IMPLEMENTATION_CHECKPOINT_ONLY
+active_phase = v3.08 Data-Fetch Authorization
+latest_completed_checkpoint = v3.08 Mocked Unit and Contract Testing
+latest_completed_commit = 5cc08e0bcaa570b2fe01e0e984e3557f9e324856
+latest_completed_decision = PASS_MOCKED_UNIT_CONTRACT_TESTING_FOR_DATA_FETCH_AUTHORIZATION_CONSIDERATION
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Dataset Reconstruction Source/Test Implementation
-next_checkpoint = v3.08 Dataset Reconstruction Source/Test Implementation
+current_active_checkpoint = v3.08 Data-Fetch Authorization
+next_checkpoint = v3.08 Data-Fetch Authorization
 ```
 
-The implementation authorization checkpoint is complete. The current checkpoint permits source and test implementation only.
+Data-fetch authorization consideration is current. Data fetching itself remains unauthorized.
 
 ## 2. Governing classification and dataset identity
 
@@ -34,17 +32,26 @@ output_path = data/processed/ppo_v2/v3_08_superseding_alpaca_aligned_no_submit_t
 old_missing_path = data/processed/ppo_v2/v3_07_no_submit_training_input.parquet
 old_path_usage = HISTORICAL_MISSING_ARTIFACT_REFERENCE_ONLY
 old_path_as_output_target = PROHIBITED
+new_run_id_required = TRUE
+new_manifest_required = TRUE
+new_checksum_required = TRUE
 ```
 
-## 3. Implementation authorization state
+## 3. Source/test implementation and mocked testing status
 
 ```text
-canonical_final_contract_record = docs/runs/v3.08_dataset_reconstruction_contract_resolution.md
-implementation_authorization_record = docs/runs/v3.08_dataset_reconstruction_implementation_authorization.md
-implementation_authorization_decision = PASS_DATASET_RECONSTRUCTION_IMPLEMENTATION_AUTHORIZATION_FOR_SOURCE_TEST_IMPLEMENTATION_CHECKPOINT_ONLY
-future_source_test_implementation_authorized_for_next_checkpoint = YES
-implementation_scope = SOURCE_AND_TEST_IMPLEMENTATION_ONLY
-source_test_implementation_performed = NO
+source_test_implementation_checkpoint = v3.08 Dataset Reconstruction Source/Test Implementation
+source_test_implementation_commit = 4cbb979a88176c252abcf5e1cd2f310c605573e9
+source_test_implementation_performed = YES
+mocked_unit_contract_testing_record = docs/runs/v3.08_mocked_unit_contract_testing.md
+mocked_unit_contract_testing_commit = 5cc08e0bcaa570b2fe01e0e984e3557f9e324856
+mocked_unit_contract_testing_result = PASS
+mocked_unit_contract_testing_decision = PASS_MOCKED_UNIT_CONTRACT_TESTING_FOR_DATA_FETCH_AUTHORIZATION_CONSIDERATION
+py_compile_result = PASS
+targeted_pytest_result = PASS
+targeted_mocked_unit_contract_tests_passed = 14
+targeted_mocked_unit_contract_tests_failed = 0
+full_pytest_suite_run = NO
 ```
 
 ## 4. Dependency and runtime prerequisites
@@ -59,17 +66,37 @@ independent_xnys_runtime_verification_review_repeat_after_remediation = PASSED
 runtime_prerequisite_for_source_test_implementation = SATISFIED
 ```
 
-## 5. Files to review first
+## 5. Current authorization state
+
+```text
+data_fetch_authorization_checkpoint = CURRENT
+data_fetch_authorization_record = NOT_CREATED
+data_fetch_authorization_decision = NOT_YET_PERFORMED
+data_fetch_authorization_consideration = PERMITTED_BY_MOCKED_UNIT_CONTRACT_TESTING_PASS
+data_fetching_authorized = NO
+Alpaca_API_calls_authorized = NO
+live_Alpaca_client_authorized = NO
+market_data_access_authorized = NO
+dataset_generation_authorized = NO
+dataset_validation_authorized = NO
+validation_only_preflight_authorized = NO
+training_authorized = NO
+orders_authorized = NO
+deployment_authorized = NO
+tagging_authorized = NO
+```
+
+## 6. Files to review first
 
 1. `PROJECT_CONTEXT.md`
-2. `docs/runs/v3.08_dataset_reconstruction_implementation_authorization.md`
-3. `docs/runs/v3.08_dataset_reconstruction_implementation_plan.md`
-4. `docs/runs/v3.08_dataset_reconstruction_contract_resolution.md`
-5. `docs/audits/v3.08_independent_xnys_runtime_verification_review_repeat_after_remediation.md`
-6. `docs/runs/v3.08_xnys_runtime_verification_review_remediation.md`
-7. `docs/runs/v3.08_xnys_runtime_verification_execution.md`
+2. `docs/runs/v3.08_mocked_unit_contract_testing.md`
+3. `docs/runs/v3.08_dataset_reconstruction_implementation_authorization.md`
+4. `src/ppo_v2_dataset_reconstruction.py`
+5. `src/ppo_v2_data_contract.py`
+6. `src/ppo_v2_market_calendar.py`
+7. `src/ppo_v2_parquet_writer.py`
 
-## 6. Completed authorization chain
+## 7. Completed governance chain
 
 1. Dependency/requirements authorization.
 2. Requirements dependency-change authorization.
@@ -81,36 +108,27 @@ runtime_prerequisite_for_source_test_implementation = SATISFIED
 8. Failed independent XNYS runtime-verification review.
 9. XNYS runtime-verification review remediation.
 10. Repeat independent XNYS runtime-verification review passed.
-11. Dataset reconstruction implementation authorization passed for the source/test implementation checkpoint only.
+11. Dataset reconstruction implementation authorization passed for source/test implementation only.
+12. Source/test implementation completed.
+13. Mocked unit and contract testing passed for data-fetch authorization consideration only.
 
-## 7. Forward milestone roadmap
+## 8. Forward milestone roadmap
 
-1. v3.08 Dataset Reconstruction Source/Test Implementation.
-2. Mocked unit and contract testing.
-3. Data-fetch authorization.
-4. Dataset-generation authorization and execution.
+1. v3.08 Data-Fetch Authorization.
+2. v3.08 Data-Fetch Execution, only if data-fetch authorization passes.
+3. Dataset-generation authorization.
+4. Dataset-generation execution.
 5. Dataset evidence review.
-6. Dataset-validation authorization and execution.
-7. Validation-only preflight authorization and execution.
-8. Training authorization and execution.
-9. Artifact/model review.
-10. Paper-trading authorization.
+6. Dataset-validation authorization.
+7. Dataset-validation execution.
+8. Validation-only preflight authorization.
+9. Validation-only preflight execution.
+10. Training authorization.
+11. Training execution.
+12. Artifact/model review.
+13. Paper-trading authorization.
 
-Each later milestone remains separately governed.
-
-## 8. Current authorization boundary
-
-```text
-source_test_implementation = AUTHORIZED_FOR_CURRENT_CHECKPOINT_ONLY
-data_fetching_in_future_checkpoint = NOT_AUTHORIZED
-Alpaca_API_calls_in_future_checkpoint = NOT_AUTHORIZED
-dataset_generation_in_future_checkpoint = NOT_AUTHORIZED
-dataset_validation_in_future_checkpoint = NOT_AUTHORIZED
-training_in_future_checkpoint = NOT_AUTHORIZED
-orders_in_future_checkpoint = NOT_AUTHORIZED
-deployment_in_future_checkpoint = NOT_AUTHORIZED
-tagging_in_future_checkpoint = NOT_AUTHORIZED
-```
+Every later milestone remains separately governed.
 
 ## 9. Alignment checkpoint action confirmations
 
@@ -119,16 +137,26 @@ source_code_changed = NO
 tests_changed = NO
 requirements_changed = NO
 dependencies_installed = NO
+py_compile_rerun = NO
+pytest_rerun = NO
 runtime_verification_rerun = NO
-exchange_calendars_imported = NO
+exchange_calendars_imported_for_runtime_verification = NO
 XNYS_get_calendar_called = NO
-XNYS_schedule_constructed = NO
+XNYS_schedule_constructed_from_live_calendar = NO
 market_data_accessed = NO
 Alpaca_API_called = NO
+live_Alpaca_client_created = NO
 datasets_created = NO
+data_directory_written = NO
 artifacts_created = NO
-validation_run = NO
+artifacts_directory_written = NO
+parquet_output_written = NO
+manifest_created = NO
+checksum_created = NO
+dataset_validation_run = NO
+validation_only_preflight_run = NO
 training_run = NO
+model_artifact_created = NO
 orders_submitted = NO
 deployment_performed = NO
 tag_created = NO
@@ -141,20 +169,19 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor abcef2b0f6a6f64a9701fbe53f545dc41cdc55c6 HEAD
+git merge-base --is-ancestor 5cc08e0bcaa570b2fe01e0e984e3557f9e324856 HEAD
 echo $?
 ```
-
-Proceed only when the working tree is clean, `HEAD` equals `origin/main`, and the merge-base exit code is `0`.
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Dataset Reconstruction Source/Test Implementation
-next_checkpoint = v3.08 Dataset Reconstruction Source/Test Implementation
-implementation_scope = SOURCE_AND_TEST_IMPLEMENTATION_ONLY
-source_test_implementation_performed = NO
-runtime_prerequisite_for_source_test_implementation = SATISFIED
+current_active_checkpoint = v3.08 Data-Fetch Authorization
+next_checkpoint = v3.08 Data-Fetch Authorization
+data_fetch_authorization_checkpoint = CURRENT
+data_fetching_authorized = NO
+Alpaca_API_calls_authorized = NO
+dataset_generation_authorized = NO
 ```
 
-The next allowed work is source/test implementation only. Data fetching, Alpaca API calls, dataset generation, validation, training, orders, deployment, and tagging remain prohibited.
+The current checkpoint may authorize a later data-fetch execution only. Data fetching, dataset generation, validation, training, orders, deployment, and tagging are not authorized.
