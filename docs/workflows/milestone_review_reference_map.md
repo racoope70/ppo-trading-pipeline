@@ -130,6 +130,21 @@ tagging_authorized = NO
 
 Every later milestone remains separately governed.
 
+## Future validation/training reference
+
+For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe expansion guidance, read:
+
+`docs/workflows/future_validation_training_reference_map.md`
+
+This file is a reference guide only. It does not authorize any future work.
+
+Before each future checkpoint, read:
+
+1. `PROJECT_CONTEXT.md`.
+2. This milestone map.
+3. The matching section of `docs/workflows/future_validation_training_reference_map.md`.
+4. The latest relevant run, audit, review, and authorization records.
+
 ## 9. Alignment checkpoint action confirmations
 
 ```text
