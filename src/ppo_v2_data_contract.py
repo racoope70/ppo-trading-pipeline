@@ -14,7 +14,9 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
+from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from src.ppo_v2_retraining_config import (
@@ -61,6 +63,121 @@ FORBIDDEN_HOLDOUT_USES: tuple[str, ...] = (
     "scaler_fitting",
     "manual_iteration",
 )
+
+# v3.08 superseding reconstruction contract. These constants are intentionally
+# inert: importing this module performs no network, calendar, or filesystem I/O.
+RECONSTRUCTION_CLASSIFICATION = "SUPERSEDING_GOVERNED_ALPACA_ALIGNED_RECONSTRUCTION"
+OUTPUT_PATH = Path(
+    "data/processed/ppo_v2/"
+    "v3_08_superseding_alpaca_aligned_no_submit_training_input.parquet"
+)
+OLD_MISSING_PATH = Path("data/processed/ppo_v2/v3_07_no_submit_training_input.parquet")
+OLD_PATH_AS_OUTPUT_TARGET = "PROHIBITED"
+SYMBOLS: tuple[str, ...] = ("AAPL", "AMD", "MRK", "PFE", "UNH", "XOM")
+SYMBOL_ORDER = "PRESERVED_AS_LISTED"
+RAW_REQUEST_START = "2022-12-01T00:00:00Z"
+RAW_REQUEST_END = "2025-06-30T20:00:00Z"
+CONTRACT_START = "2023-01-03T14:30:00Z"
+CONTRACT_END = "2025-06-30T20:00:00Z"
+CANONICAL_DATASET_WINDOW = "[contract_start, contract_end)"
+MINIMUM_OBSERVED_WARMUP_BARS_PER_SYMBOL = 50
+CALENDAR_LIBRARY = "exchange_calendars"
+CALENDAR_IDENTIFIER = "XNYS"
+CALENDAR_VERSION = "4.13.2"
+SESSION_POLICY = "REGULAR_CORE_SESSION_ONLY"
+
+FINAL_COLUMNS: tuple[str, ...] = (
+    "Symbol", "Datetime", "Open", "High", "Low", "Close", "Volume",
+    "return_1h", "log_return_1h", "sma_10", "sma_20", "sma_50",
+    "ema_12", "ema_26", "rsi_14", "macd", "macd_signal", "macd_hist",
+    "atr_14", "realized_volatility_20", "volume_zscore_20",
+    "close_to_sma20", "close_to_sma50", "hour_sin", "hour_cos",
+    "day_of_week_sin", "day_of_week_cos",
+)
+ENGINEERED_FEATURE_COLUMNS: tuple[str, ...] = FINAL_COLUMNS[7:]
+
+MISSING_EXPECTED_SLOT_TOLERANCE = 0
+CROSS_SYMBOL_ROW_COUNT_MISMATCH_TOLERANCE = 0
+SYNTHETIC_BARS = "PROHIBITED"
+FORWARD_FILL = "PROHIBITED"
+BACKFILL = "PROHIBITED"
+INTERPOLATION = "PROHIBITED"
+DUPLICATE_SYMBOL_DATETIME = "REJECT"
+MISSING_EXPECTED_SLOT = "REPORT_AND_FAIL_CLOSED"
+GAP_REASON_CODES: tuple[str, ...] = (
+    "OBSERVED", "MISSING_EXPECTED_SLOT", "NON_SESSION",
+    "INELIGIBLE_PARTIAL_SESSION_EDGE", "DUPLICATE_SYMBOL_DATETIME",
+    "INSUFFICIENT_WARMUP",
+)
+GAP_EVIDENCE_FIELDS: tuple[str, ...] = (
+    "symbol", "session_label", "expected_timestamp_utc",
+    "expected_interval_end_utc", "session_open_utc", "session_close_utc",
+    "calendar_library", "calendar_version", "calendar_identifier", "timeframe",
+    "feed", "adjustment", "raw_request_start", "raw_request_end", "observed",
+    "gap_reason_code", "per_symbol_expected_count", "per_symbol_observed_count",
+    "per_symbol_missing_count", "total_missing_count",
+)
+
+
+class GovernedContractError(ValueError):
+    """Raised when data violates the governed v3.08 contract."""
+
+
+def validate_output_path(path: str | Path) -> Path:
+    """Require the new v3.08 identity and prohibit the missing v3.07 path."""
+
+    candidate = Path(path)
+    if candidate == OLD_MISSING_PATH:
+        raise GovernedContractError("the missing v3.07 path is prohibited as an output target")
+    if candidate != OUTPUT_PATH:
+        raise GovernedContractError(f"output path must be {OUTPUT_PATH.as_posix()}")
+    return candidate
+
+
+def validate_reconstructed_frame(data: pd.DataFrame) -> None:
+    """Fail closed unless a frame satisfies the exact final dataset contract."""
+
+    if tuple(data.columns) != FINAL_COLUMNS:
+        raise GovernedContractError("columns must match the governed 27-column order exactly")
+    if data.empty:
+        raise GovernedContractError("reconstructed data must not be empty")
+    if data.isna().any().any():
+        raise GovernedContractError("null or NaN values are prohibited")
+    if not isinstance(data["Symbol"].dtype, pd.StringDtype):
+        raise GovernedContractError("Symbol must use pandas string dtype")
+    symbols = data["Symbol"]
+    if not symbols.map(lambda value: isinstance(value, str) and value == value.upper()).all():
+        raise GovernedContractError("Symbol values must be non-null uppercase strings")
+    datetime_dtype = data["Datetime"].dtype
+    if not isinstance(datetime_dtype, pd.DatetimeTZDtype) or str(datetime_dtype.tz) != "UTC":
+        raise GovernedContractError("Datetime must be timezone-aware UTC")
+    if data.duplicated(["Symbol", "Datetime"]).any():
+        raise GovernedContractError("duplicate Symbol/Datetime rows are prohibited")
+
+    for column in OHLCV_COLUMNS + ENGINEERED_FEATURE_COLUMNS:
+        if data[column].dtype != np.dtype("float64"):
+            raise GovernedContractError(f"{column} must have float64 dtype")
+        values = data[column].to_numpy(dtype="float64", copy=False)
+        if not np.isfinite(values).all():
+            raise GovernedContractError(f"{column} must contain only finite values")
+        if column in OHLCV_COLUMNS and (values < 0).any():
+            raise GovernedContractError(f"{column} must be nonnegative")
+
+    object_columns = [column for column in data.columns if data[column].dtype == object]
+    if object_columns:
+        raise GovernedContractError("object dtype is prohibited")
+
+
+def validate_gap_evidence(record: Mapping[str, object]) -> None:
+    """Require complete, controlled gap evidence with zero missing-slot tolerance."""
+
+    missing = [field for field in GAP_EVIDENCE_FIELDS if field not in record]
+    if missing:
+        raise GovernedContractError("missing gap evidence fields: " + ", ".join(missing))
+    if record["gap_reason_code"] not in GAP_REASON_CODES:
+        raise GovernedContractError("uncontrolled gap_reason_code")
+    if int(record["total_missing_count"]) > MISSING_EXPECTED_SLOT_TOLERANCE:
+        raise GovernedContractError("missing expected slots must be reported and fail closed")
 
 
 @dataclass(frozen=True)
