@@ -8,17 +8,17 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Dataset-Generation Execution Remediation
-latest_completed_checkpoint = v3.08 Dataset-Generation Execution Remediation Authorization
-latest_completed_commit = ddcf80f47467bb7e1fc213b03d16bf99b3cd800a
-latest_completed_decision = PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_AUTHORIZATION_FOR_RUNTIME_DEPENDENCY_REMEDIATION_ONLY
-latest_completed_record = docs/runs/v3.08_dataset_generation_execution_remediation_authorization.md
+active_phase = v3.08 Dataset-Generation Re-Execution Authorization
+latest_completed_checkpoint = v3.08 Dataset-Generation Execution Remediation
+latest_completed_commit = dbbc658fc04ad494ad86dbd6cf07137bed686f09
+latest_completed_decision = PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_WORKSPACE_VENV_SELECTED_AND_IMPORTS_VERIFIED
+latest_completed_record = docs/runs/v3.08_dataset_generation_execution_remediation.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Dataset-Generation Execution Remediation
-next_checkpoint = v3.08 Dataset-Generation Execution Remediation
+current_active_checkpoint = v3.08 Dataset-Generation Re-Execution Authorization
+next_checkpoint = v3.08 Dataset-Generation Re-Execution Authorization
 ```
 
-Runtime dependency remediation is current under the separately authorized narrow scope. Dataset-generation re-execution, requirements changes, validation, and all later execution remain unauthorized.
+Runtime dependency remediation completed successfully. Dataset-generation re-execution authorization consideration is current; re-execution, requirements changes, validation, and all later execution remain unauthorized.
 
 ## 2. Governing classification and dataset identity
 
@@ -87,16 +87,20 @@ dataset_generation_authorization_result = PASS
 dataset_generation_authorization_decision = PASS_DATASET_GENERATION_AUTHORIZATION_FOR_DATASET_GENERATION_EXECUTION_CHECKPOINT_ONLY
 dataset_generation_authorized = NO
 dataset_generation_reexecution_authorized = NO
-dataset_generation_remediation_authorized = YES
-dependency_installation_authorized = CONDITIONAL_EXISTING_REQUIREMENTS_ONLY_IF_REMEDIATION_CHECK_PROVES_NEEDED
+dataset_generation_remediation_authorized = NO
+dependency_installation_authorized = NO
 requirements_change_authorized = NO
-authorized_current_execution_scope = RUNTIME_DEPENDENCY_REMEDIATION_ONLY
+authorized_current_execution_scope = NONE
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
-dataset_generation_execution_remediation_checkpoint = CURRENT
-dataset_generation_execution_remediation_record = NOT_CREATED
-dataset_generation_execution_remediation_result = NOT_YET_PERFORMED
+dataset_generation_execution_remediation_checkpoint = COMPLETED
+dataset_generation_execution_remediation_record = docs/runs/v3.08_dataset_generation_execution_remediation.md
+dataset_generation_execution_remediation_result = PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_WORKSPACE_VENV_SELECTED_AND_IMPORTS_VERIFIED
+selected_runtime_interpreter = ../.venv/bin/python
+selected_runtime_imports_pass = YES
+dependencies_installed_during_remediation = NO
+requirements_changed_during_remediation = NO
 blocked_failure_reason = required packages unavailable: pandas, pyarrow, exchange-calendars
 final_dataset_created = NO
 manifest_created = NO
@@ -161,29 +165,7 @@ The blocked Dataset-Generation Execution checkpoint did not:
 - deploy; or
 - tag.
 
-The current Dataset-Generation Execution Remediation checkpoint may only:
-
-- inspect the active Python interpreter and virtual environment;
-- select and verify the existing workspace virtual environment for execution diagnostics;
-- install or restore required runtime packages only from existing repository requirements if a fresh remediation-time check proves installation is needed;
-- verify imports only for pandas, pyarrow, and exchange_calendars;
-- verify package versions against existing repository requirements and governance;
-- rerun only dependency and import checks; and
-- write a remediation execution record.
-
-The current Dataset-Generation Execution Remediation checkpoint must not:
-
-- rerun dataset generation;
-- create the final dataset;
-- create the manifest or checksum;
-- run dataset validation;
-- run validation-only preflight;
-- run training;
-- edit source code, tests, requirements, or workflows;
-- create model artifacts;
-- submit orders;
-- deploy; or
-- tag.
+The current Dataset-Generation Re-Execution Authorization checkpoint may only consider whether the fixed runtime environment supports a separate dataset-generation re-execution authorization. It must not run dataset generation or authorize validation, preflight, training, orders, deployment, or tagging.
 
 ## 6. Files to review first
 
@@ -320,23 +302,22 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 17. v3.08 Dataset-Generation Authorization; commit `cfdb99543a886e1e4604443a520b006cf9587c15`; decision `PASS_DATASET_GENERATION_AUTHORIZATION_FOR_DATASET_GENERATION_EXECUTION_CHECKPOINT_ONLY`; record `docs/runs/v3.08_dataset_generation_authorization.md`.
 18. v3.08 Dataset-Generation Execution; commit `c6537943f48e2213bc5d67069da7ae81d4b314db`; decision `BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED`; record `docs/runs/v3.08_dataset_generation_execution.md`.
 19. v3.08 Dataset-Generation Execution Remediation Authorization; commit `ddcf80f47467bb7e1fc213b03d16bf99b3cd800a`; decision `PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_AUTHORIZATION_FOR_RUNTIME_DEPENDENCY_REMEDIATION_ONLY`; record `docs/runs/v3.08_dataset_generation_execution_remediation_authorization.md`.
+20. v3.08 Dataset-Generation Execution Remediation; commit `dbbc658fc04ad494ad86dbd6cf07137bed686f09`; decision `PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_WORKSPACE_VENV_SELECTED_AND_IMPORTS_VERIFIED`; record `docs/runs/v3.08_dataset_generation_execution_remediation.md`.
 
 ## 8. Forward milestone roadmap
 
-1. v3.08 Dataset-Generation Execution Remediation.
-2. Source-of-truth alignment after remediation execution.
-3. v3.08 Dataset-Generation Re-Execution Authorization.
-4. v3.08 Dataset-Generation Re-Execution.
-5. Source-of-truth alignment after successful dataset-generation execution.
-6. Dataset evidence review.
-7. Dataset-validation authorization.
-8. Dataset-validation execution.
-9. Validation-only preflight authorization.
-10. Validation-only preflight execution.
-11. Training authorization.
-12. Training execution.
-13. Artifact/model review.
-14. Paper-trading authorization.
+1. v3.08 Dataset-Generation Re-Execution Authorization.
+2. v3.08 Dataset-Generation Re-Execution.
+3. Source-of-truth alignment after successful dataset-generation execution.
+4. Dataset evidence review.
+5. Dataset-validation authorization.
+6. Dataset-validation execution.
+7. Validation-only preflight authorization.
+8. Validation-only preflight execution.
+9. Training authorization.
+10. Training execution.
+11. Artifact/model review.
+12. Paper-trading authorization.
 
 Every later milestone remains separately governed.
 
@@ -396,25 +377,25 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor ddcf80f47467bb7e1fc213b03d16bf99b3cd800a HEAD
+git merge-base --is-ancestor dbbc658fc04ad494ad86dbd6cf07137bed686f09 HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Dataset-Generation Execution Remediation
-next_checkpoint = v3.08 Dataset-Generation Execution Remediation
+current_active_checkpoint = v3.08 Dataset-Generation Re-Execution Authorization
+next_checkpoint = v3.08 Dataset-Generation Re-Execution Authorization
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
 dataset_generation_reexecution_authorized = NO
-dataset_generation_remediation_authorized = YES
-authorized_current_execution_scope = RUNTIME_DEPENDENCY_REMEDIATION_ONLY
-dataset_generation_execution_remediation_checkpoint = CURRENT
-dependency_installation_authorized = CONDITIONAL_EXISTING_REQUIREMENTS_ONLY_IF_REMEDIATION_CHECK_PROVES_NEEDED
+dataset_generation_remediation_authorized = NO
+authorized_current_execution_scope = NONE
+dataset_generation_execution_remediation_checkpoint = COMPLETED
+dependency_installation_authorized = NO
 requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint authorizes runtime dependency remediation only. Dataset-generation re-execution, requirements changes, dataset validation, training, orders, deployment, and tagging remain unauthorized.
+The current checkpoint is dataset-generation re-execution authorization consideration only. Re-execution, requirements changes, dataset validation, training, orders, deployment, and tagging remain unauthorized.
