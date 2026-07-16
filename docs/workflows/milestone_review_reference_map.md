@@ -8,17 +8,17 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Dataset-Generation Re-Execution
-latest_completed_checkpoint = v3.08 Dataset-Generation Re-Execution Authorization
-latest_completed_commit = bb1f6f18107085154674a45f4f0b464c157559ec
-latest_completed_decision = PASS_DATASET_GENERATION_REEXECUTION_AUTHORIZATION_FOR_DATASET_GENERATION_REEXECUTION_ONLY
-latest_completed_record = docs/runs/v3.08_dataset_generation_reexecution_authorization.md
+active_phase = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
+latest_completed_checkpoint = v3.08 Dataset-Generation Re-Execution
+latest_completed_commit = a9f8bfe2425a154625f6fd5293330bc97ad7337f
+latest_completed_decision = BLOCK_DATASET_GENERATION_REEXECUTION_RAW_INPUT_MISSING_EXPECTED_SLOTS
+latest_completed_record = docs/runs/v3.08_dataset_generation_reexecution.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Dataset-Generation Re-Execution
-next_checkpoint = v3.08 Dataset-Generation Re-Execution
+current_active_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
+next_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
 ```
 
-Dataset-generation re-execution is current under the exact separately authorized scope. Dataset validation and all later execution remain unauthorized.
+The blocked dataset-generation re-execution evidence review is current. No execution scope is authorized, and dataset validation and all later execution remain unauthorized.
 
 ## 2. Governing classification and dataset identity
 
@@ -91,11 +91,16 @@ dataset_generation_reexecution_authorization_record = docs/runs/v3.08_dataset_ge
 dataset_generation_reexecution_authorization_commit = bb1f6f18107085154674a45f4f0b464c157559ec
 dataset_generation_reexecution_authorization_result = PASS
 dataset_generation_reexecution_authorization_decision = PASS_DATASET_GENERATION_REEXECUTION_AUTHORIZATION_FOR_DATASET_GENERATION_REEXECUTION_ONLY
-dataset_generation_reexecution_authorized = YES
+dataset_generation_reexecution_checkpoint = COMPLETED_BLOCKED
+dataset_generation_reexecution_record = docs/runs/v3.08_dataset_generation_reexecution.md
+dataset_generation_reexecution_commit = a9f8bfe2425a154625f6fd5293330bc97ad7337f
+dataset_generation_reexecution_result = BLOCK_DATASET_GENERATION_REEXECUTION_RAW_INPUT_MISSING_EXPECTED_SLOTS
+dataset_generation_reexecution_complete = NO
+dataset_generation_reexecution_authorized = NO
 dataset_generation_remediation_authorized = NO
 dependency_installation_authorized = NO
 requirements_change_authorized = NO
-authorized_current_execution_scope = DATASET_GENERATION_REEXECUTION_ONLY
+authorized_current_execution_scope = NONE
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -108,7 +113,13 @@ dependencies_installed_during_remediation = NO
 requirements_changed_during_remediation = NO
 raw_input_path = data/raw/ppo_v2/v3_08_alpaca_iex_hourly_raw_bars.parquet
 raw_input_sha256 = 1694d9e706666c0718e940f40e28a8170b246ce7e2a07a570a5b122fd3c04e30
-blocked_failure_reason = required packages unavailable: pandas, pyarrow, exchange-calendars
+raw_input_sha256_match = YES
+expected_slots_per_symbol = 3729
+observed_expected_slots_per_symbol = 3718
+missing_expected_slots_per_symbol = 11
+total_missing_expected_slots = 66
+missing_expected_slot_tolerance = 0
+gap_contract_result = FAIL
 final_dataset_created = NO
 manifest_created = NO
 checksum_created = NO
@@ -172,22 +183,19 @@ The blocked Dataset-Generation Execution checkpoint did not:
 - deploy; or
 - tag.
 
-The current Dataset-Generation Re-Execution checkpoint may only:
+The current Dataset-Generation Re-Execution Blocked Evidence Review checkpoint may only:
 
-- use the selected runtime interpreter `../.venv/bin/python`;
-- read the existing raw parquet input at `data/raw/ppo_v2/v3_08_alpaca_iex_hourly_raw_bars.parquet`;
-- verify the raw input SHA-256 before processing;
-- generate the governed superseding v3.08 final dataset at `data/processed/ppo_v2/v3_08_superseding_alpaca_aligned_no_submit_training_input.parquet`;
-- generate the required manifest at `data/processed/ppo_v2/v3_08_superseding_alpaca_aligned_no_submit_training_input.manifest.json`;
-- generate the required checksum at `data/processed/ppo_v2/v3_08_superseding_alpaca_aligned_no_submit_training_input.sha256`;
-- write the execution evidence record `docs/runs/v3.08_dataset_generation_reexecution.md`;
-- use a local temporary execution script only if needed, preferably outside the repository or clearly untracked; and
-- preserve the old missing v3.07 path as historical context only.
+- review the blocked re-execution evidence;
+- review the missing-slot evidence;
+- determine what authorization checkpoint should be considered next; and
+- preserve all non-authorization boundaries.
 
-The current Dataset-Generation Re-Execution checkpoint must not:
+The current Dataset-Generation Re-Execution Blocked Evidence Review checkpoint must not:
 
 - fetch data;
 - make Alpaca API calls;
+- rerun dataset generation;
+- create datasets, manifests, or checksums;
 - edit source code, tests, requirements, or workflows;
 - run dataset validation;
 - run validation-only preflight;
@@ -334,20 +342,27 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 19. v3.08 Dataset-Generation Execution Remediation Authorization; commit `ddcf80f47467bb7e1fc213b03d16bf99b3cd800a`; decision `PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_AUTHORIZATION_FOR_RUNTIME_DEPENDENCY_REMEDIATION_ONLY`; record `docs/runs/v3.08_dataset_generation_execution_remediation_authorization.md`.
 20. v3.08 Dataset-Generation Execution Remediation; commit `dbbc658fc04ad494ad86dbd6cf07137bed686f09`; decision `PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_WORKSPACE_VENV_SELECTED_AND_IMPORTS_VERIFIED`; record `docs/runs/v3.08_dataset_generation_execution_remediation.md`.
 21. v3.08 Dataset-Generation Re-Execution Authorization; commit `bb1f6f18107085154674a45f4f0b464c157559ec`; decision `PASS_DATASET_GENERATION_REEXECUTION_AUTHORIZATION_FOR_DATASET_GENERATION_REEXECUTION_ONLY`; record `docs/runs/v3.08_dataset_generation_reexecution_authorization.md`.
+22. v3.08 Dataset-Generation Re-Execution; commit `a9f8bfe2425a154625f6fd5293330bc97ad7337f`; decision `BLOCK_DATASET_GENERATION_REEXECUTION_RAW_INPUT_MISSING_EXPECTED_SLOTS`; record `docs/runs/v3.08_dataset_generation_reexecution.md`.
 
 ## 8. Forward milestone roadmap
 
-1. v3.08 Dataset-Generation Re-Execution.
-2. Source-of-truth alignment after successful dataset-generation re-execution.
-3. Dataset evidence review.
-4. Dataset-validation authorization.
-5. Dataset-validation execution.
-6. Validation-only preflight authorization.
-7. Validation-only preflight execution.
-8. Training authorization.
-9. Training execution.
-10. Artifact/model review.
-11. Paper-trading authorization.
+1. v3.08 Dataset-Generation Re-Execution Blocked Evidence Review.
+2. Missing-slot root-cause and remediation-authorization consideration.
+3. Source-of-truth alignment after missing-slot remediation authorization, if authorization passes.
+4. Missing-slot remediation or governed data-completeness remediation execution, if authorized.
+5. Source-of-truth alignment after remediation execution.
+6. Dataset-generation re-execution authorization reconsideration.
+7. Dataset-generation re-execution.
+8. Source-of-truth alignment after successful dataset generation, if generation passes.
+9. Dataset evidence review.
+10. Dataset-validation authorization.
+11. Dataset-validation execution.
+12. Validation-only preflight authorization.
+13. Validation-only preflight execution.
+14. Training authorization.
+15. Training execution.
+16. Artifact/model review.
+17. Paper-trading authorization.
 
 Every later milestone remains separately governed.
 
@@ -407,26 +422,27 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor bb1f6f18107085154674a45f4f0b464c157559ec HEAD
+git merge-base --is-ancestor a9f8bfe2425a154625f6fd5293330bc97ad7337f HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Dataset-Generation Re-Execution
-next_checkpoint = v3.08 Dataset-Generation Re-Execution
+current_active_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
+next_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
 dataset_generation_reexecution_authorization_checkpoint = COMPLETED
-dataset_generation_reexecution_authorized = YES
+dataset_generation_reexecution_checkpoint = COMPLETED_BLOCKED
+dataset_generation_reexecution_authorized = NO
 dataset_generation_remediation_authorized = NO
-authorized_current_execution_scope = DATASET_GENERATION_REEXECUTION_ONLY
+authorized_current_execution_scope = NONE
 dataset_generation_execution_remediation_checkpoint = COMPLETED
 dependency_installation_authorized = NO
 requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint authorizes dataset-generation re-execution only. Dataset validation, training, orders, deployment, and tagging remain unauthorized.
+The current checkpoint is review-only and authorizes no execution. Dataset validation, training, orders, deployment, and tagging remain unauthorized.
