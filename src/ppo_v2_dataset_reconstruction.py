@@ -70,7 +70,7 @@ def construct_stock_bars_request() -> Any:
         from alpaca.data.enums import Adjustment, DataFeed
         from alpaca.data.requests import StockBarsRequest
         from alpaca.data.timeframe import TimeFrame
-        from alpaca.data.enums import Sort
+        from alpaca.common.enums import Sort
     except ImportError as exc:
         raise AlpacaDependencyError("alpaca-py is required to construct the governed request") from exc
 
