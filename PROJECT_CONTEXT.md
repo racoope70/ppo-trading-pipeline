@@ -10,16 +10,17 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Data-Fetch Execution
-latest_completed_checkpoint = v3.08 Data-Fetch Authorization
-latest_completed_commit = d2b44e952a2350e312f6b7b4298beeea912a7e8f
-latest_completed_decision = PASS_DATA_FETCH_AUTHORIZATION_FOR_DATA_FETCH_EXECUTION_CHECKPOINT_ONLY
+active_phase = v3.08 Source-of-Truth Alignment After Data-Fetch Execution
+latest_completed_checkpoint = v3.08 Data-Fetch Execution
+latest_completed_commit = 3a49775514ff5c21a51ef192e970e269ed8b5ceb
+latest_completed_decision = PASS_DATA_FETCH_EXECUTION_RAW_HISTORICAL_BARS_FETCH_COMPLETED
+latest_completed_record = docs/runs/v3.08_data_fetch_execution.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Data-Fetch Execution
-next_checkpoint = v3.08 Data-Fetch Execution
+current_active_checkpoint = v3.08 Source-of-Truth Alignment After Data-Fetch Execution
+next_checkpoint = v3.08 Dataset-Generation Authorization
 ```
 
-Data-fetch execution is current under the exact separately authorized historical-bars contract. All downstream execution remains unauthorized.
+The governed raw historical-bars data fetch is complete. This alignment checkpoint does not authorize dataset generation or any downstream execution.
 
 ## 2. Governing reconstruction classification
 
@@ -82,16 +83,10 @@ data_fetch_authorization_commit = d2b44e952a2350e312f6b7b4298beeea912a7e8f
 data_fetch_authorization_result = PASS
 data_fetch_authorization_decision = PASS_DATA_FETCH_AUTHORIZATION_FOR_DATA_FETCH_EXECUTION_CHECKPOINT_ONLY
 data_fetch_authorization_consideration = PERMITTED_BY_MOCKED_UNIT_CONTRACT_TESTING_PASS
-data_fetch_authorization_granted_data_fetch_execution = YES
-authorized_current_execution_scope = DATA_FETCH_EXECUTION_ONLY
-data_fetch_execution_checkpoint = CURRENT
-data_fetch_execution_record = NOT_CREATED
-data_fetch_execution_result = NOT_YET_PERFORMED
-data_fetch_execution_authorized = YES
-data_fetching_authorized_for_current_checkpoint = YES
-Alpaca_API_calls_authorized_for_current_checkpoint = YES
-live_Alpaca_client_authorized_for_current_checkpoint = YES
-market_data_access_authorized_for_current_checkpoint = YES
+data_fetch_execution_checkpoint = COMPLETED
+data_fetch_execution_record = docs/runs/v3.08_data_fetch_execution.md
+data_fetch_execution_result = PASS_DATA_FETCH_EXECUTION_RAW_HISTORICAL_BARS_FETCH_COMPLETED
+data_fetch_execution_commit = 3a49775514ff5c21a51ef192e970e269ed8b5ceb
 dataset_generation_authorized = NO
 dataset_validation_authorized = NO
 validation_only_preflight_authorized = NO
@@ -101,38 +96,38 @@ deployment_authorized = NO
 tagging_authorized = NO
 ```
 
-The current checkpoint may perform only the separately authorized v3.08 Data-Fetch Execution.
+The completed Data-Fetch Execution was limited to:
 
-The Data-Fetch Execution checkpoint may only:
+- the exact governed Alpaca historical bars request contract;
+- the six-symbol universe only: AAPL, AMD, MRK, PFE, UNH, XOM;
+- `TimeFrame.Hour` only;
+- `DataFeed.IEX` only;
+- `Adjustment.RAW` only;
+- `Sort.ASC` only;
+- `raw_request_start = 2022-12-01T00:00:00Z`;
+- `raw_request_end = 2025-06-30T20:00:00Z`;
+- timezone-aware UTC datetimes;
+- no-submit / historical-data-only behavior;
+- credentials loaded only for read-only historical data access;
+- separately declared data-fetch execution evidence and raw-fetch output; and
+- preservation of the old v3.07 path prohibition.
 
-- use the exact governed Alpaca historical bars request contract;
-- use the six-symbol universe only: AAPL, AMD, MRK, PFE, UNH, XOM;
-- use `TimeFrame.Hour` only;
-- use `DataFeed.IEX` only;
-- use `Adjustment.RAW` only;
-- use `Sort.ASC` only;
-- use `raw_request_start = 2022-12-01T00:00:00Z`;
-- use `raw_request_end = 2025-06-30T20:00:00Z`;
-- use timezone-aware UTC datetimes;
-- use no-submit / historical-data-only behavior;
-- load credentials only for read-only historical data access;
-- write only separately declared data-fetch execution evidence and raw-fetch outputs if explicitly defined by the execution checkpoint; and
-- preserve the old v3.07 path prohibition.
+The completed Data-Fetch Execution remained prohibited from:
 
-The Data-Fetch Execution checkpoint must not:
+- generating the final dataset;
+- writing the governed final Parquet dataset;
+- writing the final manifest;
+- writing the final checksum;
+- treating fetched data as validated;
+- running dataset validation;
+- running validation-only preflight;
+- running training;
+- creating model artifacts;
+- submitting paper or live orders;
+- deploying; or
+- tagging.
 
-- generate the final dataset;
-- write the governed final Parquet dataset;
-- write the final manifest;
-- write the final checksum;
-- treat fetched data as validated;
-- run dataset validation;
-- run validation-only preflight;
-- run training;
-- create model artifacts;
-- submit paper or live orders;
-- deploy; or
-- tag.
+The current alignment checkpoint records the completed data-fetch execution only. It does not authorize dataset generation. Dataset-generation authorization is the next checkpoint only after this alignment is committed.
 
 ## 7. Completed governance chain
 
@@ -150,22 +145,23 @@ The Data-Fetch Execution checkpoint must not:
 12. Source/test implementation completed.
 13. Mocked unit and contract testing passed for data-fetch authorization consideration only.
 14. Data-fetch authorization passed for data-fetch execution checkpoint only.
+15. v3.08 Data-Fetch Execution Remediation — Alpaca Sort Import Compatibility; commit `9011751bb3d046954b200cd77838e8c5bfa1afda`; decision `PASS_ALPACA_SORT_IMPORT_COMPATIBILITY_REMEDIATION`; record `docs/runs/v3.08_data_fetch_execution_remediation_alpaca_sort_import.md`.
+16. v3.08 Data-Fetch Execution; commit `3a49775514ff5c21a51ef192e970e269ed8b5ceb`; decision `PASS_DATA_FETCH_EXECUTION_RAW_HISTORICAL_BARS_FETCH_COMPLETED`; record `docs/runs/v3.08_data_fetch_execution.md`.
 
 ## 8. Forward roadmap
 
-1. v3.08 Data-Fetch Execution.
-2. Source-of-truth alignment after data-fetch execution.
-3. Dataset-generation authorization.
-4. Dataset-generation execution.
-5. Dataset evidence review.
-6. Dataset-validation authorization.
-7. Dataset-validation execution.
-8. Validation-only preflight authorization.
-9. Validation-only preflight execution.
-10. Training authorization.
-11. Training execution.
-12. Artifact/model review.
-13. Paper-trading authorization.
+1. v3.08 Source-of-Truth Alignment After Data-Fetch Execution.
+2. v3.08 Dataset-Generation Authorization.
+3. v3.08 Dataset-Generation Execution.
+4. v3.08 Dataset Evidence Review.
+5. v3.08 Dataset-Validation Authorization.
+6. v3.08 Dataset-Validation Execution.
+7. v3.08 Validation-Only Preflight Authorization.
+8. v3.08 Validation-Only Preflight Execution.
+9. v3.08 Training Authorization.
+10. v3.08 Training Execution.
+11. v3.08 Artifact/Model Review.
+12. v3.08 Paper-Trading Authorization.
 
 Every later milestone remains separately governed.
 
@@ -214,20 +210,18 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor d2b44e952a2350e312f6b7b4298beeea912a7e8f HEAD
+git merge-base --is-ancestor 3a49775514ff5c21a51ef192e970e269ed8b5ceb HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Data-Fetch Execution
-next_checkpoint = v3.08 Data-Fetch Execution
-data_fetch_execution_checkpoint = CURRENT
-data_fetch_execution_authorized = YES
-data_fetching_authorized_for_current_checkpoint = YES
-Alpaca_API_calls_authorized_for_current_checkpoint = YES
+current_active_checkpoint = v3.08 Source-of-Truth Alignment After Data-Fetch Execution
+next_checkpoint = v3.08 Dataset-Generation Authorization
+data_fetch_execution_checkpoint = COMPLETED
+data_fetch_execution_result = PASS_DATA_FETCH_EXECUTION_RAW_HISTORICAL_BARS_FETCH_COMPLETED
 dataset_generation_authorized = NO
 ```
 
-The current checkpoint is authorized only for the exact governed historical-bars data-fetch execution contract. Dataset generation and all later activity remain separately governed.
+The current alignment checkpoint does not authorize dataset generation. Dataset generation and all later activity remain separately governed.
