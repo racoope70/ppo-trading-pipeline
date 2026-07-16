@@ -10,17 +10,17 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
-latest_completed_checkpoint = v3.08 Dataset-Generation Re-Execution
-latest_completed_commit = a9f8bfe2425a154625f6fd5293330bc97ad7337f
-latest_completed_decision = BLOCK_DATASET_GENERATION_REEXECUTION_RAW_INPUT_MISSING_EXPECTED_SLOTS
-latest_completed_record = docs/runs/v3.08_dataset_generation_reexecution.md
+active_phase = v3.08 Missing-Slot Root-Cause and Remediation-Authorization Consideration
+latest_completed_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
+latest_completed_commit = bd5083e65d5d198f9e4eb159373f9c49fb73b2fe
+latest_completed_decision = PASS_BLOCKED_DATASET_GENERATION_REEXECUTION_EVIDENCE_REVIEW_FOR_MISSING_SLOT_REMEDIATION_AUTHORIZATION_CONSIDERATION
+latest_completed_record = docs/runs/v3.08_dataset_generation_reexecution_blocked_evidence_review.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
-next_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
+current_active_checkpoint = v3.08 Missing-Slot Root-Cause and Remediation-Authorization Consideration
+next_checkpoint = v3.08 Missing-Slot Root-Cause and Remediation-Authorization Consideration
 ```
 
-The blocked dataset-generation re-execution evidence review is current. No execution scope is authorized, and dataset validation and all later execution remain unauthorized.
+Missing-slot root-cause and remediation authorization consideration is current. No root-cause analysis, remediation, or other execution scope is authorized.
 
 ## 2. Governing reconstruction classification
 
@@ -104,9 +104,22 @@ dataset_generation_reexecution_commit = a9f8bfe2425a154625f6fd5293330bc97ad7337f
 dataset_generation_reexecution_result = BLOCK_DATASET_GENERATION_REEXECUTION_RAW_INPUT_MISSING_EXPECTED_SLOTS
 dataset_generation_reexecution_complete = NO
 dataset_generation_reexecution_authorized = NO
+dataset_generation_reexecution_blocked_evidence_review_checkpoint = COMPLETED
+dataset_generation_reexecution_blocked_evidence_review_record = docs/runs/v3.08_dataset_generation_reexecution_blocked_evidence_review.md
+dataset_generation_reexecution_blocked_evidence_review_commit = bd5083e65d5d198f9e4eb159373f9c49fb73b2fe
+dataset_generation_reexecution_blocked_evidence_review_result = PASS
+dataset_generation_reexecution_blocked_evidence_review_decision = PASS_BLOCKED_DATASET_GENERATION_REEXECUTION_EVIDENCE_REVIEW_FOR_MISSING_SLOT_REMEDIATION_AUTHORIZATION_CONSIDERATION
+missing_slot_root_cause_and_remediation_authorization_checkpoint = CURRENT
+missing_slot_root_cause_and_remediation_authorization_record = NOT_CREATED
+missing_slot_root_cause_and_remediation_authorization_result = NOT_YET_PERFORMED
+missing_slot_root_cause_analysis_authorized = NO
+missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
 dependency_installation_authorized = NO
 requirements_change_authorized = NO
+data_fetch_authorized = NO
+alpaca_api_calls_authorized = NO
+dataset_generation_authorized = NO
 authorized_current_execution_scope = NONE
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
@@ -190,15 +203,19 @@ The blocked Dataset-Generation Execution checkpoint did not:
 - deploy; or
 - tag.
 
-The current Dataset-Generation Re-Execution Blocked Evidence Review checkpoint may only:
+The current Missing-Slot Root-Cause and Remediation-Authorization Consideration checkpoint may only:
 
-- review the blocked re-execution evidence;
-- review the missing-slot evidence;
-- determine what authorization checkpoint should be considered next; and
+- review the blocked evidence review record;
+- review the blocked re-execution evidence record;
+- review the reconstruction contract and missing-slot evidence;
+- decide whether to create a separate authorization record for missing-slot root-cause analysis and/or remediation; and
 - preserve all non-authorization boundaries.
 
-The current Dataset-Generation Re-Execution Blocked Evidence Review checkpoint must not:
+The current Missing-Slot Root-Cause and Remediation-Authorization Consideration checkpoint must not:
 
+- perform root-cause analysis yet;
+- perform remediation;
+- read or rewrite raw parquet unless separately authorized;
 - fetch data;
 - make Alpaca API calls;
 - rerun dataset generation;
@@ -236,26 +253,26 @@ The current Dataset-Generation Re-Execution Blocked Evidence Review checkpoint m
 20. v3.08 Dataset-Generation Execution Remediation; commit `dbbc658fc04ad494ad86dbd6cf07137bed686f09`; decision `PASS_DATASET_GENERATION_EXECUTION_REMEDIATION_WORKSPACE_VENV_SELECTED_AND_IMPORTS_VERIFIED`; record `docs/runs/v3.08_dataset_generation_execution_remediation.md`.
 21. v3.08 Dataset-Generation Re-Execution Authorization; commit `bb1f6f18107085154674a45f4f0b464c157559ec`; decision `PASS_DATASET_GENERATION_REEXECUTION_AUTHORIZATION_FOR_DATASET_GENERATION_REEXECUTION_ONLY`; record `docs/runs/v3.08_dataset_generation_reexecution_authorization.md`.
 22. v3.08 Dataset-Generation Re-Execution; commit `a9f8bfe2425a154625f6fd5293330bc97ad7337f`; decision `BLOCK_DATASET_GENERATION_REEXECUTION_RAW_INPUT_MISSING_EXPECTED_SLOTS`; record `docs/runs/v3.08_dataset_generation_reexecution.md`.
+23. v3.08 Dataset-Generation Re-Execution Blocked Evidence Review; commit `bd5083e65d5d198f9e4eb159373f9c49fb73b2fe`; decision `PASS_BLOCKED_DATASET_GENERATION_REEXECUTION_EVIDENCE_REVIEW_FOR_MISSING_SLOT_REMEDIATION_AUTHORIZATION_CONSIDERATION`; record `docs/runs/v3.08_dataset_generation_reexecution_blocked_evidence_review.md`.
 
 ## 8. Forward roadmap
 
-1. v3.08 Dataset-Generation Re-Execution Blocked Evidence Review.
-2. Missing-slot root-cause and remediation-authorization consideration.
-3. Source-of-truth alignment after missing-slot remediation authorization, if authorization passes.
-4. Missing-slot remediation or governed data-completeness remediation execution, if authorized.
-5. Source-of-truth alignment after remediation execution.
-6. Dataset-generation re-execution authorization reconsideration.
-7. Dataset-generation re-execution.
-8. Source-of-truth alignment after successful dataset generation, if generation passes.
-9. Dataset evidence review.
-10. Dataset-validation authorization.
-11. Dataset-validation execution.
-12. Validation-only preflight authorization.
-13. Validation-only preflight execution.
-14. Training authorization.
-15. Training execution.
-16. Artifact/model review.
-17. Paper-trading authorization.
+1. v3.08 Missing-Slot Root-Cause and Remediation-Authorization Consideration.
+2. Source-of-truth alignment after missing-slot root-cause/remediation authorization, if authorization passes.
+3. Missing-slot root-cause analysis and/or governed data-completeness remediation execution, if authorized.
+4. Source-of-truth alignment after root-cause/remediation execution.
+5. Dataset-generation re-execution authorization reconsideration.
+6. Dataset-generation re-execution.
+7. Source-of-truth alignment after successful dataset generation, if generation passes.
+8. Dataset evidence review.
+9. Dataset-validation authorization.
+10. Dataset-validation execution.
+11. Validation-only preflight authorization.
+12. Validation-only preflight execution.
+13. Training authorization.
+14. Training execution.
+15. Artifact/model review.
+16. Paper-trading authorization.
 
 Every later milestone remains separately governed.
 
@@ -306,21 +323,25 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor a9f8bfe2425a154625f6fd5293330bc97ad7337f HEAD
+git merge-base --is-ancestor bd5083e65d5d198f9e4eb159373f9c49fb73b2fe HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
-next_checkpoint = v3.08 Dataset-Generation Re-Execution Blocked Evidence Review
+current_active_checkpoint = v3.08 Missing-Slot Root-Cause and Remediation-Authorization Consideration
+next_checkpoint = v3.08 Missing-Slot Root-Cause and Remediation-Authorization Consideration
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
 dataset_generation_reexecution_authorization_checkpoint = COMPLETED
 dataset_generation_reexecution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_reexecution_authorized = NO
+dataset_generation_reexecution_blocked_evidence_review_checkpoint = COMPLETED
+missing_slot_root_cause_and_remediation_authorization_checkpoint = CURRENT
+missing_slot_root_cause_analysis_authorized = NO
+missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
 authorized_current_execution_scope = NONE
 dataset_generation_execution_remediation_checkpoint = COMPLETED
@@ -329,4 +350,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint is review-only and authorizes no execution. Dataset validation and all later activity remain separately governed and unauthorized.
+The current checkpoint is authorization-consideration-only and authorizes no execution. Root-cause analysis, remediation, dataset validation, and all later activity remain separately governed and unauthorized.
