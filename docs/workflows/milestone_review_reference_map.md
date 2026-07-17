@@ -8,17 +8,17 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Post-Blocked-Remediation Pathway Decision
-latest_completed_checkpoint = v3.08 Source-of-Truth Alignment After Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
-latest_completed_commit = d31d29881c4c0080af3b214b99346334737ba9c4
-latest_completed_decision = PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION
-latest_completed_record = docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md
+active_phase = v3.08 SIP Feed Investigation Planning Authorization
+latest_completed_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
+latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_decision = PASS_POST_BLOCKED_REMEDIATION_PATHWAY_DECISION_FOR_SIP_FEED_INVESTIGATION_PLANNING_ONLY
+latest_completed_record = docs/runs/v3.08_post_blocked_remediation_pathway_decision.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
-next_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
+current_active_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
+next_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
 ```
 
-The targeted remediation execution completed blocked. The next checkpoint is a pathway decision only; dataset generation and all later execution remain unauthorized.
+SIP-feed investigation planning has been selected for authorization consideration only. SIP access, data fetching, dataset generation, and all later execution remain unauthorized.
 
 ## 2. Governing classification and dataset identity
 
@@ -128,6 +128,12 @@ targeted_refetch_execution_record = docs/runs/v3.08_governed_targeted_missing_sl
 targeted_refetch_execution_commit = d692f38b2ce8876c6353371bce0b7c6376ad2565
 missing_observation_remediation_result = BLOCKED_NOT_RECOVERED
 raw_candidate_available_for_dataset_generation = NO
+SIP_feed_investigation_planning_selected = YES
+SIP_feed_investigation_execution_authorized = NO
+SIP_data_access_authorized = NO
+SIP_API_calls_authorized = NO
+IEX_refetch_authorized = NO
+contract_replacement_authorized = NO
 targeted_refetch_authorized = NO
 raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
@@ -399,13 +405,14 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 26. v3.08 Missing-Slot Remediation and Data-Completeness Authorization Consideration; commit `d3953eea67fb44f1c9c6ac6e983fbcec301262cb`; decision `PASS_MISSING_SLOT_REMEDIATION_DATA_COMPLETENESS_AUTHORIZATION_CONSIDERATION_FOR_GOVERNED_TARGETED_REFETCH_RAW_REMEDIATION_EXECUTION_ONLY`; record `docs/runs/v3.08_missing_slot_remediation_data_completeness_authorization_consideration.md`.
 27. v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution completed blocked; commit `d692f38b2ce8876c6353371bce0b7c6376ad2565`; decision `BLOCK_GOVERNED_TARGETED_MISSING_SLOT_REFETCH_RAW_REMEDIATION_EXECUTION_MISSING_OBSERVATIONS_NOT_FULLY_RECOVERED`; record `docs/runs/v3.08_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
 28. Source-of-truth alignment after blocked targeted missing-slot remediation completed; commit `d31d29881c4c0080af3b214b99346334737ba9c4`; decision `PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION`; record `docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
+29. v3.08 Post-Blocked-Remediation Pathway Decision selected SIP-feed investigation planning only; commit `PENDING_COMMIT_HASH`; decision `PASS_POST_BLOCKED_REMEDIATION_PATHWAY_DECISION_FOR_SIP_FEED_INVESTIGATION_PLANNING_ONLY`; record `docs/runs/v3.08_post_blocked_remediation_pathway_decision.md`.
 
 ## 8. Forward milestone roadmap
 
-1. v3.08 Post-Blocked-Remediation Pathway Decision.
-2. Any future branch requires separate authorization.
-
-Non-authorized future pathway categories are: retain the block under the current IEX zero-missing-slot contract; investigate calendar/session assumptions; investigate SIP feed as a separate contract change; define a new missing-data policy contract; or abandon v3.08 reconstruction and return to a prior verified baseline.
+1. v3.08 SIP Feed Investigation Planning Authorization.
+2. SIP Feed Investigation Planning, only if authorization passes.
+3. Any later SIP data access or SIP execution requires separate authorization.
+4. Any contract replacement, dataset generation, validation, preflight, training, or paper trading remains separately governed.
 
 Every later milestone remains separately governed.
 
@@ -472,8 +479,8 @@ echo $?
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
-next_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
+current_active_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
+next_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -498,4 +505,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint is a documentation/governance pathway decision only. It authorizes no pathway option or execution. Dataset generation, dataset validation, training, orders, deployment, and tagging remain unauthorized.
+The current checkpoint may consider authorization for SIP-feed investigation planning only. It does not authorize SIP access, market-data fetching, dataset generation, dataset validation, training, orders, deployment, or tagging.
