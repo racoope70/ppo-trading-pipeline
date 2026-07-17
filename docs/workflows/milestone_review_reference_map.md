@@ -10,7 +10,7 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
 active_phase = v3.08 Post-Blocked-Remediation Pathway Decision
 latest_completed_checkpoint = v3.08 Source-of-Truth Alignment After Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
-latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_commit = 05be9fd5d2fd4e0de63d1eeaee103e75378fe666
 latest_completed_decision = PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION
 latest_completed_record = docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
@@ -398,7 +398,7 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 25. v3.08 Missing-Slot Root-Cause Analysis; commit `db3b72a1f957499ea265dd51a8c5f7d8731c5e42`; decision `PASS_MISSING_SLOT_ROOT_CAUSE_ANALYSIS_FOR_REMEDIATION_AUTHORIZATION_CONSIDERATION`; record `docs/runs/v3.08_missing_slot_root_cause_analysis.md`.
 26. v3.08 Missing-Slot Remediation and Data-Completeness Authorization Consideration; commit `d3953eea67fb44f1c9c6ac6e983fbcec301262cb`; decision `PASS_MISSING_SLOT_REMEDIATION_DATA_COMPLETENESS_AUTHORIZATION_CONSIDERATION_FOR_GOVERNED_TARGETED_REFETCH_RAW_REMEDIATION_EXECUTION_ONLY`; record `docs/runs/v3.08_missing_slot_remediation_data_completeness_authorization_consideration.md`.
 27. v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution completed blocked; commit `d692f38b2ce8876c6353371bce0b7c6376ad2565`; decision `BLOCK_GOVERNED_TARGETED_MISSING_SLOT_REFETCH_RAW_REMEDIATION_EXECUTION_MISSING_OBSERVATIONS_NOT_FULLY_RECOVERED`; record `docs/runs/v3.08_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
-28. Source-of-truth alignment after blocked targeted missing-slot remediation completed; commit `PENDING_COMMIT_HASH`; decision `PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION`; record `docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
+28. Source-of-truth alignment after blocked targeted missing-slot remediation completed; commit `05be9fd5d2fd4e0de63d1eeaee103e75378fe666`; decision `PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION`; record `docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
 
 ## 8. Forward milestone roadmap
 
