@@ -10,17 +10,17 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 SIP Feed Investigation Planning Authorization
-latest_completed_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
-latest_completed_commit = 4e6bd047c58062b79042b57a41975bbbb6147d27
-latest_completed_decision = PASS_POST_BLOCKED_REMEDIATION_PATHWAY_DECISION_FOR_SIP_FEED_INVESTIGATION_PLANNING_ONLY
-latest_completed_record = docs/runs/v3.08_post_blocked_remediation_pathway_decision.md
+active_phase = v3.08 SIP Feed Investigation Planning
+latest_completed_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
+latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_decision = PASS_SIP_FEED_INVESTIGATION_PLANNING_AUTHORIZATION_FOR_PLANNING_DOCUMENT_ONLY
+latest_completed_record = docs/runs/v3.08_sip_feed_investigation_planning_authorization.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
-next_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
+current_active_checkpoint = v3.08 SIP Feed Investigation Planning
+next_checkpoint = v3.08 SIP Feed Investigation Planning
 ```
 
-SIP-feed investigation planning has been selected for authorization consideration only. SIP access, data fetching, dataset generation, and all later execution remain unauthorized.
+The documentation-only SIP Feed Investigation Planning record is authorized. SIP access, data fetching, dataset generation, and all execution remain unauthorized.
 
 ## 2. Governing reconstruction classification
 
@@ -136,11 +136,17 @@ targeted_refetch_execution_commit = d692f38b2ce8876c6353371bce0b7c6376ad2565
 missing_observation_remediation_result = BLOCKED_NOT_RECOVERED
 raw_candidate_available_for_dataset_generation = NO
 SIP_feed_investigation_planning_selected = YES
+SIP_feed_investigation_planning_document_authorized = YES
 SIP_feed_investigation_execution_authorized = NO
 SIP_data_access_authorized = NO
 SIP_API_calls_authorized = NO
+IEX_data_access_authorized = NO
 IEX_refetch_authorized = NO
+market_data_access_authorized = NO
+live_Alpaca_client_authorized = NO
 contract_replacement_authorized = NO
+raw_data_modification_authorized = NO
+candidate_raw_creation_authorized = NO
 targeted_refetch_authorized = NO
 raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
@@ -153,7 +159,7 @@ dataset_generation_authorized = NO
 contract_relaxation_authorized = NO
 calendar_rule_change_authorized = NO
 synthetic_fill_authorized = NO
-authorized_current_execution_scope = NONE
+authorized_current_execution_scope = DOCUMENTATION_ONLY_SIP_FEED_INVESTIGATION_PLANNING
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -299,12 +305,13 @@ The current Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Rem
 27. v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution completed blocked; commit `d692f38b2ce8876c6353371bce0b7c6376ad2565`; decision `BLOCK_GOVERNED_TARGETED_MISSING_SLOT_REFETCH_RAW_REMEDIATION_EXECUTION_MISSING_OBSERVATIONS_NOT_FULLY_RECOVERED`; record `docs/runs/v3.08_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
 28. Source-of-truth alignment after blocked targeted missing-slot remediation completed; commit `d31d29881c4c0080af3b214b99346334737ba9c4`; decision `PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION`; record `docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
 29. v3.08 Post-Blocked-Remediation Pathway Decision selected SIP-feed investigation planning only; commit `4e6bd047c58062b79042b57a41975bbbb6147d27`; decision `PASS_POST_BLOCKED_REMEDIATION_PATHWAY_DECISION_FOR_SIP_FEED_INVESTIGATION_PLANNING_ONLY`; record `docs/runs/v3.08_post_blocked_remediation_pathway_decision.md`.
+30. v3.08 SIP Feed Investigation Planning Authorization passed for planning document only; commit `PENDING_COMMIT_HASH`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_AUTHORIZATION_FOR_PLANNING_DOCUMENT_ONLY`; record `docs/runs/v3.08_sip_feed_investigation_planning_authorization.md`.
 
 ## 8. Forward roadmap
 
-1. v3.08 SIP Feed Investigation Planning Authorization.
-2. SIP Feed Investigation Planning, only if authorization passes.
-3. Any later SIP data access or SIP execution requires separate authorization.
+1. v3.08 SIP Feed Investigation Planning.
+2. SIP Feed Investigation Planning review/acceptance.
+3. Any SIP data access or SIP execution requires separate authorization.
 4. Any contract replacement, dataset generation, validation, preflight, training, or paper trading remains separately governed.
 
 Every later milestone remains separately governed.
@@ -363,8 +370,8 @@ echo $?
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
-next_checkpoint = v3.08 SIP Feed Investigation Planning Authorization
+current_active_checkpoint = v3.08 SIP Feed Investigation Planning
+next_checkpoint = v3.08 SIP Feed Investigation Planning
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -382,11 +389,11 @@ targeted_refetch_authorized = NO
 raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
-authorized_current_execution_scope = NONE
+authorized_current_execution_scope = DOCUMENTATION_ONLY_SIP_FEED_INVESTIGATION_PLANNING
 dataset_generation_execution_remediation_checkpoint = COMPLETED
 dependency_installation_authorized = NO
 requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint may consider authorization for SIP-feed investigation planning only. It does not authorize SIP access, market-data fetching, dataset generation, dataset validation, or any later execution.
+The current checkpoint authorizes only a documentation-only SIP Feed Investigation Planning record. It does not authorize SIP access, market-data fetching, dataset generation, dataset validation, or any execution.
