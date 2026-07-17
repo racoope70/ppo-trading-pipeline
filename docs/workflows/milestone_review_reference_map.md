@@ -8,17 +8,17 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
-latest_completed_checkpoint = v3.08 Missing-Slot Remediation and Data-Completeness Authorization Consideration
-latest_completed_commit = d3953eea67fb44f1c9c6ac6e983fbcec301262cb
-latest_completed_decision = PASS_MISSING_SLOT_REMEDIATION_DATA_COMPLETENESS_AUTHORIZATION_CONSIDERATION_FOR_GOVERNED_TARGETED_REFETCH_RAW_REMEDIATION_EXECUTION_ONLY
-latest_completed_record = docs/runs/v3.08_missing_slot_remediation_data_completeness_authorization_consideration.md
+active_phase = v3.08 Post-Blocked-Remediation Pathway Decision
+latest_completed_checkpoint = v3.08 Source-of-Truth Alignment After Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
+latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_decision = PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION
+latest_completed_record = docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
-next_checkpoint = v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
+current_active_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
+next_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
 ```
 
-Governed targeted missing-slot refetch and raw data-completeness remediation execution is current under the exact authorized scope. Dataset generation and all later execution remain unauthorized.
+The targeted remediation execution completed blocked. The next checkpoint is a pathway decision only; dataset generation and all later execution remain unauthorized.
 
 ## 2. Governing classification and dataset identity
 
@@ -120,22 +120,27 @@ missing_slot_remediation_authorization_record = docs/runs/v3.08_missing_slot_rem
 missing_slot_remediation_authorization_commit = d3953eea67fb44f1c9c6ac6e983fbcec301262cb
 missing_slot_remediation_authorization_result = PASS
 missing_slot_remediation_authorization_decision = PASS_MISSING_SLOT_REMEDIATION_DATA_COMPLETENESS_AUTHORIZATION_CONSIDERATION_FOR_GOVERNED_TARGETED_REFETCH_RAW_REMEDIATION_EXECUTION_ONLY
-governed_targeted_missing_slot_refetch_raw_remediation_checkpoint = CURRENT
-governed_targeted_missing_slot_refetch_raw_remediation_record = NOT_CREATED
-governed_targeted_missing_slot_refetch_raw_remediation_result = NOT_YET_PERFORMED
-targeted_refetch_authorized = YES
-raw_data_completeness_remediation_authorized = YES
-missing_slot_remediation_authorized = YES
+governed_targeted_missing_slot_refetch_raw_remediation_checkpoint = COMPLETED_BLOCKED
+governed_targeted_missing_slot_refetch_raw_remediation_record = docs/runs/v3.08_governed_targeted_missing_slot_refetch_raw_remediation_execution.md
+governed_targeted_missing_slot_refetch_raw_remediation_result = BLOCK_GOVERNED_TARGETED_MISSING_SLOT_REFETCH_RAW_REMEDIATION_EXECUTION_MISSING_OBSERVATIONS_NOT_FULLY_RECOVERED
+targeted_refetch_execution_checkpoint = COMPLETED_BLOCKED
+targeted_refetch_execution_record = docs/runs/v3.08_governed_targeted_missing_slot_refetch_raw_remediation_execution.md
+targeted_refetch_execution_commit = d692f38b2ce8876c6353371bce0b7c6376ad2565
+missing_observation_remediation_result = BLOCKED_NOT_RECOVERED
+raw_candidate_available_for_dataset_generation = NO
+targeted_refetch_authorized = NO
+raw_data_completeness_remediation_authorized = NO
+missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
 dependency_installation_authorized = NO
 requirements_change_authorized = NO
-data_fetch_authorized = YES
-alpaca_api_calls_authorized = YES
+data_fetch_authorized = NO
+alpaca_api_calls_authorized = NO
 dataset_generation_authorized = NO
 contract_relaxation_authorized = NO
 calendar_rule_change_authorized = NO
 synthetic_fill_authorized = NO
-authorized_current_execution_scope = GOVERNED_TARGETED_MISSING_SLOT_REFETCH_RAW_REMEDIATION_EXECUTION_ONLY
+authorized_current_execution_scope = NONE
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -392,23 +397,15 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 24. v3.08 Missing-Slot Root-Cause and Remediation-Authorization Consideration; commit `81934d64010ac9771c0022ffacd18a5ab79035fa`; decision `PASS_MISSING_SLOT_ROOT_CAUSE_REMEDIATION_AUTHORIZATION_CONSIDERATION_FOR_MISSING_SLOT_ROOT_CAUSE_ANALYSIS_ONLY`; record `docs/runs/v3.08_missing_slot_root_cause_remediation_authorization_consideration.md`.
 25. v3.08 Missing-Slot Root-Cause Analysis; commit `db3b72a1f957499ea265dd51a8c5f7d8731c5e42`; decision `PASS_MISSING_SLOT_ROOT_CAUSE_ANALYSIS_FOR_REMEDIATION_AUTHORIZATION_CONSIDERATION`; record `docs/runs/v3.08_missing_slot_root_cause_analysis.md`.
 26. v3.08 Missing-Slot Remediation and Data-Completeness Authorization Consideration; commit `d3953eea67fb44f1c9c6ac6e983fbcec301262cb`; decision `PASS_MISSING_SLOT_REMEDIATION_DATA_COMPLETENESS_AUTHORIZATION_CONSIDERATION_FOR_GOVERNED_TARGETED_REFETCH_RAW_REMEDIATION_EXECUTION_ONLY`; record `docs/runs/v3.08_missing_slot_remediation_data_completeness_authorization_consideration.md`.
+27. v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution completed blocked; commit `d692f38b2ce8876c6353371bce0b7c6376ad2565`; decision `BLOCK_GOVERNED_TARGETED_MISSING_SLOT_REFETCH_RAW_REMEDIATION_EXECUTION_MISSING_OBSERVATIONS_NOT_FULLY_RECOVERED`; record `docs/runs/v3.08_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
+28. Source-of-truth alignment after blocked targeted missing-slot remediation completed; commit `PENDING_COMMIT_HASH`; decision `PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_BLOCKED_TARGETED_MISSING_SLOT_REMEDIATION`; record `docs/runs/v3.08_source_of_truth_alignment_after_governed_targeted_missing_slot_refetch_raw_remediation_execution.md`.
 
 ## 8. Forward milestone roadmap
 
-1. v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution.
-2. Source-of-truth alignment after governed targeted missing-slot refetch/raw remediation execution.
-3. Dataset-generation re-execution authorization reconsideration.
-4. Dataset-generation re-execution.
-5. Source-of-truth alignment after successful dataset generation, if generation passes.
-6. Dataset evidence review.
-7. Dataset-validation authorization.
-8. Dataset-validation execution.
-9. Validation-only preflight authorization.
-10. Validation-only preflight execution.
-11. Training authorization.
-12. Training execution.
-13. Artifact/model review.
-14. Paper-trading authorization.
+1. v3.08 Post-Blocked-Remediation Pathway Decision.
+2. Any future branch requires separate authorization.
+
+Non-authorized future pathway categories are: retain the block under the current IEX zero-missing-slot contract; investigate calendar/session assumptions; investigate SIP feed as a separate contract change; define a new missing-data policy contract; or abandon v3.08 reconstruction and return to a prior verified baseline.
 
 Every later milestone remains separately governed.
 
@@ -468,15 +465,15 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor d3953eea67fb44f1c9c6ac6e983fbcec301262cb HEAD
+git merge-base --is-ancestor d692f38b2ce8876c6353371bce0b7c6376ad2565 HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
-next_checkpoint = v3.08 Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution
+current_active_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
+next_checkpoint = v3.08 Post-Blocked-Remediation Pathway Decision
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -489,16 +486,16 @@ missing_slot_root_cause_analysis_checkpoint = COMPLETED
 missing_slot_root_cause_analysis_authorized = NO
 missing_slot_root_cause_category = PROVIDER_OR_FEED_LEVEL_MISSING_BARS
 missing_slot_remediation_authorization_checkpoint = COMPLETED
-governed_targeted_missing_slot_refetch_raw_remediation_checkpoint = CURRENT
-targeted_refetch_authorized = YES
-raw_data_completeness_remediation_authorized = YES
-missing_slot_remediation_authorized = YES
+governed_targeted_missing_slot_refetch_raw_remediation_checkpoint = COMPLETED_BLOCKED
+targeted_refetch_authorized = NO
+raw_data_completeness_remediation_authorized = NO
+missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
-authorized_current_execution_scope = GOVERNED_TARGETED_MISSING_SLOT_REFETCH_RAW_REMEDIATION_EXECUTION_ONLY
+authorized_current_execution_scope = NONE
 dataset_generation_execution_remediation_checkpoint = COMPLETED
 dependency_installation_authorized = NO
 requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint authorizes only the governed targeted missing-slot refetch/raw remediation execution. Dataset generation, dataset validation, training, orders, deployment, and tagging remain unauthorized.
+The current checkpoint is a documentation/governance pathway decision only. It authorizes no pathway option or execution. Dataset generation, dataset validation, training, orders, deployment, and tagging remain unauthorized.
