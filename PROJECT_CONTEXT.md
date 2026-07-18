@@ -12,7 +12,7 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
 active_phase = v3.08 SIP Feed Investigation Execution Authorization
 latest_completed_checkpoint = v3.08 SIP Feed Investigation Planning Review
-latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_commit = 8f58bd8b7bfbc95874673de48b42efe1bbfb7250
 latest_completed_decision = PASS_SIP_FEED_INVESTIGATION_PLANNING_REVIEW_FOR_EXECUTION_AUTHORIZATION_CONSIDERATION
 latest_completed_record = docs/reviews/v3.08_sip_feed_investigation_planning_review.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
@@ -309,7 +309,7 @@ The current Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Rem
 29. v3.08 Post-Blocked-Remediation Pathway Decision selected SIP-feed investigation planning only; commit `4e6bd047c58062b79042b57a41975bbbb6147d27`; decision `PASS_POST_BLOCKED_REMEDIATION_PATHWAY_DECISION_FOR_SIP_FEED_INVESTIGATION_PLANNING_ONLY`; record `docs/runs/v3.08_post_blocked_remediation_pathway_decision.md`.
 30. v3.08 SIP Feed Investigation Planning Authorization passed for planning document only; commit `58f2e61c2d30a437c6849cc983b3c8ecefd84eb1`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_AUTHORIZATION_FOR_PLANNING_DOCUMENT_ONLY`; record `docs/runs/v3.08_sip_feed_investigation_planning_authorization.md`.
 31. v3.08 SIP Feed Investigation Planning completed for review only; commit `834321c77edc5aac22a85112b161ef18935ae443`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_FOR_REVIEW_ONLY`; record `docs/runs/v3.08_sip_feed_investigation_planning.md`.
-32. v3.08 SIP Feed Investigation Planning Review passed for execution authorization consideration only; commit `PENDING_COMMIT_HASH`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_REVIEW_FOR_EXECUTION_AUTHORIZATION_CONSIDERATION`; record `docs/reviews/v3.08_sip_feed_investigation_planning_review.md`.
+32. v3.08 SIP Feed Investigation Planning Review passed for execution authorization consideration only; commit `8f58bd8b7bfbc95874673de48b42efe1bbfb7250`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_REVIEW_FOR_EXECUTION_AUTHORIZATION_CONSIDERATION`; record `docs/reviews/v3.08_sip_feed_investigation_planning_review.md`.
 
 ## 8. Forward roadmap
 
