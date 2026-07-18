@@ -10,7 +10,7 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
 active_phase = v3.08 SIP Feed Investigation Evidence Review
 latest_completed_checkpoint = v3.08 SIP Feed Investigation Execution
-latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_commit = 155c0bb827f85c69708cbdf0e08f97e9d36bcccd
 latest_completed_decision = BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE
 latest_completed_record = docs/runs/v3.08_sip_feed_investigation_execution.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
@@ -420,7 +420,7 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 31. v3.08 SIP Feed Investigation Planning completed for review only; commit `834321c77edc5aac22a85112b161ef18935ae443`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_FOR_REVIEW_ONLY`; record `docs/runs/v3.08_sip_feed_investigation_planning.md`.
 32. v3.08 SIP Feed Investigation Planning Review passed for execution authorization consideration only; commit `8f58bd8b7bfbc95874673de48b42efe1bbfb7250`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_REVIEW_FOR_EXECUTION_AUTHORIZATION_CONSIDERATION`; record `docs/reviews/v3.08_sip_feed_investigation_planning_review.md`.
 33. v3.08 SIP Feed Investigation Execution Authorization passed for bounded execution only; commit `a74f79cef48990e192271bd4f0a9936f8ed5e7a2`; decision `PASS_SIP_FEED_INVESTIGATION_EXECUTION_AUTHORIZATION_FOR_BOUNDED_EXECUTION_ONLY`; record `docs/runs/v3.08_sip_feed_investigation_execution_authorization.md`.
-34. v3.08 SIP Feed Investigation Execution completed; result `BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE`; commit `PENDING_COMMIT_HASH`; record `docs/runs/v3.08_sip_feed_investigation_execution.md`.
+34. v3.08 SIP Feed Investigation Execution completed; result `BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE`; commit `155c0bb827f85c69708cbdf0e08f97e9d36bcccd`; record `docs/runs/v3.08_sip_feed_investigation_execution.md`.
 
 ## 8. Forward milestone roadmap
 
