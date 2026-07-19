@@ -10,7 +10,7 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
 active_phase = v3.08 SIP Access Prerequisite Public-Document Research Authorization
 latest_completed_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning Review
-latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_commit = a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab
 latest_completed_decision = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
 latest_completed_record = docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
@@ -169,11 +169,11 @@ SIP_access_prerequisite_assessment_planning_authorization_review_commit = 6be329
 SIP_access_prerequisite_assessment_planning_authorization_review_result = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
 SIP_access_prerequisite_assessment_planning_checkpoint = COMPLETED
 SIP_access_prerequisite_assessment_planning_record = docs/runs/v3.08_sip_access_prerequisite_assessment_planning.md
-SIP_access_prerequisite_assessment_planning_commit = PENDING_COMMIT_HASH
+SIP_access_prerequisite_assessment_planning_commit = a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab
 SIP_access_prerequisite_assessment_planning_result = PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_FOR_INDEPENDENT_REVIEW_ONLY
 SIP_access_prerequisite_assessment_planning_review_checkpoint = COMPLETED
 SIP_access_prerequisite_assessment_planning_review_record = docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md
-SIP_access_prerequisite_assessment_planning_review_commit = PENDING_COMMIT_HASH
+SIP_access_prerequisite_assessment_planning_review_commit = a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab
 SIP_access_prerequisite_assessment_planning_review_result = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
 SIP_access_prerequisite_assessment_planning_authorized = NO
 SIP_access_prerequisite_assessment_plan_created = YES
@@ -483,8 +483,8 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 39. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision selected SIP access-prerequisite-assessment planning only; commit `d4c8489af9527cc27da409078a250e624e5426ac`; decision `PASS_POST_SIP_FEED_INVESTIGATION_EXECUTION_PATHWAY_DECISION_FOR_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY`; record `docs/runs/v3.08_post_sip_feed_investigation_execution_pathway_decision.md`.
 40. v3.08 SIP Access Prerequisite Assessment Planning Authorization completed for a documentation-only planning record; commit `6be329c860faa6405bf2f7f312fd1431bcf3faec`; decision `PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_FOR_PLANNING_RECORD_ONLY`; record `docs/runs/v3.08_sip_access_prerequisite_assessment_planning_authorization.md`.
 41. v3.08 SIP Access Prerequisite Assessment Planning Authorization Review passed with no findings requiring correction; commit `6be329c860faa6405bf2f7f312fd1431bcf3faec`; decision `PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION`; record `docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_authorization_review.md`.
-42. v3.08 SIP Access Prerequisite Assessment Planning completed for independent review only; commit `PENDING_COMMIT_HASH`; decision `PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_FOR_INDEPENDENT_REVIEW_ONLY`; record `docs/runs/v3.08_sip_access_prerequisite_assessment_planning.md`.
-43. v3.08 SIP Access Prerequisite Assessment Planning Review passed for source-of-truth alignment consideration only; commit `PENDING_COMMIT_HASH`; decision `PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION`; record `docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md`.
+42. v3.08 SIP Access Prerequisite Assessment Planning completed for independent review only; commit `a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab`; decision `PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_FOR_INDEPENDENT_REVIEW_ONLY`; record `docs/runs/v3.08_sip_access_prerequisite_assessment_planning.md`.
+43. v3.08 SIP Access Prerequisite Assessment Planning Review passed for source-of-truth alignment consideration only; commit `a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab`; decision `PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION`; record `docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md`.
 
 ## 8. Forward milestone roadmap
 
@@ -588,7 +588,7 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor 325efdb6664b9136f9fe086acb5bc0fc13a9fb59 HEAD
+git merge-base --is-ancestor a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab HEAD
 echo $?
 ```
 
