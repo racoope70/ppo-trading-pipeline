@@ -12,7 +12,7 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
 active_phase = v3.08 SIP Access Prerequisite Assessment Planning Authorization
 latest_completed_checkpoint = v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision
-latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_commit = d4c8489af9527cc27da409078a250e624e5426ac
 latest_completed_decision = PASS_POST_SIP_FEED_INVESTIGATION_EXECUTION_PATHWAY_DECISION_FOR_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 latest_completed_record = docs/runs/v3.08_post_sip_feed_investigation_execution_pathway_decision.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
@@ -152,7 +152,7 @@ SIP_missing_observations_proven_unavailable = NO
 SIP_candidate_available = NO
 post_SIP_pathway_decision_checkpoint = COMPLETED
 post_SIP_pathway_decision_record = docs/runs/v3.08_post_sip_feed_investigation_execution_pathway_decision.md
-post_SIP_pathway_decision_commit = PENDING_COMMIT_HASH
+post_SIP_pathway_decision_commit = d4c8489af9527cc27da409078a250e624e5426ac
 post_SIP_pathway_decision_result = PASS_POST_SIP_FEED_INVESTIGATION_EXECUTION_PATHWAY_DECISION_FOR_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 post_SIP_pathway_decision_draft_audit_record = docs/reviews/v3.08_post_sip_feed_investigation_execution_pathway_decision_draft_audit.md
 post_SIP_pathway_decision_draft_audit_result = FAIL_INDEPENDENT_PATHWAY_DECISION_DRAFT_AUDIT
@@ -350,9 +350,9 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 34. v3.08 SIP Feed Investigation Execution completed; result `BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE`; commit `155c0bb827f85c69708cbdf0e08f97e9d36bcccd`; record `docs/runs/v3.08_sip_feed_investigation_execution.md`.
 35. v3.08 SIP Feed Investigation Evidence Review completed; commit `efb258a19711b9be8ef69af4ea7170c7fabff93e`; decision `PASS_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW_FOR_POST_BLOCKED_EXECUTION_PATHWAY_DECISION_CONSIDERATION`; record `docs/reviews/v3.08_sip_feed_investigation_evidence_review.md`.
 36. v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review completed; commit `d23b8bdacf374c6c3f362163c59163c1c85d50ca`; decision `PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW`; record `docs/runs/v3.08_source_of_truth_alignment_after_sip_feed_investigation_evidence_review.md`.
-37. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision Draft Audit completed with a blocking result; commit `PENDING_COMMIT_HASH`; decision `FAIL_INDEPENDENT_PATHWAY_DECISION_DRAFT_AUDIT`; record `docs/reviews/v3.08_post_sip_feed_investigation_execution_pathway_decision_draft_audit.md`.
-38. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision Corrected Draft Re-Audit passed with no remaining findings; commit `PENDING_COMMIT_HASH`; decision `PASS_INDEPENDENT_PATHWAY_DECISION_CORRECTED_DRAFT_REAUDIT`; record `docs/reviews/v3.08_post_sip_feed_investigation_execution_pathway_decision_corrected_draft_reaudit.md`.
-39. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision selected SIP access-prerequisite-assessment planning only; commit `PENDING_COMMIT_HASH`; decision `PASS_POST_SIP_FEED_INVESTIGATION_EXECUTION_PATHWAY_DECISION_FOR_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY`; record `docs/runs/v3.08_post_sip_feed_investigation_execution_pathway_decision.md`.
+37. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision Draft Audit completed with a blocking result; commit `d4c8489af9527cc27da409078a250e624e5426ac`; decision `FAIL_INDEPENDENT_PATHWAY_DECISION_DRAFT_AUDIT`; record `docs/reviews/v3.08_post_sip_feed_investigation_execution_pathway_decision_draft_audit.md`.
+38. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision Corrected Draft Re-Audit passed with no remaining findings; commit `d4c8489af9527cc27da409078a250e624e5426ac`; decision `PASS_INDEPENDENT_PATHWAY_DECISION_CORRECTED_DRAFT_REAUDIT`; record `docs/reviews/v3.08_post_sip_feed_investigation_execution_pathway_decision_corrected_draft_reaudit.md`.
+39. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision selected SIP access-prerequisite-assessment planning only; commit `d4c8489af9527cc27da409078a250e624e5426ac`; decision `PASS_POST_SIP_FEED_INVESTIGATION_EXECUTION_PATHWAY_DECISION_FOR_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY`; record `docs/runs/v3.08_post_sip_feed_investigation_execution_pathway_decision.md`.
 
 ## 8. Forward roadmap
 
@@ -426,7 +426,7 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor d6ab4f8c0c6cd91c82704d9c9b622718a32574fb HEAD
+git merge-base --is-ancestor d4c8489af9527cc27da409078a250e624e5426ac HEAD
 echo $?
 ```
 
