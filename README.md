@@ -12,14 +12,17 @@ This project is for research and educational purposes only. It is not financial 
 
 ## Current Governance Status
 
-Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) before making training, retraining, paper-trading, or deployment recommendations. `PROJECT_CONTEXT.md` is the controlling source of truth.
+Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) first before making validation, training, retraining, paper-trading, deployment, data, API, account, or execution recommendations. `PROJECT_CONTEXT.md` is the controlling source of truth for the active broad section/state, authorization boundaries, and non-authorization states.
 
-Current state is controlled by `PROJECT_CONTEXT.md`. The README intentionally defers current milestone and checkpoint labels to `PROJECT_CONTEXT.md` to avoid current-stage drift. Durable blocked authorization boundaries remain:
+Use [docs/workflows/milestone_review_reference_map.md](docs/workflows/milestone_review_reference_map.md) for roadmap navigation, big milestone/section reference, the 2v governance lookup, and locating supporting run/review/audit records. It is not a current checkpoint tracker.
+
+Use Git history and latest pushed run/review records for exact checkpoint chronology. The README intentionally defers the active broad section/state and authorization boundaries to `PROJECT_CONTEXT.md` to avoid governance drift. Durable blocked authorization boundaries remain:
 
 ```text
 current_state_source = PROJECT_CONTEXT.md
-active_milestone = see PROJECT_CONTEXT.md
-next_checkpoint = see PROJECT_CONTEXT.md
+active_section = see PROJECT_CONTEXT.md
+checkpoint_navigation_source = docs/workflows/milestone_review_reference_map.md
+checkpoint_chronology_source = git history and latest pushed run/review records
 v3.07_status = BLOCKED
 NO_SUBMIT = DEFAULT
 ppo_v2_training_execution = NOT_AUTHORIZED
@@ -44,9 +47,9 @@ Passing tests prove infrastructure, control, and reporting stability. They do no
 
 ## Governance documents
 
-- [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) — current active checkpoint, source of truth, and authorization boundary.
-- [Milestone Review Reference Map](docs/workflows/milestone_review_reference_map.md) — roadmap navigation and checkpoint reference map.
-- [Future Validation and Training Reference Map](docs/workflows/future_validation_training_reference_map.md) — future validation, training, holdout, candidate-selection, and paper-trading reference guide.
+- [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) — controlling source of truth for the active broad section/state, authorization boundaries, and non-authorization states.
+- [Milestone Review Reference Map](docs/workflows/milestone_review_reference_map.md) — roadmap/navigation/governance reference map for big sections, the 2v governance lookup, and locating supporting run/review/audit records; it is not a current checkpoint tracker.
+- [Future Validation and Training Reference Map](docs/workflows/future_validation_training_reference_map.md) — guidance only for future validation, retraining, holdout, candidate-selection, paper-trading, and deployment planning; it does not authorize execution.
 
 ## Audit Archive
 

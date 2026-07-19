@@ -2,14 +2,15 @@
 
 ## Purpose
 
-This file preserves future validation, training, final holdout, candidate-selection, and paper-trading reference guidance without bloating `PROJECT_CONTEXT.md`.
+This file preserves guidance for future validation, retraining, final holdout, candidate-selection, paper-trading, and deployment planning without bloating `PROJECT_CONTEXT.md`.
 
-`PROJECT_CONTEXT.md` remains the current source of truth. `docs/workflows/milestone_review_reference_map.md` remains the broad navigation map. This file is a future reference guide only and does not authorize execution or replace a checkpoint-specific plan, run record, authorization, or independent review.
+`PROJECT_CONTEXT.md` is the controlling source of truth for the active broad section/state, authorization boundaries, and non-authorization states. `docs/workflows/milestone_review_reference_map.md` is the roadmap/navigation/governance reference map for big sections, the 2v governance lookup, and locating supporting run/review/audit records. This file is guidance only and does not authorize execution or replace a task-specific plan, run record, authorization, or independent review.
 
-## Active-state source of truth
+## Governance role
 
-The current active checkpoint is always governed by `PROJECT_CONTEXT.md`.
-This file should not be treated as the active-state source of truth.
+This file does not track the current checkpoint and does not determine exact checkpoint chronology.
+
+Use Git history and latest pushed run/review records for exact checkpoint chronology.
 
 Future validation, training, paper trading, universe expansion, and downstream execution remain separately governed and require their own authorization.
 
