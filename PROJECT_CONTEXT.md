@@ -10,17 +10,17 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 SIP Feed Investigation Evidence Review
-latest_completed_checkpoint = v3.08 SIP Feed Investigation Execution
-latest_completed_commit = 155c0bb827f85c69708cbdf0e08f97e9d36bcccd
-latest_completed_decision = BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE
-latest_completed_record = docs/runs/v3.08_sip_feed_investigation_execution.md
+active_phase = v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review
+latest_completed_checkpoint = v3.08 SIP Feed Investigation Evidence Review
+latest_completed_commit = efb258a19711b9be8ef69af4ea7170c7fabff93e
+latest_completed_decision = PASS_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW_FOR_POST_BLOCKED_EXECUTION_PATHWAY_DECISION_CONSIDERATION
+latest_completed_record = docs/reviews/v3.08_sip_feed_investigation_evidence_review.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 SIP Feed Investigation Evidence Review
-next_checkpoint = v3.08 SIP Feed Investigation Evidence Review
+current_active_checkpoint = v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review
+next_checkpoint = NOT_SELECTED_PENDING_PUSHED_ALIGNMENT_REVIEW
 ```
 
-The bounded SIP investigation identified all 66 targets but failed closed before API access because SIP entitlement or permission was not established. No market data was accessed.
+The SIP execution evidence passed governance review while provider coverage remained untested and inconclusive. The current work is source-of-truth alignment only; no later checkpoint is selected or authorized.
 
 ## 2. Governing reconstruction classification
 
@@ -141,6 +141,15 @@ SIP_feed_investigation_planning_document_completed = YES
 SIP_feed_investigation_planning_review_completed = YES
 SIP_feed_investigation_execution_completed = YES
 SIP_feed_investigation_execution_result = BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE
+SIP_feed_investigation_evidence_review_completed = YES
+SIP_feed_investigation_evidence_review_result = PASS
+SIP_feed_investigation_evidence_review_decision = PASS_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW_FOR_POST_BLOCKED_EXECUTION_PATHWAY_DECISION_CONSIDERATION
+SIP_provider_request_performed = NO
+SIP_provider_coverage_tested = NO
+SIP_target_recovery_result = NOT_EVALUATED
+SIP_provider_coverage_conclusion = INCONCLUSIVE
+SIP_missing_observations_proven_unavailable = NO
+SIP_candidate_available = NO
 SIP_feed_investigation_execution_authorized = NO
 SIP_data_access_authorized = NO
 SIP_API_calls_authorized = NO
@@ -246,7 +255,7 @@ The blocked Dataset-Generation Execution checkpoint did not:
 - deploy; or
 - tag.
 
-The current Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution checkpoint may only:
+The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution checkpoint was historically authorized only to:
 
 - use Alpaca historical bars access for the governed six-symbol universe only: AAPL, AMD, MRK, PFE, UNH, XOM;
 - use IEX feed only;
@@ -260,7 +269,7 @@ The current Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Rem
 - create a remediation evidence record documenting recovered and unrecovered slots; and
 - create a checksum for any new raw remediation candidate file, if one is created.
 
-The current Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution checkpoint must not:
+The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Remediation Execution checkpoint did not authorize:
 
 - modify the original raw parquet;
 - synthesize, fill, interpolate, forward-fill, or backfill bars;
@@ -314,12 +323,14 @@ The current Governed Targeted Missing-Slot Refetch and Raw Data-Completeness Rem
 32. v3.08 SIP Feed Investigation Planning Review passed for execution authorization consideration only; commit `8f58bd8b7bfbc95874673de48b42efe1bbfb7250`; decision `PASS_SIP_FEED_INVESTIGATION_PLANNING_REVIEW_FOR_EXECUTION_AUTHORIZATION_CONSIDERATION`; record `docs/reviews/v3.08_sip_feed_investigation_planning_review.md`.
 33. v3.08 SIP Feed Investigation Execution Authorization passed for bounded execution only; commit `a74f79cef48990e192271bd4f0a9936f8ed5e7a2`; decision `PASS_SIP_FEED_INVESTIGATION_EXECUTION_AUTHORIZATION_FOR_BOUNDED_EXECUTION_ONLY`; record `docs/runs/v3.08_sip_feed_investigation_execution_authorization.md`.
 34. v3.08 SIP Feed Investigation Execution completed; result `BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE`; commit `155c0bb827f85c69708cbdf0e08f97e9d36bcccd`; record `docs/runs/v3.08_sip_feed_investigation_execution.md`.
+35. v3.08 SIP Feed Investigation Evidence Review completed; commit `efb258a19711b9be8ef69af4ea7170c7fabff93e`; decision `PASS_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW_FOR_POST_BLOCKED_EXECUTION_PATHWAY_DECISION_CONSIDERATION`; record `docs/reviews/v3.08_sip_feed_investigation_evidence_review.md`.
 
 ## 8. Forward roadmap
 
-1. v3.08 SIP Feed Investigation Evidence Review.
-2. Any contract replacement or raw candidate acceptance requires separate authorization.
-3. Dataset generation, validation, preflight, training, artifact review, paper trading, deployment, and tagging remain separately governed.
+1. Complete and review `v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review`.
+2. Select any later checkpoint only after the pushed alignment result is reviewed.
+3. Any contract replacement or raw-candidate acceptance requires separate authorization.
+4. Dataset generation, validation, preflight, training, artifact review, paper trading, deployment, and tagging remain separately governed.
 
 Every later milestone remains separately governed.
 
@@ -337,9 +348,9 @@ tests_changed = NO
 requirements_changed = NO
 dependencies_installed = NO
 py_compile_rerun = NO
-pytest_rerun = YES
-pytest_command = python -m pytest tests/test_ppo_v2_validation_reporting_scaffold.py
-pytest_result = PASS_37_PASSED
+pytest_rerun = NO
+pytest_command = NOT_RUN
+pytest_result = NOT_RUN
 runtime_verification_rerun = NO
 exchange_calendars_imported_for_runtime_verification = NO
 XNYS_get_calendar_called = NO
@@ -370,15 +381,15 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor 58f2e61c2d30a437c6849cc983b3c8ecefd84eb1 HEAD
+git merge-base --is-ancestor efb258a19711b9be8ef69af4ea7170c7fabff93e HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 SIP Feed Investigation Evidence Review
-next_checkpoint = v3.08 SIP Feed Investigation Evidence Review
+current_active_checkpoint = v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review
+next_checkpoint = NOT_SELECTED_PENDING_PUSHED_ALIGNMENT_REVIEW
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -403,4 +414,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint is documentation-only SIP investigation evidence review. SIP/IEX access, API calls, raw mutation, candidate creation, contract replacement, dataset generation, validation, training, orders, deployment, and tagging are unauthorized.
+The current checkpoint is documentation-only source-of-truth alignment after SIP evidence review. No later checkpoint is selected or authorized; all execution and downstream boundaries remain locked.
