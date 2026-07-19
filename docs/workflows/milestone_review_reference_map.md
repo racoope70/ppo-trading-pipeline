@@ -8,17 +8,17 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review
-latest_completed_checkpoint = v3.08 SIP Feed Investigation Evidence Review
-latest_completed_commit = efb258a19711b9be8ef69af4ea7170c7fabff93e
-latest_completed_decision = PASS_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW_FOR_POST_BLOCKED_EXECUTION_PATHWAY_DECISION_CONSIDERATION
-latest_completed_record = docs/reviews/v3.08_sip_feed_investigation_evidence_review.md
+active_phase = v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision
+latest_completed_checkpoint = v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review
+latest_completed_commit = d23b8bdacf374c6c3f362163c59163c1c85d50ca
+latest_completed_decision = PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW
+latest_completed_record = docs/runs/v3.08_source_of_truth_alignment_after_sip_feed_investigation_evidence_review.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review
-next_checkpoint = NOT_SELECTED_PENDING_PUSHED_ALIGNMENT_REVIEW
+current_active_checkpoint = v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision
+next_checkpoint = v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision
 ```
 
-The SIP execution evidence passed governance review while provider coverage remained untested and inconclusive. The current work is source-of-truth alignment only; no later checkpoint is selected or authorized.
+The source-of-truth alignment is completed. The current checkpoint is pathway decision only; no pathway has been selected, and no planning or execution has been authorized.
 
 ## 2. Governing classification and dataset identity
 
@@ -431,11 +431,12 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 33. v3.08 SIP Feed Investigation Execution Authorization passed for bounded execution only; commit `a74f79cef48990e192271bd4f0a9936f8ed5e7a2`; decision `PASS_SIP_FEED_INVESTIGATION_EXECUTION_AUTHORIZATION_FOR_BOUNDED_EXECUTION_ONLY`; record `docs/runs/v3.08_sip_feed_investigation_execution_authorization.md`.
 34. v3.08 SIP Feed Investigation Execution completed; result `BLOCK_SIP_FEED_INVESTIGATION_EXECUTION_ENTITLEMENT_OR_PERMISSION_UNAVAILABLE`; commit `155c0bb827f85c69708cbdf0e08f97e9d36bcccd`; record `docs/runs/v3.08_sip_feed_investigation_execution.md`.
 35. v3.08 SIP Feed Investigation Evidence Review completed; commit `efb258a19711b9be8ef69af4ea7170c7fabff93e`; decision `PASS_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW_FOR_POST_BLOCKED_EXECUTION_PATHWAY_DECISION_CONSIDERATION`; record `docs/reviews/v3.08_sip_feed_investigation_evidence_review.md`.
+36. v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review completed; commit `d23b8bdacf374c6c3f362163c59163c1c85d50ca`; decision `PASS_SOURCE_OF_TRUTH_ALIGNMENT_AFTER_SIP_FEED_INVESTIGATION_EVIDENCE_REVIEW`; record `docs/runs/v3.08_source_of_truth_alignment_after_sip_feed_investigation_evidence_review.md`.
 
 ## 8. Forward milestone roadmap
 
-1. Complete and review `v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review`.
-2. Select any later checkpoint only after the pushed alignment result is reviewed.
+1. Complete `v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision`.
+2. Any selected pathway requires a separately governed planning or authorization checkpoint before execution.
 3. Any contract replacement or raw-candidate acceptance requires separate authorization.
 4. Dataset generation, validation, preflight, training, artifact review, paper trading, deployment, and tagging remain separately governed.
 
@@ -456,7 +457,7 @@ Before each future checkpoint, read:
 3. The matching section of `docs/workflows/future_validation_training_reference_map.md`.
 4. The latest relevant run, audit, review, and authorization records.
 
-## 9. Alignment checkpoint action confirmations
+## 9. Latest completed alignment checkpoint action confirmations
 
 ```text
 source_code_changed = NO
@@ -497,15 +498,15 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor efb258a19711b9be8ef69af4ea7170c7fabff93e HEAD
+git merge-base --is-ancestor d23b8bdacf374c6c3f362163c59163c1c85d50ca HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 Source-of-Truth Alignment After SIP Feed Investigation Evidence Review
-next_checkpoint = NOT_SELECTED_PENDING_PUSHED_ALIGNMENT_REVIEW
+current_active_checkpoint = v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision
+next_checkpoint = v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -524,10 +525,38 @@ raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
 authorized_current_execution_scope = NONE
+pathway_selected = NO
+pathway_planning_authorized = NO
+pathway_execution_authorized = NO
+source_code_changes = NOT_AUTHORIZED
+test_changes = NOT_AUTHORIZED
+requirements_change = NOT_AUTHORIZED
+workflow_change = NOT_AUTHORIZED
+dependency_installation = NOT_AUTHORIZED
+market_data_access = NOT_AUTHORIZED
+Alpaca_API_calls = NOT_AUTHORIZED
+live_Alpaca_client_creation = NOT_AUTHORIZED
+SIP_data_access = NOT_AUTHORIZED
+IEX_data_access = NOT_AUTHORIZED
+raw_data_modification = NOT_AUTHORIZED
+candidate_raw_creation = NOT_AUTHORIZED
+contract_replacement = NOT_AUTHORIZED
+contract_relaxation = NOT_AUTHORIZED
+calendar_rule_change = NOT_AUTHORIZED
+synthetic_fill = NOT_AUTHORIZED
+dataset_generation = NOT_AUTHORIZED
+dataset_validation = NOT_AUTHORIZED
+validation_only_preflight = NOT_AUTHORIZED
+training = NOT_AUTHORIZED
+model_artifact_creation = NOT_AUTHORIZED
+paper_orders = NOT_AUTHORIZED
+live_orders = NOT_AUTHORIZED
+deployment = NOT_AUTHORIZED
+tagging = NOT_AUTHORIZED
 dataset_generation_execution_remediation_checkpoint = COMPLETED
 dependency_installation_authorized = NO
 requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint is documentation-only source-of-truth alignment after SIP evidence review. No later checkpoint is selected or authorized; all execution and downstream boundaries remain locked.
+The current checkpoint is documentation-only pathway decision. No planning, API access, data access, remediation, dataset, validation, training, order, deployment, or tagging action is authorized.
