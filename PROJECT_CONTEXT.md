@@ -10,17 +10,22 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 SIP Access Prerequisite Public-Document Research Authorization
-latest_completed_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning Review
-latest_completed_commit = a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab
-latest_completed_decision = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
-latest_completed_record = docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md
-latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
-next_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
+active_section = SIP_ACCESS_PREREQUISITE_RESOLUTION
+active_section_status = IN_PROGRESS
+active_section_goal = Resolve SIP entitlement, permission, subscription, licensing, permitted-use, plan-tier, and cost prerequisites before any further SIP execution can be considered.
+
+PROJECT_CONTEXT_role = CONTROLLING_SOURCE_OF_TRUTH_AND_AUTHORIZATION_BOUNDARY
+checkpoint_navigation_source = docs/workflows/milestone_review_reference_map.md
+checkpoint_chronology_source = git history and latest pushed run/review records
+future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
+
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
 ```
 
-The SIP Access Prerequisite Assessment Planning record was completed, and its independent review passed. The current checkpoint may consider authorization for a later, separately governed public-document research execution. No public or internet research is currently authorized. Account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, and provider-coverage testing remain unauthorized. No contract action or downstream action is authorized.
+Before making validation, training, retraining, paper-trading, deployment, data, API, account, or execution recommendations, read `PROJECT_CONTEXT.md` first. `PROJECT_CONTEXT.md` is the controlling source of truth for active section, authorization boundaries, and non-authorization states. Use `docs/workflows/milestone_review_reference_map.md` for roadmap navigation, milestone/section guidance, and locating supporting run/review/audit records. Use Git history and latest pushed run/review records for exact checkpoint chronology.
+
+The active section remains SIP access-prerequisite resolution. No public or internet research is currently authorized. Account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, and provider-coverage testing remain unauthorized. No contract action or downstream action is authorized.
 
 ## 2. Governing reconstruction classification
 
@@ -400,7 +405,7 @@ future_validation_training_reference_map = docs/workflows/future_validation_trai
 
 For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe-expansion guidance, use the future validation/training reference map. That file is guidance only and does not authorize execution.
 
-## 9. Latest completed SIP Access Prerequisite Assessment Planning Review checkpoint action confirmations
+## 9. SIP Access Prerequisite Assessment Planning Review action confirmations
 
 ```text
 source_code_changed = NO
@@ -479,8 +484,10 @@ echo $?
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
-next_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
+active_section = SIP_ACCESS_PREREQUISITE_RESOLUTION
+active_section_status = IN_PROGRESS
+checkpoint_navigation_source = docs/workflows/milestone_review_reference_map.md
+checkpoint_chronology_source = git history and latest pushed run/review records
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -547,4 +554,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint may consider authorization for separately governed public-document research only. It does not authorize browsing or consulting provider sources, account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, provider testing, contract action, data action, or downstream execution.
+The active section permits governance consideration only. It does not authorize browsing or consulting provider sources, account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, provider testing, contract action, data action, or downstream execution.
