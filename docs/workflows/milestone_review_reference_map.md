@@ -8,17 +8,17 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
-active_phase = v3.08 SIP Access Prerequisite Assessment Planning
-latest_completed_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning Authorization
-latest_completed_commit = 6be329c860faa6405bf2f7f312fd1431bcf3faec
-latest_completed_decision = PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_FOR_PLANNING_RECORD_ONLY
-latest_completed_record = docs/runs/v3.08_sip_access_prerequisite_assessment_planning_authorization.md
+active_phase = v3.08 SIP Access Prerequisite Public-Document Research Authorization
+latest_completed_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning Review
+latest_completed_commit = PENDING_COMMIT_HASH
+latest_completed_decision = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
+latest_completed_record = docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md
 latest_completed_ci = NOT_INDEPENDENTLY_VERIFIED_IN_THIS_CHECKPOINT
-current_active_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning
-next_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning
+current_active_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
+next_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
 ```
 
-The SIP Access Prerequisite Assessment Planning Authorization passed independent review. After this transition becomes controlling, one documentation-only planning record may be created to define a prospective prerequisite-assessment process. The planning checkpoint may not perform public or internet research, account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, or provider-coverage testing. No prerequisite-assessment execution or downstream execution is authorized.
+The SIP Access Prerequisite Assessment Planning record was completed, and its independent review passed. The current checkpoint may consider authorization for a later, separately governed public-document research execution. No public or internet research is currently authorized. Account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, and provider-coverage testing remain unauthorized. No contract action or downstream action is authorized.
 
 ## 2. Governing classification and dataset identity
 
@@ -167,8 +167,17 @@ SIP_access_prerequisite_assessment_planning_authorization_review_checkpoint = CO
 SIP_access_prerequisite_assessment_planning_authorization_review_record = docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_authorization_review.md
 SIP_access_prerequisite_assessment_planning_authorization_review_commit = 6be329c860faa6405bf2f7f312fd1431bcf3faec
 SIP_access_prerequisite_assessment_planning_authorization_review_result = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
-SIP_access_prerequisite_assessment_planning_authorized = YES
-SIP_access_prerequisite_assessment_plan_created = NO
+SIP_access_prerequisite_assessment_planning_checkpoint = COMPLETED
+SIP_access_prerequisite_assessment_planning_record = docs/runs/v3.08_sip_access_prerequisite_assessment_planning.md
+SIP_access_prerequisite_assessment_planning_commit = PENDING_COMMIT_HASH
+SIP_access_prerequisite_assessment_planning_result = PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_FOR_INDEPENDENT_REVIEW_ONLY
+SIP_access_prerequisite_assessment_planning_review_checkpoint = COMPLETED
+SIP_access_prerequisite_assessment_planning_review_record = docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md
+SIP_access_prerequisite_assessment_planning_review_commit = PENDING_COMMIT_HASH
+SIP_access_prerequisite_assessment_planning_review_result = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
+SIP_access_prerequisite_assessment_planning_authorized = NO
+SIP_access_prerequisite_assessment_plan_created = YES
+SIP_access_prerequisite_assessment_plan_reviewed = YES
 SIP_access_prerequisite_assessment_execution_authorized = NO
 public_document_research_authorized = NO
 internet_research_authorized = NO
@@ -177,7 +186,7 @@ account_change_authorized = NO
 subscription_change_authorized = NO
 purchase_authorized = NO
 SIP_provider_coverage_testing_authorized = NO
-pathway_planning_authorized = YES
+pathway_planning_authorized = NO
 pathway_execution_authorized = NO
 SIP_feed_investigation_execution_authorized = NO
 SIP_data_access_authorized = NO
@@ -202,7 +211,7 @@ dataset_generation_authorized = NO
 contract_relaxation_authorized = NO
 calendar_rule_change_authorized = NO
 synthetic_fill_authorized = NO
-authorized_current_execution_scope = DOCUMENTATION_ONLY_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING
+authorized_current_execution_scope = NONE
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -474,20 +483,23 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 39. v3.08 Post-SIP-Feed-Investigation-Execution Pathway Decision selected SIP access-prerequisite-assessment planning only; commit `d4c8489af9527cc27da409078a250e624e5426ac`; decision `PASS_POST_SIP_FEED_INVESTIGATION_EXECUTION_PATHWAY_DECISION_FOR_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY`; record `docs/runs/v3.08_post_sip_feed_investigation_execution_pathway_decision.md`.
 40. v3.08 SIP Access Prerequisite Assessment Planning Authorization completed for a documentation-only planning record; commit `6be329c860faa6405bf2f7f312fd1431bcf3faec`; decision `PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_FOR_PLANNING_RECORD_ONLY`; record `docs/runs/v3.08_sip_access_prerequisite_assessment_planning_authorization.md`.
 41. v3.08 SIP Access Prerequisite Assessment Planning Authorization Review passed with no findings requiring correction; commit `6be329c860faa6405bf2f7f312fd1431bcf3faec`; decision `PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION`; record `docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_authorization_review.md`.
+42. v3.08 SIP Access Prerequisite Assessment Planning completed for independent review only; commit `PENDING_COMMIT_HASH`; decision `PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_FOR_INDEPENDENT_REVIEW_ONLY`; record `docs/runs/v3.08_sip_access_prerequisite_assessment_planning.md`.
+43. v3.08 SIP Access Prerequisite Assessment Planning Review passed for source-of-truth alignment consideration only; commit `PENDING_COMMIT_HASH`; decision `PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION`; record `docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md`.
 
 ## 8. Forward milestone roadmap
 
-1. Complete `v3.08 SIP Access Prerequisite Assessment Planning`.
-2. Independently review the completed planning record.
-3. Consider a separately governed public-document-research authorization only after the plan passes review.
-4. Require separate authorization before account inspection.
-5. Require separate authorization before any account or subscription change or purchase.
-6. Require separate authorization before client creation, API calls, market-data access, or provider-coverage testing.
-7. Keep contract, raw-data, candidate, dataset, validation, training, order, deployment, and tagging actions separately governed.
+1. Complete `v3.08 SIP Access Prerequisite Public-Document Research Authorization`.
+2. Perform public-document research only if that separate authorization passes.
+3. Limit any authorized research to official public provider materials and the approved evidence/provenance schema.
+4. Independently review the public-document evidence.
+5. Consider account inspection only if public evidence is insufficient and a separate account-inspection authorization passes.
+6. Require a separate decision before an account change, subscription change, or purchase.
+7. Require separate authorization before client creation, API calls, market-data access, or provider-coverage testing.
+8. Keep contract, raw-data, candidate, dataset, validation, training, order, deployment, and tagging actions separately governed.
 
 Every later milestone remains separately governed.
 
-The active planning checkpoint may name categories of authoritative evidence but may not consult those sources.
+The current authorization checkpoint may consider public-document research authorization but may not consult public sources.
 
 ## Future validation/training reference
 
@@ -504,7 +516,7 @@ Before each future checkpoint, read:
 3. The matching section of `docs/workflows/future_validation_training_reference_map.md`.
 4. The latest relevant run, audit, review, and authorization records.
 
-## 9. Latest completed SIP Access Prerequisite Assessment Planning Authorization checkpoint action confirmations
+## 9. Latest completed SIP Access Prerequisite Assessment Planning Review checkpoint action confirmations
 
 ```text
 source_code_changed = NO
@@ -540,11 +552,15 @@ tag_created = NO
 authorization_record_created = YES
 authorization_review_record_created = YES
 authorization_record_approved = YES
-planning_record_created = NO
-planning_execution_performed = NO
-SIP_access_prerequisite_assessment_planning_authorized = YES
+planning_record_created = YES
+planning_review_record_created = YES
+planning_record_approved = YES
+planning_record_reviewed = YES
+planning_execution_performed = YES
+SIP_access_prerequisite_assessment_execution_performed = NO
+SIP_access_prerequisite_assessment_planning_authorized = NO
 SIP_access_prerequisite_assessment_execution_authorized = NO
-pathway_planning_authorized = YES
+pathway_planning_authorized = NO
 pathway_execution_authorized = NO
 public_document_research_performed = NO
 internet_research_performed = NO
@@ -572,15 +588,15 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor 6be329c860faa6405bf2f7f312fd1431bcf3faec HEAD
+git merge-base --is-ancestor 325efdb6664b9136f9fe086acb5bc0fc13a9fb59 HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
 ```text
-current_active_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning
-next_checkpoint = v3.08 SIP Access Prerequisite Assessment Planning
+current_active_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
+next_checkpoint = v3.08 SIP Access Prerequisite Public-Document Research Authorization
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -598,15 +614,16 @@ targeted_refetch_authorized = NO
 raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
-authorized_current_execution_scope = DOCUMENTATION_ONLY_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING
+authorized_current_execution_scope = NONE
 pathway_selected = YES
 selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 selected_pathway_scope = SIP_ENTITLEMENT_PERMISSION_SUBSCRIPTION_LICENSING_PERMITTED_USE_RESTRICTIONS_PLAN_TIER_AND_COST_PREREQUISITES_ONLY
 SIP_access_prerequisite_assessment_planning_selected = YES
-SIP_access_prerequisite_assessment_planning_authorized = YES
-SIP_access_prerequisite_assessment_plan_created = NO
+SIP_access_prerequisite_assessment_planning_authorized = NO
+SIP_access_prerequisite_assessment_plan_created = YES
+SIP_access_prerequisite_assessment_plan_reviewed = YES
 SIP_access_prerequisite_assessment_execution_authorized = NO
-pathway_planning_authorized = YES
+pathway_planning_authorized = NO
 pathway_execution_authorized = NO
 public_document_research_authorized = NO
 internet_research_authorized = NO
@@ -646,4 +663,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The current checkpoint authorizes creation of a documentation-only prerequisite-assessment planning record. The planning record may define questions, evidence categories, provenance fields, classifications, fail-closed criteria, stop conditions, and later authorization gates. No public research, account activity, purchases, client or API activity, market-data access, provider testing, contract action, data action, or downstream execution is authorized.
+The current checkpoint may consider authorization for separately governed public-document research only. It does not authorize browsing or consulting provider sources, account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, provider testing, contract action, data action, or downstream execution.
