@@ -8,7 +8,7 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ## 1. Current source-of-truth summary
 
-The boundary and scope values in this section describe the target state only after this exact `PROJECT_CONTEXT.md` update is committed and pushed. Until then, the pushed controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`.
+The boundary and scope values in this section describe the proposed post-alignment target state only after this exact three-file source-of-truth alignment update is independently approved, committed, and pushed. Until then, the pushed controlling boundary remains `PUBLIC_DOCUMENT_RESEARCH_ONLY` and the pushed authorized execution scope remains `SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH`.
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
@@ -16,30 +16,31 @@ active_section = SIP_ACCESS_PREREQUISITE_RESOLUTION
 active_section_status = IN_PROGRESS
 active_section_goal = Resolve SIP entitlement, permission, subscription, licensing, permitted-use, plan-tier, and cost prerequisites before any further SIP execution can be considered.
 
-PROJECT_CONTEXT_role = CONTROLLING_SOURCE_OF_TRUTH_AND_AUTHORIZATION_BOUNDARY
+PROJECT_CONTEXT_role = CONTROLLING_SOURCE_OF_TRUTH_FOR_BROAD_ACTIVE_STATE_AUTHORIZATION_BOUNDARIES_AND_NON_AUTHORIZATION_STATES
 checkpoint_navigation_source = docs/workflows/milestone_review_reference_map.md
-checkpoint_chronology_source = git history and latest pushed run/review records
+checkpoint_chronology_source = git history and latest pushed run/review/audit records
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
 
-PROJECT_CONTEXT_acceptance_effective_condition = THIS_EXACT_PROJECT_CONTEXT_UPDATE_COMMITTED_AND_PUSHED
+PROJECT_CONTEXT_alignment_effective_condition = THIS_EXACT_THREE_FILE_SOURCE_OF_TRUTH_ALIGNMENT_UPDATE_INDEPENDENTLY_APPROVED_COMMITTED_AND_PUSHED
 local_edit_alone_authorizes_execution = FALSE
 audit_pass_alone_authorizes_execution = FALSE
 staging_alone_authorizes_execution = FALSE
 commit_without_push_authorizes_execution = FALSE
 subordinate_record_alone_authorizes_execution = FALSE
-top_summary_boundary_values_are_target_state_only = TRUE
-pushed_controlling_boundary_until_effective_condition = NO_EXECUTION_AUTHORIZED
-pushed_authorized_execution_scope_until_effective_condition = NONE
 
-current_authorization_boundary = PUBLIC_DOCUMENT_RESEARCH_ONLY
-authorized_current_execution_scope = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+top_summary_boundary_values_are_post_alignment_target_state_only = TRUE
+pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
+pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
 ```
 
-No run, review, audit, milestone reference map, or future-guidance reference map can independently activate this authorization.
+No run, review, audit, milestone reference map, future-guidance map, local edit, staging action, or unpushed commit can independently activate or expand authorization.
 
-Before making validation, training, retraining, paper-trading, deployment, data, API, account, or execution recommendations, read `PROJECT_CONTEXT.md` first. `PROJECT_CONTEXT.md` is the controlling source of truth for active section, authorization boundaries, and non-authorization states. Use `docs/workflows/milestone_review_reference_map.md` for roadmap navigation, milestone/section guidance, and locating supporting run/review/audit records. Use Git history and latest pushed run/review records for exact checkpoint chronology.
+`PROJECT_CONTEXT.md` controls only the broad active section and state, authorization boundaries, and non-authorization states. The milestone map remains the roadmap, navigation, and governance-reference document. The future validation and training map remains guidance only and non-authorizing. Exact checkpoint chronology remains in Git history and the latest pushed run, review, audit, and re-audit records.
 
-The active section remains SIP access-prerequisite resolution. Only after this exact `PROJECT_CONTEXT.md` update is committed and pushed, public internet research is authorized for the narrowly bounded review of publicly accessible official documents defined by `docs/runs/v3.08_sip_access_prerequisite_public_document_research_authorization.md`. Until then, the pushed controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`. Authenticated sources, account inspection, account or subscription changes, purchases, acceptance of new contractual terms, support contact, credential or client creation, API calls, market-data access, and provider-coverage testing remain unauthorized. No contract, raw-data, candidate-data, dataset, validation, validation-only preflight, training, model-artifact, order, deployment, release, tagging, or other downstream action is authorized.
+The official public-document research was completed, corrected after an independent `NEEDS_CORRECTION` review, and passed corrected-record re-audit in pushed commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`. That evidence supports only future governance consideration. It does not authorize additional research, authenticated access, account inspection, subscription or billing action, support contact, acceptance of terms, credential or client creation, API calls, SIP or IEX access, provider testing, data activity, validation, training, model activity, trading, deployment, release creation, or tagging.
 
 ## 2. Governing reconstruction classification
 
@@ -213,19 +214,32 @@ SIP_access_prerequisite_public_document_research_authorization_draft_audit_resul
 SIP_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit_record = docs/reviews/v3.08_sip_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit.md
 SIP_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit_result = PASS
 SIP_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit_commit = e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d
+SIP_access_prerequisite_official_public_document_research_checkpoint = COMPLETED
+SIP_access_prerequisite_official_public_document_research_record = docs/runs/v3.08_sip_access_prerequisite_official_public_document_research.md
+SIP_access_prerequisite_official_public_document_research_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_record_status = COMPLETED_PENDING_INDEPENDENT_REVIEW
+SIP_access_prerequisite_official_public_document_research_initial_review_checkpoint = COMPLETED_NEEDS_CORRECTION
+SIP_access_prerequisite_official_public_document_research_initial_review_record = docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_independent_evidence_review.md
+SIP_access_prerequisite_official_public_document_research_initial_review_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_initial_review_result = NEEDS_CORRECTION
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_checkpoint = COMPLETED
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_record = docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_corrected_record_reaudit.md
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_result = PASS
+SIP_access_prerequisite_official_public_document_research_review_chain_final_result = PASS_AFTER_CORRECTION
 ```
 
-The following acceptance and effectiveness fields describe the target state only after this exact `PROJECT_CONTEXT.md` update is committed and pushed. Until then, the pushed controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`.
+The following alignment fields describe the proposed post-alignment target state only after this exact three-file source-of-truth alignment update is independently approved, committed, and pushed. Until then, the pushed controlling boundary remains `PUBLIC_DOCUMENT_RESEARCH_ONLY` and the pushed authorized execution scope remains `SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH`.
 
 ```text
-acceptance_fields_apply_only_after_PROJECT_CONTEXT_acceptance_effective_condition = TRUE
-acceptance_fields_pushed_controlling_boundary_until_effective_condition = NO_EXECUTION_AUTHORIZED
-acceptance_fields_pushed_authorized_execution_scope_until_effective_condition = NONE
-SIP_access_prerequisite_public_document_research_authorization_acceptance = ACCEPTED_BY_PROJECT_CONTEXT_AFTER_THIS_EXACT_UPDATE_COMMITTED_AND_PUSHED
-SIP_access_prerequisite_public_document_research_authorization_effective = YES_AFTER_THIS_EXACT_PROJECT_CONTEXT_UPDATE_COMMITTED_AND_PUSHED
-public_document_research_authorized = YES_OFFICIAL_PUBLIC_DOCUMENTS_ONLY_AFTER_EFFECTIVE_CONDITION
-internet_research_authorized = YES_OFFICIAL_PUBLIC_DOCUMENTS_ONLY_AFTER_EFFECTIVE_CONDITION
-public_document_research_scope = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH_AFTER_EFFECTIVE_CONDITION
+alignment_fields_apply_only_after_PROJECT_CONTEXT_alignment_effective_condition = TRUE
+alignment_fields_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
+alignment_fields_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+SIP_access_prerequisite_public_document_research_authorization_acceptance = HISTORICALLY_ACCEPTED_AND_EFFECTIVE_BEFORE_ALIGNMENT
+SIP_access_prerequisite_public_document_research_authorization_effective = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
+public_document_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
+internet_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
+public_document_research_scope = NONE_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
 authenticated_public_source_access_authorized = NO
 authenticated_portal_access_authorized = NO
 account_specific_record_access_authorized = NO
@@ -267,12 +281,12 @@ dataset_generation_authorized = NO
 contract_relaxation_authorized = NO
 calendar_rule_change_authorized = NO
 synthetic_fill_authorized = NO
-section_6_boundary_values_are_target_state_only = TRUE
-section_6_boundary_effective_condition = THIS_EXACT_PROJECT_CONTEXT_UPDATE_COMMITTED_AND_PUSHED
-section_6_pushed_controlling_boundary_until_effective_condition = NO_EXECUTION_AUTHORIZED
-section_6_pushed_authorized_execution_scope_until_effective_condition = NONE
-current_authorization_boundary = PUBLIC_DOCUMENT_RESEARCH_ONLY
-authorized_current_execution_scope = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+section_6_boundary_values_are_post_alignment_target_state_only = TRUE
+section_6_boundary_effective_condition = PROJECT_CONTEXT_ALIGNMENT_EFFECTIVE_CONDITION
+section_6_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
+section_6_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -435,29 +449,32 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 44. v3.08 SIP Access Prerequisite Public-Document Research Authorization Draft Audit completed with corrections required and commit withheld; commit `e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d`; result `NEEDS_CORRECTION`; record `docs/reviews/v3.08_sip_access_prerequisite_public_document_research_authorization_draft_audit.md`.
 45. v3.08 SIP Access Prerequisite Public-Document Research Authorization Corrected-Draft Re-Audit passed with no remaining findings and commit approval; commit `e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d`; result `PASS`; record `docs/reviews/v3.08_sip_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit.md`.
 46. v3.08 SIP Access Prerequisite Public-Document Research Authorization records were committed and pushed for explicit `PROJECT_CONTEXT.md` acceptance; commit `e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d`; record `docs/runs/v3.08_sip_access_prerequisite_public_document_research_authorization.md`.
+47. v3.08 SIP Access Prerequisite Official Public-Document Research completed within the bounded official-public-source scope; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; status `COMPLETED_PENDING_INDEPENDENT_REVIEW`; record `docs/runs/v3.08_sip_access_prerequisite_official_public_document_research.md`.
+48. v3.08 SIP Access Prerequisite Official Public-Document Research Independent Evidence Review completed with one material evidence-fidelity correction required; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; result `NEEDS_CORRECTION`; record `docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_independent_evidence_review.md`.
+49. v3.08 SIP Access Prerequisite Official Public-Document Research Corrected Record Re-audit passed with no remaining material correction; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; result `PASS`; record `docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_corrected_record_reaudit.md`.
 
 ## 8. Forward roadmap
 
-1. After this exact `PROJECT_CONTEXT.md` acceptance update is committed and pushed, perform only the authorized `v3.08 SIP Access Prerequisite Official Public-Document Research` task.
-2. Limit the research to publicly accessible official provider, exchange, regulator, and market-data licensing documents within the approved source scope.
-3. Create the separately governed research record with the required source provenance, findings, unresolved questions, limitations, and confirmation that no prohibited activity occurred.
-4. Independently review the public-document research evidence.
-5. Consider account inspection only if public evidence is insufficient and a separate account-inspection authorization passes.
-6. Require a separate decision before an account change, subscription change, purchase, or acceptance of new contractual terms.
-7. Require separate authorization before support contact, credential or client creation, API calls, market-data access, or provider-coverage testing.
-8. Keep contract, raw-data, candidate, dataset, validation, validation-only preflight, training, model-artifact, order, deployment, release, and tagging actions separately governed.
+1. Independently audit this corrected three-file source-of-truth alignment draft.
+2. Preserve the completed official public-document research record, the original `NEEDS_CORRECTION` evidence review, and the corrected-record `PASS` re-audit as the full evidence chain.
+3. After this exact alignment update is independently approved, committed, and pushed, apply the fail-closed boundary `NO_EXECUTION_AUTHORIZED / NONE`.
+4. Do not treat the research record or its proposal-sufficiency conclusion as authorization for account inspection, authenticated access, support contact, acceptance of terms, subscription action, API calls, SIP testing, or market-data access.
+5. Consider account inspection only through a separate governance decision and authorization checkpoint.
+6. Resolve or explicitly govern licensing, permitted-use, non-display, storage, derived-data, publication, redistribution, reporting, and fee questions before any technical SIP-access proposal is considered.
+7. Require separate independent review and authorization before account access, client creation, API calls, SIP or IEX access, provider testing, or any data activity.
+8. Keep contract, raw-data, candidate-data, dataset, validation, validation-only preflight, training, model-artifact, order, deployment, release, and tagging actions separately governed.
 
 Every later milestone remains separately governed.
 
-Once this `PROJECT_CONTEXT.md` acceptance update is committed and pushed, the active checkpoint permits only the official public-document research scope defined by the pushed authorization record. It does not permit authenticated-source access or any downstream activity.
+The completed research and corrected-record re-audit support only future governance consideration. They do not select or authorize a later execution pathway.
 
 ```text
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
 ```
 
-For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe-expansion guidance, use the future validation/training reference map. That file is guidance only and does not authorize execution.
+For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe-expansion guidance, use the future validation and training reference map. That file remains guidance only and does not authorize execution.
 
-## 9. SIP Access Prerequisite Assessment Planning Review action confirmations
+## 9. SIP Access Prerequisite Official Public-Document Research and Evidence-Review action confirmations
 
 ```text
 source_code_changed = NO
@@ -503,8 +520,25 @@ SIP_access_prerequisite_assessment_planning_authorized = NO
 SIP_access_prerequisite_assessment_execution_authorized = NO
 pathway_planning_authorized = NO
 pathway_execution_authorized = NO
-public_document_research_performed = NO
-internet_research_performed = NO
+public_document_research_performed = YES
+internet_research_performed = YES
+official_public_sources_reviewed = 8
+official_public_document_research_record_created = YES
+official_public_document_research_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+initial_independent_evidence_review_created = YES
+initial_independent_evidence_review_result = NEEDS_CORRECTION
+evidence_fidelity_correction_applied = YES
+corrected_record_reaudit_created = YES
+corrected_record_reaudit_result = PASS
+corrected_record_reaudit_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+research_review_chain_final_result = PASS_AFTER_CORRECTION
+authenticated_source_accessed = NO
+account_or_portal_accessed = NO
+account_specific_record_accessed = NO
+billing_or_subscription_inspected = NO
+entitlement_or_permission_inspected = NO
+API_or_market_data_testing_performed = NO
+downstream_execution_performed = NO
 pathway_decision_record_created = YES
 failed_draft_audit_record_created = YES
 corrected_draft_reaudit_record_created = YES
@@ -529,13 +563,13 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d HEAD
+git merge-base --is-ancestor 4710645dbe2ea8d9435d7cd9a602c3751524c0c4 HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
-The boundary and scope values in this section describe the target state only after this exact `PROJECT_CONTEXT.md` update is committed and pushed. Until then, the pushed controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`.
+The boundary and scope values in this section describe the proposed post-alignment target state only after this exact three-file source-of-truth alignment update is independently approved, committed, and pushed. Until then, the pushed controlling boundary remains `PUBLIC_DOCUMENT_RESEARCH_ONLY` and the pushed authorized execution scope remains `SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH`.
 
 ```text
 active_section = SIP_ACCESS_PREREQUISITE_RESOLUTION
@@ -559,15 +593,15 @@ targeted_refetch_authorized = NO
 raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
-bottom_line_boundary_values_are_target_state_only = TRUE
-bottom_line_boundary_effective_condition = THIS_EXACT_PROJECT_CONTEXT_UPDATE_COMMITTED_AND_PUSHED
-bottom_line_pushed_controlling_boundary_until_effective_condition = NO_EXECUTION_AUTHORIZED
-bottom_line_pushed_authorized_execution_scope_until_effective_condition = NONE
-current_authorization_boundary = PUBLIC_DOCUMENT_RESEARCH_ONLY
-authorized_current_execution_scope = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+bottom_line_boundary_values_are_post_alignment_target_state_only = TRUE
+bottom_line_boundary_effective_condition = PROJECT_CONTEXT_ALIGNMENT_EFFECTIVE_CONDITION
+bottom_line_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
+bottom_line_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
 pathway_selected = YES
-selected_pathway = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH_ONLY
-selected_pathway_scope = PUBLICLY_ACCESSIBLE_OFFICIAL_SIP_ACCESS_PREREQUISITE_DOCUMENTS_ONLY
+selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
+selected_pathway_scope = SIP_ENTITLEMENT_PERMISSION_SUBSCRIPTION_LICENSING_PERMITTED_USE_RESTRICTIONS_PLAN_TIER_AND_COST_PREREQUISITES_ONLY
 SIP_access_prerequisite_assessment_planning_selected = YES
 SIP_access_prerequisite_assessment_planning_authorized = NO
 SIP_access_prerequisite_assessment_plan_created = YES
@@ -576,11 +610,19 @@ SIP_access_prerequisite_assessment_execution_authorized = NO
 SIP_access_prerequisite_public_document_research_authorization_checkpoint = COMPLETED
 SIP_access_prerequisite_public_document_research_authorization_record = docs/runs/v3.08_sip_access_prerequisite_public_document_research_authorization.md
 SIP_access_prerequisite_public_document_research_authorization_commit = e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d
+SIP_access_prerequisite_official_public_document_research_checkpoint = COMPLETED
+SIP_access_prerequisite_official_public_document_research_record = docs/runs/v3.08_sip_access_prerequisite_official_public_document_research.md
+SIP_access_prerequisite_official_public_document_research_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_initial_review_result = NEEDS_CORRECTION
+SIP_access_prerequisite_official_public_document_research_initial_review_record = docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_independent_evidence_review.md
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_result = PASS
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_record = docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_corrected_record_reaudit.md
+SIP_access_prerequisite_official_public_document_research_review_chain_final_result = PASS_AFTER_CORRECTION
 pathway_planning_authorized = NO
 pathway_execution_authorized = NO
-public_document_research_authorized = YES_OFFICIAL_PUBLIC_DOCUMENTS_ONLY_AFTER_EFFECTIVE_CONDITION
-internet_research_authorized = YES_OFFICIAL_PUBLIC_DOCUMENTS_ONLY_AFTER_EFFECTIVE_CONDITION
-public_document_research_scope = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH_AFTER_EFFECTIVE_CONDITION
+public_document_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
+internet_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
+public_document_research_scope = NONE_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
 authenticated_public_source_access_authorized = NO
 authenticated_portal_access_authorized = NO
 account_specific_record_access_authorized = NO
@@ -628,4 +670,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-Only after this exact `PROJECT_CONTEXT.md` update is committed and pushed, the active section permits the narrowly bounded official public-document research defined by the pushed v3.08 authorization record. Until then, the pushed controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`. The active section does not authorize authenticated browsing, authenticated portal access, account-specific record access, account inspection, billing inspection, subscription inspection, entitlement inspection, permission inspection, account or subscription changes, purchases, payment submission, acceptance of new contractual terms, support contact, credential or client creation, API calls, SIP or IEX data access, any other market-data access, provider testing, contract action, raw-data or candidate-data action, dataset work, validation, validation-only preflight, training, retraining, holdout evaluation, candidate selection, model-artifact activity, orders, deployment, release creation, tagging, or any other downstream execution.
+After this exact three-file source-of-truth alignment update is independently approved, committed, and pushed, the controlling boundary is `NO_EXECUTION_AUTHORIZED` and the authorized execution scope is `NONE`. Until then, the pushed public-document-research boundary remains controlling. The completed research and corrected-record `PASS` re-audit support only future governance consideration. They do not authorize additional research, authenticated access, account inspection, billing or subscription inspection, entitlement or permission inspection, account or subscription changes, purchases, payment submission, acceptance of terms, support contact, credential or client creation, API calls, SIP or IEX access, other market-data access, provider testing, contract action, raw-data or candidate-data activity, dataset work, validation, validation-only preflight, training, retraining, holdout evaluation, candidate selection, model-artifact activity, orders, deployment, release creation, tagging, or any other downstream execution.

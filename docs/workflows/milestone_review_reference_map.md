@@ -2,11 +2,13 @@
 
 Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstruction workstream. `PROJECT_CONTEXT.md` remains authoritative.
 
-`PROJECT_CONTEXT.md` is the controlling source of truth for active section and authorization boundaries. This milestone map is a roadmap/navigation/reference map for big sections, governance lookup, and locating run/review/audit records. It is not a current checkpoint tracker. Use Git history and latest pushed run/review records for exact checkpoint chronology. The future validation/training map is guidance only and does not authorize execution.
+`PROJECT_CONTEXT.md` is the controlling source of truth for active section and authorization boundaries. This milestone map is a roadmap/navigation/reference map for big sections, governance lookup, and locating run/review/audit records. It is not a current checkpoint tracker. Use Git history and the latest pushed run, review, audit, and re-audit records for exact checkpoint chronology. The future validation/training map is guidance only and does not authorize execution.
 
 ---
 
 ## 1. Roadmap role and active section
+
+The boundary values below describe the proposed post-alignment target state only. Until the exact three-file source-of-truth alignment update is independently approved, committed, and pushed, the controlling pushed state must be read from `PROJECT_CONTEXT.md` and remains `PUBLIC_DOCUMENT_RESEARCH_ONLY / SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH`.
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
@@ -14,11 +16,21 @@ active_section = SIP_ACCESS_PREREQUISITE_RESOLUTION
 active_section_status = IN_PROGRESS
 map_role = ROADMAP_NAVIGATION_AND_GOVERNANCE_REFERENCE
 PROJECT_CONTEXT_source = PROJECT_CONTEXT.md
-checkpoint_chronology_source = git history and latest pushed run/review records
+checkpoint_chronology_source = git history and latest pushed run/review/audit records
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
+
+map_boundary_values_are_post_alignment_target_state_only = TRUE
+map_alignment_effective_condition = THIS_EXACT_THREE_FILE_SOURCE_OF_TRUTH_ALIGNMENT_UPDATE_INDEPENDENTLY_APPROVED_COMMITTED_AND_PUSHED
+map_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
+map_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
 ```
 
-The active section remains SIP access-prerequisite resolution. No public or internet research is currently authorized. Account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, and provider-coverage testing remain unauthorized. No contract action or downstream action is authorized.
+The official public-document research and independent evidence-review chain are complete. The corrected record passed re-audit.
+
+This milestone map remains a roadmap, navigation, and governance-reference document only. It does not track the current checkpoint, determine exact chronology, activate authorization, or authorize later execution.
 
 ## 2. Governing classification and dataset identity
 
@@ -175,6 +187,27 @@ SIP_access_prerequisite_assessment_planning_review_checkpoint = COMPLETED
 SIP_access_prerequisite_assessment_planning_review_record = docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md
 SIP_access_prerequisite_assessment_planning_review_commit = a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab
 SIP_access_prerequisite_assessment_planning_review_result = PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION
+SIP_access_prerequisite_public_document_research_authorization_checkpoint = COMPLETED
+SIP_access_prerequisite_public_document_research_authorization_record = docs/runs/v3.08_sip_access_prerequisite_public_document_research_authorization.md
+SIP_access_prerequisite_public_document_research_authorization_commit = e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d
+SIP_access_prerequisite_public_document_research_authorization_draft_audit_record = docs/reviews/v3.08_sip_access_prerequisite_public_document_research_authorization_draft_audit.md
+SIP_access_prerequisite_public_document_research_authorization_draft_audit_result = NEEDS_CORRECTION
+SIP_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit_record = docs/reviews/v3.08_sip_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit.md
+SIP_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit_result = PASS
+SIP_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit_commit = e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d
+SIP_access_prerequisite_official_public_document_research_checkpoint = COMPLETED
+SIP_access_prerequisite_official_public_document_research_record = docs/runs/v3.08_sip_access_prerequisite_official_public_document_research.md
+SIP_access_prerequisite_official_public_document_research_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_record_status = COMPLETED_PENDING_INDEPENDENT_REVIEW
+SIP_access_prerequisite_official_public_document_research_initial_review_checkpoint = COMPLETED_NEEDS_CORRECTION
+SIP_access_prerequisite_official_public_document_research_initial_review_record = docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_independent_evidence_review.md
+SIP_access_prerequisite_official_public_document_research_initial_review_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_initial_review_result = NEEDS_CORRECTION
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_checkpoint = COMPLETED
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_record = docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_corrected_record_reaudit.md
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_result = PASS
+SIP_access_prerequisite_official_public_document_research_review_chain_final_result = PASS_AFTER_CORRECTION
 SIP_access_prerequisite_assessment_planning_authorized = NO
 SIP_access_prerequisite_assessment_plan_created = YES
 SIP_access_prerequisite_assessment_plan_reviewed = YES
@@ -211,7 +244,6 @@ dataset_generation_authorized = NO
 contract_relaxation_authorized = NO
 calendar_rule_change_authorized = NO
 synthetic_fill_authorized = NO
-authorized_current_execution_scope = NONE
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -485,21 +517,27 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 41. v3.08 SIP Access Prerequisite Assessment Planning Authorization Review passed with no findings requiring correction; commit `6be329c860faa6405bf2f7f312fd1431bcf3faec`; decision `PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION`; record `docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_authorization_review.md`.
 42. v3.08 SIP Access Prerequisite Assessment Planning completed for independent review only; commit `a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab`; decision `PASS_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_FOR_INDEPENDENT_REVIEW_ONLY`; record `docs/runs/v3.08_sip_access_prerequisite_assessment_planning.md`.
 43. v3.08 SIP Access Prerequisite Assessment Planning Review passed for source-of-truth alignment consideration only; commit `a14cd6e444bcf06f6ddf91feb79ae1d8ab4805ab`; decision `PASS_INDEPENDENT_SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION`; record `docs/reviews/v3.08_sip_access_prerequisite_assessment_planning_review.md`.
+44. v3.08 SIP Access Prerequisite Public-Document Research Authorization Draft Audit completed with corrections required and commit withheld; commit `e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d`; result `NEEDS_CORRECTION`; record `docs/reviews/v3.08_sip_access_prerequisite_public_document_research_authorization_draft_audit.md`.
+45. v3.08 SIP Access Prerequisite Public-Document Research Authorization Corrected-Draft Re-Audit passed with no remaining findings and commit approval; commit `e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d`; result `PASS`; record `docs/reviews/v3.08_sip_access_prerequisite_public_document_research_authorization_corrected_draft_reaudit.md`.
+46. v3.08 SIP Access Prerequisite Public-Document Research Authorization records were committed and pushed for explicit `PROJECT_CONTEXT.md` acceptance; commit `e9cba5c9ee85fd2945ec4c0a970f5e36dda9e29d`; record `docs/runs/v3.08_sip_access_prerequisite_public_document_research_authorization.md`.
+47. v3.08 SIP Access Prerequisite Official Public-Document Research completed within the bounded official-public-source scope; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; status `COMPLETED_PENDING_INDEPENDENT_REVIEW`; record `docs/runs/v3.08_sip_access_prerequisite_official_public_document_research.md`.
+48. v3.08 SIP Access Prerequisite Official Public-Document Research Independent Evidence Review completed with one material evidence-fidelity correction required; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; result `NEEDS_CORRECTION`; record `docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_independent_evidence_review.md`.
+49. v3.08 SIP Access Prerequisite Official Public-Document Research Corrected Record Re-audit passed with no remaining material correction; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; result `PASS`; record `docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_corrected_record_reaudit.md`.
 
 ## 8. Forward milestone roadmap
 
-1. Complete `v3.08 SIP Access Prerequisite Public-Document Research Authorization`.
-2. Perform public-document research only if that separate authorization passes.
-3. Limit any authorized research to official public provider materials and the approved evidence/provenance schema.
-4. Independently review the public-document evidence.
-5. Consider account inspection only if public evidence is insufficient and a separate account-inspection authorization passes.
-6. Require a separate decision before an account change, subscription change, or purchase.
-7. Require separate authorization before client creation, API calls, market-data access, or provider-coverage testing.
-8. Keep contract, raw-data, candidate, dataset, validation, training, order, deployment, and tagging actions separately governed.
+1. Independently audit the corrected three-file source-of-truth alignment draft.
+2. Preserve the completed public-document research record, original `NEEDS_CORRECTION` evidence review, and corrected-record `PASS` re-audit as the full evidence chain.
+3. After the exact alignment update is independently approved, committed, and pushed, apply `NO_EXECUTION_AUTHORIZED / NONE` as the controlling target boundary and scope.
+4. Treat account inspection only as a possible separately governed proposal, not as an authorized next action.
+5. Resolve or explicitly govern remaining licensing, permitted-use, non-display, storage, derived-data, publication, redistribution, reporting, and fee questions before technical SIP testing is proposed.
+6. Require separate authorization before account access, support contact, acceptance of terms, subscription action, credential or client creation, API calls, market-data access, or provider testing.
+7. Require a separately bounded technical-testing authorization before any symbol, date, feed, pagination, rate-limit, or bar request.
+8. Keep contract, data, validation, training, model, trading, deployment, release, and tagging work separately governed.
 
 Every later milestone remains separately governed.
 
-The current authorization checkpoint may consider public-document research authorization but may not consult public sources.
+The completed research and review chain supports only future governance consideration. This milestone map remains roadmap, navigation, and governance reference only and does not authorize execution.
 
 ## Future validation/training reference
 
@@ -516,7 +554,7 @@ Before each future checkpoint, read:
 3. The matching section of `docs/workflows/future_validation_training_reference_map.md`.
 4. The latest relevant run, audit, review, and authorization records.
 
-## 9. SIP Access Prerequisite Assessment Planning Review action confirmations
+## 9. SIP Access Prerequisite Official Public-Document Research and Evidence-Review action confirmations
 
 ```text
 source_code_changed = NO
@@ -562,8 +600,23 @@ SIP_access_prerequisite_assessment_planning_authorized = NO
 SIP_access_prerequisite_assessment_execution_authorized = NO
 pathway_planning_authorized = NO
 pathway_execution_authorized = NO
-public_document_research_performed = NO
-internet_research_performed = NO
+public_document_research_performed = YES
+internet_research_performed = YES
+official_public_sources_reviewed = 8
+official_public_document_research_record_created = YES
+official_public_document_research_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+initial_independent_evidence_review_created = YES
+initial_independent_evidence_review_result = NEEDS_CORRECTION
+evidence_fidelity_correction_applied = YES
+corrected_record_reaudit_created = YES
+corrected_record_reaudit_result = PASS
+corrected_record_reaudit_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+research_review_chain_final_result = PASS_AFTER_CORRECTION
+authenticated_source_accessed = NO
+account_or_portal_accessed = NO
+account_specific_record_accessed = NO
+API_or_market_data_testing_performed = NO
+downstream_execution_performed = NO
 pathway_decision_record_created = YES
 failed_draft_audit_record_created = YES
 corrected_draft_reaudit_record_created = YES
@@ -588,9 +641,13 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
+git merge-base --is-ancestor 4710645dbe2ea8d9435d7cd9a602c3751524c0c4 HEAD
+echo $?
 ```
 
-For checkpoint-specific freshness, verify any required authorization, run, review, or audit record against Git history and latest pushed records for the requested task. This milestone map is not a current-checkpoint tracker.
+For checkpoint-specific freshness, verify required authorization, research, review, re-audit, and alignment records against Git history and the latest pushed records.
+
+This milestone map remains a roadmap, navigation, and governance reference. It is not a current-checkpoint tracker.
 
 ## 11. Authorization bottom line
 
@@ -598,7 +655,7 @@ For checkpoint-specific freshness, verify any required authorization, run, revie
 active_section = SIP_ACCESS_PREREQUISITE_RESOLUTION
 active_section_status = IN_PROGRESS
 map_role = ROADMAP_NAVIGATION_AND_GOVERNANCE_REFERENCE
-checkpoint_chronology_source = git history and latest pushed run/review records
+checkpoint_chronology_source = git history and latest pushed run/review/audit/re-audit records
 dataset_generation_authorization_checkpoint = COMPLETED
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_authorized = NO
@@ -616,6 +673,11 @@ targeted_refetch_authorized = NO
 raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
+map_boundary_values_are_post_alignment_target_state_only = TRUE
+map_alignment_effective_condition = THIS_EXACT_THREE_FILE_SOURCE_OF_TRUTH_ALIGNMENT_UPDATE_INDEPENDENTLY_APPROVED_COMMITTED_AND_PUSHED
+map_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
+map_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
 pathway_selected = YES
 selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
@@ -625,6 +687,11 @@ SIP_access_prerequisite_assessment_planning_authorized = NO
 SIP_access_prerequisite_assessment_plan_created = YES
 SIP_access_prerequisite_assessment_plan_reviewed = YES
 SIP_access_prerequisite_assessment_execution_authorized = NO
+SIP_access_prerequisite_official_public_document_research_checkpoint = COMPLETED
+SIP_access_prerequisite_official_public_document_research_commit = 4710645dbe2ea8d9435d7cd9a602c3751524c0c4
+SIP_access_prerequisite_official_public_document_research_initial_review_result = NEEDS_CORRECTION
+SIP_access_prerequisite_official_public_document_research_corrected_record_reaudit_result = PASS
+SIP_access_prerequisite_official_public_document_research_review_chain_final_result = PASS_AFTER_CORRECTION
 pathway_planning_authorized = NO
 pathway_execution_authorized = NO
 public_document_research_authorized = NO
@@ -665,4 +732,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-The active section permits governance consideration only. It does not authorize browsing or consulting provider sources, account inspection, account or subscription changes, purchases, client creation, API calls, market-data access, provider testing, contract action, data action, or downstream execution.
+The completed official public-document research and final `PASS` re-audit support only future governance consideration. The proposed post-alignment target state authorizes no execution. This milestone map remains roadmap, navigation, and governance reference only and does not authorize additional research, authenticated access, account inspection, account or subscription changes, purchases, acceptance of terms, support contact, client creation, API calls, SIP or IEX access, provider testing, contract action, data activity, validation, training, model activity, trading, deployment, release creation, or tagging.
