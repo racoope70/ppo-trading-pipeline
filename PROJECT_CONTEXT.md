@@ -8,7 +8,7 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ## 1. Current source-of-truth summary
 
-The boundary and scope values in this section describe the proposed post-alignment target state only after this exact three-file source-of-truth alignment update is independently approved, committed, and pushed. Until then, the pushed controlling boundary remains `PUBLIC_DOCUMENT_RESEARCH_ONLY` and the pushed authorized execution scope remains `SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH`.
+The current boundary and scope remain controlling until the full effectiveness condition is satisfied. A local edit is not effective, an independent audit alone is not effective, a commit without push is not effective, and a pushed commit before CI is green is not effective. Until every condition is confirmed, the controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`.
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
@@ -21,7 +21,7 @@ checkpoint_navigation_source = docs/workflows/milestone_review_reference_map.md
 checkpoint_chronology_source = git history and latest pushed run/review/audit records
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
 
-PROJECT_CONTEXT_alignment_effective_condition = THIS_EXACT_THREE_FILE_SOURCE_OF_TRUTH_ALIGNMENT_UPDATE_INDEPENDENTLY_APPROVED_COMMITTED_AND_PUSHED
+PROJECT_CONTEXT_alignment_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
 local_edit_alone_authorizes_execution = FALSE
 audit_pass_alone_authorizes_execution = FALSE
 staging_alone_authorizes_execution = FALSE
@@ -29,11 +29,19 @@ commit_without_push_authorizes_execution = FALSE
 subordinate_record_alone_authorizes_execution = FALSE
 
 top_summary_boundary_values_are_post_alignment_target_state_only = TRUE
-pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
-pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+pushed_controlling_boundary_until_effective_condition = NO_EXECUTION_AUTHORIZED
+pushed_authorized_execution_scope_until_effective_condition = NONE
 
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
+accepted_post_effectiveness_authorization_boundary = READ_ONLY_ACCOUNT_INSPECTION_ONLY
+accepted_post_effectiveness_authorized_execution_scope = SIP_ACCESS_PREREQUISITE_ACCOUNT_SPECIFIC_READ_ONLY_INSPECTION
+authorization_transition_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
+local_edit_alone_effective = NO
+independent_audit_alone_effective = NO
+commit_without_push_effective = NO
+push_before_CI_green_effective = NO
+account_inspection_authorized_before_effectiveness = NO
 ```
 
 No run, review, audit, milestone reference map, future-guidance map, local edit, staging action, or unpushed commit can independently activate or expand authorization.
@@ -229,17 +237,17 @@ SIP_access_prerequisite_official_public_document_research_corrected_record_reaud
 SIP_access_prerequisite_official_public_document_research_review_chain_final_result = PASS_AFTER_CORRECTION
 ```
 
-The following alignment fields describe the proposed post-alignment target state only after this exact three-file source-of-truth alignment update is independently approved, committed, and pushed. Until then, the pushed controlling boundary remains `PUBLIC_DOCUMENT_RESEARCH_ONLY` and the pushed authorized execution scope remains `SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH`.
+The following fields preserve the controlling pre-effectiveness state and accept a narrow post-effectiveness transition. A local edit is not effective, an independent audit alone is not effective, a commit without push is not effective, and a pushed commit before CI is green is not effective. Until every condition is satisfied, the controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`.
 
 ```text
-alignment_fields_apply_only_after_PROJECT_CONTEXT_alignment_effective_condition = TRUE
-alignment_fields_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
-alignment_fields_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+read_only_account_inspection_acceptance_applies_only_after_effectiveness = TRUE
+controlling_boundary_until_effectiveness = NO_EXECUTION_AUTHORIZED
+authorized_execution_scope_until_effectiveness = NONE
 SIP_access_prerequisite_public_document_research_authorization_acceptance = HISTORICALLY_ACCEPTED_AND_EFFECTIVE_BEFORE_ALIGNMENT
-SIP_access_prerequisite_public_document_research_authorization_effective = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
-public_document_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
-internet_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
-public_document_research_scope = NONE_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
+SIP_access_prerequisite_public_document_research_authorization_effective = NO
+public_document_research_authorized = NO
+internet_research_authorized = NO
+public_document_research_scope = NONE
 authenticated_public_source_access_authorized = NO
 authenticated_portal_access_authorized = NO
 account_specific_record_access_authorized = NO
@@ -252,6 +260,15 @@ retraining_authorized = NO
 holdout_evaluation_authorized = NO
 candidate_selection_authorized = NO
 account_inspection_authorized = NO
+post_effectiveness_account_inspection_authorized = YES_NARROW_READ_ONLY_SCOPE_ONLY
+post_effectiveness_account_inspection_scope_record = docs/runs/v3.08_read_only_account_inspection_authorization.md
+post_effectiveness_account_inspection_review_record = docs/reviews/v3.08_read_only_account_inspection_authorization_independent_review.md
+post_effectiveness_scope_does_not_authorize_support_contact = TRUE
+post_effectiveness_scope_does_not_authorize_account_or_subscription_change = TRUE
+post_effectiveness_scope_does_not_authorize_purchase_or_payment = TRUE
+post_effectiveness_scope_does_not_authorize_terms_acceptance = TRUE
+post_effectiveness_scope_does_not_authorize_API_or_market_data_access = TRUE
+post_effectiveness_scope_does_not_authorize_downstream_execution = TRUE
 account_change_authorized = NO
 subscription_change_authorized = NO
 purchase_authorized = NO
@@ -281,12 +298,16 @@ dataset_generation_authorized = NO
 contract_relaxation_authorized = NO
 calendar_rule_change_authorized = NO
 synthetic_fill_authorized = NO
-section_6_boundary_values_are_post_alignment_target_state_only = TRUE
-section_6_boundary_effective_condition = PROJECT_CONTEXT_ALIGNMENT_EFFECTIVE_CONDITION
-section_6_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
-section_6_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+section_6_current_values_control_until_effectiveness = TRUE
+section_6_transition_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
+section_6_local_edit_alone_effective = NO
+section_6_independent_audit_alone_effective = NO
+section_6_commit_without_push_effective = NO
+section_6_push_before_CI_green_effective = NO
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
+section_6_accepted_post_effectiveness_authorization_boundary = READ_ONLY_ACCOUNT_INSPECTION_ONLY
+section_6_accepted_post_effectiveness_execution_scope = SIP_ACCESS_PREREQUISITE_ACCOUNT_SPECIFIC_READ_ONLY_INSPECTION
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -452,29 +473,31 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 47. v3.08 SIP Access Prerequisite Official Public-Document Research completed within the bounded official-public-source scope; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; status `COMPLETED_PENDING_INDEPENDENT_REVIEW`; record `docs/runs/v3.08_sip_access_prerequisite_official_public_document_research.md`.
 48. v3.08 SIP Access Prerequisite Official Public-Document Research Independent Evidence Review completed with one material evidence-fidelity correction required; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; result `NEEDS_CORRECTION`; record `docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_independent_evidence_review.md`.
 49. v3.08 SIP Access Prerequisite Official Public-Document Research Corrected Record Re-audit passed with no remaining material correction; commit `4710645dbe2ea8d9435d7cd9a602c3751524c0c4`; result `PASS`; record `docs/reviews/v3.08_sip_access_prerequisite_official_public_document_research_corrected_record_reaudit.md`.
+50. v3.08 Post-Public-Document-Research Pathway Decision accepted the read-only account-inspection authorization-consideration path; commit `f6f6ac33a8de14f60ee0b2c3677dea6e9695bce8`; record `docs/runs/v3.08_post_public_document_research_pathway_decision.md`.
+51. v3.08 Read-Only Account-Inspection Authorization and Independent Review completed and pushed; commit `80add89755c519ba0d7f5c7711001952595ee4f3`; authorization record `docs/runs/v3.08_read_only_account_inspection_authorization.md`; review record `docs/reviews/v3.08_read_only_account_inspection_authorization_independent_review.md`; review result `PASS_INDEPENDENT_READ_ONLY_ACCOUNT_INSPECTION_AUTHORIZATION_DRAFT_AUDIT`.
 
 ## 8. Forward roadmap
 
-1. Independently audit this corrected three-file source-of-truth alignment draft.
-2. Preserve the completed official public-document research record, the original `NEEDS_CORRECTION` evidence review, and the corrected-record `PASS` re-audit as the full evidence chain.
-3. After this exact alignment update is independently approved, committed, and pushed, apply the fail-closed boundary `NO_EXECUTION_AUTHORIZED / NONE`.
-4. Do not treat the research record or its proposal-sufficiency conclusion as authorization for account inspection, authenticated access, support contact, acceptance of terms, subscription action, API calls, SIP testing, or market-data access.
-5. Consider account inspection only through a separate governance decision and authorization checkpoint.
-6. Resolve or explicitly govern licensing, permitted-use, non-display, storage, derived-data, publication, redistribution, reporting, and fee questions before any technical SIP-access proposal is considered.
-7. Require separate independent review and authorization before account access, client creation, API calls, SIP or IEX access, provider testing, or any data activity.
-8. Keep contract, raw-data, candidate-data, dataset, validation, validation-only preflight, training, model-artifact, order, deployment, release, and tagging actions separately governed.
+1. Independently audit this exact three-file source-of-truth acceptance-alignment draft.
+2. Preserve the accepted pathway decision, approved read-only account-inspection authorization, and independent PASS review as the evidence chain for this narrow transition.
+3. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling until the independent audit passes, this exact three-file alignment is committed and pushed, and CI is green.
+4. After effectiveness only, limit inspection to the user's existing Alpaca account, user-performed manual browser login, ordinary user-performed MFA, and the exact account facts in `docs/runs/v3.08_read_only_account_inspection_authorization.md`.
+5. Apply every stop condition in the approved authorization. Stop at any state-changing, payment, terms, classification, support, credential, API, market-data, privacy, licensing, or uncertain-read-only boundary.
+6. Record any later inspection in a separate text-only run record that excludes screenshots, exports, credentials, secrets, payment information, balances, holdings, orders, and unrelated personal information.
+7. Require independent evidence review after the bounded account inspection before considering another governance path.
+8. Resolve or explicitly govern licensing, permitted-use, non-display, storage, derived-data, publication, redistribution, reporting, and fee questions before any technical SIP-access proposal.
+9. Require separate authorization before support contact, terms acceptance, account or subscription changes, purchases, payments, credential or client activity, API calls, SIP or IEX access, provider testing, or data activity.
+10. Keep contract, raw-data, candidate-data, dataset, validation, validation-only preflight, training, model-artifact, order, deployment, release, and tagging actions separately governed.
 
 Every later milestone remains separately governed.
 
-The completed research and corrected-record re-audit support only future governance consideration. They do not select or authorize a later execution pathway.
+The approved account-inspection authorization permits no technical SIP testing and no downstream execution.
 
-```text
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
-```
 
 For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe-expansion guidance, use the future validation and training reference map. That file remains guidance only and does not authorize execution.
 
-## 9. SIP Access Prerequisite Official Public-Document Research and Evidence-Review action confirmations
+## 9. Read-Only Account-Inspection Acceptance Alignment action confirmations
 
 ```text
 source_code_changed = NO
@@ -556,6 +579,38 @@ candidate_raw_created = NO
 raw_data_read = NO
 ```
 
+### Read-only account-inspection acceptance-alignment status
+
+post_public_document_research_pathway_decision_record_created = YES
+post_public_document_research_pathway_decision_commit = f6f6ac33a8de14f60ee0b2c3677dea6e9695bce8
+read_only_account_inspection_authorization_record_created = YES
+read_only_account_inspection_authorization_review_record_created = YES
+read_only_account_inspection_authorization_commit = 80add89755c519ba0d7f5c7711001952595ee4f3
+read_only_account_inspection_authorization_review_result = PASS_INDEPENDENT_READ_ONLY_ACCOUNT_INSPECTION_AUTHORIZATION_DRAFT_AUDIT
+source_of_truth_acceptance_alignment_draft_created = YES
+source_of_truth_acceptance_alignment_independent_audit_completed = YES
+source_of_truth_acceptance_alignment_initial_audit_record = docs/reviews/v3.08_source_of_truth_acceptance_alignment_for_read_only_account_inspection_independent_audit.md
+source_of_truth_acceptance_alignment_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_READ_ONLY_ACCOUNT_INSPECTION_SOURCE_OF_TRUTH_ACCEPTANCE_ALIGNMENT_AUDIT
+source_of_truth_acceptance_alignment_initial_audit_findings = 3
+source_of_truth_acceptance_alignment_corrections_applied = YES
+source_of_truth_acceptance_alignment_independent_reaudit_completed = NO
+source_of_truth_acceptance_alignment_committed = NO
+source_of_truth_acceptance_alignment_pushed = NO
+source_of_truth_acceptance_alignment_CI_green = NO
+source_of_truth_acceptance_alignment_effective = NO
+authenticated_account_login_performed = NO
+ordinary_MFA_performed = NO
+read_only_account_inspection_performed = NO
+support_contacted = NO
+terms_accepted_or_acknowledged = NO
+account_or_subscription_changed = NO
+purchase_or_payment_submitted = NO
+credential_or_client_created_or_viewed = NO
+API_call_made = NO
+market_data_accessed_for_this_alignment = NO
+provider_testing_performed = NO
+downstream_execution_performed_for_this_alignment = NO
+
 ## 10. Freshness guardrail
 
 ```bash
@@ -563,13 +618,13 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor 4710645dbe2ea8d9435d7cd9a602c3751524c0c4 HEAD
+git merge-base --is-ancestor 80add89755c519ba0d7f5c7711001952595ee4f3 HEAD
 echo $?
 ```
 
 ## 11. Current bottom line
 
-The boundary and scope values in this section describe the proposed post-alignment target state only after this exact three-file source-of-truth alignment update is independently approved, committed, and pushed. Until then, the pushed controlling boundary remains `PUBLIC_DOCUMENT_RESEARCH_ONLY` and the pushed authorized execution scope remains `SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH`.
+The current boundary and scope remain controlling until the full effectiveness condition is satisfied. A local edit is not effective, an independent audit alone is not effective, a commit without push is not effective, and a pushed commit before CI is green is not effective. Until every condition is confirmed, the controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`.
 
 ```text
 active_section = SIP_ACCESS_PREREQUISITE_RESOLUTION
@@ -593,12 +648,16 @@ targeted_refetch_authorized = NO
 raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
-bottom_line_boundary_values_are_post_alignment_target_state_only = TRUE
-bottom_line_boundary_effective_condition = PROJECT_CONTEXT_ALIGNMENT_EFFECTIVE_CONDITION
-bottom_line_pushed_controlling_boundary_until_effective_condition = PUBLIC_DOCUMENT_RESEARCH_ONLY
-bottom_line_pushed_authorized_execution_scope_until_effective_condition = SIP_ACCESS_PREREQUISITE_OFFICIAL_PUBLIC_DOCUMENT_RESEARCH
+bottom_line_current_values_control_until_effectiveness = TRUE
+bottom_line_transition_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
+bottom_line_local_edit_alone_effective = NO
+bottom_line_independent_audit_alone_effective = NO
+bottom_line_commit_without_push_effective = NO
+bottom_line_push_before_CI_green_effective = NO
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
+bottom_line_accepted_post_effectiveness_authorization_boundary = READ_ONLY_ACCOUNT_INSPECTION_ONLY
+bottom_line_accepted_post_effectiveness_execution_scope = SIP_ACCESS_PREREQUISITE_ACCOUNT_SPECIFIC_READ_ONLY_INSPECTION
 pathway_selected = YES
 selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 selected_pathway_scope = SIP_ENTITLEMENT_PERMISSION_SUBSCRIPTION_LICENSING_PERMITTED_USE_RESTRICTIONS_PLAN_TIER_AND_COST_PREREQUISITES_ONLY
@@ -620,9 +679,9 @@ SIP_access_prerequisite_official_public_document_research_corrected_record_reaud
 SIP_access_prerequisite_official_public_document_research_review_chain_final_result = PASS_AFTER_CORRECTION
 pathway_planning_authorized = NO
 pathway_execution_authorized = NO
-public_document_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
-internet_research_authorized = NO_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
-public_document_research_scope = NONE_AFTER_ALIGNMENT_EFFECTIVE_CONDITION
+public_document_research_authorized = NO
+internet_research_authorized = NO
+public_document_research_scope = NONE
 authenticated_public_source_access_authorized = NO
 authenticated_portal_access_authorized = NO
 account_specific_record_access_authorized = NO
@@ -635,6 +694,15 @@ retraining_authorized = NO
 holdout_evaluation_authorized = NO
 candidate_selection_authorized = NO
 account_inspection_authorized = NO
+post_effectiveness_account_inspection_authorized = YES_NARROW_READ_ONLY_SCOPE_ONLY
+post_effectiveness_account_inspection_scope_record = docs/runs/v3.08_read_only_account_inspection_authorization.md
+post_effectiveness_account_inspection_review_record = docs/reviews/v3.08_read_only_account_inspection_authorization_independent_review.md
+post_effectiveness_scope_does_not_authorize_support_contact = TRUE
+post_effectiveness_scope_does_not_authorize_account_or_subscription_change = TRUE
+post_effectiveness_scope_does_not_authorize_purchase_or_payment = TRUE
+post_effectiveness_scope_does_not_authorize_terms_acceptance = TRUE
+post_effectiveness_scope_does_not_authorize_API_or_market_data_access = TRUE
+post_effectiveness_scope_does_not_authorize_downstream_execution = TRUE
 account_change_authorized = NO
 subscription_change_authorized = NO
 purchase_authorized = NO
@@ -670,4 +738,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-After this exact three-file source-of-truth alignment update is independently approved, committed, and pushed, the controlling boundary is `NO_EXECUTION_AUTHORIZED` and the authorized execution scope is `NONE`. Until then, the pushed public-document-research boundary remains controlling. The completed research and corrected-record `PASS` re-audit support only future governance consideration. They do not authorize additional research, authenticated access, account inspection, billing or subscription inspection, entitlement or permission inspection, account or subscription changes, purchases, payment submission, acceptance of terms, support contact, credential or client creation, API calls, SIP or IEX access, other market-data access, provider testing, contract action, raw-data or candidate-data activity, dataset work, validation, validation-only preflight, training, retraining, holdout evaluation, candidate selection, model-artifact activity, orders, deployment, release creation, tagging, or any other downstream execution.
+Only after an independent PASS audit, commit and push of this exact three-file alignment, and green CI may the accepted post-effectiveness boundary be treated as `READ_ONLY_ACCOUNT_INSPECTION_ONLY` with scope `SIP_ACCESS_PREREQUISITE_ACCOUNT_SPECIFIC_READ_ONLY_INSPECTION`. That scope permits only user-performed manual browser login, ordinary user-performed MFA, and inspection of the exact account facts in the approved authorization. It does not authorize Deep Research, additional internet research, support contact, forms or tickets, terms acceptance or acknowledgment, classification changes, account or subscription changes, trials, purchases, payments, credential or client activity, API calls, SIP or IEX access, other market-data access, provider testing, contract action, raw-data or candidate-data activity, dataset work, validation, validation-only preflight, training, retraining, holdout evaluation, candidate selection, model-artifact activity, orders, deployment, release creation, tagging, or downstream execution.
