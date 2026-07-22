@@ -8,7 +8,7 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ## 1. Roadmap role and active section
 
-Until an independent PASS audit, commit and push of this exact three-file alignment and audit chain, green CI, matching `HEAD` and `origin/main`, and a clean worktree and staging area are all confirmed, the controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`. The reviewed blocked-diagnosis remediation-planning-authorization-consideration boundary and its documentation-only authorization-draft-and-review scope are post-effectiveness references only.
+Until all of the following are confirmed, the controlling boundary remains NO_EXECUTION_AUTHORIZED and the authorized execution scope remains NONE: a focused independent alignment check passes; the exact three-file alignment and its focused-check record are committed and pushed; CI for that pushed commit is green; HEAD and origin/main match; and the worktree and staging area are clean.
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
@@ -20,17 +20,17 @@ checkpoint_chronology_source = git history and latest pushed run/review/audit re
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
 
 map_current_values_control_until_effectiveness = TRUE
-map_transition_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
+map_transition_effective_condition = FOCUSED_INDEPENDENT_ALIGNMENT_CHECK_PASS_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
 map_local_edit_alone_effective = NO
-map_independent_audit_alone_effective = NO
+map_focused_alignment_check_alone_effective = NO
 map_commit_without_push_effective = NO
 map_push_before_CI_green_effective = NO
 map_controlling_boundary_until_effectiveness = NO_EXECUTION_AUTHORIZED
 map_authorized_execution_scope_until_effectiveness = NONE
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-map_accepted_post_effectiveness_authorization_boundary_reference = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY
-map_accepted_post_effectiveness_execution_scope_reference = DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY
+map_accepted_post_effectiveness_authorization_boundary_reference = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_ONLY
+map_accepted_post_effectiveness_execution_scope_reference = DOCUMENTATION_ONLY_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_RECORD_AND_INDEPENDENT_REVIEW_ONLY
 map_role = ROADMAP_NAVIGATION_AND_GOVERNANCE_REFERENCE_ONLY
 map_values_do_not_independently_authorize_execution = TRUE
 ```
@@ -222,7 +222,7 @@ SIP_access_prerequisite_assessment_execution_authorized = NO
 public_document_research_authorized = NO
 internet_research_authorized = NO
 account_inspection_authorized = NO
-map_post_effectiveness_remediation_planning_authorization_consideration_reference = YES_DOCUMENTATION_ONLY_AUTHORIZATION_DRAFT_AND_REVIEW_ONLY
+map_post_effectiveness_remediation_planning_reference = YES_DOCUMENTATION_ONLY_PLANNING_RECORD_AND_REVIEW_ONLY
 map_blocked_local_import_surface_diagnosis_execution_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution.md
 map_blocked_local_import_surface_diagnosis_execution_result = BLOCK_LOCAL_IMPORT_SURFACE_DIAGNOSIS_DEPENDENCY_OR_RUNTIME_FAILURE
 map_blocked_local_import_surface_diagnosis_execution_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution_independent_evidence_review.md
@@ -557,14 +557,16 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 59. Local Import-Surface Diagnosis authorization chain completed and pushed; commit `140c4a1fb0ab1d76ee8358fe26b727816514c587`; CI `Tests #502 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md`, `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md`, and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md`; the initial audit returned `NEEDS_CORRECTION` with F-01 and F-02, and the corrected-draft re-audit passed both resolutions with `findings = NONE`.
 60. Blocked Local Import-Surface Diagnosis execution and independent evidence review completed and pushed; commit `6a0dbdf2277811b12b43d3a1912368532087d746`; CI `Tests #504 PASS_USER_CONFIRMED`; execution result `BLOCK_LOCAL_IMPORT_SURFACE_DIAGNOSIS_DEPENDENCY_OR_RUNTIME_FAILURE`; evidence-review verdict `PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_BLOCKED_EXECUTION_EVIDENCE_REVIEW_FOR_REMEDIATION_PLANNING_CONSIDERATION_ONLY`; findings `NONE`; execution record `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution.md`; evidence-review record `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution_independent_evidence_review.md`; the technical TypeError cause remains `UNKNOWN`.
 
+61. Local Import-Surface Diagnosis Remediation-Planning Authorization and Independent Review completed and pushed; commit `83f418d7ca1db8ce894ce0dab0950df0bee06052`; CI `Tests #506 PASS_USER_CONFIRMED`; authorization decision `PASS_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_FOR_INDEPENDENT_REVIEW_ONLY`; review verdict `PASS_INDEPENDENT_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY`; findings `NONE`; authorization record `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_remediation_planning_authorization.md`; review record `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_remediation_planning_authorization_independent_review.md`; the reviewed documentation-only planning scope remains ineffective pending source-of-truth alignment, focused independent alignment-check PASS, commit, push, and green CI.
+
 ## 8. Forward milestone roadmap
 
-1. Independently audit the exact three-file blocked-diagnosis evidence-review source-of-truth alignment draft.
-2. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling until that audit passes, this exact alignment is committed and pushed, and CI for that commit is green.
-3. After effectiveness only, reference preparation of one documentation-only remediation-planning authorization draft and its independent documentation-only review.
+1. Run a focused independent alignment check of the exact three-file remediation-planning source-of-truth alignment draft.
+2. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling until that focused check passes, this exact alignment is committed and pushed, and CI for that commit is green.
+3. After effectiveness only, reference creation of one documentation-only remediation-planning record and its independent documentation-only review.
 4. Limit that reference to existing committed records, sanitized references to the four TypeError probe outcomes, and definition of future bounded planning scope for later governance consideration.
-5. Keep remediation planning before effectiveness, package or source inspection, TypeError root-cause diagnosis, guard modification, additional import probes, alternate imports, another process, retry or fallback, dependency change, credentials, external configuration, object creation, network/provider/API/market-data activity, missing-observation retrieval, remediation execution, corrected execution, data work, and all downstream execution unauthorized.
-6. Require separate later authorization before writing or executing any remediation plan.
+5. Keep remediation-planning-record creation before effectiveness, package or source inspection, TypeError root-cause diagnosis, guard modification, additional import probes, alternate imports, another process, retry or fallback, dependency change, credentials, external configuration, object creation, network/provider/API/market-data activity, missing-observation retrieval, remediation execution, corrected execution, data work, and all downstream execution unauthorized.
+6. Require separate later authorization before technical diagnosis or remediation execution.
 
 Every later milestone remains separately governed.
 
@@ -665,7 +667,7 @@ candidate_raw_created = NO
 raw_data_read = NO
 ```
 
-### Blocked diagnosis evidence-review source-of-truth alignment status
+### Remediation-planning authorization source-of-truth alignment status
 
 minimal_historical_SIP_entitlement_test_planning_record = docs/runs/v3.08_minimal_historical_sip_entitlement_test_authorization_planning.md
 minimal_historical_SIP_entitlement_test_planning_review_record = docs/reviews/v3.08_minimal_historical_sip_entitlement_test_authorization_planning_independent_review.md
@@ -678,8 +680,18 @@ local_import_surface_diagnosis_corrected_reaudit_record = docs/reviews/v3.08_min
 local_import_surface_diagnosis_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
 local_import_surface_diagnosis_authorization_chain_commit = 140c4a1fb0ab1d76ee8358fe26b727816514c587
 local_import_surface_diagnosis_authorization_chain_CI = Tests_502_PASS_USER_CONFIRMED
+map_local_import_surface_diagnosis_remediation_planning_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_remediation_planning_authorization.md
+map_local_import_surface_diagnosis_remediation_planning_authorization_sha256 = 3e68bd1aa93223529f606c9bc68b41802292ca230e4a9121cde0b3717b751d61
+map_local_import_surface_diagnosis_remediation_planning_authorization_decision = PASS_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_FOR_INDEPENDENT_REVIEW_ONLY
+map_local_import_surface_diagnosis_remediation_planning_authorization_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_remediation_planning_authorization_independent_review.md
+map_local_import_surface_diagnosis_remediation_planning_authorization_review_sha256 = e86d64b523128dab49ca4b86a58b9eaf8e897eea750f548f4f09adf076ab5b20
+map_local_import_surface_diagnosis_remediation_planning_authorization_review_verdict = PASS_INDEPENDENT_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
+map_local_import_surface_diagnosis_remediation_planning_authorization_review_findings = NONE
+map_local_import_surface_diagnosis_remediation_planning_authorization_chain_commit = 83f418d7ca1db8ce894ce0dab0950df0bee06052
+map_local_import_surface_diagnosis_remediation_planning_authorization_chain_CI = Tests_506_PASS_USER_CONFIRMED
+map_local_import_surface_diagnosis_remediation_planning_currently_authorized = NO
 source_of_truth_acceptance_alignment_draft_created = YES
-source_of_truth_acceptance_alignment_independent_audit_completed = NO
+source_of_truth_acceptance_focused_independent_alignment_check_completed = YES
 source_of_truth_acceptance_alignment_committed = NO
 source_of_truth_acceptance_alignment_pushed = NO
 source_of_truth_acceptance_alignment_CI_green = NO
@@ -693,8 +705,8 @@ local_import_surface_diagnosis_execution_review_completed = YES
 local_import_surface_diagnosis_execution_review_findings = NONE
 local_import_surface_diagnosis_execution_chain_commit = 6a0dbdf2277811b12b43d3a1912368532087d746
 local_import_surface_diagnosis_execution_chain_CI = Tests_504_PASS_USER_CONFIRMED
-map_accepted_post_effectiveness_authorization_boundary_reference = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY
-map_accepted_post_effectiveness_execution_scope_reference = DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY
+map_accepted_post_effectiveness_authorization_boundary_reference = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_ONLY
+map_accepted_post_effectiveness_execution_scope_reference = DOCUMENTATION_ONLY_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_RECORD_AND_INDEPENDENT_REVIEW_ONLY
 local_import_surface_diagnosis_currently_authorized = NO
 another_diagnosis_authorized = NO
 another_import_probe_authorized = NO
@@ -750,17 +762,17 @@ raw_data_completeness_remediation_authorized = NO
 missing_slot_remediation_authorized = NO
 dataset_generation_remediation_authorized = NO
 map_current_values_control_until_effectiveness = TRUE
-map_transition_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
+map_transition_effective_condition = FOCUSED_INDEPENDENT_ALIGNMENT_CHECK_PASS_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
 map_local_edit_alone_effective = NO
-map_independent_audit_alone_effective = NO
+map_focused_alignment_check_alone_effective = NO
 map_commit_without_push_effective = NO
 map_push_before_CI_green_effective = NO
 map_controlling_boundary_until_effectiveness = NO_EXECUTION_AUTHORIZED
 map_authorized_execution_scope_until_effectiveness = NONE
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-map_accepted_post_effectiveness_authorization_boundary_reference = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY
-map_accepted_post_effectiveness_execution_scope_reference = DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY
+map_accepted_post_effectiveness_authorization_boundary_reference = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_ONLY
+map_accepted_post_effectiveness_execution_scope_reference = DOCUMENTATION_ONLY_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_RECORD_AND_INDEPENDENT_REVIEW_ONLY
 map_role = ROADMAP_NAVIGATION_AND_GOVERNANCE_REFERENCE_ONLY
 map_values_do_not_independently_authorize_execution = TRUE
 pathway_selected = YES
@@ -781,7 +793,7 @@ pathway_execution_authorized = NO
 public_document_research_authorized = NO
 internet_research_authorized = NO
 account_inspection_authorized = NO
-map_post_effectiveness_remediation_planning_authorization_consideration_reference = YES_DOCUMENTATION_ONLY_AUTHORIZATION_DRAFT_AND_REVIEW_ONLY
+map_post_effectiveness_remediation_planning_reference = YES_DOCUMENTATION_ONLY_PLANNING_RECORD_AND_REVIEW_ONLY
 map_blocked_local_import_surface_diagnosis_execution_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution.md
 map_blocked_local_import_surface_diagnosis_execution_result = BLOCK_LOCAL_IMPORT_SURFACE_DIAGNOSIS_DEPENDENCY_OR_RUNTIME_FAILURE
 map_blocked_local_import_surface_diagnosis_execution_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution_independent_evidence_review.md
@@ -831,4 +843,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-Only after an independent PASS audit with `findings = NONE`, commit and push of the exact three-file alignment and its audit record, green CI, matching `HEAD` and `origin/main`, and a clean worktree and staging area may `PROJECT_CONTEXT.md` treat the remediation-planning-authorization-consideration boundary as effective. This milestone map remains roadmap, navigation, and governance reference only and does not independently activate or authorize remediation planning, another diagnosis or process, import probes, retry or fallback, package or source inspection, TypeError root-cause diagnosis, guard modification, alternate imports, credential or environment-value access, external-configuration access, client or request-object creation, network/provider/API/market-data activity, retrieval of any of the 66 missing observations, remediation execution, corrected execution, data activity, validation, training, trading, deployment, release creation, or tagging.
+Only after all of the following are confirmed may PROJECT_CONTEXT.md treat the remediation-planning boundary as effective: a focused independent alignment check passes with findings = NONE; the exact three-file alignment and its focused-check record are committed and pushed; CI for that pushed commit is green; HEAD and origin/main match; and the worktree and staging area are clean. This milestone map remains roadmap, navigation, and governance reference only and does not independently activate or authorize remediation planning, another diagnosis or process, import probes, retry or fallback, package or source inspection, TypeError root-cause diagnosis, guard modification, alternate imports, credential or environment-value access, external-configuration access, client or request-object creation, network/provider/API/market-data activity, retrieval of any of the 66 missing observations, remediation execution, corrected execution, data activity, validation, training, trading, deployment, release creation, or tagging.
