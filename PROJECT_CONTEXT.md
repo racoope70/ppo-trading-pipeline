@@ -34,8 +34,8 @@ pushed_authorized_execution_scope_until_effective_condition = NONE
 
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-accepted_post_effectiveness_authorization_boundary = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
-accepted_post_effectiveness_authorized_execution_scope = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+accepted_post_effectiveness_authorization_boundary = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY
+accepted_post_effectiveness_authorized_execution_scope = DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY
 authorization_transition_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
 selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 selected_pathway_scope = SIP_ENTITLEMENT_PERMISSION_SUBSCRIPTION_LICENSING_PERMITTED_USE_RESTRICTIONS_PLAN_TIER_AND_COST_PREREQUISITES_ONLY
@@ -301,8 +301,8 @@ section_6_commit_without_push_effective = NO
 section_6_push_before_CI_green_effective = NO
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-section_6_accepted_post_effectiveness_authorization_boundary = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
-section_6_accepted_post_effectiveness_execution_scope = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+section_6_accepted_post_effectiveness_authorization_boundary = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY
+section_6_accepted_post_effectiveness_execution_scope = DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY
 local_import_surface_diagnosis_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
 local_import_surface_diagnosis_authorization_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md
 local_import_surface_diagnosis_authorization_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_AUDIT
@@ -312,6 +312,39 @@ local_import_surface_diagnosis_authorization_chain_commit = 140c4a1fb0ab1d76ee83
 local_import_surface_diagnosis_authorization_chain_CI = Tests_502_PASS_USER_CONFIRMED
 local_import_surface_diagnosis_currently_authorized = NO
 alignment_effective = NO
+local_import_surface_diagnosis_execution_completed = YES
+local_import_surface_diagnosis_execution_result = BLOCK_LOCAL_IMPORT_SURFACE_DIAGNOSIS_DEPENDENCY_OR_RUNTIME_FAILURE
+local_import_surface_established_unambiguously = NO
+technical_TypeError_cause = UNKNOWN
+local_import_surface_diagnosis_execution_review_completed = YES
+local_import_surface_diagnosis_execution_review_findings = NONE
+local_import_surface_diagnosis_execution_chain_commit = 6a0dbdf2277811b12b43d3a1912368532087d746
+local_import_surface_diagnosis_execution_chain_CI = Tests_504_PASS_USER_CONFIRMED
+another_diagnosis_authorized = NO
+another_import_probe_authorized = NO
+retry_or_fallback_authorized = NO
+package_inspection_authorized = NO
+package_source_inspection_authorized = NO
+symbol_discovery_authorized = NO
+TypeError_root_cause_diagnosis_authorized = NO
+guard_modification_authorized = NO
+alternate_import_testing_authorized = NO
+remediation_execution_authorized = NO
+corrected_execution_authorized = NO
+credential_access_authorized = NO
+client_creation_authorized = NO
+request_object_creation_authorized = NO
+network_or_provider_access_authorized = NO
+market_data_access_authorized = NO
+missing_observation_retrieval_authorized = NO
+data_modification_authorized = NO
+validation_authorized = NO
+training_authorized = NO
+orders_authorized = NO
+deployment_authorized = NO
+release_authorized = NO
+tagging_authorized = NO
+downstream_execution_authorized = NO
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -487,15 +520,16 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 57. Failed Minimal Historical SIP Access-Path Test execution and evidence chain completed and pushed; commit `14b1fb8b08c49ee4b9bcb5eeaca475ce50d9e87b`; CI `Tests #500 PASS_USER_CONFIRMED`; historical execution result `FAIL_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_execution.md`, `docs/reviews/v3.08_minimal_historical_sip_access_path_test_execution_independent_evidence_review.md`, and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_execution_corrected_record_reaudit.md`; the initial evidence review was `NEEDS_CORRECTION` and the corrected-record re-audit passed.
 58. Import-failure remediation planning and independent review completed and pushed; commit `68caf831a1f309d5e8088e0060f18513b7057da2`; CI `Tests #501 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_import_failure_remediation_planning.md` and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_import_failure_remediation_planning_independent_review.md`.
 59. Local Import-Surface Diagnosis authorization chain completed and pushed; commit `140c4a1fb0ab1d76ee8358fe26b727816514c587`; CI `Tests #502 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md`, `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md`, and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md`; the initial audit returned `NEEDS_CORRECTION` with F-01 and F-02, and the corrected-draft re-audit passed both resolutions with `findings = NONE`.
+60. Blocked Local Import-Surface Diagnosis execution and independent evidence review completed and pushed; commit `6a0dbdf2277811b12b43d3a1912368532087d746`; CI `Tests #504 PASS_USER_CONFIRMED`; execution result `BLOCK_LOCAL_IMPORT_SURFACE_DIAGNOSIS_DEPENDENCY_OR_RUNTIME_FAILURE`; evidence-review verdict `PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_BLOCKED_EXECUTION_EVIDENCE_REVIEW_FOR_REMEDIATION_PLANNING_CONSIDERATION_ONLY`; findings `NONE`; execution record `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution.md`; evidence-review record `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution_independent_evidence_review.md`; the technical TypeError cause remains `UNKNOWN`.
 
 ## 8. Forward roadmap
 
-1. Independently audit this exact three-file local import-surface diagnosis source-of-truth acceptance-alignment draft.
+1. Independently audit this exact three-file blocked-diagnosis evidence-review source-of-truth alignment draft.
 2. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling until that audit passes, this exact alignment is committed and pushed, and CI for that commit is green.
-3. After effectiveness only, permit the bounded local import-surface diagnosis governed technically by `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md`.
-4. Keep that diagnosis within the authorization record's alpaca-py 0.43.4 six-symbol allowlist, preventive guards, sanitized categorical evidence, and single text-only record.
-5. Keep package inspection, symbol discovery, credentials, external configuration, object creation, network/provider/API/market-data activity, missing-observation retrieval, remediation, rerun, data work, and all downstream execution unauthorized.
-6. Require independent review of any later diagnostic record before any further governance decision.
+3. After effectiveness only, permit preparation of one documentation-only remediation-planning authorization draft and its independent documentation-only review.
+4. Use only existing committed governance, execution, and evidence-review records, sanitized references to the four TypeError probe outcomes, and a definition of future bounded planning scope for later governance consideration.
+5. Keep remediation planning before effectiveness, package or source inspection, TypeError root-cause diagnosis, guard testing or modification, additional import probes, alternate imports, another process, retry or fallback, dependency change, credentials, external configuration, object creation, network/provider/API/market-data activity, missing-observation retrieval, remediation execution, corrected execution, data work, and all downstream execution unauthorized.
+6. Require separate later authorization before writing or executing any remediation plan.
 
 Every later milestone remains separately governed.
 
@@ -505,7 +539,7 @@ future_validation_training_reference_map = docs/workflows/future_validation_trai
 
 For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe-expansion guidance, use the future validation and training reference map. That file remains guidance only and does not authorize execution.
 
-## 9. Local Import-Surface Diagnosis Acceptance Alignment action confirmations
+## 9. Blocked Diagnosis Evidence-Review Alignment action confirmations
 
 ```text
 source_code_changed = NO
@@ -587,7 +621,7 @@ candidate_raw_created = NO
 raw_data_read = NO
 ```
 
-### Local import-surface diagnosis acceptance-alignment status
+### Blocked diagnosis evidence-review source-of-truth alignment status
 
 minimal_historical_SIP_entitlement_test_planning_record = docs/runs/v3.08_minimal_historical_sip_entitlement_test_authorization_planning.md
 minimal_historical_SIP_entitlement_test_planning_review_record = docs/reviews/v3.08_minimal_historical_sip_entitlement_test_authorization_planning_independent_review.md
@@ -607,9 +641,24 @@ source_of_truth_acceptance_alignment_pushed = NO
 source_of_truth_acceptance_alignment_CI_green = NO
 source_of_truth_acceptance_alignment_effective = NO
 alignment_effective = NO
+local_import_surface_diagnosis_execution_completed = YES
+local_import_surface_diagnosis_execution_result = BLOCK_LOCAL_IMPORT_SURFACE_DIAGNOSIS_DEPENDENCY_OR_RUNTIME_FAILURE
+local_import_surface_established_unambiguously = NO
+technical_TypeError_cause = UNKNOWN
+local_import_surface_diagnosis_execution_review_completed = YES
+local_import_surface_diagnosis_execution_review_findings = NONE
+local_import_surface_diagnosis_execution_chain_commit = 6a0dbdf2277811b12b43d3a1912368532087d746
+local_import_surface_diagnosis_execution_chain_CI = Tests_504_PASS_USER_CONFIRMED
+accepted_post_effectiveness_authorization_boundary = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY
+accepted_post_effectiveness_authorized_execution_scope = DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY
 local_import_surface_diagnosis_currently_authorized = NO
+another_diagnosis_authorized = NO
+another_import_probe_authorized = NO
+retry_or_fallback_authorized = NO
+TypeError_root_cause_diagnosis_authorized = NO
 rerun_authorized = NO
 remediation_execution_authorized = NO
+corrected_execution_authorized = NO
 credentials_resolved_for_this_alignment = NO
 client_created_for_this_alignment = NO
 API_call_made_for_this_alignment = NO
@@ -624,7 +673,7 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor 140c4a1fb0ab1d76ee8358fe26b727816514c587 HEAD
+git merge-base --is-ancestor 6a0dbdf2277811b12b43d3a1912368532087d746 HEAD
 echo $?
 ```
 
@@ -662,8 +711,8 @@ bottom_line_commit_without_push_effective = NO
 bottom_line_push_before_CI_green_effective = NO
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-bottom_line_accepted_post_effectiveness_authorization_boundary = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
-bottom_line_accepted_post_effectiveness_execution_scope = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+bottom_line_accepted_post_effectiveness_authorization_boundary = BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY
+bottom_line_accepted_post_effectiveness_execution_scope = DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY
 pathway_selected = YES
 selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 selected_pathway_scope = SIP_ENTITLEMENT_PERMISSION_SUBSCRIPTION_LICENSING_PERMITTED_USE_RESTRICTIONS_PLAN_TIER_AND_COST_PREREQUISITES_ONLY
@@ -700,12 +749,19 @@ retraining_authorized = NO
 holdout_evaluation_authorized = NO
 candidate_selection_authorized = NO
 account_inspection_authorized = NO
-post_effectiveness_local_import_surface_diagnosis_reference = YES_EXACT_REVIEWED_BOUNDED_DIAGNOSIS_ONLY
-post_effectiveness_scope_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
-post_effectiveness_scope_prohibits_client_or_request_object_creation = TRUE
-post_effectiveness_scope_prohibits_network_provider_API_or_market_data_activity = TRUE
-post_effectiveness_scope_prohibits_66_missing_observation_requests = TRUE
-post_effectiveness_scope_does_not_authorize_downstream_execution = TRUE
+post_effectiveness_remediation_planning_authorization_consideration_reference = YES_DOCUMENTATION_ONLY_AUTHORIZATION_DRAFT_AND_REVIEW_ONLY
+blocked_local_import_surface_diagnosis_execution_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution.md
+blocked_local_import_surface_diagnosis_execution_result = BLOCK_LOCAL_IMPORT_SURFACE_DIAGNOSIS_DEPENDENCY_OR_RUNTIME_FAILURE
+blocked_local_import_surface_diagnosis_execution_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_execution_independent_evidence_review.md
+blocked_local_import_surface_diagnosis_execution_review_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_BLOCKED_EXECUTION_EVIDENCE_REVIEW_FOR_REMEDIATION_PLANNING_CONSIDERATION_ONLY
+blocked_local_import_surface_diagnosis_execution_chain_commit = 6a0dbdf2277811b12b43d3a1912368532087d746
+blocked_local_import_surface_diagnosis_execution_chain_CI = Tests_504_PASS_USER_CONFIRMED
+technical_TypeError_cause = UNKNOWN
+post_effectiveness_scope_does_not_authorize_remediation_planning_before_effectiveness = TRUE
+post_effectiveness_scope_does_not_authorize_TypeError_root_cause_diagnosis = TRUE
+post_effectiveness_scope_does_not_authorize_remediation_execution = TRUE
+post_effectiveness_scope_does_not_authorize_corrected_execution = TRUE
+post_effectiveness_scope_does_not_authorize_provider_or_downstream_execution = TRUE
 account_change_authorized = NO
 subscription_change_authorized = NO
 purchase_authorized = NO
@@ -741,4 +797,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-Only after an independent PASS audit with `findings = NONE`, commit and push of this exact three-file alignment and audit chain, green CI for that pushed commit, matching `HEAD` and `origin/main`, and a clean worktree and staging area may the accepted post-effectiveness boundary be treated as `LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY` with scope `ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY`. The exact technical contract remains controlled by the local import-surface diagnosis authorization record. Diagnosis is not active now; rerun, remediation execution, package inspection, credential or environment-value access, external-configuration access, object creation, network/provider/API/market-data activity, missing-observation retrieval, data modification, validation, training, trading, deployment, release creation, tagging, and downstream execution remain unauthorized.
+Only after an independent PASS audit with `findings = NONE`, commit and push of this exact three-file alignment and its audit record, green CI for that pushed commit, matching `HEAD` and `origin/main`, and a clean worktree and staging area may the accepted post-effectiveness boundary be treated as `BLOCKED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_REMEDIATION_PLANNING_AUTHORIZATION_CONSIDERATION_ONLY` with scope `DOCUMENTATION_ONLY_REMEDIATION_PLANNING_AUTHORIZATION_DRAFT_AND_INDEPENDENT_REVIEW_ONLY`. That future scope permits only one documentation-only authorization draft and its independent documentation-only review; it is not effective now. Another diagnosis or process, import probes, retry or fallback, remediation planning before effectiveness, remediation execution, corrected execution, package or source inspection, TypeError root-cause diagnosis, guard modification, alternate import testing, credential or environment-value access, external-configuration access, client or request-object creation, network/provider/API/market-data activity, missing-observation retrieval, data modification, validation, training, trading, deployment, release creation, tagging, and downstream execution remain unauthorized.
