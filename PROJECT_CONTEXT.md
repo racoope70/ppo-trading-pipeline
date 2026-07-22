@@ -34,8 +34,8 @@ pushed_authorized_execution_scope_until_effective_condition = NONE
 
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-accepted_post_effectiveness_authorization_boundary = MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_ONLY
-accepted_post_effectiveness_authorized_execution_scope = ALPACA_SINGLE_REQUEST_HISTORICAL_SIP_CONTROL_BAR_TEST_ONLY
+accepted_post_effectiveness_authorization_boundary = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+accepted_post_effectiveness_authorized_execution_scope = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
 authorization_transition_effective_condition = INDEPENDENT_PASS_AUDIT_AND_THIS_EXACT_THREE_FILE_ALIGNMENT_COMMITTED_AND_PUSHED_AND_CI_GREEN
 selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 selected_pathway_scope = SIP_ENTITLEMENT_PERMISSION_SUBSCRIPTION_LICENSING_PERMITTED_USE_RESTRICTIONS_PLAN_TIER_AND_COST_PREREQUISITES_ONLY
@@ -47,7 +47,6 @@ local_edit_alone_effective = NO
 independent_audit_alone_effective = NO
 commit_without_push_effective = NO
 push_before_CI_green_effective = NO
-minimal_historical_SIP_access_path_test_authorized_before_effectiveness = NO
 ```
 
 No run, review, audit, milestone reference map, future-guidance map, local edit, staging action, or unpushed commit can independently activate or expand authorization.
@@ -246,7 +245,6 @@ SIP_access_prerequisite_official_public_document_research_review_chain_final_res
 The following fields preserve the controlling pre-effectiveness state and accept a narrow post-effectiveness transition. A local edit is not effective, an independent audit alone is not effective, a commit without push is not effective, and a pushed commit before CI is green is not effective. Until every condition is satisfied, the controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`.
 
 ```text
-read_only_account_inspection_acceptance_applies_only_after_effectiveness = TRUE
 controlling_boundary_until_effectiveness = NO_EXECUTION_AUTHORIZED
 authorized_execution_scope_until_effectiveness = NONE
 SIP_access_prerequisite_public_document_research_authorization_acceptance = HISTORICALLY_ACCEPTED_AND_EFFECTIVE_BEFORE_ALIGNMENT
@@ -266,15 +264,6 @@ retraining_authorized = NO
 holdout_evaluation_authorized = NO
 candidate_selection_authorized = NO
 account_inspection_authorized = NO
-post_effectiveness_account_inspection_authorized = YES_NARROW_READ_ONLY_SCOPE_ONLY
-post_effectiveness_account_inspection_scope_record = docs/runs/v3.08_read_only_account_inspection_authorization.md
-post_effectiveness_account_inspection_review_record = docs/reviews/v3.08_read_only_account_inspection_authorization_independent_review.md
-post_effectiveness_scope_does_not_authorize_support_contact = TRUE
-post_effectiveness_scope_does_not_authorize_account_or_subscription_change = TRUE
-post_effectiveness_scope_does_not_authorize_purchase_or_payment = TRUE
-post_effectiveness_scope_does_not_authorize_terms_acceptance = TRUE
-post_effectiveness_scope_does_not_authorize_API_or_market_data_access = TRUE
-post_effectiveness_scope_does_not_authorize_downstream_execution = TRUE
 account_change_authorized = NO
 subscription_change_authorized = NO
 purchase_authorized = NO
@@ -312,15 +301,17 @@ section_6_commit_without_push_effective = NO
 section_6_push_before_CI_green_effective = NO
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-section_6_accepted_post_effectiveness_authorization_boundary = MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_ONLY
-section_6_accepted_post_effectiveness_execution_scope = ALPACA_SINGLE_REQUEST_HISTORICAL_SIP_CONTROL_BAR_TEST_ONLY
-minimal_historical_SIP_access_path_test_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md
-minimal_historical_SIP_access_path_test_authorization_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_draft_audit.md
-minimal_historical_SIP_access_path_test_authorization_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_DRAFT_AUDIT
-minimal_historical_SIP_access_path_test_authorization_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_corrected_draft_reaudit.md
-minimal_historical_SIP_access_path_test_authorization_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT
-minimal_historical_SIP_access_path_test_authorization_chain_commit = 158f4fc3c544173a4c2a605ee31a3404b12af870
-minimal_historical_SIP_access_path_test_authorization_chain_CI = Tests_498_PASS_USER_CONFIRMED
+section_6_accepted_post_effectiveness_authorization_boundary = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+section_6_accepted_post_effectiveness_execution_scope = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+local_import_surface_diagnosis_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
+local_import_surface_diagnosis_authorization_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md
+local_import_surface_diagnosis_authorization_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_AUDIT
+local_import_surface_diagnosis_authorization_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md
+local_import_surface_diagnosis_authorization_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
+local_import_surface_diagnosis_authorization_chain_commit = 140c4a1fb0ab1d76ee8358fe26b727816514c587
+local_import_surface_diagnosis_authorization_chain_CI = Tests_502_PASS_USER_CONFIRMED
+local_import_surface_diagnosis_currently_authorized = NO
+alignment_effective = NO
 dataset_generation_execution_checkpoint = COMPLETED_BLOCKED
 dataset_generation_execution_record = docs/runs/v3.08_dataset_generation_execution.md
 dataset_generation_execution_result = BLOCK_DATASET_GENERATION_EXECUTION_REQUIRED_RUNTIME_DEPENDENCIES_NOT_INSTALLED
@@ -492,17 +483,19 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 53. v3.08 Read-Only Account-Inspection Evidence and independent review chain completed and pushed; commit `57980ec7dc1bc46ec438edb1ec54e0d4ebda6e1d`; evidence record `docs/runs/v3.08_read_only_account_inspection_evidence.md`; corrected re-audit record `docs/reviews/v3.08_read_only_account_inspection_evidence_corrected_draft_reaudit.md`.
 54. v3.08 Minimal Historical SIP Entitlement-Test Authorization Planning and Independent Review completed and pushed; commit `db6e9823a81347666508268d40cafa02cb90b5a0`; planning record `docs/runs/v3.08_minimal_historical_sip_entitlement_test_authorization_planning.md`; review record `docs/reviews/v3.08_minimal_historical_sip_entitlement_test_authorization_planning_independent_review.md`.
 55. v3.08 Minimal Historical SIP Access-Path Test Authorization chain completed and pushed after correction; commit `158f4fc3c544173a4c2a605ee31a3404b12af870`; authorization record `docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md`; initial audit result `NEEDS_CORRECTION`; corrected-draft re-audit result `PASS`.
+56. Minimal Historical SIP Access-Path Test source-of-truth acceptance alignment completed and pushed; commit `b49552a96da88a10111b423a122248ccc860e507`; CI `Tests #499 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_source_of_truth_acceptance_alignment.md` and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_source_of_truth_acceptance_alignment_independent_audit.md`.
+57. Failed Minimal Historical SIP Access-Path Test execution and evidence chain completed and pushed; commit `14b1fb8b08c49ee4b9bcb5eeaca475ce50d9e87b`; CI `Tests #500 PASS_USER_CONFIRMED`; historical execution result `FAIL_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_execution.md`, `docs/reviews/v3.08_minimal_historical_sip_access_path_test_execution_independent_evidence_review.md`, and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_execution_corrected_record_reaudit.md`; the initial evidence review was `NEEDS_CORRECTION` and the corrected-record re-audit passed.
+58. Import-failure remediation planning and independent review completed and pushed; commit `68caf831a1f309d5e8088e0060f18513b7057da2`; CI `Tests #501 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_import_failure_remediation_planning.md` and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_import_failure_remediation_planning_independent_review.md`.
+59. Local Import-Surface Diagnosis authorization chain completed and pushed; commit `140c4a1fb0ab1d76ee8358fe26b727816514c587`; CI `Tests #502 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md`, `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md`, and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md`; the initial audit returned `NEEDS_CORRECTION` with F-01 and F-02, and the corrected-draft re-audit passed both resolutions with `findings = NONE`.
 
 ## 8. Forward roadmap
 
-1. Independently audit this exact three-file minimal historical SIP access-path test source-of-truth acceptance-alignment draft.
+1. Independently audit this exact three-file local import-surface diagnosis source-of-truth acceptance-alignment draft.
 2. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling until that audit passes, this exact alignment is committed and pushed, and CI for that commit is green.
-3. After effectiveness only, permit the exact reviewed control request governed by `docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md`.
-4. Limit that scope to one `StockHistoricalDataClient`, no `TradingClient`, and one frozen AAPL SIP historical stock-bars request using one-hour timeframe, raw adjustment, ascending sort, limit one, and the UTC window `2024-12-23T15:00:00Z` through `2024-12-23T15:59:59Z`.
-5. Require zero automatic retries, prevention of a second transport request, transient minimum response classification, and one text-only execution record.
-6. Do not request or retrieve any of the 66 missing observations.
-7. Require an independent evidence review of the later execution record before any further governance decision.
-8. Keep credential resolution, any broader client or request activity, missing-observation retrieval, contract, raw-data, candidate-data, dataset, validation, training, model, trading, deployment, release, and tagging work separately governed and unauthorized.
+3. After effectiveness only, permit the bounded local import-surface diagnosis governed technically by `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md`.
+4. Keep that diagnosis within the authorization record's alpaca-py 0.43.4 six-symbol allowlist, preventive guards, sanitized categorical evidence, and single text-only record.
+5. Keep package inspection, symbol discovery, credentials, external configuration, object creation, network/provider/API/market-data activity, missing-observation retrieval, remediation, rerun, data work, and all downstream execution unauthorized.
+6. Require independent review of any later diagnostic record before any further governance decision.
 
 Every later milestone remains separately governed.
 
@@ -512,7 +505,7 @@ future_validation_training_reference_map = docs/workflows/future_validation_trai
 
 For future validation, embargo, VecNormalize, retraining, final holdout, candidate selection, paper trading, and universe-expansion guidance, use the future validation and training reference map. That file remains guidance only and does not authorize execution.
 
-## 9. Minimal Historical SIP Access-Path Test Acceptance Alignment action confirmations
+## 9. Local Import-Surface Diagnosis Acceptance Alignment action confirmations
 
 ```text
 source_code_changed = NO
@@ -594,25 +587,29 @@ candidate_raw_created = NO
 raw_data_read = NO
 ```
 
-### Minimal historical SIP access-path test acceptance-alignment status
+### Local import-surface diagnosis acceptance-alignment status
 
 minimal_historical_SIP_entitlement_test_planning_record = docs/runs/v3.08_minimal_historical_sip_entitlement_test_authorization_planning.md
 minimal_historical_SIP_entitlement_test_planning_review_record = docs/reviews/v3.08_minimal_historical_sip_entitlement_test_authorization_planning_independent_review.md
 minimal_historical_SIP_entitlement_test_planning_chain_commit = db6e9823a81347666508268d40cafa02cb90b5a0
 minimal_historical_SIP_entitlement_test_planning_chain_CI = Tests_497_PASS_USER_CONFIRMED
-minimal_historical_SIP_access_path_test_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md
-minimal_historical_SIP_access_path_test_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_draft_audit.md
-minimal_historical_SIP_access_path_test_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_DRAFT_AUDIT
-minimal_historical_SIP_access_path_test_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_corrected_draft_reaudit.md
-minimal_historical_SIP_access_path_test_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT
-minimal_historical_SIP_access_path_test_authorization_chain_commit = 158f4fc3c544173a4c2a605ee31a3404b12af870
-minimal_historical_SIP_access_path_test_authorization_chain_CI = Tests_498_PASS_USER_CONFIRMED
+local_import_surface_diagnosis_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
+local_import_surface_diagnosis_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md
+local_import_surface_diagnosis_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_AUDIT
+local_import_surface_diagnosis_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md
+local_import_surface_diagnosis_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
+local_import_surface_diagnosis_authorization_chain_commit = 140c4a1fb0ab1d76ee8358fe26b727816514c587
+local_import_surface_diagnosis_authorization_chain_CI = Tests_502_PASS_USER_CONFIRMED
 source_of_truth_acceptance_alignment_draft_created = YES
 source_of_truth_acceptance_alignment_independent_audit_completed = NO
 source_of_truth_acceptance_alignment_committed = NO
 source_of_truth_acceptance_alignment_pushed = NO
 source_of_truth_acceptance_alignment_CI_green = NO
 source_of_truth_acceptance_alignment_effective = NO
+alignment_effective = NO
+local_import_surface_diagnosis_currently_authorized = NO
+rerun_authorized = NO
+remediation_execution_authorized = NO
 credentials_resolved_for_this_alignment = NO
 client_created_for_this_alignment = NO
 API_call_made_for_this_alignment = NO
@@ -627,7 +624,7 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor 158f4fc3c544173a4c2a605ee31a3404b12af870 HEAD
+git merge-base --is-ancestor 140c4a1fb0ab1d76ee8358fe26b727816514c587 HEAD
 echo $?
 ```
 
@@ -665,8 +662,8 @@ bottom_line_commit_without_push_effective = NO
 bottom_line_push_before_CI_green_effective = NO
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-bottom_line_accepted_post_effectiveness_authorization_boundary = MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_ONLY
-bottom_line_accepted_post_effectiveness_execution_scope = ALPACA_SINGLE_REQUEST_HISTORICAL_SIP_CONTROL_BAR_TEST_ONLY
+bottom_line_accepted_post_effectiveness_authorization_boundary = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+bottom_line_accepted_post_effectiveness_execution_scope = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
 pathway_selected = YES
 selected_pathway = SIP_ACCESS_PREREQUISITE_ASSESSMENT_PLANNING_ONLY
 selected_pathway_scope = SIP_ENTITLEMENT_PERMISSION_SUBSCRIPTION_LICENSING_PERMITTED_USE_RESTRICTIONS_PLAN_TIER_AND_COST_PREREQUISITES_ONLY
@@ -703,11 +700,10 @@ retraining_authorized = NO
 holdout_evaluation_authorized = NO
 candidate_selection_authorized = NO
 account_inspection_authorized = NO
-post_effectiveness_minimal_historical_SIP_access_path_test_reference = YES_EXACT_REVIEWED_CONTROL_REQUEST_ONLY
-post_effectiveness_scope_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md
-post_effectiveness_scope_requires_one_StockHistoricalDataClient = TRUE
-post_effectiveness_scope_prohibits_TradingClient = TRUE
-post_effectiveness_scope_limits_transport_requests_to_one = TRUE
+post_effectiveness_local_import_surface_diagnosis_reference = YES_EXACT_REVIEWED_BOUNDED_DIAGNOSIS_ONLY
+post_effectiveness_scope_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
+post_effectiveness_scope_prohibits_client_or_request_object_creation = TRUE
+post_effectiveness_scope_prohibits_network_provider_API_or_market_data_activity = TRUE
 post_effectiveness_scope_prohibits_66_missing_observation_requests = TRUE
 post_effectiveness_scope_does_not_authorize_downstream_execution = TRUE
 account_change_authorized = NO
@@ -745,4 +741,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-Only after an independent PASS audit, commit and push of this exact three-file alignment, and green CI may the accepted post-effectiveness boundary be treated as `MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_ONLY` with scope `ALPACA_SINGLE_REQUEST_HISTORICAL_SIP_CONTROL_BAR_TEST_ONLY`. The exact technical request remains controlled by the authorization record. No execution is authorized now, and the accepted post-effectiveness scope does not authorize a `TradingClient`, automatic retries, a second transport request, retrieval of any of the 66 missing observations, broader market-data activity, data modification, validation, training, trading, deployment, release creation, tagging, or downstream execution.
+Only after an independent PASS audit with `findings = NONE`, commit and push of this exact three-file alignment and audit chain, green CI for that pushed commit, matching `HEAD` and `origin/main`, and a clean worktree and staging area may the accepted post-effectiveness boundary be treated as `LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY` with scope `ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY`. The exact technical contract remains controlled by the local import-surface diagnosis authorization record. Diagnosis is not active now; rerun, remediation execution, package inspection, credential or environment-value access, external-configuration access, object creation, network/provider/API/market-data activity, missing-observation retrieval, data modification, validation, training, trading, deployment, release creation, tagging, and downstream execution remain unauthorized.

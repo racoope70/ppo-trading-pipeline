@@ -8,7 +8,7 @@ Navigation map for the active v3.08 superseding governed Alpaca-aligned reconstr
 
 ## 1. Roadmap role and active section
 
-Until an independent PASS audit, commit and push of this exact three-file alignment, and green CI are all confirmed, the controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`. The reviewed minimal historical SIP access-path boundary and scope are post-effectiveness references only.
+Until an independent PASS audit, commit and push of this exact three-file alignment and audit chain, green CI, matching `HEAD` and `origin/main`, and a clean worktree and staging area are all confirmed, the controlling boundary remains `NO_EXECUTION_AUTHORIZED` and the authorized execution scope remains `NONE`. The reviewed local import-surface diagnosis boundary and scope are post-effectiveness references only.
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
@@ -29,8 +29,8 @@ map_controlling_boundary_until_effectiveness = NO_EXECUTION_AUTHORIZED
 map_authorized_execution_scope_until_effectiveness = NONE
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-map_accepted_post_effectiveness_authorization_boundary_reference = MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_ONLY
-map_accepted_post_effectiveness_execution_scope_reference = ALPACA_SINGLE_REQUEST_HISTORICAL_SIP_CONTROL_BAR_TEST_ONLY
+map_accepted_post_effectiveness_authorization_boundary_reference = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+map_accepted_post_effectiveness_execution_scope_reference = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
 map_role = ROADMAP_NAVIGATION_AND_GOVERNANCE_REFERENCE_ONLY
 map_values_do_not_independently_authorize_execution = TRUE
 ```
@@ -222,14 +222,14 @@ SIP_access_prerequisite_assessment_execution_authorized = NO
 public_document_research_authorized = NO
 internet_research_authorized = NO
 account_inspection_authorized = NO
-map_post_effectiveness_minimal_historical_SIP_access_path_test_reference = YES_EXACT_REVIEWED_CONTROL_REQUEST_ONLY
-map_post_effectiveness_scope_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md
-map_minimal_historical_SIP_access_path_test_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_draft_audit.md
-map_minimal_historical_SIP_access_path_test_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_DRAFT_AUDIT
-map_minimal_historical_SIP_access_path_test_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_corrected_draft_reaudit.md
-map_minimal_historical_SIP_access_path_test_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT
-map_minimal_historical_SIP_access_path_test_authorization_chain_commit = 158f4fc3c544173a4c2a605ee31a3404b12af870
-map_minimal_historical_SIP_access_path_test_authorization_chain_CI = Tests_498_PASS_USER_CONFIRMED
+map_post_effectiveness_local_import_surface_diagnosis_reference = YES_EXACT_REVIEWED_BOUNDED_DIAGNOSIS_ONLY
+map_post_effectiveness_scope_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
+map_local_import_surface_diagnosis_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md
+map_local_import_surface_diagnosis_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_AUDIT
+map_local_import_surface_diagnosis_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md
+map_local_import_surface_diagnosis_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
+map_local_import_surface_diagnosis_authorization_chain_commit = 140c4a1fb0ab1d76ee8358fe26b727816514c587
+map_local_import_surface_diagnosis_authorization_chain_CI = Tests_502_PASS_USER_CONFIRMED
 map_reference_does_not_activate_authorization = TRUE
 account_change_authorized = NO
 subscription_change_authorized = NO
@@ -545,21 +545,23 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 53. v3.08 Read-Only Account-Inspection Evidence and independent review chain completed and pushed; commit `57980ec7dc1bc46ec438edb1ec54e0d4ebda6e1d`; evidence record `docs/runs/v3.08_read_only_account_inspection_evidence.md`; corrected re-audit record `docs/reviews/v3.08_read_only_account_inspection_evidence_corrected_draft_reaudit.md`.
 54. v3.08 Minimal Historical SIP Entitlement-Test Authorization Planning and Independent Review completed and pushed; commit `db6e9823a81347666508268d40cafa02cb90b5a0`; planning record `docs/runs/v3.08_minimal_historical_sip_entitlement_test_authorization_planning.md`; review record `docs/reviews/v3.08_minimal_historical_sip_entitlement_test_authorization_planning_independent_review.md`.
 55. v3.08 Minimal Historical SIP Access-Path Test Authorization chain completed and pushed after correction; commit `158f4fc3c544173a4c2a605ee31a3404b12af870`; authorization record `docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md`; initial audit result `NEEDS_CORRECTION`; corrected-draft re-audit result `PASS`.
+56. Minimal Historical SIP Access-Path Test source-of-truth acceptance alignment completed and pushed; commit `b49552a96da88a10111b423a122248ccc860e507`; CI `Tests #499 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_source_of_truth_acceptance_alignment.md` and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_source_of_truth_acceptance_alignment_independent_audit.md`.
+57. Failed Minimal Historical SIP Access-Path Test execution and evidence chain completed and pushed; commit `14b1fb8b08c49ee4b9bcb5eeaca475ce50d9e87b`; CI `Tests #500 PASS_USER_CONFIRMED`; historical execution result `FAIL_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_execution.md`, `docs/reviews/v3.08_minimal_historical_sip_access_path_test_execution_independent_evidence_review.md`, and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_execution_corrected_record_reaudit.md`; the initial evidence review was `NEEDS_CORRECTION` and the corrected-record re-audit passed.
+58. Import-failure remediation planning and independent review completed and pushed; commit `68caf831a1f309d5e8088e0060f18513b7057da2`; CI `Tests #501 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_import_failure_remediation_planning.md` and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_import_failure_remediation_planning_independent_review.md`.
+59. Local Import-Surface Diagnosis authorization chain completed and pushed; commit `140c4a1fb0ab1d76ee8358fe26b727816514c587`; CI `Tests #502 PASS_USER_CONFIRMED`; records `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md`, `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md`, and `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md`; the initial audit returned `NEEDS_CORRECTION` with F-01 and F-02, and the corrected-draft re-audit passed both resolutions with `findings = NONE`.
 
 ## 8. Forward milestone roadmap
 
-1. Independently audit the exact three-file minimal historical SIP access-path test source-of-truth acceptance-alignment draft.
+1. Independently audit the exact three-file local import-surface diagnosis source-of-truth acceptance-alignment draft.
 2. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling until that audit passes, this exact alignment is committed and pushed, and CI for that commit is green.
-3. After effectiveness only, reference the exact reviewed control request in `docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md`.
-4. Limit the referenced scope to one `StockHistoricalDataClient`, no `TradingClient`, one frozen AAPL historical SIP stock-bars request, one-hour timeframe, raw adjustment, ascending sort, limit one, and UTC window `2024-12-23T15:00:00Z` through `2024-12-23T15:59:59Z`.
-5. Require zero automatic retries, prevention of a second transport request, transient minimum response classification, and one text-only execution record.
-6. Do not request or retrieve any of the 66 missing observations.
-7. Require independent evidence review of the later execution record before any further governance decision.
-8. Keep all broader access, data, validation, training, model, trading, deployment, release, and tagging work separately governed and unauthorized.
+3. After effectiveness only, reference the exact bounded local diagnosis governed by `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md`.
+4. Keep the referenced diagnosis within that authorization record's alpaca-py 0.43.4 six-symbol allowlist, preventive guards, sanitized categorical evidence, and single text-only record.
+5. Keep package inspection, credentials, external configuration, object creation, network/provider/API/market-data activity, missing-observation retrieval, remediation, rerun, data work, and all downstream execution unauthorized.
+6. Require independent review of any later diagnostic record before any further governance decision.
 
 Every later milestone remains separately governed.
 
-This milestone map remains roadmap, navigation, and governance reference only. It does not activate the minimal historical SIP access-path test authorization or independently authorize execution.
+This milestone map remains roadmap, navigation, and governance reference only. It does not activate the local import-surface diagnosis authorization or independently authorize execution.
 
 ## Future validation/training reference
 
@@ -576,7 +578,7 @@ Before each later governance step, read:
 3. The matching section of `docs/workflows/future_validation_training_reference_map.md`.
 4. The latest relevant run, audit, review, and authorization records.
 
-## 9. Minimal Historical SIP Access-Path Test Acceptance Alignment action confirmations
+## 9. Local Import-Surface Diagnosis Acceptance Alignment action confirmations
 
 ```text
 source_code_changed = NO
@@ -656,25 +658,29 @@ candidate_raw_created = NO
 raw_data_read = NO
 ```
 
-### Minimal historical SIP access-path test acceptance-alignment status
+### Local import-surface diagnosis acceptance-alignment status
 
 minimal_historical_SIP_entitlement_test_planning_record = docs/runs/v3.08_minimal_historical_sip_entitlement_test_authorization_planning.md
 minimal_historical_SIP_entitlement_test_planning_review_record = docs/reviews/v3.08_minimal_historical_sip_entitlement_test_authorization_planning_independent_review.md
 minimal_historical_SIP_entitlement_test_planning_chain_commit = db6e9823a81347666508268d40cafa02cb90b5a0
 minimal_historical_SIP_entitlement_test_planning_chain_CI = Tests_497_PASS_USER_CONFIRMED
-minimal_historical_SIP_access_path_test_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md
-minimal_historical_SIP_access_path_test_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_draft_audit.md
-minimal_historical_SIP_access_path_test_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_DRAFT_AUDIT
-minimal_historical_SIP_access_path_test_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_authorization_corrected_draft_reaudit.md
-minimal_historical_SIP_access_path_test_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT
-minimal_historical_SIP_access_path_test_authorization_chain_commit = 158f4fc3c544173a4c2a605ee31a3404b12af870
-minimal_historical_SIP_access_path_test_authorization_chain_CI = Tests_498_PASS_USER_CONFIRMED
+local_import_surface_diagnosis_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
+local_import_surface_diagnosis_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md
+local_import_surface_diagnosis_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_AUDIT
+local_import_surface_diagnosis_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md
+local_import_surface_diagnosis_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
+local_import_surface_diagnosis_authorization_chain_commit = 140c4a1fb0ab1d76ee8358fe26b727816514c587
+local_import_surface_diagnosis_authorization_chain_CI = Tests_502_PASS_USER_CONFIRMED
 source_of_truth_acceptance_alignment_draft_created = YES
 source_of_truth_acceptance_alignment_independent_audit_completed = NO
 source_of_truth_acceptance_alignment_committed = NO
 source_of_truth_acceptance_alignment_pushed = NO
 source_of_truth_acceptance_alignment_CI_green = NO
 source_of_truth_acceptance_alignment_effective = NO
+alignment_effective = NO
+local_import_surface_diagnosis_currently_authorized = NO
+rerun_authorized = NO
+remediation_execution_authorized = NO
 credentials_resolved_for_this_alignment = NO
 client_created_for_this_alignment = NO
 API_call_made_for_this_alignment = NO
@@ -689,7 +695,7 @@ git fetch origin
 git status --short
 git rev-parse HEAD
 git rev-parse origin/main
-git merge-base --is-ancestor 158f4fc3c544173a4c2a605ee31a3404b12af870 HEAD
+git merge-base --is-ancestor 140c4a1fb0ab1d76ee8358fe26b727816514c587 HEAD
 echo $?
 ```
 
@@ -731,8 +737,8 @@ map_controlling_boundary_until_effectiveness = NO_EXECUTION_AUTHORIZED
 map_authorized_execution_scope_until_effectiveness = NONE
 current_authorization_boundary = NO_EXECUTION_AUTHORIZED
 authorized_current_execution_scope = NONE
-map_accepted_post_effectiveness_authorization_boundary_reference = MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_ONLY
-map_accepted_post_effectiveness_execution_scope_reference = ALPACA_SINGLE_REQUEST_HISTORICAL_SIP_CONTROL_BAR_TEST_ONLY
+map_accepted_post_effectiveness_authorization_boundary_reference = LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
+map_accepted_post_effectiveness_execution_scope_reference = ALPACA_PY_0_43_4_ALLOWLISTED_LOCAL_IMPORT_SURFACE_DIAGNOSIS_ONLY
 map_role = ROADMAP_NAVIGATION_AND_GOVERNANCE_REFERENCE_ONLY
 map_values_do_not_independently_authorize_execution = TRUE
 pathway_selected = YES
@@ -753,8 +759,14 @@ pathway_execution_authorized = NO
 public_document_research_authorized = NO
 internet_research_authorized = NO
 account_inspection_authorized = NO
-map_post_effectiveness_minimal_historical_SIP_access_path_test_reference = YES_EXACT_REVIEWED_CONTROL_REQUEST_ONLY
-map_post_effectiveness_scope_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_authorization.md
+map_post_effectiveness_local_import_surface_diagnosis_reference = YES_EXACT_REVIEWED_BOUNDED_DIAGNOSIS_ONLY
+map_post_effectiveness_scope_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization.md
+map_local_import_surface_diagnosis_initial_audit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_independent_audit.md
+map_local_import_surface_diagnosis_initial_audit_result = NEEDS_CORRECTION_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_AUDIT
+map_local_import_surface_diagnosis_corrected_reaudit_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_authorization_corrected_draft_reaudit.md
+map_local_import_surface_diagnosis_corrected_reaudit_result = PASS_INDEPENDENT_MINIMAL_HISTORICAL_SIP_ACCESS_PATH_TEST_LOCAL_IMPORT_SURFACE_DIAGNOSIS_AUTHORIZATION_CORRECTED_DRAFT_REAUDIT_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
+map_local_import_surface_diagnosis_authorization_chain_commit = 140c4a1fb0ab1d76ee8358fe26b727816514c587
+map_local_import_surface_diagnosis_authorization_chain_CI = Tests_502_PASS_USER_CONFIRMED
 map_reference_does_not_activate_authorization = TRUE
 account_change_authorized = NO
 subscription_change_authorized = NO
@@ -791,4 +803,4 @@ requirements_change_authorized = NO
 dataset_validation_authorized = NO
 ```
 
-Only after an independent PASS audit, commit and push of the exact three-file alignment, and green CI may `PROJECT_CONTEXT.md` treat the reviewed minimal historical SIP access-path test scope as active. The exact technical request remains controlled by its authorization record. This milestone map remains roadmap, navigation, and governance reference only and does not independently activate or authorize credential resolution, client creation, an API call, market-data access, retrieval of any of the 66 missing observations, data activity, validation, training, trading, deployment, release creation, or tagging.
+Only after an independent PASS audit with `findings = NONE`, commit and push of the exact three-file alignment and audit chain, green CI, matching `HEAD` and `origin/main`, and a clean worktree and staging area may `PROJECT_CONTEXT.md` treat the reviewed local import-surface diagnosis scope as active. The exact technical contract remains controlled by its authorization record. This milestone map remains roadmap, navigation, and governance reference only and does not independently activate or authorize diagnosis, package inspection, credential or environment-value access, external-configuration access, client or request-object creation, network/provider/API/market-data activity, retrieval of any of the 66 missing observations, remediation, rerun, data activity, validation, training, trading, deployment, release creation, or tagging.
