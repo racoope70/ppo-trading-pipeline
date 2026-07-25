@@ -639,11 +639,13 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 65. Local Import-Surface TypeError Technical Root-Cause Diagnosis Authorization and Independent Review completed and pushed; commit `c06eb047e901013305528daff2dd368ff845f183`; CI `Tests #510 PASS_USER_CONFIRMED`; authorization decision `PASS_LOCAL_IMPORT_SURFACE_TYPEERROR_TECHNICAL_ROOT_CAUSE_DIAGNOSIS_AUTHORIZATION_DRAFT_FOR_INDEPENDENT_AUTHORIZATION_REVIEW_ONLY`; review verdict `PASS_INDEPENDENT_LOCAL_IMPORT_SURFACE_TYPEERROR_TECHNICAL_ROOT_CAUSE_DIAGNOSIS_AUTHORIZATION_REVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY`; findings `NONE`; authorization record `docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_authorization.md`; review record `docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_authorization_independent_review.md`; at that checkpoint, the proposed one-time diagnosis remained ineffective pending source-of-truth alignment effectiveness.
 66. Local Import-Surface TypeError Technical Root-Cause Diagnosis Authorization Source-of-Truth Alignment and focused independent check completed, committed, pushed, and CI-green; commit `3f798df880dd2b5091502b5881ce1bd4e8024b07`; GitHub Actions workflow `Tests`; run `30108352334`; conclusion `success`; focused-check verdict `PASS_FOCUSED_INDEPENDENT_LOCAL_IMPORT_SURFACE_TYPEERROR_TECHNICAL_ROOT_CAUSE_DIAGNOSIS_AUTHORIZATION_SOURCE_OF_TRUTH_ALIGNMENT_CHECK`; findings `NONE`; at that checkpoint, the alignment had not yet become effective because the required immediate pre-diagnosis identity reconfirmation had not occurred, and the controlling state was `NO_EXECUTION_AUTHORIZED / NONE`.
 
+67. Failed-Execution Evidence, Independent Review, Source-of-Truth Alignment, and Focused Independent Check completed, committed, pushed, and CI-green; commit `aab7c84efb739a9566e4195117797aee4abc2ce0`; GitHub Actions workflow `Tests`; run number `518`; conclusion `success`; the four committed package records remain immutable historical snapshots; the controlling classification remains `FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION`; the prior one-time diagnosis scope remains closed and non-reusable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
+
 ## 8. Forward milestone roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Reference only the current six-file documentation package for final review and, after explicit authorization, staging, commit, push, and CI consideration.
-3. Treat any later post-CI reconciliation for this package as documentation-only and non-authorizing.
+2. Reference only the current four-file documentation-only post-CI reconciliation package for final review and, after explicit authorization, staging, commit, push, and CI consideration.
+3. After this four-file package is pushed and CI-green, reference exactly one bounded non-recursive documentation-only finalization that records its final commit and CI result. No further reconciliation or recursive finalization is authorized.
 4. Require a separately scoped authorization record and independent review before any future technical diagnosis, retry, remediation, or corrected execution may be considered. This roadmap provides no reusable technical authority.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, diagnosis, or evidence review automatically authorizes a later technical step.
@@ -1152,3 +1154,32 @@ map_reference_does_not_activate_authorization = TRUE
 ```
 
 This roadmap reference is non-authorizing. It preserves all existing pathway, dataset, governance-history, future-map, and technical non-authorization boundaries. The historical one-time diagnosis scope is closed fail-closed and is not reusable.
+
+
+## v3.08 Failed-Execution Alignment Post-CI Reconciliation Reference
+
+```text
+map_post_CI_reconciliation_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_failed_execution_alignment_post_CI_reconciliation.md
+map_post_CI_reconciliation_focused_independent_check_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_failed_execution_alignment_post_CI_reconciliation_focused_independent_check.md
+map_reconciled_package_commit = aab7c84efb739a9566e4195117797aee4abc2ce0
+map_reconciled_package_pushed = YES
+map_reconciled_package_CI_workflow = Tests
+map_reconciled_package_CI_run_number = 518
+map_reconciled_package_CI_run_id = NOT_CAPTURED_IN_USER_PROVIDED_EVIDENCE
+map_reconciled_package_CI_conclusion = success
+map_CI_evidence_source = USER_PROVIDED_GITHUB_ACTIONS_GREEN_SCREENSHOT
+map_post_CI_HEAD_origin_main_match = YES
+map_post_CI_worktree_clean = YES
+map_post_CI_staging_clean = YES
+map_committed_failed_execution_package_records_preserved_unchanged = YES
+map_failed_execution_fail_closed_classification = FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION
+map_one_time_diagnosis_scope_reuse_authorized = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_technical_diagnosis_execution_authorized_now = NO
+map_post_CI_reconciliation_package_lifecycle = COMMIT_PUSH_CI_THEN_ONE_NON_RECURSIVE_DOCUMENTATION_FINALIZATION
+map_recursive_reconciliation_or_finalization_authorized = NO
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This roadmap reference is documentation-only and non-authorizing.
