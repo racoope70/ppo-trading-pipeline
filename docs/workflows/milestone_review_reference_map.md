@@ -1211,3 +1211,25 @@ map_reference_does_not_activate_authorization = TRUE
 ```
 
 This terminal roadmap reference is documentation-only and non-authorizing.
+
+
+## v3.08 Fresh Technical-Diagnosis Authorization Alignment Reference
+
+```text
+map_fresh_authorization_alignment_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment.md
+map_fresh_authorization_alignment_focused_check_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment_focused_independent_check.md
+map_fresh_authorization_effective = NO
+map_proposed_future_authorization_boundary_reference = FRESH_LOCAL_IMPORT_SURFACE_TYPEERROR_TECHNICAL_ROOT_CAUSE_DIAGNOSIS_ONLY
+map_proposed_future_execution_scope_reference = ONE_PROCESS_FOUR_ALLOWLISTED_IMPORT_PROBE_FIRST_PERSISTENT_ACTION_ATOMIC_SANITIZED_RECORD_TECHNICAL_CAUSE_DIAGNOSIS_ONLY
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_exact_diagnosis_command_exists = NO
+map_exact_diagnosis_command_authorized = NO
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This roadmap, navigation, and governance-reference entry is documentation-only
+and non-authorizing. `PROJECT_CONTEXT.md` remains controlling; the future
+validation and training reference map remains guidance only and non-authorizing.
+The failed lifecycle remains terminally closed and non-reusable, and this
+separate fresh lifecycle does not reactivate it.

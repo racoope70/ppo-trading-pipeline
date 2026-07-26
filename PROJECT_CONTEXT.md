@@ -8,7 +8,7 @@ Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_c
 
 ## 1. Current source-of-truth summary
 
-The controlling boundary is `NO_EXECUTION_AUTHORIZED` and the authorized execution scope is `NONE`. The previously accepted one-time diagnosis command was invoked, but the sole required execution record was not created. Required execution counts and boundary confirmations are unavailable, the fail-closed classification applies, and the prior one-time scope is not reusable. No retry, technical diagnosis, remediation, corrected execution, provider activity, market-data activity, or downstream execution is authorized.
+The controlling boundary is `NO_EXECUTION_AUTHORIZED` and the authorized execution scope is `NONE`. The previously accepted one-time diagnosis command was invoked, but the sole required execution record was not created. Required execution counts and boundary confirmations are unavailable, the fail-closed classification applies, and the prior one-time scope is not reusable. A separately scoped fresh technical-diagnosis authorization draft and corrected independent re-review now exist for documentation-only source-of-truth alignment consideration. They do not authorize execution. No retry, technical diagnosis, remediation, corrected execution, provider activity, market-data activity, or downstream execution is authorized.
 
 ```text
 current_workstream = PPO_V2_SUPERSEDING_DATASET_RECONSTRUCTION
@@ -47,8 +47,20 @@ total_missing_expected_slots = 66
 missing_expected_slot_tolerance = 0
 local_edit_alone_effective = NO
 focused_alignment_check_alone_effective = NO
+staging_alone_effective = NO
 commit_without_push_effective = NO
 push_before_CI_green_effective = NO
+fresh_authorization_record_status = CORRECTED_DRAFT_COMPLETED_FOR_INDEPENDENT_REREVIEW_ONLY
+fresh_authorization_effective = NO
+proposed_future_authorization_boundary = FRESH_LOCAL_IMPORT_SURFACE_TYPEERROR_TECHNICAL_ROOT_CAUSE_DIAGNOSIS_ONLY
+proposed_future_authorized_execution_scope = ONE_PROCESS_FOUR_ALLOWLISTED_IMPORT_PROBE_FIRST_PERSISTENT_ACTION_ATOMIC_SANITIZED_RECORD_TECHNICAL_CAUSE_DIAGNOSIS_ONLY
+fresh_exact_diagnosis_command_exists = NO
+fresh_exact_diagnosis_command_authorized = NO
+technical_diagnosis_execution_authorized_now = NO
+another_diagnosis_authorized = NO
+retry_or_fallback_authorized = NO
+remediation_execution_authorized = NO
+corrected_execution_authorized = NO
 ```
 
 No run, review, audit, milestone reference map, future-guidance map, local edit, staging action, or unpushed commit can independently activate or expand authorization.
@@ -1189,3 +1201,48 @@ This is the sole bounded non-recursive documentation-only finalization for the
 failed-execution alignment lifecycle. Its eventual commit, push, and CI close
 the documentary lifecycle without requiring or authorizing a follow-up
 reconciliation, finalization, or status rewrite.
+
+
+## v3.08 Fresh Technical-Diagnosis Authorization Source-of-Truth Alignment
+
+```text
+fresh_authorization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization.md
+fresh_authorization_sha256 = 342b75149a8907a85fde7b084a7212b8ff883cd398cff9780706fc68a309529f
+fresh_authorization_record_status = CORRECTED_DRAFT_COMPLETED_FOR_INDEPENDENT_REREVIEW_ONLY
+fresh_authorization_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_independent_review.md
+fresh_authorization_review_sha256 = 8f9e4eaed0157731ae054d3d7011d57e944cc7ecaff21ede5d78d704c132b704
+fresh_authorization_review_status = COMPLETED_PASS_AFTER_CORRECTION
+fresh_authorization_review_verdict = PASS_CORRECTED_INDEPENDENT_FRESH_LOCAL_IMPORT_SURFACE_TYPEERROR_TECHNICAL_ROOT_CAUSE_DIAGNOSIS_AUTHORIZATION_REREVIEW_FOR_SOURCE_OF_TRUTH_ALIGNMENT_CONSIDERATION_ONLY
+fresh_authorization_review_open_findings = 0
+fresh_authorization_alignment_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment.md
+fresh_authorization_alignment_focused_check_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment_focused_independent_check.md
+fresh_authorization_alignment_checkpoint = DOCUMENTATION_ONLY
+fresh_authorization_effective = NO
+proposed_future_authorization_boundary = FRESH_LOCAL_IMPORT_SURFACE_TYPEERROR_TECHNICAL_ROOT_CAUSE_DIAGNOSIS_ONLY
+proposed_future_authorized_execution_scope = ONE_PROCESS_FOUR_ALLOWLISTED_IMPORT_PROBE_FIRST_PERSISTENT_ACTION_ATOMIC_SANITIZED_RECORD_TECHNICAL_CAUSE_DIAGNOSIS_ONLY
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+technical_diagnosis_execution_authorized_now = NO
+one_time_diagnosis_scope_reuse_authorized = NO
+another_diagnosis_authorized = NO
+retry_or_fallback_authorized = NO
+remediation_execution_authorized = NO
+corrected_execution_authorized = NO
+exact_diagnosis_command_exists = NO
+exact_diagnosis_command_authorized = NO
+local_edit_alone_effective = NO
+focused_independent_check_alone_effective = NO
+staging_alone_effective = NO
+commit_without_push_effective = NO
+push_before_green_CI_effective = NO
+```
+
+The existing failed lifecycle remains terminally closed, fail-closed,
+non-reusable, and not retryable. The fresh lifecycle is separate and does not
+retry, reuse, reactivate, amend, or extend that closed scope. This alignment
+checkpoint performs no technical execution and creates no execution authority.
+A future technical execution would require every effectiveness condition
+defined by the corrected fresh authorization, including an independently
+reviewed exact command, the complete committed and pushed green governance
+chain, matching repository identities and clean state, and a separate explicit
+authorization to launch that exact command without alteration.
