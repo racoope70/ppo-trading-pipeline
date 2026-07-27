@@ -658,6 +658,31 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 
 Every later milestone remains separately governed.
 
+## v3.08 Python 3.11 Artifact Path-Revision Reference
+
+```text
+map_python311_artifact_path_revision_record = docs/runs/v3.08_fresh_technical_diagnosis_python311_artifact_path_revision.md
+map_python311_artifact_path_revision_review = docs/reviews/v3.08_fresh_technical_diagnosis_python311_artifact_path_revision_independent_review.md
+map_historical_artifact_sha256 = 064d34b558ddffbda4b0fde944ffb7989420f54a6c9a4b1c9d5b2228239b9072
+map_revised_draft_artifact_sha256 = 1d922b26a73dbc5841285f442ca8c8a2d25a3c2db8e5bb8138bdc26d3725aba5
+map_artifact_revision_scope = INTERPRETER_PATH_ONLY
+map_artifact_interpreter_path = ../.venv311/bin/python
+map_revised_artifact_provenance_commit = UNRESOLVED
+map_launch_execution_allowed_commit = UNRESOLVED
+map_launch_execution_allowed_Tests_run_id = UNRESOLVED
+map_exact_launch_invocation = UNRESOLVED
+map_launch_readiness_established = NO
+map_command_launch_authorized_now = NO
+map_technical_execution_authorized_now = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This reference preserves the prior artifact hash as historical evidence and
+records the revised draft byte identity without establishing provenance,
+launch identity, exact invocation, readiness, or execution authority.
+
 This milestone map remains roadmap, navigation, and governance reference only. It does not activate the local import-surface diagnosis authorization or independently authorize execution.
 
 ## Future validation/training reference

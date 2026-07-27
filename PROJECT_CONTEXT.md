@@ -631,6 +631,30 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 
 Every later milestone remains separately governed.
 
+## v3.08 Python 3.11 Artifact Path-Revision Draft
+
+```text
+python311_artifact_path_revision_record = docs/runs/v3.08_fresh_technical_diagnosis_python311_artifact_path_revision.md
+python311_artifact_path_revision_review = docs/reviews/v3.08_fresh_technical_diagnosis_python311_artifact_path_revision_independent_review.md
+historical_artifact_sha256 = 064d34b558ddffbda4b0fde944ffb7989420f54a6c9a4b1c9d5b2228239b9072
+revised_draft_artifact_sha256 = 1d922b26a73dbc5841285f442ca8c8a2d25a3c2db8e5bb8138bdc26d3725aba5
+artifact_revision_scope = INTERPRETER_PATH_ONLY
+artifact_interpreter_path = ../.venv311/bin/python
+revised_artifact_provenance_commit = UNRESOLVED
+launch_execution_allowed_commit = UNRESOLVED
+launch_execution_allowed_Tests_run_id = UNRESOLVED
+exact_launch_invocation = UNRESOLVED
+launch_readiness_established = NO
+command_launch_authorized_now = NO
+technical_diagnosis_execution_authorized_now = NO
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+The revised hash identifies draft artifact bytes only. It does not replace the
+historical hash in prior checkpoint records, establish committed provenance,
+bind launch identity, construct an exact invocation, or authorize execution.
+
 This draft does not authorize the reviewed control request now or any downstream execution.
 
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md

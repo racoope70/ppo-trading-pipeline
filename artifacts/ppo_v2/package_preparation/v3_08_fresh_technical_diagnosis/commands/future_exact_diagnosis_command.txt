@@ -19,7 +19,7 @@ if [ "$#" -ne 3 ]; then
     exit 64
 fi
 
-../.venv/bin/python - "$1" "$2" "$3" <<'PY'
+../.venv311/bin/python - "$1" "$2" "$3" <<'PY'
 from __future__ import annotations
 
 import hashlib
