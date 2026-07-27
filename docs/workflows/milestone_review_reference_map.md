@@ -736,6 +736,32 @@ map_reference_does_not_activate_authorization = TRUE
 This reference permits only later governance consideration. It does not revive
 the prior authorization or authorize rerun, execution, or remediation.
 
+## v3.08 Python 3.11 Tracked Execution-Record Status-Guard Revision Reference
+
+```text
+map_tracked_execution_record_status_guard_revision_record = docs/runs/v3.08_fresh_technical_diagnosis_python311_tracked_execution_record_status_guard_revision.md
+map_tracked_execution_record_status_guard_revision_review = docs/reviews/v3.08_fresh_technical_diagnosis_python311_tracked_execution_record_status_guard_revision_independent_review.md
+map_historical_artifact_sha256 = 1d922b26a73dbc5841285f442ca8c8a2d25a3c2db8e5bb8138bdc26d3725aba5
+map_revised_draft_artifact_sha256 = 76d6958b88aa1f7a777167615214d27aff9ef4adfb470dab4d9f24205d5f175c
+map_artifact_revision_scope = TRACKED_EXECUTION_RECORD_STATUS_GUARD_ONLY
+map_expected_execution_record_porcelain_status = TRACKED_MODIFIED
+map_execution_record_only_changed_file_invariant = PRESERVED
+map_revised_artifact_provenance_commit = UNRESOLVED
+map_launch_execution_allowed_commit = UNRESOLVED
+map_launch_execution_allowed_Tests_run_id = UNRESOLVED
+map_exact_launch_invocation = UNRESOLVED
+map_launch_readiness_established = NO
+map_command_launch_authorized_now = NO
+map_technical_execution_authorized_now = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This reference preserves the exact-one-changed-file guard while recognizing
+the execution record as tracked. It does not establish artifact provenance,
+launch identity, invocation, readiness, or execution authority.
+
 This milestone map remains roadmap, navigation, and governance reference only. It does not activate the local import-surface diagnosis authorization or independently authorize execution.
 
 ## Future validation/training reference

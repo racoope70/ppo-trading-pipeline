@@ -708,6 +708,31 @@ This draft permits only later consideration of a new one-time rerun scope. It
 does not revive the consumed attempt, bind future launch identity, construct
 an exact invocation, or authorize execution or remediation.
 
+## v3.08 Python 3.11 Tracked Execution-Record Status-Guard Revision Draft
+
+```text
+tracked_execution_record_status_guard_revision_record = docs/runs/v3.08_fresh_technical_diagnosis_python311_tracked_execution_record_status_guard_revision.md
+tracked_execution_record_status_guard_revision_review = docs/reviews/v3.08_fresh_technical_diagnosis_python311_tracked_execution_record_status_guard_revision_independent_review.md
+historical_artifact_sha256 = 1d922b26a73dbc5841285f442ca8c8a2d25a3c2db8e5bb8138bdc26d3725aba5
+revised_draft_artifact_sha256 = 76d6958b88aa1f7a777167615214d27aff9ef4adfb470dab4d9f24205d5f175c
+artifact_revision_scope = TRACKED_EXECUTION_RECORD_STATUS_GUARD_ONLY
+expected_execution_record_porcelain_status = TRACKED_MODIFIED
+execution_record_only_changed_file_invariant = PRESERVED
+revised_artifact_provenance_commit = UNRESOLVED
+launch_execution_allowed_commit = UNRESOLVED
+launch_execution_allowed_Tests_run_id = UNRESOLVED
+exact_launch_invocation = UNRESOLVED
+launch_readiness_established = NO
+command_launch_authorized_now = NO
+technical_diagnosis_execution_authorized_now = NO
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+The revised hash identifies draft bytes only. This correction neither permits
+arbitrary changed files nor establishes provenance, launch identity, exact
+invocation, readiness, or execution authority.
+
 This draft does not authorize the reviewed control request now or any downstream execution.
 
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
