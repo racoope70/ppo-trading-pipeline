@@ -109,7 +109,7 @@ def atomic_write() -> None:
             os.unlink(temporary)
 
 
-def git_text(*arguments: str) -> str:
+def git_text(*arguments: str, preserve_leading: bool = False) -> str:
     completed = subprocess.run(
         ("git", *arguments),
         check=True,
@@ -117,6 +117,8 @@ def git_text(*arguments: str) -> str:
         text=True,
         env={"PATH": "/usr/bin:/bin"},
     )
+    if preserve_leading:
+        return completed.stdout.rstrip("\r\n")
     return completed.stdout.strip()
 
 
@@ -153,7 +155,11 @@ try:
         fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
     if git_text("rev-parse", "origin/main") != LAUNCH_EXECUTION_ALLOWED_COMMIT:
         fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
-    status_lines = [line for line in git_text("status", "--short").splitlines() if line]
+    status_lines = [
+        line
+        for line in git_text("status", "--short", preserve_leading=True).splitlines()
+        if line
+    ]
     expected_status = f" M {EXECUTION_RECORD.as_posix()}"
     if status_lines != [expected_status]:
         fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
