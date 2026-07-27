@@ -646,9 +646,9 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 ## 8. Forward milestone roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Reference the six-file documentation-only launch-authorization eligibility review package for human review and later separately authorized commit, push, and CI consideration.
-3. Preserve the current exact artifact as blocked from launch-authorization eligibility by its fixed repository-identity mismatch; no remediation is part of this package.
-4. Require a separately governed corrected exact-command proposal before any future launch-authorization eligibility review may be considered.
+2. Reference the seven-file documentation/static-artifact corrected exact-command proposal package for human review and later separately authorized commit, push, and CI consideration.
+3. Preserve the stale artifact's blocked launch-eligibility as historical evidence while referencing the corrected artifact under a distinct hash.
+4. Require later separately reviewed fixed launch literals for artifact provenance, the final green launch commit, and its successful `Tests` run before any launch-authorization eligibility review.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, finalization, diagnosis, or evidence review automatically authorizes a later technical step.
 
@@ -1330,3 +1330,24 @@ map_reference_does_not_activate_authorization = TRUE
 
 This entry is non-authorizing roadmap and navigation reference only. It is not
 a current-checkpoint tracker and performs no correction.
+
+## v3.08 Corrected Exact-Command Proposal Reference
+
+```text
+map_corrected_proposal_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_corrected_exact_command_proposal.md
+map_corrected_independent_review = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_corrected_exact_command_independent_review.md
+map_corrected_alignment = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_corrected_exact_command_source_of_truth_alignment.md
+map_corrected_alignment_focused_check = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_corrected_exact_command_source_of_truth_alignment_focused_independent_check.md
+map_stale_artifact_launch_eligibility = BLOCKED
+map_corrected_artifact_sha256 = 064d34b558ddffbda4b0fde944ffb7989420f54a6c9a4b1c9d5b2228239b9072
+map_artifact_provenance_separate_from_launch_commit = TRUE
+map_artifact_rewrite_after_governance_commit_required = FALSE
+map_self_referential_commit_loop_present = FALSE
+map_command_launch_authorized_now = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This is non-authorizing roadmap and navigation reference only, not a
+current-checkpoint tracker.

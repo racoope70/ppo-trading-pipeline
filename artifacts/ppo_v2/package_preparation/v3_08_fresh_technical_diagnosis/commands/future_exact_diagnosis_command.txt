@@ -1,11 +1,25 @@
 # FUTURE-ONLY STATIC COMMAND ARTIFACT — DO NOT EXECUTE AT THIS CHECKPOINT
 #
+# CORRECTED PROPOSAL — NOT LAUNCH AUTHORIZED
+#
 # This exact text is documentation/static-artifact material for human review.
 # File mode must remain 0644. Creation, review, commit, push, or green CI does
-# not authorize execution. A separate explicit user launch authorization for
-# this exact reviewed artifact is mandatory.
+# not authorize execution. A later launch package must supply three reviewed
+# fixed literals as shell positional arguments, in this exact order:
+#   1. launch_execution_allowed_commit (40 lowercase hex)
+#   2. launch_execution_allowed_Tests_run_id (nonzero decimal)
+#   3. command_artifact_provenance_commit (40 lowercase hex)
+#
+# The artifact hash proves these bytes. The provenance commit records where
+# these bytes were created/reviewed. Neither is required to equal the later
+# launch_execution_allowed_commit. A separate explicit user authorization of
+# the exact invocation, including all three literals, remains mandatory.
 
-../.venv/bin/python - <<'PY'
+if [ "$#" -ne 3 ]; then
+    exit 64
+fi
+
+../.venv/bin/python - "$1" "$2" "$3" <<'PY'
 from __future__ import annotations
 
 import hashlib
@@ -17,11 +31,16 @@ import subprocess
 import sys
 import tempfile
 
-SUPPLEMENT_CHAIN_COMMIT = "3ce13845961bfac3fe2158b7b5ce374ca701f815"
+import re
+
+SUPPLEMENT_PROVENANCE_COMMIT = "3ce13845961bfac3fe2158b7b5ce374ca701f815"
 SUPPLEMENT_TESTS_RUN_ID = "30225581904"
 SUPPLEMENT_TESTS_RUN_NUMBER = "522"
 SUPPLEMENT_TESTS_CONCLUSION = "success"
 EXPLICIT_COMMAND_AUTHORIZATION_IDENTITY = "V3_08_FRESH_TECHNICAL_DIAGNOSIS_EXACT_COMMAND_LAUNCH_001"
+LAUNCH_EXECUTION_ALLOWED_COMMIT = sys.argv[1] if len(sys.argv) == 4 else ""
+LAUNCH_EXECUTION_ALLOWED_TESTS_RUN_ID = sys.argv[2] if len(sys.argv) == 4 else ""
+COMMAND_ARTIFACT_PROVENANCE_COMMIT = sys.argv[3] if len(sys.argv) == 4 else ""
 EXECUTION_RECORD = pathlib.Path(
     "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_"
     "diagnosis_technical_root_cause_fresh_authorization_execution.md"
@@ -57,10 +76,13 @@ state = {
     "technical_inspection_started": "NO",
     "terminal_classification_present": "NO",
     "technical_cause_classification": "UNKNOWN",
-    "supplement_chain_commit": SUPPLEMENT_CHAIN_COMMIT,
+    "supplement_provenance_commit": SUPPLEMENT_PROVENANCE_COMMIT,
     "supplement_Tests_run_id": SUPPLEMENT_TESTS_RUN_ID,
     "supplement_Tests_run_number": SUPPLEMENT_TESTS_RUN_NUMBER,
     "supplement_Tests_conclusion": SUPPLEMENT_TESTS_CONCLUSION,
+    "command_artifact_provenance_commit": COMMAND_ARTIFACT_PROVENANCE_COMMIT,
+    "launch_execution_allowed_commit": LAUNCH_EXECUTION_ALLOWED_COMMIT,
+    "launch_execution_allowed_Tests_run_id": LAUNCH_EXECUTION_ALLOWED_TESTS_RUN_ID,
     "explicit_command_authorization_identity": EXPLICIT_COMMAND_AUTHORIZATION_IDENTITY,
     "ephemeral_process_count": 1,
     "diagnostic_import_probe_count": 0,
@@ -137,13 +159,23 @@ def fail_closed(classification: str) -> None:
 atomic_write()
 
 try:
+    if len(sys.argv) != 4:
+        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+    if re.fullmatch(r"[0-9a-f]{40}", LAUNCH_EXECUTION_ALLOWED_COMMIT) is None:
+        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+    if re.fullmatch(r"[1-9][0-9]*", LAUNCH_EXECUTION_ALLOWED_TESTS_RUN_ID) is None:
+        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+    if re.fullmatch(r"[0-9a-f]{40}", COMMAND_ARTIFACT_PROVENANCE_COMMIT) is None:
+        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+    if COMMAND_ARTIFACT_PROVENANCE_COMMIT == LAUNCH_EXECUTION_ALLOWED_COMMIT:
+        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
     if EXPLICIT_COMMAND_AUTHORIZATION_IDENTITY != (
         "V3_08_FRESH_TECHNICAL_DIAGNOSIS_EXACT_COMMAND_LAUNCH_001"
     ):
         fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
-    if git_text("rev-parse", "HEAD") != SUPPLEMENT_CHAIN_COMMIT:
+    if git_text("rev-parse", "HEAD") != LAUNCH_EXECUTION_ALLOWED_COMMIT:
         fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
-    if git_text("rev-parse", "origin/main") != SUPPLEMENT_CHAIN_COMMIT:
+    if git_text("rev-parse", "origin/main") != LAUNCH_EXECUTION_ALLOWED_COMMIT:
         fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
     for record_path, expected_hash in EXPECTED_RECORD_HASHES.items():
         if file_sha256(record_path) != expected_hash:
