@@ -1,0 +1,215 @@
+# FUTURE-ONLY STATIC COMMAND ARTIFACT — DO NOT EXECUTE AT THIS CHECKPOINT
+#
+# This exact text is documentation/static-artifact material for human review.
+# File mode must remain 0644. Creation, review, commit, push, or green CI does
+# not authorize execution. A separate explicit user launch authorization for
+# this exact reviewed artifact is mandatory.
+
+../.venv/bin/python - <<'PY'
+from __future__ import annotations
+
+import hashlib
+import importlib
+import json
+import os
+import pathlib
+import subprocess
+import sys
+import tempfile
+
+SUPPLEMENT_CHAIN_COMMIT = "3ce13845961bfac3fe2158b7b5ce374ca701f815"
+SUPPLEMENT_TESTS_RUN_ID = "30225581904"
+SUPPLEMENT_TESTS_RUN_NUMBER = "522"
+SUPPLEMENT_TESTS_CONCLUSION = "success"
+EXPLICIT_COMMAND_AUTHORIZATION_IDENTITY = "V3_08_FRESH_TECHNICAL_DIAGNOSIS_EXACT_COMMAND_LAUNCH_001"
+EXECUTION_RECORD = pathlib.Path(
+    "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_"
+    "diagnosis_technical_root_cause_fresh_authorization_execution.md"
+)
+TARGETS = (
+    ("alpaca.data.historical", "StockHistoricalDataClient"),
+    ("alpaca.data.requests", "StockBarsRequest"),
+    ("alpaca.data.timeframe", "TimeFrame"),
+    ("alpaca.data.enums", "Sort"),
+)
+EXPECTED_RECORD_HASHES = {
+    "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization.md":
+        "342b75149a8907a85fde7b084a7212b8ff883cd398cff9780706fc68a309529f",
+    "docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_independent_review.md":
+        "8f9e4eaed0157731ae054d3d7011d57e944cc7ecaff21ede5d78d704c132b704",
+    "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment.md":
+        "c5fc72c39fcaaf2a3bb69a7eeb181b0254621c9b3ff3b9e86f2be9a772058453",
+    "docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment_focused_independent_check.md":
+        "5023c646753c62de0dbe92bd43b25a6387ed033c30be14bdf494b324efb2a4bf",
+    "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_post_ci_literal_resolution_supplement.md":
+        "fec838631b84510f6b7a984d41dd17236d1d8b9724acecd5c0fef4fbb4b5c10c",
+    "docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_post_ci_literal_resolution_supplement_independent_review.md":
+        "e888f6c6747750c1030fed9588882f217dc8dc60ebc0d4333192f9e654334419",
+}
+
+state = {
+    "record_status": "STARTED_EXTERNAL_GOVERNANCE_CONFIRMED_PREFLIGHT_PENDING",
+    "external_governance_chain_status": "CONFIRMED_BY_EXACT_REVIEWED_COMMAND",
+    "explicit_exact_command_authorization_status": "REQUIRES_SEPARATE_LAUNCH_AUTHORIZATION",
+    "same_process_preflight_status": "PENDING",
+    "guards_status": "PENDING",
+    "technical_inspection_authorized_in_process": "NO",
+    "technical_inspection_started": "NO",
+    "terminal_classification_present": "NO",
+    "technical_cause_classification": "UNKNOWN",
+    "supplement_chain_commit": SUPPLEMENT_CHAIN_COMMIT,
+    "supplement_Tests_run_id": SUPPLEMENT_TESTS_RUN_ID,
+    "supplement_Tests_run_number": SUPPLEMENT_TESTS_RUN_NUMBER,
+    "supplement_Tests_conclusion": SUPPLEMENT_TESTS_CONCLUSION,
+    "explicit_command_authorization_identity": EXPLICIT_COMMAND_AUTHORIZATION_IDENTITY,
+    "ephemeral_process_count": 1,
+    "diagnostic_import_probe_count": 0,
+    "retry_count": 0,
+    "fallback_count": 0,
+    "replacement_probe_count": 0,
+    "alternate_import_count": 0,
+    "speculative_import_count": 0,
+    "network_request_count": 0,
+    "API_call_count": 0,
+    "market_data_access_count": 0,
+    "targets": [],
+}
+
+
+def atomic_write() -> None:
+    EXECUTION_RECORD.parent.mkdir(parents=False, exist_ok=True)
+    payload = (
+        "# v3.08 Fresh Technical-Diagnosis Execution Record\n\n"
+        "```json\n" + json.dumps(state, indent=2, sort_keys=True) + "\n```\n"
+    ).encode("utf-8")
+    fd, temporary = tempfile.mkstemp(
+        prefix=f".{EXECUTION_RECORD.name}.",
+        suffix=".tmp",
+        dir=str(EXECUTION_RECORD.parent),
+    )
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, EXECUTION_RECORD)
+        directory_fd = os.open(EXECUTION_RECORD.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+
+
+def git_text(*arguments: str) -> str:
+    completed = subprocess.run(
+        ("git", *arguments),
+        check=True,
+        capture_output=True,
+        text=True,
+        env={"PATH": "/usr/bin:/bin"},
+    )
+    return completed.stdout.strip()
+
+
+def file_sha256(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for block in iter(lambda: handle.read(65536), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def fail_closed(classification: str) -> None:
+    state.update(
+        record_status="TERMINAL_CLASSIFICATION_RECORDED",
+        terminal_classification_present="YES",
+        technical_cause_classification=classification,
+        technical_inspection_authorized_in_process="NO",
+    )
+    atomic_write()
+    raise SystemExit(1)
+
+
+# The first persistent action of this process is the initial atomic record.
+atomic_write()
+
+try:
+    if EXPLICIT_COMMAND_AUTHORIZATION_IDENTITY != (
+        "V3_08_FRESH_TECHNICAL_DIAGNOSIS_EXACT_COMMAND_LAUNCH_001"
+    ):
+        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+    if git_text("rev-parse", "HEAD") != SUPPLEMENT_CHAIN_COMMIT:
+        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+    if git_text("rev-parse", "origin/main") != SUPPLEMENT_CHAIN_COMMIT:
+        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+    for record_path, expected_hash in EXPECTED_RECORD_HASHES.items():
+        if file_sha256(record_path) != expected_hash:
+            fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+    status_lines = [line for line in git_text("status", "--short").splitlines() if line]
+    expected_status = f"?? {EXECUTION_RECORD.as_posix()}"
+    if status_lines != [expected_status]:
+        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+    if git_text("diff", "--cached", "--name-only"):
+        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+    if sys.version_info[:2] != (3, 11):
+        fail_closed("BLOCK_TECHNICAL_DIAGNOSIS_VERSION_MISMATCH")
+
+    # Process-local guards: prohibit credential/environment reads and networking.
+    def prohibited(*_args, **_kwargs):
+        raise RuntimeError("PROHIBITED_OPERATION")
+
+    os.getenv = prohibited
+    os.environ.__class__.__getitem__ = prohibited
+    os.environ.__class__.get = prohibited
+
+    state.update(
+        record_status="PREFLIGHT_AND_GUARDS_CONFIRMED",
+        same_process_preflight_status="PASS",
+        guards_status="PASS",
+        technical_inspection_authorized_in_process="YES",
+    )
+    atomic_write()
+
+    state["technical_inspection_started"] = "YES"
+    supported = 0
+    for index, (module_name, symbol_name) in enumerate(TARGETS, start=1):
+        result = {
+            "target_index": index,
+            "module": module_name,
+            "symbol": symbol_name,
+            "probe_count": 1,
+            "classification": "UNKNOWN",
+        }
+        state["diagnostic_import_probe_count"] += 1
+        try:
+            module = importlib.import_module(module_name)
+            getattr(module, symbol_name)
+            result["classification"] = "IMPORT_SURFACE_PRESENT"
+            supported += 1
+        except Exception as error:
+            result["classification"] = "IMPORT_EXCEPTION_CLASSIFIED"
+            result["exception_class"] = type(error).__name__
+            supported += 1
+        state["targets"].append(result)
+        state["record_status"] = f"TARGET_{index}_COMPLETED"
+        atomic_write()
+
+    state.update(
+        record_status="TERMINAL_CLASSIFICATION_RECORDED",
+        terminal_classification_present="YES",
+        technical_cause_classification=(
+            "PASS_BOUNDED_TYPEERROR_CAUSE_ESTABLISHED"
+            if supported == 4
+            else "INCONCLUSIVE_AUTHORIZED_EVIDENCE_INSUFFICIENT"
+        ),
+        technical_inspection_authorized_in_process="NO",
+    )
+    atomic_write()
+except SystemExit:
+    raise
+except BaseException:
+    fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+PY

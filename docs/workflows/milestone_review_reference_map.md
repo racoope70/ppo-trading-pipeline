@@ -646,9 +646,9 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 ## 8. Forward milestone roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Reference only the current exact six-file documentation-only fresh post-CI literal-resolution supplement package for source-of-truth alignment and focused independent checking and, only after separate explicit authorization, staging, commit, push, and CI consideration.
-3. Treat the supplement package as a separate, non-reactivating governance chain. Its eventual commit, push, green CI, clean-state confirmation, and fixed-literal resolution may make only the accepted post-CI literal-resolution method effective; they do not finalize or authorize an exact diagnosis command, create an execution record, or authorize technical diagnosis.
-4. Require separately governed exact-command preparation, fixed-literal review, independent command review, and separate explicit user launch authorization before any future technical diagnosis may be considered. The closed failed lifecycle and the fresh supplement package provide no reusable launch authority.
+2. Reference the exact seven-file documentation/static-artifact future-command package for human review and later separately authorized commit, push, and CI consideration.
+3. Preserve the package as non-executing governance material. The static artifact, reviews, alignment, commit, push, or green CI do not authorize execution or create an execution record.
+4. Require separate explicit user launch authorization for the exact reviewed artifact and fixed command-authorization identity before any future technical diagnosis may be considered.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, finalization, diagnosis, or evidence review automatically authorizes a later technical step.
 
@@ -1268,3 +1268,25 @@ remains ineffective, the failed lifecycle remains terminally closed and
 non-reusable, and no post-CI literal resolution, exact-command preparation,
 execution-record creation, Python, imports, technical diagnosis, remediation,
 or downstream activity is authorized.
+
+## v3.08 Fresh Technical-Diagnosis Exact-Command Package Reference
+
+```text
+map_exact_command_package_file_count = 7
+map_exact_command_artifact = artifacts/ppo_v2/package_preparation/v3_08_fresh_technical_diagnosis/commands/future_exact_diagnosis_command.txt
+map_exact_command_artifact_sha256 = e3f99a4a81d24e67d0f9629a46a8d8f35b8c07c20660280df1a743d762b57155
+map_exact_command_preparation_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_preparation.md
+map_exact_command_independent_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_independent_review.md
+map_exact_command_source_of_truth_alignment_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_source_of_truth_alignment.md
+map_exact_command_source_of_truth_alignment_focused_check_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_source_of_truth_alignment_focused_independent_check.md
+map_resolved_supplement_chain_commit = 3ce13845961bfac3fe2158b7b5ce374ca701f815
+map_resolved_supplement_Tests_run_id = 30225581904
+map_exact_command_package_effective = NO
+map_exact_command_execution_authorized_now = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This entry is roadmap, navigation, and governance reference only. It is not a
+current-checkpoint tracker and does not activate the package or command.
