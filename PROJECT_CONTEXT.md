@@ -617,13 +617,14 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 68. Failed-Execution Alignment Post-CI Reconciliation and corrected focused independent check completed, committed, pushed, and CI-green; commit `26a359d23fe984b636ca2e396925897148d54007`; GitHub Actions workflow `Tests`; run number `519`; run ID `30178743742`; conclusion `success`; the committed reconciliation records remain immutable historical snapshots; exactly one bounded non-recursive documentation-only finalization is now the sole remaining documentary step; the controlling classification remains `FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION`; the prior diagnosis scope remains closed and non-reusable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 69. Corrected Exact-Command Proposal, Independent Review, Source-of-Truth Alignment, and Focused Independent Check completed, committed, pushed, and CI-green; commit `88621629e0f108d1100df869d97a0a7f643ec15e`; GitHub Actions workflow `Tests`; run number `526`; run ID `30234504837`; conclusion `success`; the corrected artifact SHA-256 is `064d34b558ddffbda4b0fde944ffb7989420f54a6c9a4b1c9d5b2228239b9072`; its provenance commit is distinct from any later allowed launch commit; the artifact remains future-only and non-executable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 70. Corrected Exact-Command Post-CI Provenance Finalization completed, committed, pushed, and CI-green; commit `03597548cd446c18b0fdc1933368ae749036ffb6`; GitHub Actions workflow `Tests`; run number `527`; conclusion `success`; `HEAD` and `origin/main` were confirmed equal to the finalization commit with a clean worktree and index; the artifact remains future-only and non-executable; no launch or execution record was created; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
+71. Corrected Exact-Command Launch-Authorization Eligibility completed, committed, pushed, and CI-green; commit `a699d378d6c7e834f0ab918ab93071ad966b3b98`; GitHub Actions workflow `Tests`; run number `528`; run ID `30235948820`; conclusion `success`; repository parity and clean worktree/index were confirmed; the corrected artifact is conditionally eligible for later explicit launch-authorization consideration, but launch readiness and technical execution authorization remain absent; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 
 ## 8. Forward roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Complete only the current six-file documentation-only corrected exact-command launch-authorization eligibility package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
+2. Complete only the current six-file documentation-only corrected exact-command post-CI launch-identity and exact three-literal invocation resolution/review package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
 3. Preserve the stale artifact identity and its launch-ineligibility as immutable history while reviewing the corrected artifact under a separate hash.
-4. Keep the corrected artifact provenance commit fixed. Resolve the later allowed launch commit and its successful `Tests` run ID only after this eligibility package is reviewed, committed, pushed, CI-green, at repository parity, and clean. No launch may be considered before the complete invocation containing all three fixed literals is separately reviewed and explicitly authorized by the user.
+4. Preserve the eligibility commit and its successful `Tests` run ID as eligibility evidence only. Keep the future allowed launch commit, its launch CI run ID, and exact three-literal invocation unresolved until a later separately authorized launch-authorization package after this package is reviewed, committed, pushed, CI-green, at repository parity, and clean.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, finalization, diagnosis, or evidence review automatically authorizes a later technical step.
 
@@ -1458,3 +1459,40 @@ allowed commit, its successful `Tests` run ID, and the exact invocation cannot
 be fixed until this six-file package has completed human review, commit, push,
 green CI, repository-parity, and clean-state gates. A separate explicit user
 authorization of that exact invocation remains mandatory.
+
+## v3.08 Corrected Exact-Command Post-CI Launch-Identity and Exact-Invocation Resolution Draft
+
+```text
+eligibility_package_provenance_commit = a699d378d6c7e834f0ab918ab93071ad966b3b98
+eligibility_package_Tests_run_number = 528
+eligibility_package_Tests_run_id = 30235948820
+eligibility_package_Tests_conclusion = success
+launch_execution_allowed_commit = UNRESOLVED_PENDING_LATER_LAUNCH_AUTHORIZATION_PACKAGE
+launch_execution_allowed_Tests_run_id = UNRESOLVED_PENDING_LATER_LAUNCH_AUTHORIZATION_PACKAGE
+command_artifact_sha256 = 064d34b558ddffbda4b0fde944ffb7989420f54a6c9a4b1c9d5b2228239b9072
+command_artifact_provenance_commit = 88621629e0f108d1100df869d97a0a7f643ec15e
+exact_three_literal_invocation = UNRESOLVED_PENDING_LATER_LAUNCH_AUTHORIZATION_PACKAGE
+eligibility_commit_not_launch_identity = YES
+eligibility_Tests_run_id_not_launch_authority = YES
+F_01_resolution = PASS_ALLOWED_LAUNCH_IDENTITY_DEFERRED
+launch_identity_review_result = PASS
+launch_readiness_established = NO
+launch_authorization_effective = NO
+command_launch_authorized_now = NO
+technical_execution_authorized = NO
+execution_record_creation_authorized = NO
+corrected_artifact_future_only = YES
+corrected_artifact_non_executable = YES
+old_failed_lifecycle_closed_fail_closed_non_reusable = YES
+separate_explicit_user_launch_authorization_required = YES
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+This draft resolves F-01 by preserving the eligibility commit and Tests run as
+eligibility evidence only. It does not bind a future `HEAD` or `origin/main`
+launch identity. The actual allowed launch commit, its successful launch CI run
+ID, and the complete exact invocation remain for a later separately authorized
+launch-authorization package after this package completes review, commit, push,
+green CI, repository parity, and clean-state confirmation. This draft does not
+authorize invocation, technical execution, or execution-record creation.
