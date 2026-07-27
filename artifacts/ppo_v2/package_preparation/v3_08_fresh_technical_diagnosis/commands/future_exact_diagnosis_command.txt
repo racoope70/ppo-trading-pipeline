@@ -54,7 +54,15 @@ state = {
     "record_status": "STARTED_EXTERNAL_GOVERNANCE_CONFIRMED_PREFLIGHT_PENDING",
     "external_governance_chain_status": "CONFIRMED_BY_EXACT_REVIEWED_COMMAND",
     "explicit_exact_command_authorization_status": "REQUIRES_SEPARATE_LAUNCH_AUTHORIZATION",
+    "one_time_rerun_authorization_status": "REQUIRES_SEPARATE_LAUNCH_AUTHORIZATION",
+    "rerun_authorized": "NO",
+    "subsequent_launch_authorized": "NO",
+    "remediation_authorized": "NO",
+    "current_authorization_boundary": "NO_EXECUTION_AUTHORIZED",
+    "authorized_current_execution_scope": "NONE",
     "same_process_preflight_status": "PENDING",
+    "preflight_failed_branch": "NONE",
+    "preflight_exception_class": "NONE",
     "guards_status": "PENDING",
     "technical_inspection_authorized_in_process": "NO",
     "technical_inspection_started": "NO",
@@ -122,12 +130,32 @@ def git_text(*arguments: str, preserve_leading: bool = False) -> str:
     return completed.stdout.strip()
 
 
-def fail_closed(classification: str) -> None:
+def bounded_exception_class(error: BaseException) -> str:
+    name = type(error).__name__
+    if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,63}", name):
+        return name
+    return "UNCLASSIFIED_EXCEPTION"
+
+
+def fail_closed(
+    classification: str,
+    branch: str,
+    exception_class: str = "NONE",
+) -> None:
     state.update(
         record_status="TERMINAL_CLASSIFICATION_RECORDED",
         terminal_classification_present="YES",
         technical_cause_classification=classification,
+        preflight_failed_branch=branch,
+        preflight_exception_class=exception_class,
         technical_inspection_authorized_in_process="NO",
+        explicit_exact_command_authorization_status="USED_AND_CONSUMED",
+        one_time_rerun_authorization_status="USED_AND_CONSUMED",
+        rerun_authorized="NO",
+        subsequent_launch_authorized="NO",
+        remediation_authorized="NO",
+        current_authorization_boundary="NO_EXECUTION_AUTHORIZED",
+        authorized_current_execution_scope="NONE",
     )
     atomic_write()
     raise SystemExit(1)
@@ -136,25 +164,47 @@ def fail_closed(classification: str) -> None:
 # The first persistent action of this process is the initial atomic record.
 atomic_write()
 
+preflight_active_branch = "ARGUMENT_COUNT"
 try:
     if len(sys.argv) != 4:
-        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+        fail_closed(
+            "FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION",
+            "ARGUMENT_COUNT",
+        )
     if re.fullmatch(r"[0-9a-f]{40}", LAUNCH_EXECUTION_ALLOWED_COMMIT) is None:
-        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+        fail_closed(
+            "FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION",
+            "LAUNCH_COMMIT_LITERAL",
+        )
     if re.fullmatch(r"[1-9][0-9]*", LAUNCH_EXECUTION_ALLOWED_TESTS_RUN_ID) is None:
-        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+        fail_closed(
+            "FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION",
+            "TESTS_RUN_ID_LITERAL",
+        )
     if re.fullmatch(r"[0-9a-f]{40}", COMMAND_ARTIFACT_PROVENANCE_COMMIT) is None:
-        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+        fail_closed(
+            "FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION",
+            "ARTIFACT_PROVENANCE_LITERAL",
+        )
     if COMMAND_ARTIFACT_PROVENANCE_COMMIT == LAUNCH_EXECUTION_ALLOWED_COMMIT:
-        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+        fail_closed(
+            "FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION",
+            "COMMIT_IDENTITY_COLLISION",
+        )
     if EXPLICIT_COMMAND_AUTHORIZATION_IDENTITY != (
         "V3_08_FRESH_TECHNICAL_DIAGNOSIS_EXACT_COMMAND_LAUNCH_001"
     ):
-        fail_closed("FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION")
+        fail_closed(
+            "FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION",
+            "AUTHORIZATION_IDENTITY",
+        )
+    preflight_active_branch = "HEAD_CHECK"
     if git_text("rev-parse", "HEAD") != LAUNCH_EXECUTION_ALLOWED_COMMIT:
-        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+        fail_closed("BLOCK_HEAD_MISMATCH", "HEAD_MISMATCH")
+    preflight_active_branch = "ORIGIN_MAIN_CHECK"
     if git_text("rev-parse", "origin/main") != LAUNCH_EXECUTION_ALLOWED_COMMIT:
-        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+        fail_closed("BLOCK_ORIGIN_MAIN_MISMATCH", "ORIGIN_MAIN_MISMATCH")
+    preflight_active_branch = "STATUS_GUARD_CHECK"
     status_lines = [
         line
         for line in git_text("status", "--short", preserve_leading=True).splitlines()
@@ -162,16 +212,19 @@ try:
     ]
     expected_status = f" M {EXECUTION_RECORD.as_posix()}"
     if status_lines != [expected_status]:
-        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+        fail_closed("BLOCK_STATUS_GUARD_MISMATCH", "STATUS_GUARD_MISMATCH")
+    preflight_active_branch = "STAGING_CHECK"
     if git_text("diff", "--cached", "--name-only"):
-        fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+        fail_closed("BLOCK_STAGING_NOT_EMPTY", "STAGING_NOT_EMPTY")
+    preflight_active_branch = "PYTHON_VERSION_CHECK"
     if sys.version_info[:2] != (3, 11):
-        fail_closed("BLOCK_TECHNICAL_DIAGNOSIS_VERSION_MISMATCH")
+        fail_closed("BLOCK_PYTHON_VERSION_MISMATCH", "PYTHON_VERSION_MISMATCH")
 
     # Process-local guards: prohibit credential/environment reads and networking.
     def prohibited(*_args, **_kwargs):
         raise RuntimeError("PROHIBITED_OPERATION")
 
+    preflight_active_branch = "GUARD_INSTALLATION"
     os.getenv = prohibited
     os.environ.__class__.__getitem__ = prohibited
     os.environ.__class__.get = prohibited
@@ -182,9 +235,13 @@ try:
         guards_status="PASS",
         technical_inspection_authorized_in_process="YES",
     )
+    preflight_active_branch = "PREFLIGHT_STATE_WRITE"
     atomic_write()
 
+    preflight_active_branch = "INSPECTION_START_STATE_WRITE"
     state["technical_inspection_started"] = "YES"
+    atomic_write()
+    preflight_active_branch = "TECHNICAL_INSPECTION"
     supported = 0
     for index, (module_name, symbol_name) in enumerate(TARGETS, start=1):
         result = {
@@ -217,10 +274,27 @@ try:
             else "INCONCLUSIVE_AUTHORIZED_EVIDENCE_INSUFFICIENT"
         ),
         technical_inspection_authorized_in_process="NO",
+        explicit_exact_command_authorization_status="USED_AND_CONSUMED",
+        one_time_rerun_authorization_status="USED_AND_CONSUMED",
+        rerun_authorized="NO",
+        subsequent_launch_authorized="NO",
+        remediation_authorized="NO",
+        current_authorization_boundary="NO_EXECUTION_AUTHORIZED",
+        authorized_current_execution_scope="NONE",
     )
     atomic_write()
 except SystemExit:
     raise
-except BaseException:
-    fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
+except BaseException as error:
+    if state["technical_inspection_started"] == "NO":
+        fail_closed(
+            "BLOCK_PREFLIGHT_EXCEPTION",
+            preflight_active_branch,
+            bounded_exception_class(error),
+        )
+    fail_closed(
+        "INCOMPLETE_FAIL_CLOSED_NO_RETRY",
+        "TECHNICAL_INSPECTION_EXCEPTION",
+        bounded_exception_class(error),
+    )
 PY
