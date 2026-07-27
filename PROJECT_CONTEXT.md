@@ -618,13 +618,14 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 69. Corrected Exact-Command Proposal, Independent Review, Source-of-Truth Alignment, and Focused Independent Check completed, committed, pushed, and CI-green; commit `88621629e0f108d1100df869d97a0a7f643ec15e`; GitHub Actions workflow `Tests`; run number `526`; run ID `30234504837`; conclusion `success`; the corrected artifact SHA-256 is `064d34b558ddffbda4b0fde944ffb7989420f54a6c9a4b1c9d5b2228239b9072`; its provenance commit is distinct from any later allowed launch commit; the artifact remains future-only and non-executable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 70. Corrected Exact-Command Post-CI Provenance Finalization completed, committed, pushed, and CI-green; commit `03597548cd446c18b0fdc1933368ae749036ffb6`; GitHub Actions workflow `Tests`; run number `527`; conclusion `success`; `HEAD` and `origin/main` were confirmed equal to the finalization commit with a clean worktree and index; the artifact remains future-only and non-executable; no launch or execution record was created; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 71. Corrected Exact-Command Launch-Authorization Eligibility completed, committed, pushed, and CI-green; commit `a699d378d6c7e834f0ab918ab93071ad966b3b98`; GitHub Actions workflow `Tests`; run number `528`; run ID `30235948820`; conclusion `success`; repository parity and clean worktree/index were confirmed; the corrected artifact is conditionally eligible for later explicit launch-authorization consideration, but launch readiness and technical execution authorization remain absent; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
+72. One-time Corrected Exact-Command launch completed fail-closed and was recorded, committed, pushed, and CI-green; execution-record commit `1439a2ac738e1e7b357654a08adc176bce52b934`; GitHub Actions workflow `Tests`; run number `530`; conclusion `success`; terminal classification `BLOCK_TECHNICAL_DIAGNOSIS_VERSION_MISMATCH`; technical inspection did not start; import probes, retries, API calls, network requests, and market-data accesses were all zero; the one-time authorization is used, consumed, and non-reusable; the controlling state is `NO_EXECUTION_AUTHORIZED / NONE`.
 
 ## 8. Forward roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Complete only the current six-file documentation-only corrected exact-command post-CI launch-identity and exact three-literal invocation resolution/review package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
+2. Complete only the current six-file documentation-only version-mismatch remediation-planning authorization package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
 3. Preserve the stale artifact identity and its launch-ineligibility as immutable history while reviewing the corrected artifact under a separate hash.
-4. Preserve the eligibility commit and its successful `Tests` run ID as eligibility evidence only. Keep the future allowed launch commit, its launch CI run ID, and exact three-literal invocation unresolved until a later separately authorized launch-authorization package after this package is reviewed, committed, pushed, CI-green, at repository parity, and clean.
+4. Keep the proposed version-mismatch inspection scope ineffective unless a later separate explicit authorization activates it after this package is reviewed, committed, pushed, CI-green, at repository parity, and clean. Keep remediation and every retry unauthorized.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, finalization, diagnosis, or evidence review automatically authorizes a later technical step.
 
@@ -1496,3 +1497,45 @@ ID, and the complete exact invocation remain for a later separately authorized
 launch-authorization package after this package completes review, commit, push,
 green CI, repository parity, and clean-state confirmation. This draft does not
 authorize invocation, technical execution, or execution-record creation.
+
+## v3.08 Version-Mismatch Remediation-Planning Authorization Draft
+
+```text
+planning_basis_execution_record_commit = 1439a2ac738e1e7b357654a08adc176bce52b934
+planning_basis_Tests_run_number = 530
+terminal_classification = BLOCK_TECHNICAL_DIAGNOSIS_VERSION_MISMATCH
+prior_one_time_launch_authorization = USED_AND_CONSUMED
+prior_one_time_launch_authorization_reusable = NO
+retry_authorized_now = NO
+remediation_authorized_now = NO
+proposed_future_inspection_scope = VERSION_MISMATCH_IDENTITY_AND_AVAILABILITY_INSPECTION_ONLY
+proposed_future_inspection_scope_effective_now = NO
+proposed_future_inspection_item_1 = IDENTIFY_INTERPRETER_USED_BY_PRIOR_LAUNCH
+proposed_future_inspection_item_2 = IDENTIFY_THAT_INTERPRETERS_PYTHON_VERSION
+proposed_future_inspection_item_3 = DETERMINE_WHETHER_PYTHON_3_11_IS_AVAILABLE_LOCALLY
+proposed_future_inspection_item_4 = DOCUMENT_SMALLEST_SAFE_COMMAND_ARTIFACT_OR_INVOCATION_ENVIRONMENT_CORRECTION_PATH
+proposed_future_scope_allows_version_reporting_commands_only = YES_IF_LATER_EXPLICITLY_AUTHORIZED
+proposed_future_scope_allows_imports = NO
+proposed_future_scope_allows_package_inspection = NO
+proposed_future_scope_allows_artifact_or_environment_modification = NO
+proposed_future_scope_allows_retry_or_diagnosis = NO
+launch_execution_allowed_commit = UNRESOLVED
+launch_execution_allowed_Tests_run_id = UNRESOLVED
+exact_launch_invocation = UNRESOLVED
+stale_commit_loop_present = NO
+command_launch_authorized_now = NO
+execution_record_creation_authorized_now = NO
+Python_execution_authorized_now = NO
+imports_authorized_now = NO
+package_inspection_authorized_now = NO
+downloaded_script_verification_authorized_now = NO
+provider_API_market_data_or_data_file_access_authorized_now = NO
+data_modification_authorized_now = NO
+validation_training_trading_deployment_release_or_tagging_authorized_now = NO
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+This draft proposes only a later separately authorized, read-only
+version-identity and availability inspection. It does not activate that scope,
+authorize Python now, authorize remediation, or authorize another launch.

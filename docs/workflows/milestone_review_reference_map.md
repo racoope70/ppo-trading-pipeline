@@ -645,13 +645,14 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 69. Corrected Exact-Command Proposal, Independent Review, Source-of-Truth Alignment, and Focused Independent Check completed, committed, pushed, and CI-green; commit `88621629e0f108d1100df869d97a0a7f643ec15e`; GitHub Actions workflow `Tests`; run number `526`; run ID `30234504837`; conclusion `success`; the corrected artifact remains future-only and non-executable; its provenance commit is separate from any later allowed launch commit; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 70. Corrected Exact-Command Post-CI Provenance Finalization completed, committed, pushed, and CI-green; commit `03597548cd446c18b0fdc1933368ae749036ffb6`; GitHub Actions workflow `Tests`; run number `527`; conclusion `success`; repository parity and clean state were confirmed; the artifact remains future-only and non-executable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 71. Corrected Exact-Command Launch-Authorization Eligibility completed, committed, pushed, and CI-green; commit `a699d378d6c7e834f0ab918ab93071ad966b3b98`; GitHub Actions workflow `Tests`; run number `528`; run ID `30235948820`; conclusion `success`; repository parity and clean state were confirmed; eligibility remains conditional and non-authorizing; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
+72. One-time Corrected Exact-Command launch completed fail-closed and its execution record was committed, pushed, and CI-green; commit `1439a2ac738e1e7b357654a08adc176bce52b934`; GitHub Actions workflow `Tests`; run number `530`; conclusion `success`; classification `BLOCK_TECHNICAL_DIAGNOSIS_VERSION_MISMATCH`; the one-time authorization is consumed and non-reusable; technical inspection did not start; the controlling state is `NO_EXECUTION_AUTHORIZED / NONE`.
 
 ## 8. Forward milestone roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Reference the six-file documentation-only corrected exact-command post-CI launch-identity and exact three-literal invocation resolution/review package for human review and later separately authorized commit, push, and CI consideration.
+2. Reference the six-file documentation-only version-mismatch remediation-planning authorization package for human review and later separately authorized commit, push, and CI consideration.
 3. Preserve the stale artifact's blocked launch-eligibility as historical evidence while referencing the corrected artifact under a distinct hash.
-4. Preserve the eligibility commit and its successful `Tests` run ID as eligibility evidence only; keep the future allowed launch commit, its launch CI run ID, and exact three-literal invocation unresolved for a later separately authorized launch-authorization package after this package's green CI, parity, and clean-state gates.
+4. Keep the proposed version-identity and availability inspection ineffective pending later separate explicit authorization after this package's review, green CI, parity, and clean-state gates; keep remediation and retry unauthorized.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, finalization, diagnosis, or evidence review automatically authorizes a later technical step.
 
@@ -1434,3 +1435,27 @@ This is non-authorizing roadmap, navigation, and governance reference only.
 The eligibility commit and CI run are evidence only, not launch authority.
 Future launch identity and the exact invocation remain unresolved for a later
 separately authorized package.
+
+## v3.08 Version-Mismatch Remediation-Planning Authorization Reference
+
+```text
+map_planning_basis_execution_record_commit = 1439a2ac738e1e7b357654a08adc176bce52b934
+map_planning_basis_Tests_run_number = 530
+map_terminal_classification = BLOCK_TECHNICAL_DIAGNOSIS_VERSION_MISMATCH
+map_prior_one_time_launch_authorization_consumed_non_reusable = TRUE
+map_proposed_future_inspection_scope = VERSION_MISMATCH_IDENTITY_AND_AVAILABILITY_INSPECTION_ONLY
+map_proposed_future_inspection_scope_effective_now = FALSE
+map_retry_authorized_now = FALSE
+map_remediation_authorized_now = FALSE
+map_launch_execution_allowed_commit = UNRESOLVED
+map_launch_execution_allowed_Tests_run_id = UNRESOLVED
+map_exact_launch_invocation = UNRESOLVED
+map_command_launch_authorized_now = NO
+map_Python_execution_authorized_now = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This is roadmap, navigation, and governance reference only. It does not
+activate inspection, remediation, retry, diagnosis, or launch authority.
