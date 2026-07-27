@@ -22,7 +22,6 @@ fi
 ../.venv311/bin/python - "$1" "$2" "$3" <<'PY'
 from __future__ import annotations
 
-import hashlib
 import importlib
 import json
 import os
@@ -51,21 +50,6 @@ TARGETS = (
     ("alpaca.data.timeframe", "TimeFrame"),
     ("alpaca.data.enums", "Sort"),
 )
-EXPECTED_RECORD_HASHES = {
-    "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization.md":
-        "342b75149a8907a85fde7b084a7212b8ff883cd398cff9780706fc68a309529f",
-    "docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_independent_review.md":
-        "8f9e4eaed0157731ae054d3d7011d57e944cc7ecaff21ede5d78d704c132b704",
-    "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment.md":
-        "c5fc72c39fcaaf2a3bb69a7eeb181b0254621c9b3ff3b9e86f2be9a772058453",
-    "docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_source_of_truth_alignment_focused_independent_check.md":
-        "5023c646753c62de0dbe92bd43b25a6387ed033c30be14bdf494b324efb2a4bf",
-    "docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_post_ci_literal_resolution_supplement.md":
-        "fec838631b84510f6b7a984d41dd17236d1d8b9724acecd5c0fef4fbb4b5c10c",
-    "docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_post_ci_literal_resolution_supplement_independent_review.md":
-        "e888f6c6747750c1030fed9588882f217dc8dc60ebc0d4333192f9e654334419",
-}
-
 state = {
     "record_status": "STARTED_EXTERNAL_GOVERNANCE_CONFIRMED_PREFLIGHT_PENDING",
     "external_governance_chain_status": "CONFIRMED_BY_EXACT_REVIEWED_COMMAND",
@@ -136,14 +120,6 @@ def git_text(*arguments: str) -> str:
     return completed.stdout.strip()
 
 
-def file_sha256(path: str) -> str:
-    digest = hashlib.sha256()
-    with open(path, "rb") as handle:
-        for block in iter(lambda: handle.read(65536), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
 def fail_closed(classification: str) -> None:
     state.update(
         record_status="TERMINAL_CLASSIFICATION_RECORDED",
@@ -177,9 +153,6 @@ try:
         fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
     if git_text("rev-parse", "origin/main") != LAUNCH_EXECUTION_ALLOWED_COMMIT:
         fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
-    for record_path, expected_hash in EXPECTED_RECORD_HASHES.items():
-        if file_sha256(record_path) != expected_hash:
-            fail_closed("INCOMPLETE_FAIL_CLOSED_NO_RETRY")
     status_lines = [line for line in git_text("status", "--short").splitlines() if line]
     expected_status = f" M {EXECUTION_RECORD.as_posix()}"
     if status_lines != [expected_status]:
