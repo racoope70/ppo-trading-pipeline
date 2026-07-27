@@ -710,6 +710,32 @@ This reference does not authorize launch or execution. Post-CI identity
 resolution, exact-invocation review, and separate explicit user authorization
 remain mandatory.
 
+## v3.08 Python 3.11 Fresh Rerun Authorization Consideration Reference
+
+```text
+map_python311_fresh_rerun_consideration_record = docs/runs/v3.08_fresh_technical_diagnosis_python311_fresh_rerun_authorization_consideration.md
+map_python311_fresh_rerun_consideration_review = docs/reviews/v3.08_fresh_technical_diagnosis_python311_fresh_rerun_authorization_consideration_independent_review.md
+map_prior_interrupted_attempt_status = USED_AND_CONSUMED
+map_prior_interrupted_attempt_reusable = NO
+map_prior_technical_inspection_started = NO
+map_prior_import_probe_API_network_market_data_activity = NONE
+map_future_fresh_rerun_authorization_may_be_considered = YES
+map_future_launch_execution_allowed_commit = UNRESOLVED
+map_future_launch_execution_allowed_Tests_run_id = UNRESOLVED
+map_future_exact_invocation = UNRESOLVED
+map_future_exact_invocation_review_required = YES
+map_separate_explicit_user_authorization_required = YES
+map_stale_commit_loop_present = NO
+map_fresh_rerun_execution_authorized_now = NO
+map_remediation_authorized = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This reference permits only later governance consideration. It does not revive
+the prior authorization or authorize rerun, execution, or remediation.
+
 This milestone map remains roadmap, navigation, and governance reference only. It does not activate the local import-surface diagnosis authorization or independently authorize execution.
 
 ## Future validation/training reference

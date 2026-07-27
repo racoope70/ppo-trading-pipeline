@@ -682,6 +682,32 @@ This package creates no launch authority. Its future commit and successful
 clean-state confirmation, followed by exact-invocation review and separate
 explicit user authorization.
 
+## v3.08 Python 3.11 Fresh Rerun Authorization Consideration Draft
+
+```text
+python311_fresh_rerun_consideration_record = docs/runs/v3.08_fresh_technical_diagnosis_python311_fresh_rerun_authorization_consideration.md
+python311_fresh_rerun_consideration_review = docs/reviews/v3.08_fresh_technical_diagnosis_python311_fresh_rerun_authorization_consideration_independent_review.md
+prior_interrupted_attempt_status = USED_AND_CONSUMED
+prior_interrupted_attempt_reusable = NO
+prior_technical_inspection_started = NO
+prior_import_probe_API_network_market_data_activity = NONE
+future_fresh_rerun_authorization_may_be_considered = YES
+future_launch_execution_allowed_commit = UNRESOLVED
+future_launch_execution_allowed_Tests_run_id = UNRESOLVED
+future_exact_invocation = UNRESOLVED
+future_exact_invocation_review_required = YES
+separate_explicit_user_authorization_required = YES
+stale_commit_loop_present = NO
+fresh_rerun_execution_authorized_now = NO
+remediation_authorized = NO
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+This draft permits only later consideration of a new one-time rerun scope. It
+does not revive the consumed attempt, bind future launch identity, construct
+an exact invocation, or authorize execution or remediation.
+
 This draft does not authorize the reviewed control request now or any downstream execution.
 
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
