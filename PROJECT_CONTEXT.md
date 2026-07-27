@@ -655,6 +655,33 @@ The revised hash identifies draft artifact bytes only. It does not replace the
 historical hash in prior checkpoint records, establish committed provenance,
 bind launch identity, construct an exact invocation, or authorize execution.
 
+## v3.08 Python 3.11 Final Launch-Authorization Package Draft
+
+```text
+python311_final_launch_authorization_record = docs/runs/v3.08_fresh_technical_diagnosis_python311_final_launch_authorization_package.md
+python311_final_launch_authorization_review = docs/reviews/v3.08_fresh_technical_diagnosis_python311_final_launch_authorization_package_independent_review.md
+command_artifact_provenance_commit = e4dc50c8dbb05fb32333c3d703a4514ced669c97
+command_artifact_sha256 = 1d922b26a73dbc5841285f442ca8c8a2d25a3c2db8e5bb8138bdc26d3725aba5
+command_artifact_interpreter = ../.venv311/bin/python
+artifact_provenance_Tests_run_number = 533
+artifact_provenance_Tests_run_id = 30280792523
+artifact_provenance_Tests_conclusion = success
+final_launch_execution_allowed_commit = UNRESOLVED_THIS_FINAL_PACKAGE_COMMIT
+final_launch_execution_allowed_Tests_run_id = UNRESOLVED_FUTURE_GREEN_CI_RUN_FOR_FINAL_PACKAGE_COMMIT
+exact_launch_invocation = UNRESOLVED_PENDING_FINAL_PACKAGE_COMMIT_PUSH_GREEN_CI_PARITY_AND_CLEAN_STATE
+launch_readiness_established = NO
+command_launch_authorized_now = NO
+technical_diagnosis_execution_authorized_now = NO
+separate_explicit_user_launch_authorization_required = YES
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+This package creates no launch authority. Its future commit and successful
+`Tests` run may be bound only after push, green CI, repository parity, and
+clean-state confirmation, followed by exact-invocation review and separate
+explicit user authorization.
+
 This draft does not authorize the reviewed control request now or any downstream execution.
 
 future_validation_training_reference_map = docs/workflows/future_validation_training_reference_map.md
