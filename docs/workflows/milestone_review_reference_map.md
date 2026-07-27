@@ -646,8 +646,8 @@ This numbered lookup is a navigation aid only. It does not authorize source chan
 ## 8. Forward milestone roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Reference the exact seven-file documentation/static-artifact future-command package for human review and later separately authorized commit, push, and CI consideration.
-3. Preserve the package as non-executing governance material. The static artifact, reviews, alignment, commit, push, or green CI do not authorize execution or create an execution record.
+2. Reference the four-file documentation-only post-CI identity-binding finalization package for human review and later separately authorized commit, push, and CI consideration.
+3. Preserve the committed exact-command package and its finalization as non-executing governance material. Their static artifact, reviews, alignments, commits, pushes, or green CI do not authorize execution or create an execution record.
 4. Require separate explicit user launch authorization for the exact reviewed artifact and fixed command-authorization identity before any future technical diagnosis may be considered.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, finalization, diagnosis, or evidence review automatically authorizes a later technical step.
@@ -1290,3 +1290,24 @@ map_reference_does_not_activate_authorization = TRUE
 
 This entry is roadmap, navigation, and governance reference only. It is not a
 current-checkpoint tracker and does not activate the package or command.
+
+## v3.08 Exact-Command Package Post-CI Finalization Reference
+
+```text
+map_exact_command_package_commit = bab6d241655278400a9dffef3ff7a9ef228e6dae
+map_exact_command_package_Tests_run_id = 30230671503
+map_exact_command_package_Tests_run_number = 523
+map_exact_command_package_Tests_conclusion = success
+map_post_CI_finalization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_package_post_ci_identity_binding_finalization.md
+map_post_CI_finalization_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_package_post_ci_identity_binding_finalization_independent_review.md
+map_post_CI_finalization_package_file_count = 4
+map_finalization_is_non_recursive = TRUE
+map_command_artifact_future_only = TRUE
+map_command_launch_authorized_now = NO
+map_current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+map_authorized_current_execution_scope = NONE
+map_reference_does_not_activate_authorization = TRUE
+```
+
+This entry is non-authorizing roadmap and governance navigation only. It is not
+a current-checkpoint tracker and does not authorize command launch.
