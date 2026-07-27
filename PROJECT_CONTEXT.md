@@ -615,11 +615,12 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 67. Failed-Execution Evidence, Independent Review, Source-of-Truth Alignment, and Focused Independent Check completed, committed, pushed, and CI-green; commit `aab7c84efb739a9566e4195117797aee4abc2ce0`; GitHub Actions workflow `Tests`; run number `518`; conclusion `success`; the four committed package records remain immutable historical snapshots; the controlling classification remains `FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION`; the prior one-time diagnosis scope remains closed and non-reusable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 
 68. Failed-Execution Alignment Post-CI Reconciliation and corrected focused independent check completed, committed, pushed, and CI-green; commit `26a359d23fe984b636ca2e396925897148d54007`; GitHub Actions workflow `Tests`; run number `519`; run ID `30178743742`; conclusion `success`; the committed reconciliation records remain immutable historical snapshots; exactly one bounded non-recursive documentation-only finalization is now the sole remaining documentary step; the controlling classification remains `FAIL_TECHNICAL_DIAGNOSIS_SCOPE_OR_EVIDENCE_BOUNDARY_VIOLATION`; the prior diagnosis scope remains closed and non-reusable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
+69. Corrected Exact-Command Proposal, Independent Review, Source-of-Truth Alignment, and Focused Independent Check completed, committed, pushed, and CI-green; commit `88621629e0f108d1100df869d97a0a7f643ec15e`; GitHub Actions workflow `Tests`; run number `526`; run ID `30234504837`; conclusion `success`; the corrected artifact SHA-256 is `064d34b558ddffbda4b0fde944ffb7989420f54a6c9a4b1c9d5b2228239b9072`; its provenance commit is distinct from any later allowed launch commit; the artifact remains future-only and non-executable; the controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.
 
 ## 8. Forward roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Complete only the current seven-file documentation/static-artifact corrected exact-command proposal package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
+2. Complete only the current four-file documentation-only corrected exact-command post-CI provenance-finalization package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
 3. Preserve the stale artifact identity and its launch-ineligibility as immutable history while reviewing the corrected artifact under a separate hash.
 4. Require later non-recursive resolution of the corrected artifact provenance commit and a still-later final green launch-authorization commit as distinct exact invocation literals. No launch may be considered before a separately reviewed complete invocation and explicit user authorization.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
@@ -1392,3 +1393,32 @@ The corrected proposal separates artifact bytes, provenance, and the later
 allowed execution commit. The later complete invocation must contain reviewed
 fixed literals for both commits and the allowed commit's successful `Tests`
 run ID. This proposal does not authorize that invocation or launch.
+
+## v3.08 Corrected Exact-Command Post-CI Provenance-Finalization State
+
+```text
+corrected_exact_command_package_commit = 88621629e0f108d1100df869d97a0a7f643ec15e
+corrected_exact_command_package_Tests_run_id = 30234504837
+corrected_exact_command_package_Tests_run_number = 526
+corrected_exact_command_package_Tests_conclusion = success
+command_artifact_provenance_commit = 88621629e0f108d1100df869d97a0a7f643ec15e
+corrected_post_CI_provenance_finalization_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_corrected_exact_command_package_post_ci_provenance_finalization.md
+corrected_post_CI_provenance_finalization_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_corrected_exact_command_package_post_ci_provenance_finalization_independent_review.md
+post_CI_provenance_finalization_effective = NO
+launch_readiness_established = NO
+launch_execution_allowed_commit = UNRESOLVED
+launch_execution_allowed_Tests_run_id = UNRESOLVED
+separate_exact_launch_invocation_review_required = YES
+separate_explicit_user_launch_authorization_required = YES
+corrected_artifact_future_only = YES
+corrected_artifact_non_executable = YES
+corrected_artifact_launch_authorized_now = NO
+execution_record_creation_authorized = NO
+technical_diagnosis_execution_authorized_now = NO
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+This post-CI state binds only the corrected artifact's immutable provenance.
+It does not resolve an allowed launch commit or CI run, establish launch
+readiness, authorize the exact invocation, or authorize execution.
