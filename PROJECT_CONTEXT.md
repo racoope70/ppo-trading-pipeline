@@ -619,9 +619,9 @@ The completed Governed Targeted Missing-Slot Refetch and Raw Data-Completeness R
 ## 8. Forward roadmap
 
 1. Keep `NO_EXECUTION_AUTHORIZED / NONE` controlling. The prior one-time diagnosis scope is closed fail-closed and is not reusable.
-2. Complete only the current four-file documentation-only post-CI identity-binding finalization package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
-3. Treat the committed exact-command package and this finalization as non-executing governance material. Their artifacts, reviews, alignments, commits, pushes, and green CI do not authorize command execution, create an execution record, or activate technical diagnosis.
-4. Require a separate explicit user launch authorization for the exact reviewed command artifact and its fixed authorization identity before any future technical diagnosis may be considered. The closed failed lifecycle and every documentation package provide no reusable launch authority.
+2. Complete only the current six-file documentation-only launch-authorization eligibility review package through human review and, only after separate explicit authorization, staging, commit, push, and CI consideration.
+3. Preserve the current exact command as not eligible for launch authorization because its fixed repository identity does not match the finalized governance identity. This checkpoint does not modify or remediate the artifact.
+4. Require a separately governed corrected exact-command proposal before any future launch-authorization eligibility review may be considered. The closed failed lifecycle and every prior documentation package provide no reusable launch authority.
 5. Keep every second process, retry, fallback, replacement probe, alternate or speculative import, unguarded comparison, constructor or method call, class or enum instantiation, client or request-object creation, credential or external-configuration access, network/provider/API/market-data activity, missing-observation retrieval, broad or unrelated package/module/symbol/dependency/source/filesystem inspection, package/dependency/guard/source modification, remediation, corrected execution, data change, validation, training, trading, deployment, release creation, tagging, and downstream execution unauthorized.
 6. No completed authorization, review, alignment, focused check, commit, push, CI result, reconciliation, finalization, diagnosis, or evidence review automatically authorizes a later technical step.
 
@@ -1334,3 +1334,31 @@ This checkpoint binds only the immutable commit and successful CI identities
 of the already committed seven-file exact-command package. It is a terminal,
 non-recursive documentary finalization and does not activate or authorize the
 future command.
+
+## v3.08 Exact-Command Launch-Authorization Eligibility State
+
+```text
+launch_authorization_eligibility_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_launch_authorization_eligibility_review.md
+launch_authorization_independent_review_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_launch_authorization_eligibility_independent_review.md
+launch_authorization_source_of_truth_alignment_record = docs/runs/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_launch_authorization_eligibility_source_of_truth_alignment.md
+launch_authorization_alignment_focused_check_record = docs/reviews/v3.08_minimal_historical_sip_access_path_test_local_import_surface_diagnosis_technical_root_cause_fresh_authorization_exact_command_launch_authorization_eligibility_source_of_truth_alignment_focused_independent_check.md
+finalized_governance_commit = 9e2e5cb7b7cc300c430008a8fa18cb7c6e946d71
+finalized_governance_Tests_run_id = 30232035859
+finalized_governance_Tests_run_number = 524
+command_artifact_sha256 = e3f99a4a81d24e67d0f9629a46a8d8f35b8c07c20660280df1a743d762b57155
+artifact_expected_repository_commit = 3ce13845961bfac3fe2158b7b5ce374ca701f815
+repository_identity_match = NO
+launch_authorization_eligibility = BLOCKED
+blocking_finding = F-01_EXACT_COMMAND_REPOSITORY_IDENTITY_MISMATCH
+command_artifact_modified = NO
+command_artifact_executed = NO
+execution_record_creation_authorized = NO
+command_launch_authorized_now = NO
+technical_diagnosis_execution_authorized_now = NO
+current_authorization_boundary = NO_EXECUTION_AUTHORIZED
+authorized_current_execution_scope = NONE
+```
+
+The exact artifact remains future-only and non-executable but is not eligible
+for later launch authorization without a new separately governed corrected
+artifact. This checkpoint records the block and performs no remediation.
