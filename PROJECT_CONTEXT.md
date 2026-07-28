@@ -1669,3 +1669,9 @@ authorized_current_execution_scope = NONE
 This draft proposes only a later separately authorized, read-only
 version-identity and availability inspection. It does not activate that scope,
 authorize Python now, authorize remediation, or authorize another launch.
+
+The guarded Python 3.11 Alpaca import-surface remediation-authorization
+alignment is recorded in its subordinate source-of-truth alignment and focused
+check; `LOCAL_GUARDED_PYTHON311_ALPACA_IMPORT_SURFACE_REMEDIATION_ONLY` remains
+proposed and inactive, technical remediation remains unauthorized, and the
+controlling state remains `NO_EXECUTION_AUTHORIZED / NONE`.

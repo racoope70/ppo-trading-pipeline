@@ -1591,3 +1591,13 @@ map_reference_does_not_activate_authorization = TRUE
 
 This is roadmap, navigation, and governance reference only. It does not
 activate inspection, remediation, retry, diagnosis, or launch authority.
+
+## v3.08 Guarded Python 3.11 Alpaca Import-Surface Remediation-Authorization Alignment Reference
+
+See
+`docs/runs/v3.08_guarded_python311_alpaca_import_surface_remediation_authorization_plan_source_of_truth_alignment.md`
+and
+`docs/reviews/v3.08_guarded_python311_alpaca_import_surface_remediation_authorization_plan_source_of_truth_alignment_focused_independent_check.md`.
+This navigation reference is non-authorizing:
+`LOCAL_GUARDED_PYTHON311_ALPACA_IMPORT_SURFACE_REMEDIATION_ONLY` remains
+proposed and inactive, and technical remediation remains unauthorized.
