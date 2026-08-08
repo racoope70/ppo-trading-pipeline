@@ -123,7 +123,7 @@ Detailed research, validation, remediation, documentation and governance records
 
 Large generated runtime artifacts were generally excluded, including many datasets, trained model binaries, processed outputs, backtest/paper-trading outputs, logs and credentials. This repository is therefore a historical implementation and research record rather than a complete binary reproduction package for every experiment.
 
-AI tools were used to assist with drafting portions of the historical governance and process documentation. These materials were reviewed and used under human project control and are retained as part of the repository's development history. Current development continues in [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform).
+AI tools were used to assist with drafting and bounded review of portions of the historical governance, evidence, and process documentation. Separate AI-assisted review contexts were also used for selected evidence and governance checks. Their findings and recommendations were advisory within an owner-controlled workflow and did not independently authorize project actions or determine project decisions. These materials are retained as part of the repository's development history. Current development continues in [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform).
 
 ## Disclaimer
 
