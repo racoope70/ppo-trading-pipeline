@@ -1,457 +1,132 @@
-# PPO Walk-Forward Trading Pipeline
+# PPO Trading Pipeline — Historical Quantitative Research Repository
 
-This repository contains a modular VS Code implementation of a governed PPO-based trading research and validation-readiness pipeline.
+> **Status: Legacy / historical repository**
+>
+> This repository preserves the quantitative-trading research and engineering pipeline that preceded the current canonical project, [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform).
+>
+> It is retained as a historical research record and should not be interpreted as the current production or forward-development platform.
 
-The project converts an earlier Google Colab research workflow into a local Python codebase with structured modules for data preparation, feature engineering, walk-forward PPO training, prediction, diagnostics, and downstream execution adapters. Under the current v3.06 state, those modules are not automatically authorized for training, data generation, artifact creation, paper orders, live orders, or controlled submit.
+## Overview
 
-The current goal of this repository is to preserve a governed implementation layer for research, auditability, validation readiness, and future review. It is not currently an authorized live/paper trading deployment or PPO v2 training execution repository.
+This project documents the evolution of a reinforcement-learning trading pipeline centered on **Proximal Policy Optimization (PPO)**.
 
-This project is for research and educational purposes only. It is not financial advice and does not guarantee profitable trading results.
+The work progressed from exploratory PPO experiments into a modular Python implementation covering market-data preparation, feature engineering, chronological walk-forward evaluation, execution-cost analysis, final-holdout testing, candidate qualification, model-artifact management, Alpaca Paper integration, QuantConnect/LEAN signal integration, and later PPO v2 data/retraining investigations.
 
----
+The repository preserves both favorable intermediate research results and the evidence that ultimately prevented the legacy PPO from being promoted as a reliable trading model.
 
-## Current Governance Status
+## Quantitative Research Summary
 
-Read [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) first before making validation, training, retraining, paper-trading, deployment, data, API, account, or execution recommendations. `PROJECT_CONTEXT.md` is the controlling source of truth for the active broad section/state, authorization boundaries, and non-authorization states.
+| Research area               | Implementation                                                                            |
+| --------------------------- | ----------------------------------------------------------------------------------------- |
+| Primary model               | Stable-Baselines3 PPO with continuous target exposure in `[-1, 1]`                        |
+| Feature pipeline            | Technical, denoised and regime-aware feature construction                                 |
+| Validation design           | Chronological walk-forward training/evaluation with explicit time-ordered split utilities |
+| Execution realism           | Turnover, transaction-cost, and slippage sensitivity analysis.                            |
+| Final evaluation            | Later untouched holdout evaluated without PPO retraining                                  |
+| Candidate qualification     | Holdout filtering, promotion scoring and required-artifact validation                     |
+| Broker integration          | Alpaca Paper broker-connected no-submit inference and execution planning                  |
+| External execution research | JSON signal bridge plus QuantConnect/LEAN consumer                                        |
+| Final legacy conclusion     | Infrastructure and research value retained; stable trading edge not established           |
 
-Use [docs/workflows/milestone_review_reference_map.md](docs/workflows/milestone_review_reference_map.md) for roadmap navigation, big milestone/section reference, the 2v governance lookup, and locating supporting run/review/audit records. It is not a current checkpoint tracker.
+## Research Outcome
 
-Use Git history and latest pushed run/review records for exact checkpoint chronology. The README intentionally defers the active broad section/state and authorization boundaries to `PROJECT_CONTEXT.md` to avoid governance drift. Durable blocked authorization boundaries remain:
+Intermediate experiments produced favorable candidate-level PPO results for selected symbols, but the evidence did not remain sufficiently stable across the full research process to support a deployment claim.
+
+The later legacy-model quality audit found mixed benchmark performance across the complete artifact sets and concluded:
 
 ```text
-current_state_source = PROJECT_CONTEXT.md
-active_section = see PROJECT_CONTEXT.md
-checkpoint_navigation_source = docs/workflows/milestone_review_reference_map.md
-checkpoint_chronology_source = git history and latest pushed run/review records
-v3.07_status = BLOCKED
-NO_SUBMIT = DEFAULT
-ppo_v2_training_execution = NOT_AUTHORIZED
-paper_order_authorization = NOT_AUTHORIZED
-live_order_authorization = NOT_AUTHORIZED
-controlled_submit = BLOCKED
-ppo_rf = BLOCKED
-ppo_xgboost = BLOCKED
+infrastructure_baseline_decision = PASS
+trading_edge_decision = FAIL_FOR_TRADING_EDGE
+controlled_submit_decision = REJECT_FOR_CONTROLLED_SUBMIT
 ```
 
-Legacy PPO is an infrastructure fixture only, not a promoted trading model.
+The legacy PPO was retained as an **infrastructure fixture and research artifact**, not promoted as evidence of a reliable trading edge. Favorable windows, positive Sharpe ratios, successful broker connectivity, or working code were not treated as sufficient evidence of deployability.
 
-PPO v2 training, training command execution, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, PPO + Random Forest, and PPO + XGBoost remain blocked unless a later sealed checkpoint explicitly authorizes them.
+Representative records:
 
-Passing tests prove infrastructure, control, and reporting stability. They do not prove trading profitability, model promotion, deployment readiness, or trading edge.
+* [`docs/audits/v1.63_ppo_baseline_model_quality_audit_summary.md`](docs/audits/v1.63_ppo_baseline_model_quality_audit_summary.md)
+* [`docs/runs/v1.65_legacy_ppo_final_audit_decision.md`](docs/runs/v1.65_legacy_ppo_final_audit_decision.md)
 
----
+## Research Progression
 
-## Workflows
+### Walk-forward PPO research
 
-- [Six-Ticker Quality Baseline](docs/workflows/six_ticker_quality_baseline.md)
+The project used rolling chronological evaluation rather than a single in-sample backtest. Representative experiments include the [`10-ticker 50k validation`](docs/runs/2026-05-08_10ticker_50k_validation.md) and the later [`4-ticker 150k focused validation`](docs/runs/2026-05-09_4ticker_150k_focused_validation.md). Results were symbol-dependent: longer training improved several intermediate candidates, but turnover, drawdown and execution sensitivity remained material.
 
-## Governance documents
+### Validation and execution realism
 
-- [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) — controlling source of truth for the active broad section/state, authorization boundaries, and non-authorization states.
-- [Milestone Review Reference Map](docs/workflows/milestone_review_reference_map.md) — roadmap/navigation/governance reference map for big sections, the 2v governance lookup, and locating supporting run/review/audit records; it is not a current checkpoint tracker.
-- [Future Validation and Training Reference Map](docs/workflows/future_validation_training_reference_map.md) — guidance only for future validation, retraining, holdout, candidate-selection, paper-trading, and deployment planning; it does not authorize execution.
+Training and evaluation were separated in time, with support for an embargo region between slices to reduce boundary-leakage risk. Follow-up analysis evaluated turnover, transaction costs, slippage assumptions, cost-adjusted performance and drawdown, making execution realism part of model interpretation rather than an afterthought.
 
-## Audit Archive
+### Final holdout and candidate qualification
 
-Evidence Contract Usage Chain: v2.76-v3.02, result `PASS_READ_ONLY_NO_SUBMIT`. Detailed milestone files are preserved under `docs/runs` and `docs/reviews`; a grouped summary is available in [docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md](docs/archive/evidence_contract_usage_chain_v2_76_v3_02.md).
+Final-holdout evaluation was implemented separately in [`src/alpaca_ppo_holdout_validation.py`](src/alpaca_ppo_holdout_validation.py). The holdout began after the latest pre-holdout validation/evaluation period used to define the candidate set; previously trained PPO and VecNormalize artifacts were then loaded without PPO retraining or threshold tuning. Holdout completion was not automatic promotion: [`src/model_selection/select_alpaca_ppo_candidates.py`](src/model_selection/select_alpaca_ppo_candidates.py) applied separate eligibility and promotion scoring and validated required artifacts before downstream use. See [`v1.8.5 final holdout`](docs/runs/v1.8.5_final_holdout_validation.md) and [`v1.9 candidate selection`](docs/runs/v1.9_alpaca_ppo_candidate_selection.md).
 
-## Status
+### Alpaca Paper integration
 
-This repository is currently a production-oriented implementation in progress.
+[`src/paper_trading/paper_trade_dry_run.py`](src/paper_trading/paper_trade_dry_run.py) connects to Alpaca Paper, reads account and position state, retrieves recent bars, rebuilds features, runs PPO inference and constructs target-exposure/execution plans without submitting orders. The representative [`six-symbol no-submit redeployment run`](docs/runs/v1.9_alpaca_ppo_no_submit_redeployment_dry_run.md) produced valid predictions for all reviewed symbols with **zero submitted orders**.
 
-Historical / infrastructure components present in the codebase:
+### QuantConnect / LEAN integration
 
-- Local project paths and configuration
-- Data download and preparation modules
-- Feature engineering modules
-- Custom continuous-position PPO environment
-- PPO walk-forward training modules
-- Model artifact path and metadata helpers
-- Latest-signal prediction modules
-- Diagnostics
-- QuantConnect signal export adapter
-- Alpaca paper-trading API utility adapter
+[`src/adapters/quantconnect.py`](src/adapters/quantconnect.py) exports PPO predictions as an external JSON signal feed, while [`quantconnect/ExternalSignalConsumer.py`](quantconnect/ExternalSignalConsumer.py) consumes that feed inside LEAN. This keeps local model inference separate from downstream portfolio-target and execution logic.
 
-Presence of these components does not mean they are currently authorized for PPO v2 training, data fetching, dataset generation, model artifact creation, paper orders, live orders, controlled submit, model promotion, or hybrid deployment.
+### Later PPO v2 and data investigations
 
-In progress:
+Later work expanded into PPO v2 retraining and data-engineering questions, including Alpaca historical-data alignment, dataset reconstruction, exchange-calendar handling, missing-bar investigation, provider/feed coverage and validation/reporting infrastructure. Detailed records remain under `docs/`.
 
-- Full Alpaca paper-trading runner
-- Production-grade monitoring
-- Improved model selection rules
-- Expanded reporting and attribution
-- Additional model families such as XGBoost, LightGBM, SAC, TD3, and Deep SARSA
-
----
-
-## Repository Purpose
-
-This repo is intended to make the trading pipeline easier to run, test, debug, and extend locally.
-
-The earlier Colab workflow was useful for experimentation. This VS Code version is designed for:
-
-- Modular Python development
-- Governed validation-readiness review
-- Cleaner artifact management
-- Safer environment-variable handling
-- QuantConnect signal export scaffolding
-- Alpaca paper-trading integration scaffolding
-- Future publication or portfolio presentation
-
-Reproducible training, prediction runs that create new outputs, data fetching, dataset generation, and model artifact creation require explicit authorization from a later sealed checkpoint before they may be treated as current workflow steps.
-
----
-
-## Core Workflow
-
-Historical / general architecture:
+## Architecture
 
 ```text
-Data download
+Market data
+  -> Data preparation
   -> Feature engineering
-  -> Walk-forward PPO training
-  -> Artifact saving
-  -> Latest prediction
-  -> Diagnostics
-  -> QuantConnect / Alpaca integration
+  -> Chronological walk-forward PPO training / evaluation
+  -> Model + normalization artifacts
+  -> Execution-realism analysis
+  -> Later untouched holdout
+  -> Candidate qualification
+  -> Artifact-based inference
+  -> Risk / execution planning
+  -> Alpaca Paper or QuantConnect integration
+  -> Model-quality audit / disposition
 ```
 
-Current v3.06 interpretation: the architecture above is not current authorization to fetch data, generate datasets, train PPO v2, create model artifacts, produce new validation reports from PPO v2 outputs, promote models, submit paper/live orders, use controlled submit, or deploy PPO + RF / PPO + XGBoost.
-
----
-
-## Repo Layout
-
-Generated folders such as `data/`, `models/`, `reports/`, and `logs/` are intentionally ignored by Git.
-
-```text
-ppo_research_pipeline/
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── src/
-│   ├── __init__.py
-│   ├── paths.py
-│   ├── config.py
-│   ├── data_download.py
-│   ├── prepare_data.py
-│   ├── features.py
-│   ├── env.py
-│   ├── artifacts.py
-│   ├── train.py
-│   ├── predict.py
-│   ├── diagnostics.py
-│   ├── training_utils.py
-│   └── adapters/
-│       ├── __init__.py
-│       ├── quantconnect.py
-│       └── alpaca.py
-├── quantconnect/
-│   └── ExternalSignalConsumer.py
-├── configs/
-├── docs/
-├── data/
-├── models/
-├── reports/
-└── logs/
-```
-
----
-
-## Main Modules
-
-| Module | Purpose |
-|---|---|
-| `src/paths.py` | Defines project-relative paths and creates the expected local folder structure. |
-| `src/config.py` | Stores runtime settings, ticker lists, walk-forward settings, PPO hyperparameters, paths, and result-folder helpers. |
-| `src/data_download.py` | Downloads market data for configured symbols. |
-| `src/prepare_data.py` | Runs the data preparation workflow and saves processed datasets. |
-| `src/features.py` | Builds technical indicators, regime features, denoised price features, and other model inputs. |
-| `src/env.py` | Defines the custom continuous-position trading environment used by PPO. |
-| `src/artifacts.py` | Handles model artifact paths, model metadata, feature lists, probability configuration, and saved PPO artifacts. |
-| `src/train.py` | Runs walk-forward PPO training, evaluation, metric logging, model selection, and artifact saving. |
-| `src/predict.py` | Loads saved PPO artifacts, selects the best available model by metadata, generates the latest signal, and saves prediction outputs. |
-| `src/diagnostics.py` | Checks project health, data availability, model artifacts, latest reports, and prediction outputs. |
-| `src/adapters/quantconnect.py` | Exports prediction outputs into a QuantConnect-compatible `live_signals.json` file. |
-| `src/adapters/alpaca.py` | Provides safe Alpaca API utilities for paper-account connection checks, positions, prices, recent bars, basic order helpers, and future paper-trading integration. |
-| `quantconnect/ExternalSignalConsumer.py` | Reference QuantConnect/LEAN algorithm that consumes external JSON signals and maps them into portfolio targets. This file is meant to run inside QuantConnect, not as a normal local Python script. |
-
----
-
-## Setup
-
-Create and activate a virtual environment:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Environment Variables
-
-Create a local `.env` file for credentials and runtime settings.
-
-Do not commit `.env`.
-
-Example:
-
-```env
-ALPACA_API_KEY=your_paper_key_here
-ALPACA_SECRET_KEY=your_paper_secret_here
-APCA_API_BASE_URL=https://paper-api.alpaca.markets
-
-GITHUB_TOKEN=your_gist_token_here
-
-TICKERS=UNH,GE
-DATA_TIMEFRAME=1H
-TRAIN_TIMEFRAME=1H
-EQUITY_TIMEFRAME=5Min
-
-ENTER_CONF_MIN=0.02
-ENTER_WEIGHT_MIN=0.002
-REBALANCE_MIN_NOTIONAL=25.00
-RAW_POS_MIN=0.00
-RAW_NEG_MAX=0.00
-
-GE_ENTER_CONF_MIN=0.22
-GE_ENTER_WEIGHT_MIN=0.04
-GE_REBALANCE_MIN_NOTIONAL=75
-GE_RAW_POS_MIN=0.18
-GE_RAW_NEG_MAX=0.10
-
-UNH_ENTER_CONF_MIN=0.08
-UNH_ENTER_WEIGHT_MIN=0.02
-UNH_REBALANCE_MIN_NOTIONAL=50
-UNH_RAW_POS_MIN=0.00
-UNH_RAW_NEG_MAX=0.20
-
-START_FLAT=0
-```
-
----
-
-## Usage
-
-### Current v3.06 usage boundary
-
-Current authorized work is limited to governed review, documentation remediation, source inspection, and explicitly no-submit/read-only checks that do not fetch new market data, generate datasets, create model artifacts, create quarantine outputs, generate validation reports from new PPO v2 outputs, promote models, or submit orders.
-
-### Currently blocked commands
-
-The following commands are retained as legacy/general historical examples only. They are not current PPO v2 authorization:
-
-```text
-python -m src.prepare_data  # BLOCKED: data fetching / dataset generation not authorized
-python -m src.train         # BLOCKED: PPO v2 training / model artifact creation not authorized
-```
-
-Do not run these commands unless a later sealed checkpoint explicitly authorizes them.
-
-### Future-only / separately reviewed commands
-
-Prediction, diagnostics, QuantConnect export, and Alpaca adapter commands may create outputs, inspect broker state, or depend on generated artifacts. Treat them as future-only or separately reviewed unless the current milestone explicitly authorizes the exact command and mode.
-
-```text
-python -m src.predict
-python -m src.diagnostics
-python -m src.adapters.quantconnect --symbols GE,UNH
-python -m src.adapters.quantconnect --symbols GE,UNH --publish-gist
-python -m src.adapters.alpaca
-```
-
-No command in this README authorizes paper orders, live orders, controlled submit, model promotion, PPO + RF, PPO + XGBoost, or v3.07.
-
----
-
-## QuantConnect Integration
-
-The local adapter:
-
-```bash
-python -m src.adapters.quantconnect --symbols GE,UNH
-```
-
-creates a JSON file similar to:
-
-```text
-reports/backtests/quantconnect_signals_YYYYMMDD_HHMMSS/live_signals.json
-```
-
-The QuantConnect algorithm in:
-
-```text
-quantconnect/ExternalSignalConsumer.py
-```
-
-can consume that JSON through a raw Gist URL.
-
-Typical QuantConnect parameters:
-
-```text
-SignalsUrl = <raw live_signals.json URL>
-Symbols = GE,UNH
-PollingMinutes = 60
-SizingMode = threshold
-WeightCap = 0.60
-ConfidenceFloor = 0.55
-Mode = json-live
-```
-
----
-
-## Alpaca Integration
-
-The current Alpaca module is a safe adapter layer, not the full live trading bot.
-
-It currently supports:
-
-- Environment loading
-- Paper-account connection
-- Account snapshot checks
-- Open position reads
-- Latest price lookup
-- Recent bar downloads
-- Basic market order helpers
-- Flatten-symbol helper
-
-The larger paper-trading execution loop is still being tuned separately before being migrated into this repository.
-
----
-
-## Artifact Policy
-
-Model artifacts, processed data, reports, logs, and credentials are intentionally not committed.
-
-Ignored examples:
-
-```text
-.env
-.env.*
-data/raw/
-data/processed/
-models/
-trained_models/
-reports/
-logs/
-*.zip
-*.pkl
-*.csv
-live_signals.json
-gist_metadata.json
-```
-
-This keeps the repository focused on source code and reproducible workflows.
-
----
-
-## Current Limitations
-
-- PPO is the primary implemented model.
-- The current local test mode may use a limited ticker list.
-- Existing model artifacts are not included in the repository.
-- The Alpaca live execution loop is not finalized in this repo yet.
-- Model performance must be validated with walk-forward testing, paper trading, and out-of-sample evaluation before any real-money use.
-
----
-
-## Roadmap
-
-Planned improvements:
-
-- Full Alpaca paper-trading runner
-- Better model selection using Sharpe, drawdown, and stability filters
-- Enhanced performance attribution
-- Automated report generation
-- CI checks for module imports and syntax
-- QuantConnect packaging improvements
-- Additional supervised and reinforcement learning models
-- Publication-ready methodology notes
-
----
+## Core Components
+
+| Component                                             | Responsibility                                                                                |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `src/features.py`                                     | Constructs technical, denoised, regime and model-input features                               |
+| `src/env.py`                                          | Implements the continuous-position PPO environment, including transaction-cost/slippage terms |
+| `src/training_splits.py`                              | Enforces time-ordered train/embargo/evaluation partitioning                                   |
+| `src/train.py`                                        | Performs walk-forward PPO training, evaluation, metric logging and artifact persistence       |
+| `src/artifacts.py`                                    | Manages PPO, VecNormalize, feature, inference-config and metadata artifacts                   |
+| `src/alpaca_ppo_holdout_validation.py`                | Evaluates frozen candidates on a later holdout without retraining                             |
+| `src/model_selection/select_alpaca_ppo_candidates.py` | Applies holdout eligibility, promotion scoring and artifact validation                        |
+| `src/predict.py`                                      | Loads selected artifacts, rebuilds inference features and emits model signals                 |
+| `src/paper_trading/paper_trade_dry_run.py`            | Runs broker-connected Alpaca Paper inference/exposure planning without order submission       |
+| `src/adapters/quantconnect.py`                        | Exports model predictions as QuantConnect-compatible JSON                                     |
+| `quantconnect/ExternalSignalConsumer.py`              | Consumes external JSON signals inside LEAN and maps them to portfolio targets                 |
+
+## Repository Navigation
+
+* `src/` — research, data, model, validation and execution-support implementation
+* `tests/` — automated tests
+* `quantconnect/` — QuantConnect/LEAN integration
+* `config/` — historical runtime and retraining configuration
+* `docs/runs/`, `docs/audits/`, `docs/workflows/`, `docs/designs/` — research, validation, audit and design records
+* `docs/reviews/`, `docs/plans/`, `docs/decisions/`, `docs/archive/` — detailed historical process and traceability records
+
+## Historical & Reproducibility Notes
+
+The canonical successor project's historical review used legacy snapshot `072103f43d8b2488c3efca183f637ab0508a193a`. That snapshot and its ancestry are intentionally preserved; no history rewrite is proposed.
+
+Detailed research, validation, remediation, documentation and governance records remain in the repository for traceability. The successor platform was created partly to consolidate the resulting architecture and provide a cleaner forward engineering structure.
+
+Large generated runtime artifacts were generally excluded, including many datasets, trained model binaries, processed outputs, backtest/paper-trading outputs, logs and credentials. This repository is therefore a historical implementation and research record rather than a complete binary reproduction package for every experiment.
+
+AI tools were used to assist with drafting portions of the historical governance and process documentation. These materials were reviewed and used under human project control and are retained as part of the repository's development history. Current development continues in [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform).
 
 ## Disclaimer
 
-This repository is for research, education, and software development practice. Trading involves risk, and model outputs may be wrong, unstable, or unsuitable for live trading.
+This repository is provided for quantitative-research, educational and software-engineering purposes. Historical backtests, validation metrics, model outputs and paper-trading tests do not guarantee future performance and should not be interpreted as evidence of a deployable or profitable trading strategy.
 
----
-
-## Paper-Trading Reporting Chain
-
-The paper-trading reporting chain converts a completed no-submit paper-trading run into auditable decision artifacts.
-
-This workflow is reporting-only.
-
-It does not connect to Alpaca, does not submit orders, and does not alter broker state.
-
-### Reporting Chain Artifacts
-
-After a paper-trading dry run and pre-trade checklist have completed, the reporting chain can produce:
-
-```text
-decision_state_report.json
-paper_trading_run_summary.json
-reporting_chain_smoke_test_report.json
-docs/runs/paper_trading_decision_dashboard_with_state.md
-```
-
-### Standard Reporting Commands
-
-Run from the repository root:
-
-```bash
-python -m src.paper_trading.pipeline_decision_state_hook \
-  --run-dir reports/paper_trading_dry_runs/latest \
-  --prior-symbol AMD \
-  --prior-side buy
-
-python -m src.paper_trading.build_run_summary_with_decision_state \
-  --run-dir reports/paper_trading_dry_runs/latest
-
-python -m src.paper_trading.build_decision_dashboard_with_state \
-  --run-dir reports/paper_trading_dry_runs/latest
-
-python -m src.paper_trading.reporting_chain_smoke_test \
-  --run-dir reports/paper_trading_dry_runs/latest \
-  --prior-symbol AMD \
-  --prior-side buy
-```
-
-### Expected Safe Output
-
-The default safe reporting output is:
-
-```text
-decision = NO_SUBMIT
-submit_allowed = False
-```
-
-A reporting artifact is not trade approval.
-A controlled submit still requires a separate controlled-submit checkpoint, fresh validation, manual approval, exact run-directory confirmation, broker verification, and documentation.
-
-### Reporting Runbook
-
-Full operational instructions are documented here:
-
-```text
-docs/workflows/paper_trading_operational_reporting_runbook.md
-```
-
-Latest reporting-chain checkpoints:
-
-```text
-v1.34 = decision-state classifier
-v1.35 = decision_state_report.json writer
-v1.36 = post-checklist classification hook
-v1.37 = run summary includes decision state
-v1.38 = dashboard reads decision state
-v1.39 = reporting chain smoke test
-v1.40 = operational reporting runbook
-```
+Nothing in this repository constitutes financial advice.
