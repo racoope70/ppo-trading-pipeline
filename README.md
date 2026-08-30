@@ -1,5 +1,11 @@
 # PPO Trading Pipeline — Historical Quantitative Research Repository
 
+![Status](https://img.shields.io/badge/status-historical%20research-lightgrey)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+[![Tests](https://github.com/racoope70/ppo-trading-pipeline/actions/workflows/tests.yml/badge.svg)](https://github.com/racoope70/ppo-trading-pipeline/actions/workflows/tests.yml)
+![Model](https://img.shields.io/badge/model-PPO-blueviolet)
+![Validation](https://img.shields.io/badge/validation-walk--forward-informational)
+
 > **Status: Legacy / historical repository**
 >
 > This repository preserves the quantitative-trading research and engineering pipeline that preceded the current canonical project, [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform).
