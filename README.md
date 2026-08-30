@@ -10,13 +10,15 @@
 >
 > This repository preserves the quantitative-trading research and engineering pipeline that preceded the current canonical project, [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform).
 >
+> Public research lineage: [`racoope70/exploratory-daytrading`](https://github.com/racoope70/exploratory-daytrading) → [`racoope70/quant-trading-model-validation`](https://github.com/racoope70/quant-trading-model-validation) (preceding structured PPO / PPO + Random Forest validation) → this repository (later modular PPO implementation / execution research) → [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform) (current canonical platform).
+>
 > It is retained as a historical research record and should not be interpreted as the current production or forward-development platform.
 
 ## Overview
 
 This project documents the evolution of a reinforcement-learning trading pipeline centered on **Proximal Policy Optimization (PPO)**.
 
-The work progressed from exploratory PPO experiments into a modular Python implementation covering market-data preparation, feature engineering, chronological walk-forward evaluation, execution-cost analysis, final-holdout testing, candidate qualification, model-artifact management, Alpaca Paper integration, QuantConnect/LEAN signal integration, and later PPO v2 data/retraining investigations.
+The work progressed from exploratory PPO experiments into a modular Python implementation covering market-data preparation, feature engineering, chronological walk-forward evaluation, execution-cost analysis, final-holdout testing, candidate qualification, model-artifact management, Alpaca Paper integration, QuantConnect/LEAN signal integration, and later PPO v2 retraining-design, package/preflight, and data-engineering investigations.
 
 The repository preserves both favorable intermediate research results and the evidence that ultimately prevented the legacy PPO from being promoted as a reliable trading model.
 
@@ -77,7 +79,7 @@ Final-holdout evaluation was implemented separately in [`src/alpaca_ppo_holdout_
 
 ### Later PPO v2 and data investigations
 
-Later work expanded into PPO v2 retraining and data-engineering questions, including Alpaca historical-data alignment, dataset reconstruction, exchange-calendar handling, missing-bar investigation, provider/feed coverage and validation/reporting infrastructure. Detailed records remain under `docs/`.
+Later work expanded into PPO v2 retraining design, controlled implementation planning, package/preflight preparation, and data-engineering investigations, including Alpaca historical-data alignment, dataset reconstruction, exchange-calendar handling, missing-bar investigation, provider/feed coverage and validation/reporting infrastructure. These records document investigation and preparation rather than a successfully trained or qualified PPO v2 model. Detailed records remain under `docs/`.
 
 ## Architecture
 
