@@ -10,8 +10,6 @@
 >
 > This repository preserves the quantitative-trading research and engineering pipeline that preceded the current canonical project, [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform).
 >
-> Public research lineage: [`racoope70/exploratory-daytrading`](https://github.com/racoope70/exploratory-daytrading) → [`racoope70/quant-trading-model-validation`](https://github.com/racoope70/quant-trading-model-validation) (preceding structured PPO / PPO + Random Forest validation) → this repository (later modular PPO implementation / execution research) → [`racoope70/quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform) (current canonical platform).
->
 > It is retained as a historical research record and should not be interpreted as the current production or forward-development platform.
 
 ## Overview
@@ -21,6 +19,22 @@ This project documents the evolution of a reinforcement-learning trading pipelin
 The work progressed from exploratory PPO experiments into a modular Python implementation covering market-data preparation, feature engineering, chronological walk-forward evaluation, execution-cost analysis, final-holdout testing, candidate qualification, model-artifact management, Alpaca Paper integration, QuantConnect/LEAN signal integration, and later PPO v2 retraining-design, package/preflight, and data-engineering investigations.
 
 The repository preserves both favorable intermediate research results and the evidence that ultimately prevented the legacy PPO from being promoted as a reliable trading model.
+
+## Relationship to the Research Repositories
+
+1. **Exploration — [`exploratory-daytrading`](https://github.com/racoope70/exploratory-daytrading)**  
+   Historical exploratory ML/RL research involving feature engineering, classical machine learning, reinforcement learning, model comparison, mixed results, and early execution-platform experiments.
+
+2. **Structured model validation — [`quant-trading-model-validation`](https://github.com/racoope70/quant-trading-model-validation)**  
+   Historical PPO and PPO + Random Forest validation research with more structured chronological / walk-forward evaluation, backtesting, artifact preservation, signal validation, and paper-trading reliability work.
+
+3. **Modular PPO implementation / execution research — this repository**  
+   Historical modular PPO research and engineering covering separated Python components, chronological train/evaluation design, execution realism, holdout evaluation, candidate qualification, artifact-based inference, Alpaca Paper no-submit integration, QuantConnect / LEAN integration, and later model-quality review.
+
+4. **Current canonical research platform — [`quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform)**  
+   Current research platform in development with stricter reproducibility, leakage control, data provenance, testing, and model-evaluation methodology.
+
+This progression reflects increasing research and engineering discipline; it does not imply that each historical stage automatically validated the previous stage or established production readiness.
 
 ## Quantitative Research Summary
 
