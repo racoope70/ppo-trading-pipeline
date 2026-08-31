@@ -1,5 +1,11 @@
 # PROJECT_CONTEXT.md
 
+> **Historical governance snapshot:** This document preserves the governance state of
+> `ppo-trading-pipeline` during its active development period. References below to
+> “current” status, active workstreams, authorization boundaries, and future actions
+> are historical and do not describe the present state of
+> `quantitative-trading-research-platform`.
+
 Authoritative source of truth for `racoope70/ppo-trading-pipeline`.
 
 Detailed v3.07 history is archived at `docs/archive/v3_07_validation_readiness_chain_summary.md`. The missing v3.07 dataset remains historical context only.
